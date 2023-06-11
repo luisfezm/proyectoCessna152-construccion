@@ -4,13 +4,13 @@
     <div class="content">
       <h1>Proyecto Construcción de Software - Vuejs + Vuex + Vite</h1>
       <h2>Además usa Husky, Conventional Commits, ESLint + Prettier</h2>
-      <panel />
+      <MiPanel />
     </div>
   </div>
 </template>
 
 <script setup>
-  import Panel from '@/components/Panel.vue'
+  import MiPanel from './components/MiPanel.vue'
 </script>
 
 <style>
