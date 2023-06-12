@@ -2,10 +2,10 @@
   <div class="terreno">
     <div class="terrenoIzquierda">
       <MiMapa />
-      <!-- soy la parte izquierda del terreno -->
+      <!-- Esta es la parte izquierda de la vista del vuelo, deben colocar aquí el componente que creen -->
     </div>
     <div class="terrenoDerecha">
-      <!-- soy la parte derecha del terreno -->
+      <!-- Esta es la parte derecha de la vista del vuelo, deben colocar aquí el componente que creen -->
     </div>
   </div>
 </template>

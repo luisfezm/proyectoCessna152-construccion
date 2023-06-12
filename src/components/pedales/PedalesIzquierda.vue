@@ -1,6 +1,6 @@
 <template>
   <div class="pedales">
-    <!-- Estos componentes se borran y agregan los que crean ustedes -->
+    <!-- Estos componentes se borran y agregan los que crean ustedes, el componente Pedal debe ser solo 1, ya que tienen distintas funciones -->
     <Pedal />
     <Pedal />
   </div>
