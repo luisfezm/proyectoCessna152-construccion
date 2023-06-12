@@ -12,12 +12,12 @@
     <div class="tableroInferior">
       <div class="itemTableroInferior">
         <div class="controlesTableroInferior">Controles</div>
-        <PedalesIzquierda />
+        <PedalesPiloto />
       </div>
       <CenterColumn />
       <div class="itemTableroInferior">
         <div class="controlesTableroInferior">Controles</div>
-        <PedalesDerecha />
+        <PedalesCopiloto />
       </div>
     </div>
   </div>
@@ -29,8 +29,8 @@
   import RadioPanel from './components/tablero/radioPanel/RadioPanel.vue'
   import RightHandPanel from './components/tablero/rightHandPanel/RightHandPanel.vue'
   import CenterColumn from './components/tablero/centerColumn/CenterColumnPanel.vue'
-  import PedalesIzquierda from './components/pedales/PedalesIzquierda.vue'
-  import PedalesDerecha from './components/pedales/PedalesDerecha.vue'
+  import PedalesPiloto from './components/pedales/PedalesPiloto.vue'
+  import PedalesCopiloto from './components/pedales/PedalesCopiloto.vue'
 </script>
 
 <style src="./style.css">

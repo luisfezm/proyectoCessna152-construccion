@@ -1,5 +1,5 @@
 <template>
-  <div class="pedal" />
+  <div class="indicadorRightHandPanel">Adf Neddle</div>
 </template>
 
 <script>

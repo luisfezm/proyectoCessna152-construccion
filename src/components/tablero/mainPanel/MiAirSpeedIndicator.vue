@@ -1,5 +1,5 @@
 <template>
-  <div class="indicadorMainPanel">Altimeter</div>
+  <div class="indicadorMainPanel">Airspeed Indicator</div>
 </template>
 
 <script>

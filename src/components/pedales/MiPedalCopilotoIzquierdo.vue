@@ -1,5 +1,5 @@
 <template>
-  <div class="indicadorMainPanel">Altimeter</div>
+  <div class="pedal">Pedal</div>
 </template>
 
 <script>

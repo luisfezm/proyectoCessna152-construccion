@@ -1,5 +1,5 @@
 <template>
-  <div class="indicadorMainPanel">Altimeter</div>
+  <div class="indicadorMainPanel">Artificial Horizon</div>
 </template>
 
 <script>
