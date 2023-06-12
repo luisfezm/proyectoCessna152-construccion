@@ -82,20 +82,21 @@
   /* 40 30 30 */
 
   .primeraPersona {
-    background-color: aqua;
+    background-color: rgb(81, 207, 207);
     width: 40vw;
     
   }
 
   .vistaMapa {
-    background-color: greenyellow;
+    background-color: rgb(111, 149, 54);
     width: 30vw;
    
   }
 
   .alturasAvion{
-    background-color: blue;
+    background-color: rgb(115, 115, 146);
     width: 30vw;
+
     
   }
 
@@ -105,7 +106,7 @@
   }
 
   .partesAvion{
-    background-color: brown;
+    background-color: rgb(63, 92, 99);
     width: 30vw;
   }
 

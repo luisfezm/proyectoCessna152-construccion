@@ -11,13 +11,14 @@
 <style>
 
 .MandoPrincipal{
+  /* centrado generico */
   display: flex;
   justify-content: center;
   align-items: center;
 
 
   border-radius: 60%;
-  background-color: rgb(98, 179, 216);
+  background-color: rgb(65, 94, 108);
   width: 60%;
   height: 60%;
 }   

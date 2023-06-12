@@ -1,6 +1,6 @@
 <template>  
-    <div class="circular"> 
-      ejemplo
+    <div class="diferente"> 
+      diferente
     </div>
 </template>
 
@@ -10,7 +10,7 @@
 
 <style>
 
-.circular{
+.diferente{
   /* centrado generico */
   display: flex;
   justify-content: center;

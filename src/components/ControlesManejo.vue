@@ -5,8 +5,7 @@
     <div class = "divicionPrincipalizq">
 
       <div class = "PrimeraFila" >
-        <ContenedorCircular/>
-        <ContenedorCircular/>
+        <ContenedorCircularEjemplo/>
         <ContenedorCircular/>
         <ContenedorCircular/>
         <ContenedorCircular/>
@@ -23,14 +22,18 @@
       </div>
       
       <div class = "TerceraFila">
-        <div class = "pedales">
-          <Pedales/>
-          <Pedales/>
-        </div>
+
         
-        <div class = "mando">
-          <MandoPrincipal/>
-        </div>
+
+          <div class = "pedalesCabina">
+            <Pedales/>
+            <Pedales/>
+          </div>
+
+          <div class = "mando">
+            <MandoPrincipal/>
+          </div>
+
 
       </div>
 
@@ -71,6 +74,10 @@
   import MandoPrincipal from './elementos/MandoPrincipal.vue';
   import ContenedorRectangulo from './elementos/ContenedorRectangulo.vue';
   import Pedales from './elementos/Pedales.vue'
+
+  /* importar los nuevos componentes */
+  import ContenedorCircularEjemplo from './elementos/ContenedorCircularEjemplo.vue';
+
 </script>
 
 <script>
@@ -82,7 +89,7 @@
   .PrimeraFila{
     display: flex;
     flex-direction: row;
-    background-color: royalblue;
+    background-color: rgb(196, 141, 79);
     height: 20%;
     width: 100%;
 
@@ -91,25 +98,40 @@
   .SegundaFila{
     display: flex;
     flex-direction: row;
-    background-color: rgb(52, 168, 48);
+    background-color: rgb(196, 141, 79);
     height: 20%;
     width: 68%;
   }
+  .pedalesCabina{
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(196, 141, 79);
+    height: 40%;
+    margin-top: 20%;
+    
+  }
 
   .TerceraFila{
-    background-color: rgb(168, 120, 48);
+    background-color: rgb(196, 141, 79);
     height: 60%;
     width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
+    
   }
 
   .divicionPrincipalizq{
     
-    background-color: coral;
+    background-color: rgb(196, 141, 79);
     height: 100%;
     width: 50%;
+  }
+
+  .espacio{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
   }
 
   .divicionPrincipalder{
@@ -131,7 +153,7 @@
     display: flex;
     flex-direction: column;
     
-    background-color: rgb(169, 169, 43);
+    background-color: rgb(196, 141, 79);
     height: 100%;
     width: 100%;
   }
@@ -141,13 +163,13 @@
   justify-content: center;
   align-items: center;
 
-    background-color: rgb(169, 169, 43);
+    background-color: rgb(196, 141, 79);
     height: 100%;
     width: 100%;
   }
 
   .radio{
-    background-color: beige;
+    background-color: rgb(196, 141, 79);
     height: 100%;
     width: 100%;
     /* centrado generico */
@@ -159,7 +181,7 @@
   .Palancas{
     display: flex;
     flex-direction: row;
-    background-color: rgb(90, 82, 196);
+    background-color: rgb(196, 141, 79);
     height: 50%;
     width: 100%;
 
@@ -175,23 +197,23 @@
 
   /* Palancas */
   #primera{
-    background-color: aquamarine; 
+    background-color: rgb(110, 132, 124); 
   }
 
   #segunda{
-    background-color: rgb(7, 156, 107);
+    background-color: rgb(161, 193, 182);
     
   }
   #tercera{
-    background-color: rgb(18, 101, 73);
+    background-color: rgb(99, 119, 112);
     
   }
   #cuarta{
-    background-color: rgb(7, 156, 107);
+    background-color: rgb(148, 181, 170);
     
   }
   #quinta{
-    background-color: rgb(66, 207, 160);
+    background-color: rgb(82, 106, 98);
     
   }
 
