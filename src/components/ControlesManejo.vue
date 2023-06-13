@@ -16,7 +16,8 @@
       <div class = "SegundaFila" > 
         <ContenedorCircular/>
         <ContenedorCircular/>
-        <ContenedorCircular/>
+        <VerticalSpeed/>
+
         <ContenedorCircular/>
                
       </div>
@@ -70,18 +71,19 @@
 
 <script setup>
   import ContenedorCircular from './elementos/ContenedorCircular.vue';
-  import palancas from './elementos/palancas.vue';
-  import MandoPrincipal from './elementos/MandoPrincipal.vue';
-  import ContenedorRectangulo from './elementos/ContenedorRectangulo.vue';
-  import Pedales from './elementos/Pedales.vue'
+import ContenedorRectangulo from './elementos/ContenedorRectangulo.vue';
+import MandoPrincipal from './elementos/MandoPrincipal.vue';
+import Pedales from './elementos/Pedales.vue';
+import palancas from './elementos/palancas.vue';
 
   /* importar los nuevos componentes */
   import ContenedorCircularEjemplo from './elementos/ContenedorCircularEjemplo.vue';
+import VerticalSpeed from './elementos/VerticalSpeed.vue';
 
 </script>
 
 <script>
-  export default {}
+  export default { components: { VerticalSpeed, VerticalSpeed } }
 </script>
 
 
