@@ -7,7 +7,7 @@
       <div class = "PrimeraFila" >
         <ContenedorCircularEjemplo/>
         <ContenedorCircular/>
-        <ContenedorCircular/>
+        <Tachometer/>
         <ContenedorCircular/>
         <ContenedorCircular/>
 
@@ -77,11 +77,12 @@
 
   /* importar los nuevos componentes */
   import ContenedorCircularEjemplo from './elementos/ContenedorCircularEjemplo.vue';
+import Tachometer from './elementos/tachometer.vue';
 
 </script>
 
 <script>
-  export default {}
+  export default { components: { Tachometer } }
 </script>
 
 
