@@ -1,33 +1,42 @@
 <template>
-    <div class="circular">
-      <div class="airspeed-indicator">
-        <div class="needle"></div>
-      </div>
+  <div class="circular">
+    <div class="airspeed-indicator">
+      <div class="needle" ref="needle"></div>
     </div>
-  </template>
+  </div>
+</template>
 
 <script>
 export default {
   methods: {
+
+    //velocity seria el parametro recibido
+    moveNeedle(velocity) {
+      const needle = this.$refs.needle;
+      const baseAngle = 50;
+      const maxVelocity = 160;
+      const angle = baseAngle - (velocity / maxVelocity) * 180;
+      needle.style.transform = `rotate(${angle}deg)`;
+    },
+    //Se pone el needle en la base del velocimetro
+    speedBase() {
+      this.moveNeedle(180);
+    }
   },
   mounted() {
-    const needle = document.querySelector(".needle");
-
-    function changeSpeed() {
+    this.speedBase();
+    setInterval(() => {
       const randomSpeed = Math.floor(Math.random() * 161);
-      const degrees = (randomSpeed / 160) * 180 - 90;
-      needle.style.transform = `rotate(${degrees}deg)`;
-    }
-
-    setInterval(changeSpeed, 2000);
+      this.moveNeedle(randomSpeed);
+    }, 1000);
   }
+  //-30 de velocity llega hasta 160mph
 };
 </script>
 
-
 <style scoped>
 .circular {
-  /* centrado generico */
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,7 +61,6 @@ export default {
   background-image: url("https://i.ibb.co/3M0XNSx/speedindicator-Rojo.png");
   background-size: cover;
   background-position: center;
-  
 }
 
 .needle {

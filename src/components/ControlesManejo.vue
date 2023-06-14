@@ -14,7 +14,7 @@
       </div>
   
       <div class = "SegundaFila" > 
-        <ContenedorCircular/>
+        <TurnCoordinator/>
         <AirspeedIndicator/>
         <ContenedorCircular/>
         <ContenedorCircular/>
@@ -78,11 +78,12 @@
   /* importar los nuevos componentes */
   import ContenedorCircularEjemplo from './elementos/ContenedorCircularEjemplo.vue';
 import AirspeedIndicator from './elementos/AirspeedIndicator.vue';
+import TurnCoordinator from './elementos/TurnCoordinator.vue';
 
 </script>
 
 <script>
-  export default { components: { AirspeedIndicator } }
+  export default { components: { AirspeedIndicator, TurnCoordinator } }
 </script>
 
 
