@@ -43,8 +43,8 @@
 
       <div class="Palancas">
         <palancas id="primera" />
-        <palancas id="segunda" />
-        <palancas id="tercera" />
+        <MixtureKnob id="segunda" />
+        <TrottleKnob id="tercera" />
         <palancas id="cuarta" />
         <palancas id="quinta" />
       </div>
@@ -62,10 +62,12 @@
   /* importar los nuevos componentes */
   import ContenedorCircularEjemplo from './elementos/ContenedorCircularEjemplo.vue'
   import ArtificialHorizon from './elementos/ArtificialHorizon.vue'
+  import MixtureKnob from './elementos/MixtureKnob.vue'
+  import TrottleKnob from './elementos/TrottleKnob.vue'
 </script>
 
 <script>
-  export default {}
+  export default { components: { MixtureKnob } }
 </script>
 
 <style>
