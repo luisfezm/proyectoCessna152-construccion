@@ -3,7 +3,6 @@ import interactuadores from './modules/interactuadores/interactuadores';
 import indicadores from './modules/indicadores/indicadores';
 // import NombreArchivo from "./modules/indicadores/NombreArchivo"
 
-
 const store = createStore({
   state: {
     luz: false
