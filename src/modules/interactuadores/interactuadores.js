@@ -1,19 +1,50 @@
 // interactuadores.js
 
 const interactuadores = {
-    state: {
-      // Estado inicial de los interactuadores
+  state: {
+    mov_pedal_izq: 0,
+    mov_pedal_derecha: 0
+  },
+
+  mutations: {
+    incrementarMovPedalIzq(state) {
+      if (state.mov_pedal_izq < 100) {
+        state.mov_pedal_izq++;
+      }
     },
-    mutations: {
-      // Mutaciones para modificar el estado de los interactuadores
+    incrementarMovPedalDerecha(state) {
+      if (state.mov_pedal_derecha < 100) {
+        state.mov_pedal_derecha++;
+      }
     },
-    actions: {
-      // Acciones para realizar operaciones relacionadas con los interactuadores
+    resetMovPedalIzq(state) {
+      state.mov_pedal_izq = 0;
     },
-    getters: {
-      // Getters para obtener datos del estado de los interactuadores
+    resetMovPedalDerecha(state) {
+      state.mov_pedal_derecha = 0;
     }
-  };
-  
-  export default interactuadores;
-  
+  },
+
+  actions: {
+    incrementarMovPedalIzq({ commit }) {
+      commit("incrementarMovPedalIzq");
+    },
+    incrementarMovPedalDerecha({ commit }) {
+      commit("incrementarMovPedalDerecha");
+    },
+    resetMovPedalIzq({ commit }) {
+      commit("resetMovPedalIzq");
+    },
+    resetMovPedalDerecha({ commit }) {
+      commit("resetMovPedalDerecha");
+    }
+  },
+
+  getters: {
+    movPedalIzq: (state) => state.mov_pedal_izq,
+    movPedalDerecha: (state) => state.mov_pedal_derecha
+  },
+
+};
+
+export default interactuadores;
