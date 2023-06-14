@@ -1,4 +1,6 @@
 // interactuadores.js
+import store from '../../store.js';
+
 
 const interactuadores = {
   state: {
@@ -11,17 +13,21 @@ const interactuadores = {
       if (state.mov_pedal_izq < 100) {
         state.mov_pedal_izq++;
       }
+      
     },
     incrementarMovPedalDerecha(state) {
       if (state.mov_pedal_derecha < 100) {
         state.mov_pedal_derecha++;
       }
+
     },
     resetMovPedalIzq(state) {
       state.mov_pedal_izq = 0;
+
     },
     resetMovPedalDerecha(state) {
       state.mov_pedal_derecha = 0;
+
     }
   },
 
