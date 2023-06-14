@@ -1,7 +1,8 @@
 // store.js
 import { createStore } from 'vuex';
-import interactuadores from './interactuadores';
-import indicadores from './indicadores';
+import interactuadores from './modules/interactuadores/interactuadores';
+import indicadores from './modules/indicadores/indicadores';
+
 
 const store = createStore({
   state: {
