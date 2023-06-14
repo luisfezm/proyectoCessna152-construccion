@@ -19,8 +19,12 @@
 
   border-radius: 50%;
   background-color: rgb(16, 15, 15);
-  height: 100%;
-  width: 100px;
+  height: 100hv;
+  width: 6vw;
+  margin-left: 1%;
+  margin-top: 1%;
+
+  
 }   
 
 

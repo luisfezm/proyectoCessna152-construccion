@@ -59,8 +59,8 @@
         <palancas id="primera"/>
         <palancas id="segunda"/>
         <palancas id="tercera"/>
-        <palancas id="cuarta"/>
-        <palancas id="quinta"/>
+        <TrimWheel/>
+        <WingFlaps/>
       </div>
 
     </div>
@@ -77,11 +77,13 @@
 
   /* importar los nuevos componentes */
   import ContenedorCircularEjemplo from './elementos/ContenedorCircularEjemplo.vue';
+  import TrimWheel from './elementos/TrimWheel.vue';
+  import WingFlaps from './elementos/WingFlaps.vue';
 
 </script>
 
 <script>
-  export default {}
+  export default { components: { TrimWheel } }
 </script>
 
 
