@@ -6,9 +6,27 @@ const interactuadores = {
     throttle_depth: 0,
     estadoPitch_yoke: 0,
     estadoRoll_yoke: 0,
+    mov_pedal_izq: 0,
+    mov_pedal_derecha: 0
   },
   mutations: {
     // Mutaciones para modificar el estado de los interactuadores
+    incrementarMovPedalIzq(state) {
+      if (state.mov_pedal_izq < 100) {
+        state.mov_pedal_izq++;
+      }
+    },
+    incrementarMovPedalDerecha(state) {
+      if (state.mov_pedal_derecha < 100) {
+        state.mov_pedal_derecha++;
+      }
+    },
+    resetMovPedalIzq(state) {
+      state.mov_pedal_izq = 0;
+    },
+    resetMovPedalDerecha(state) {
+      state.mov_pedal_derecha = 0;
+    },
 
     presionarThrottle(state) {
       if (state.throttle_depth < 100) {
@@ -29,6 +47,19 @@ const interactuadores = {
   },
   actions: {
     // Acciones para realizar operaciones relacionadas con los interactuadores
+    incrementarMovPedalIzq({ commit }) {
+      commit("incrementarMovPedalIzq");
+    },
+    incrementarMovPedalDerecha({ commit }) {
+      commit("incrementarMovPedalDerecha");
+    },
+    resetMovPedalIzq({ commit }) {
+      commit("resetMovPedalIzq");
+    },
+    resetMovPedalDerecha({ commit }) {
+      commit("resetMovPedalDerecha");
+    },
+      
     presionarThrottle({ commit }) {
       commit('presionarThrottle')
     },
@@ -72,6 +103,8 @@ const interactuadores = {
     getEstadoRoll_yoke(state) {
       return state.estadoRoll_yoke
     },
+     movPedalIzq: (state) => state.mov_pedal_izq,
+    movPedalDerecha: (state) => state.mov_pedal_derecha
   },
 }
 
