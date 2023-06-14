@@ -1,178 +1,159 @@
-<template>
-
+ <template>
   <div class="principal">
-
-    <div class = "divicionPrincipalizq">
-
-      <div class = "PrimeraFila" >
-        <ContenedorCircularEjemplo/>
-        <ContenedorCircular/>
-        <ContenedorCircular/>
-        <ContenedorCircular/>
-        <ContenedorCircular/>
-
+    <div class="divicionPrincipalizq">
+      <div class="PrimeraFila">
+        <ContenedorCircularEjemplo />
+        <ArtificialHorizon />
+        <ContenedorCircular />
+        <ContenedorCircular />
+        <ContenedorCircular />
       </div>
-  
-      <div class = "SegundaFila" > 
-        <ContenedorCircular/>
-        <ContenedorCircular/>
+
+      <div class="SegundaFila">
         <VerticalSpeed/>
-
-        <ContenedorCircular/>
-               
-      </div>
-      
-      <div class = "TerceraFila">
-
-        
-
-          <div class = "pedalesCabina">
-            <Pedales/>
-            <Pedales/>
-          </div>
-
-          <div class = "mando">
-            <MandoPrincipal/>
-          </div>
-
-
+        <ContenedorCircular />
+        <ContenedorCircular />
+        <ContenedorCircular />
       </div>
 
+      <div class="TerceraFila">
+        <div class="pedalesCabina">
+          <Pedales />
+          <Pedales />
+        </div>
+
+        <div class="mando">
+          <MandoPrincipal />
+        </div>
+      </div>
     </div>
 
-    <div class = "divicionPrincipalder">
+    <div class="divicionPrincipalder">
       <div class="ElementosRectangulares">
-        
         <div class="elementos">
-          <ContenedorRectangulo/>
-          <ContenedorRectangulo/>
-          <ContenedorRectangulo/>
+          <ContenedorRectangulo />
+          <ContenedorRectangulo />
+          <ContenedorRectangulo />
         </div>
-        
+
         <div class="radio">
-          <h2> posiblemente aqui meta botones en vez de radio</h2>
-          
+          <h2>posiblemente aqui meta botones en vez de radio</h2>
         </div>
-
       </div>
 
-      <div class = "Palancas">
+      <div class="Palancas">
         <CarburetorHeat id="primera"/>
-        
-        <palancas id="segunda"/>
-        <palancas id="tercera"/>
-        <palancas id="cuarta"/>
-        <palancas id="quinta"/>
+        <MixtureKnob id="segunda" />
+        <TrottleKnob id="tercera" />
+        <TrimWheel />
+        <WingFlaps />
       </div>
-
     </div>
-
   </div>
 </template>
 
 <script setup>
-  import ContenedorCircular from './elementos/ContenedorCircular.vue';
-import ContenedorRectangulo from './elementos/ContenedorRectangulo.vue';
-import MandoPrincipal from './elementos/MandoPrincipal.vue';
-import Pedales from './elementos/Pedales.vue';
-import palancas from './elementos/palancas.vue';
+  import ContenedorCircular from './elementos/ContenedorCircular.vue'
+  import palancas from './elementos/palancas.vue'
+  import MandoPrincipal from './elementos/MandoPrincipal.vue'
+  import ContenedorRectangulo from './elementos/ContenedorRectangulo.vue'
+  import Pedales from './elementos/Pedales.vue'
 
   /* importar los nuevos componentes */
+  import ContenedorCircularEjemplo from './elementos/ContenedorCircularEjemplo.vue'
+  import ArtificialHorizon from './elementos/ArtificialHorizon.vue'
+  import MixtureKnob from './elementos/MixtureKnob.vue'
+  import TrottleKnob from './elementos/TrottleKnob.vue'
+  import TrimWheel from './elementos/TrimWheel.vue'
+  import WingFlaps from './elementos/WingFlaps.vue'
   import CarburetorHeat from './elementos/CarburetorHeat.vue';
-import ContenedorCircularEjemplo from './elementos/ContenedorCircularEjemplo.vue';
-import VerticalSpeed from './elementos/VerticalSpeed.vue';
-
+  import VerticalSpeed from './elementos/VerticalSpeed.vue';
 </script>
 
 <script>
-  export default { components: { VerticalSpeed, VerticalSpeed, CarburetorHeat } }
+  export default { components: { MixtureKnob } }
 </script>
 
-
 <style>
-  .PrimeraFila{
+  .PrimeraFila {
     display: flex;
     flex-direction: row;
     background-color: rgb(196, 141, 79);
     height: 20%;
     width: 100%;
-
   }
 
-  .SegundaFila{
+  .SegundaFila {
     display: flex;
     flex-direction: row;
     background-color: rgb(196, 141, 79);
     height: 20%;
     width: 68%;
   }
-  .pedalesCabina{
+  .pedalesCabina {
     display: flex;
     flex-direction: row;
     background-color: rgb(196, 141, 79);
     height: 40%;
     margin-top: 20%;
-    
   }
 
-  .TerceraFila{
+  .TerceraFila {
     background-color: rgb(196, 141, 79);
     height: 60%;
     width: 100%;
     display: flex;
     flex-direction: row;
-    
   }
 
-  .divicionPrincipalizq{
-    
+  .divicionPrincipalizq {
     background-color: rgb(196, 141, 79);
     height: 100%;
     width: 50%;
   }
 
-  .espacio{
+  .espacio {
     display: flex;
     flex-direction: row;
     height: 100%;
     width: 100%;
   }
 
-  .divicionPrincipalder{
+  .divicionPrincipalder {
     display: flex;
     flex-direction: column;
     background-color: rgb(255, 235, 80);
     height: 100%;
     width: 50%;
-  }  
+  }
 
-  .principal{
+  .principal {
     display: flex;
     flex-direction: row;
     height: 100%;
     width: 100%;
   }
 
-  .elementos{
+  .elementos {
     display: flex;
     flex-direction: column;
-    
+
     background-color: rgb(196, 141, 79);
     height: 100%;
     width: 100%;
   }
 
-  .mando{
+  .mando {
     display: flex;
-  justify-content: center;
-  align-items: center;
+    justify-content: center;
+    align-items: center;
 
     background-color: rgb(196, 141, 79);
     height: 100%;
     width: 100%;
   }
 
-  .radio{
+  .radio {
     background-color: rgb(196, 141, 79);
     height: 100%;
     width: 100%;
@@ -182,16 +163,15 @@ import VerticalSpeed from './elementos/VerticalSpeed.vue';
     align-items: center;
   }
 
-  .Palancas{
+  .Palancas {
     display: flex;
     flex-direction: row;
     background-color: rgb(196, 141, 79);
     height: 50%;
     width: 100%;
-
   }
 
-  .ElementosRectangulares{
+  .ElementosRectangulares {
     display: flex;
     flex-direction: row;
     background-color: rgb(255, 80, 80);
@@ -200,28 +180,21 @@ import VerticalSpeed from './elementos/VerticalSpeed.vue';
   }
 
   /* Palancas */
-  #primera{
-    background-color: rgb(110, 132, 124); 
+  #primera {
+    background-color: rgb(110, 132, 124);
   }
 
-  #segunda{
+  #segunda {
     background-color: rgb(161, 193, 182);
-    
   }
-  #tercera{
+  #tercera {
     background-color: rgb(99, 119, 112);
-    
   }
-  #cuarta{
+  #cuarta {
     background-color: rgb(148, 181, 170);
-    
   }
-  #quinta{
+  #quinta {
     background-color: rgb(82, 106, 98);
-    
   }
-
-
-
-
 </style>
+
