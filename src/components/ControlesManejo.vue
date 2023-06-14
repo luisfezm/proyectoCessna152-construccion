@@ -1,12 +1,14 @@
  <template>
   <div class="principal">
+
     <div class="divicionPrincipalizq">
       <div class="PrimeraFila">
-        <ContenedorCircularEjemplo />
+        <Altimeter/>
         <ArtificialHorizon />
+         <Tachometer/>
         <ContenedorCircular />
         <ContenedorCircular />
-        <ContenedorCircular />
+
       </div>
 
       <div class="SegundaFila">
@@ -60,7 +62,9 @@
   import Pedales from './elementos/Pedales.vue'
 
   /* importar los nuevos componentes */
-   
+
+  import Tachometer from './elementos/tachometer.vue';
+  import Altimeter from './elementos/altimeter.vue';
   import AirspeedIndicator from './elementos/AirspeedIndicator.vue';
   import TurnCoordinator from './elementos/TurnCoordinator.vue';
   import ContenedorCircularEjemplo from './elementos/ContenedorCircularEjemplo.vue'
@@ -74,7 +78,7 @@
 </script>
 
 <script>
-  export default {}
+  export default { components: { Tachometer, Altimeter } }
 </script>
 
 <style>
