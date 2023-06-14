@@ -13,7 +13,7 @@ window.addEventListener("keydown", (event) => {
     store.dispatch("incrementarMovPedalIzq");
     console.log("mov_Pedal_izq:", store.getters.movPedalIzq);
 
-    store.dispatch('calcularHeadingIndicator',store.getters.movPedalIzq);
+    store.dispatch('calcularHeadingIndicator',-store.getters.movPedalIzq);
     console.log("Valor de Heading Indicator:", store.getters.getHeadingIndicator);
 
 
@@ -34,7 +34,7 @@ window.addEventListener("keyup", (event) => {
       store.dispatch("resetMovPedalIzq");
       console.log("mov_Pedal_izq reset to 0");
 
-      store.dispatch('calcularHeadingIndicator',store.getters.movPedalIzq);
+      store.dispatch('calcularHeadingIndicator',-store.getters.movPedalIzq);
       console.log("Valor de Heading Indicator:", store.getters.getHeadingIndicator);
     }, 1000);
   } else if (event.key === "e") {

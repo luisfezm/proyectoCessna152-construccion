@@ -9,8 +9,9 @@ const indicadores = {
       // Mutaciones para modificar el estado de los indicadores
 
       calcularHeadingIndicator(state,PedalValue){
-        state.HeadingIndicator = PedalValue/10;
-
+        
+        state.HeadingIndicator += PedalValue/10;
+        state.HeadingIndicator = state.HeadingIndicator % 360;
       }
 
     },
