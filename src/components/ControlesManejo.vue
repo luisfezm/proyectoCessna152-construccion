@@ -11,8 +11,8 @@
 
       <div class="SegundaFila">
         <VerticalSpeed/>
-        <ContenedorCircular />
-        <ContenedorCircular />
+        <TurnCoordinator/>
+        <AirspeedIndicator/>
         <ContenedorCircular />
       </div>
 
@@ -60,6 +60,9 @@
   import Pedales from './elementos/Pedales.vue'
 
   /* importar los nuevos componentes */
+   
+  import AirspeedIndicator from './elementos/AirspeedIndicator.vue';
+  import TurnCoordinator from './elementos/TurnCoordinator.vue';
   import ContenedorCircularEjemplo from './elementos/ContenedorCircularEjemplo.vue'
   import ArtificialHorizon from './elementos/ArtificialHorizon.vue'
   import MixtureKnob from './elementos/MixtureKnob.vue'
@@ -71,7 +74,7 @@
 </script>
 
 <script>
-  export default { components: { MixtureKnob } }
+  export default {}
 </script>
 
 <style>
