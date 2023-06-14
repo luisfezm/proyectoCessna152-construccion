@@ -4,6 +4,7 @@
       <div class="PrimeraFila">
         <ContenedorCircularEjemplo />
         <ArtificialHorizon />
+        <ContenedorCircularEjemplo />
         <ContenedorCircular />
         <ContenedorCircular />
         <ContenedorCircular />
@@ -45,8 +46,8 @@
         <palancas id="primera" />
         <MixtureKnob id="segunda" />
         <TrottleKnob id="tercera" />
-        <palancas id="cuarta" />
-        <palancas id="quinta" />
+        <TrimWheel />
+        <WingFlaps />
       </div>
     </div>
   </div>
@@ -64,6 +65,8 @@
   import ArtificialHorizon from './elementos/ArtificialHorizon.vue'
   import MixtureKnob from './elementos/MixtureKnob.vue'
   import TrottleKnob from './elementos/TrottleKnob.vue'
+  import TrimWheel from './elementos/TrimWheel.vue'
+  import WingFlaps from './elementos/WingFlaps.vue'
 </script>
 
 <script>
