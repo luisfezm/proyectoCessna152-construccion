@@ -5,7 +5,7 @@
     <div class = "divicionPrincipalizq">
 
       <div class = "PrimeraFila" >
-        <ContenedorCircularEjemplo/>
+        <Altimeter/>
         <ContenedorCircular/>
         <Tachometer/>
         <ContenedorCircular/>
@@ -78,11 +78,12 @@
   /* importar los nuevos componentes */
   import ContenedorCircularEjemplo from './elementos/ContenedorCircularEjemplo.vue';
 import Tachometer from './elementos/tachometer.vue';
+import Altimeter from './elementos/altimeter.vue';
 
 </script>
 
 <script>
-  export default { components: { Tachometer } }
+  export default { components: { Tachometer, Altimeter } }
 </script>
 
 

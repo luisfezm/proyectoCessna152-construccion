@@ -19,6 +19,7 @@ import { computed } from 'vue';
 
   export default {
 
+  
 
     methods:{
         Accelerator(){
@@ -49,18 +50,9 @@ import { computed } from 'vue';
 
 
 
-.box{
-    width: 90px;
-    height: 90px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: nowrap;
 
-}
 /*
-.box #increase{
+.box #increase{ 
     width: 8px;
     height: 4px;
     position: absolute;
@@ -121,7 +113,7 @@ import { computed } from 'vue';
     left: 49%;
     z-index: 3;
     transform-origin: bottom;
-    transform: rotate(-135deg);    /* Grados para rotar el medidor de velocidad */
+    transform: rotate(-130deg);    /* Grados para rotar el medidor de velocidad */
     transition: 2s;
 
 
