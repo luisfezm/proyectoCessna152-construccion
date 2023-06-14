@@ -1,7 +1,5 @@
-<template>  
-    <div class="circular"> 
-      ejemplo
-    </div>
+<template>
+  <div class="circular">ejemplo</div>
 </template>
 
 <script>
@@ -9,23 +7,18 @@
 </script>
 
 <style>
+  .circular {
+    /* centrado generico */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
 
-.circular{
-  /* centrado generico */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-
-  border-radius: 50%;
-  background-color: rgb(16, 15, 15);
-  height: 100hv;
-  width: 6vw;
-  margin-left: 1%;
-  margin-top: 1%;
-
-  
-}   
-
-
+    border-radius: 50%;
+    background-color: rgb(16, 15, 15);
+    height: 100hv;
+    width: 6vw;
+    margin-left: 1%;
+    margin-top: 1%;
+  }
 </style>
