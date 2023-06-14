@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div class="principal">
     <div class="divicionPrincipalizq">
       <div class="PrimeraFila">
@@ -10,7 +10,7 @@
       </div>
 
       <div class="SegundaFila">
-        <ContenedorCircular />
+        <VerticalSpeed/>
         <ContenedorCircular />
         <ContenedorCircular />
         <ContenedorCircular />
@@ -42,7 +42,7 @@
       </div>
 
       <div class="Palancas">
-        <palancas id="primera" />
+        <CarburetorHeat id="primera"/>
         <MixtureKnob id="segunda" />
         <TrottleKnob id="tercera" />
         <TrimWheel />
@@ -66,6 +66,8 @@
   import TrottleKnob from './elementos/TrottleKnob.vue'
   import TrimWheel from './elementos/TrimWheel.vue'
   import WingFlaps from './elementos/WingFlaps.vue'
+  import CarburetorHeat from './elementos/CarburetorHeat.vue';
+  import VerticalSpeed from './elementos/VerticalSpeed.vue';
 </script>
 
 <script>
@@ -195,3 +197,4 @@
     background-color: rgb(82, 106, 98);
   }
 </style>
+
