@@ -2,6 +2,7 @@
 import { createStore } from 'vuex'
 import interactuadores from './modules/interactuadores/interactuadores'
 import indicadores from './modules/indicadores/indicadores'
+import horizonteArtificial from './modules/indicadores/horizonteArtificial'
 // import NombreArchivo from "./modules/indicadores/NombreArchivo"
 
 const store = createStore({
@@ -23,6 +24,7 @@ const store = createStore({
   modules: {
     interactuadores,
     indicadores,
+    horizonteArtificial,
   },
 })
 
