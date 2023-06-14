@@ -4,7 +4,6 @@
       <div class="PrimeraFila">
         <ContenedorCircularEjemplo />
         <ArtificialHorizon />
-        <ContenedorCircularEjemplo />
         <ContenedorCircular />
         <ContenedorCircular />
         <ContenedorCircular />
