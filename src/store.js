@@ -1,5 +1,8 @@
 // store.js
 import { createStore } from 'vuex';
+import interactuadores from './modules/interactuadores/interactuadores';
+import indicadores from './modules/indicadores/indicadores';
+// import NombreArchivo from "./modules/indicadores/NombreArchivo"
 
 const store = createStore({
   state: {
@@ -15,7 +18,12 @@ const store = createStore({
       commit('toggleLuz');
     }
   },
-  getters: {}
+  getters: {},
+
+  modules: {
+    interactuadores,
+    indicadores
+  }
 });
 
 export default store;
