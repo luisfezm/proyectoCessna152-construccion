@@ -5,12 +5,12 @@
     <div class = "divicionPrincipalizq">
 
       <div class = "PrimeraFila" >
+        <ContenedorCircularEjemplo />
+        <ArtificialHorizon />
         <ContenedorCircularEjemplo/>
         <ContenedorCircular/>
         <ContenedorCircular/>
         <ContenedorCircular/>
-        <ContenedorCircular/>
-
       </div>
   
       <div class = "SegundaFila" > 
@@ -22,9 +22,6 @@
       </div>
       
       <div class = "TerceraFila">
-
-        
-
           <div class = "pedalesCabina">
             <Pedales/>
             <Pedales/>
@@ -68,6 +65,7 @@
   </div>
 </template>
 
+
 <script setup>
   import ContenedorCircular from './elementos/ContenedorCircular.vue';
   import palancas from './elementos/palancas.vue';
@@ -77,6 +75,7 @@
 
   /* importar los nuevos componentes */
   import ContenedorCircularEjemplo from './elementos/ContenedorCircularEjemplo.vue';
+  import ArtificialHorizon from './elementos/ArtificialHorizon.vue'
   import TrimWheel from './elementos/TrimWheel.vue';
   import WingFlaps from './elementos/WingFlaps.vue';
 
@@ -218,8 +217,4 @@
     background-color: rgb(82, 106, 98);
     
   }
-
-
-
-
 </style>
