@@ -1,5 +1,4 @@
 // store.js
-
 import { createStore } from 'vuex'
 import interactuadores from './modules/interactuadores/interactuadores'
 import indicadores from './modules/indicadores/indicadores'
