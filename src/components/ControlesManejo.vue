@@ -57,7 +57,8 @@
       </div>
 
       <div class = "Palancas">
-        <palancas id="primera"/>
+        <CarburetorHeat id="primera"/>
+        
         <palancas id="segunda"/>
         <palancas id="tercera"/>
         <palancas id="cuarta"/>
@@ -77,13 +78,14 @@ import Pedales from './elementos/Pedales.vue';
 import palancas from './elementos/palancas.vue';
 
   /* importar los nuevos componentes */
-  import ContenedorCircularEjemplo from './elementos/ContenedorCircularEjemplo.vue';
+  import CarburetorHeat from './elementos/CarburetorHeat.vue';
+import ContenedorCircularEjemplo from './elementos/ContenedorCircularEjemplo.vue';
 import VerticalSpeed from './elementos/VerticalSpeed.vue';
 
 </script>
 
 <script>
-  export default { components: { VerticalSpeed, VerticalSpeed } }
+  export default { components: { VerticalSpeed, VerticalSpeed, CarburetorHeat } }
 </script>
 
 
