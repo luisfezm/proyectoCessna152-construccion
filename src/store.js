@@ -1,21 +1,31 @@
 // store.js
-import { createStore } from 'vuex';
+import { createStore } from 'vuex'
+import interactuadores from './modules/interactuadores/interactuadores'
+import indicadores from './modules/indicadores/indicadores'
+import horizonteArtificial from './modules/indicadores/horizonteArtificial'
+// import NombreArchivo from "./modules/indicadores/NombreArchivo"
 
 const store = createStore({
   state: {
-    luz: false
+    luz: false,
   },
   mutations: {
     toggleLuz(state) {
-      state.luz = !state.luz;
-    }
+      state.luz = !state.luz
+    },
   },
   actions: {
     toggleLuz({ commit }) {
-      commit('toggleLuz');
-    }
+      commit('toggleLuz')
+    },
   },
-  getters: {}
-});
+  getters: {},
 
-export default store;
+  modules: {
+    interactuadores,
+    indicadores,
+    horizonteArtificial,
+  },
+})
+
+export default store
