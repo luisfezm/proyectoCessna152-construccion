@@ -90,8 +90,10 @@ export default {
     left: 50%;
     border-radius: 15%;
     transform: translate(-50%, -80%);
-    width: 50px;
-    height: 10px;
+    height: 100hv;
+    width: 6vw;
+    margin-left: 1%;
+    margin-top: 1%;
     background-color: gray;
   }
   
