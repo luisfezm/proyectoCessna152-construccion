@@ -86,10 +86,6 @@
         class="speedometerScale speedometerScale-19"
       />
     </div>
-    <div class="divspeedController">
-      <button class="increase" @click="increaseSpeed()">Aumentar</button>
-      <button class="disminuir" @click="decreaseSpeed()">Disminuir</button>
-    </div>
   </div>
 </template>
 
