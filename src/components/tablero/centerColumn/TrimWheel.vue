@@ -1,7 +1,7 @@
 <template>
   <div
     id="miDiv"
-    class="WingFlaps"
+    class="TrimWheel"
     :class="{ grabbing: isDragging }"
     @mousedown="startDrag"
     @mouseup="stopDrag"
@@ -76,13 +76,13 @@
 </script>
 
 <style>
-  .WingFlaps {
+  .TrimWheel {
     display: flex;
     justify-content: center;
     align-items: center;
 
     background-color: rgb(177, 177, 177);
-    width: 100%;
+    width: 50px;
     height: 100%;
     border-radius: 5%;
     margin-left: 1%;
@@ -91,7 +91,7 @@
     cursor: grab;
   }
 
-  .WingFlaps.grabbing {
+  .TrimWheel.grabbing {
     cursor: grabbing;
   }
 

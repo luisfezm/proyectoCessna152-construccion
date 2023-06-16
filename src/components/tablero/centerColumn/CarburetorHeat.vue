@@ -1,0 +1,79 @@
+<template>
+  <div class="palanca">
+    <div id="carburetor">
+      <div id="circle-carburetor" @click="change" />
+    </div>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        cont: 1,
+      }
+    },
+
+    methods: {
+      change() {
+        // el metodo change lo que hace es cambiar el tamaño del carburador
+        if (this.cont == 1) {
+          // cuando es uno el cont, el carburador se agranda y se tira hacia afuera
+          document.getElementById('carburetor').style.width = '45px'
+          document.getElementById('carburetor').style.height = '45px'
+          document.getElementById('circle-carburetor').style.width = '20px'
+          document.getElementById('circle-carburetor').style.height = '20px'
+          this.cont++
+          console.log(this.cont)
+        } else {
+          // cuando el cont es dos, el carburador se vuelve a achicar o se tira para adentro
+          document.getElementById('carburetor').style.width = '60px'
+          document.getElementById('carburetor').style.height = '60px'
+          document.getElementById('circle-carburetor').style.width = '35px'
+          document.getElementById('circle-carburetor').style.height = '35px'
+          this.cont--
+        }
+
+        /*Cada vez que se clickea el circulito plomo del carburador se simula que se tira hacia afue si es el primer
+           click y hacia adentro si es el segundo click, asi sucesivamente */
+
+        /*se pueden pasar variables globales si se quiere modificar la temperatura del carburador en el  metodo change*/
+      },
+    },
+  }
+</script>
+
+<style>
+  .palanca {
+    /* centrado generico */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgb(11, 143, 139);
+    width: 100%;
+    height: 100%;
+    border-radius: 5%;
+    margin-left: 1%;
+  }
+
+  #carburetor {
+    /*container carburador */
+    width: 45px;
+    height: 45px;
+    background-color: rgb(20, 20, 20);
+    border-radius: 7%;
+    margin-top: 62px;
+    margin-left: 3px;
+  }
+
+  #circle-carburetor {
+    /*circulo del carburador*/
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(white, rgb(202, 197, 197));
+    border-radius: 50%;
+    margin-left: 13px;
+    margin-top: 12px;
+  }
+</style>

@@ -1,6 +1,6 @@
 <template>
   <div class="indicadorMainPanel">
-    <Attitude :size="70" :pitch="30" :roll="50" />
+    <Attitude :size="70" :pitch="0" :roll="0" />
   </div>
 </template>
 

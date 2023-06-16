@@ -1,22 +1,27 @@
 <template>
   <div class="centerColumnPanel">
-    <WingFlaps />
-    <MiThrottle />
-    <WingFlaps />
-    <WingFlaps />
-    <WingFlaps />
+    <CarburetorHeat />
+    <MixtureKnob />
+    <TrottleKnob />
+    <TrimWhell />
     <WingFlaps />
   </div>
 </template>
 
 <script>
-  import WingFlaps from '@/components/tablero/centerColumn/WingFlaps.vue'
-  import MiThrottle from '@/components/tablero/centerColumn/MiThrottle.vue'
+  import CarburetorHeat from './CarburetorHeat.vue'
+  import MixtureKnob from './MixtureKnob.vue'
+  import TrimWhell from './TrimWheel.vue'
+  import WingFlaps from './WingFlaps.vue'
+  import TrottleKnob from './TrottleKnob.vue'
 
   export default {
     components: {
+      CarburetorHeat,
+      MixtureKnob,
+      TrottleKnob,
+      TrimWhell,
       WingFlaps,
-      MiThrottle,
     },
   }
 </script>
