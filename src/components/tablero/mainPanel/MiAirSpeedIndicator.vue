@@ -1,5 +1,5 @@
 <template>
-  <div class="circular">
+  <div class="indicadorMainPanel">
     <div class="airspeed-indicator">
       <div ref="needle" class="needle" />
     </div>
@@ -41,8 +41,6 @@
     color: white;
     border-radius: 50%;
     background-color: rgb(16, 15, 15);
-    height: 100%;
-    width: 100px;
     height: 100hv;
     width: 6vw;
     margin-left: 1%;

@@ -19,18 +19,18 @@
         // el metodo change lo que hace es cambiar el tamaño del carburador
         if (this.cont == 1) {
           // cuando es uno el cont, el carburador se agranda y se tira hacia afuera
-          document.getElementById('carburetor').style.width = '45px'
-          document.getElementById('carburetor').style.height = '45px'
-          document.getElementById('circle-carburetor').style.width = '20px'
-          document.getElementById('circle-carburetor').style.height = '20px'
+          document.getElementById('carburetor').style.width = '35px'
+          document.getElementById('carburetor').style.height = '35px'
+          document.getElementById('circle-carburetor').style.width = '10px'
+          document.getElementById('circle-carburetor').style.height = '10px'
           this.cont++
           console.log(this.cont)
         } else {
           // cuando el cont es dos, el carburador se vuelve a achicar o se tira para adentro
-          document.getElementById('carburetor').style.width = '60px'
-          document.getElementById('carburetor').style.height = '60px'
-          document.getElementById('circle-carburetor').style.width = '35px'
-          document.getElementById('circle-carburetor').style.height = '35px'
+          document.getElementById('carburetor').style.width = '50px'
+          document.getElementById('carburetor').style.height = '50px'
+          document.getElementById('circle-carburetor').style.width = '25px'
+          document.getElementById('circle-carburetor').style.height = '25px'
           this.cont--
         }
 
@@ -49,12 +49,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
     background-color: rgb(11, 143, 139);
-    width: 100%;
-    height: 100%;
+    width: 60%;
+    height: 80%;
+    max-height: 80px;
     border-radius: 5%;
-    margin-left: 1%;
+    margin: auto;
   }
 
   #carburetor {
@@ -63,7 +63,7 @@
     height: 45px;
     background-color: rgb(20, 20, 20);
     border-radius: 7%;
-    margin-top: 62px;
+    margin-top: 50px;
     margin-left: 3px;
   }
 

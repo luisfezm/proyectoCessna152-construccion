@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="">
     <div class="circular">
       <div class="turn-coordinator">
         <div
@@ -53,8 +53,8 @@
     color: white;
     border-radius: 50%;
     background-color: rgb(16, 15, 15);
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     margin-left: 1%;
     margin-top: 1%;
   }

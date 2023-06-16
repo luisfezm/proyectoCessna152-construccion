@@ -68,7 +68,7 @@
     color: white;
     border-radius: 50%;
     background-color: rgb(16, 15, 15);
-    height: 80px;
-    width: 80px;
+    height: 70px;
+    width: 70px;
   }
 </style>
