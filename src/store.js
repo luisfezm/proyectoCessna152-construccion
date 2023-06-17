@@ -1,9 +1,11 @@
 // store.js
 import { createStore } from 'vuex'
-import interactuadores from './modules/interactuadores/interactuadores'
-import indicadores from './modules/indicadores/indicadores'
 import horizonteArtificial from './modules/indicadores/horizonteArtificial'
-// import NombreArchivo from "./modules/indicadores/NombreArchivo"
+import tacometro from './modules/indicadores/tacometro'
+import headingIndicator from './modules/indicadores/headingIndicator'
+import yoke from './modules/interactuadores/yoke'
+import pedales from './modules/interactuadores/pedales'
+import throttle from './modules/interactuadores/throttle'
 
 const store = createStore({
   state: {
@@ -22,9 +24,12 @@ const store = createStore({
   getters: {},
 
   modules: {
-    interactuadores,
-    indicadores,
     horizonteArtificial,
+    tacometro,
+    headingIndicator,
+    yoke,
+    pedales,
+    throttle,
   },
 })
 

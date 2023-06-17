@@ -1,7 +1,7 @@
 <template>
   <div
     id="miDiv"
-    class="WingFlaps"
+    class="TrimWheel"
     :class="{ grabbing: isDragging }"
     @mousedown="startDrag"
     @mouseup="stopDrag"
@@ -12,8 +12,8 @@
       src="src\assets\rectangle.png"
       :style="{
         transform: `translateY(${currentTranslationY}px)`,
-        width: '150px',
-        height: '30px',
+        width: '100%',
+        height: '10%',
       }"
       draggable="false"
     />
@@ -54,8 +54,8 @@
           const translationFactor = 1 // Factor de desplazamiento
           let newTranslationY = diffY * translationFactor
 
-          const maxTranslationY = 100 // Límite máximo de desplazamiento hacia arriba
-          const minTranslationY = -100 // Límite máximo de desplazamiento hacia abajo
+          const maxTranslationY = 40 // Límite máximo de desplazamiento hacia arriba
+          const minTranslationY = -40 // Límite máximo de desplazamiento hacia abajo
 
           newTranslationY = Math.max(
             minTranslationY,
@@ -76,22 +76,23 @@
 </script>
 
 <style>
-  .WingFlaps {
+  .TrimWheel {
     display: flex;
     justify-content: center;
     align-items: center;
 
     background-color: rgb(177, 177, 177);
-    width: 100%;
-    height: 100%;
+    width: 50%;
+    height: 80%;
+    max-height: 80px;
     border-radius: 5%;
-    margin-left: 1%;
+    margin: auto;
     position: relative;
 
     cursor: grab;
   }
 
-  .WingFlaps.grabbing {
+  .TrimWheel.grabbing {
     cursor: grabbing;
   }
 

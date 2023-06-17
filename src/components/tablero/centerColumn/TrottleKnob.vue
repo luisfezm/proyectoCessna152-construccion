@@ -1,7 +1,7 @@
 <template>
   <div
     id="miDiv"
-    class="knob"
+    class="Tknob"
     draggable="false"
     @mousedown="startDrag"
     @mouseup="stopDrag"
@@ -9,7 +9,7 @@
   >
     <span class="number">{{ axis }}</span>
     <img
-      src="src/assets/knob.svg"
+      src="src/assets/tknob.svg"
       :style="{
         transform: `scale(${currentScale}) rotate(${currentRotation}deg)`,
       }"
@@ -28,8 +28,8 @@
         isDragging: false,
         scaleMultiplier: 0.0002, // Factor de escala
         rotationMultiplier: 0.1, // Factor de rotación
-        currentScale: 1, // Tamaño actual de la imagen
-        maxScale: 1.25, // Límite máximo de escala
+        currentScale: 0.9, // Tamaño actual de la imagen
+        maxScale: 1, // Límite máximo de escala
         minScale: 0.75, // Límite mínimo de escala
         currentRotation: 0, // Rotación actual en grados
       }
@@ -102,22 +102,24 @@
     },
   }
 </script>
+
 <style>
-  .knob {
+  .Tknob {
     /* centrado generico */
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
 
     background-color: rgb(11, 143, 139);
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
+    max-height: 80px;
     border-radius: 5%;
-    margin-left: 1%;
+    margin: auto;
     position: relative;
   }
   .number {
     position: absolute;
-    transform: translateY(-80px);
+    transform: translateY(-50px);
   }
 </style>

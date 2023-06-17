@@ -2,8 +2,7 @@
   <div class="rightHandPanel">
     <Tachometer />
     <ADFNeddle />
-    <Tachometer />
-    <Tachometer />
+
     <div class="indicadorRightADF">ADF navigation box</div>
   </div>
 </template>
