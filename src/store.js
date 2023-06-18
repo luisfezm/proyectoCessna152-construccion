@@ -6,6 +6,7 @@ import headingIndicator from './modules/indicadores/headingIndicator'
 import yoke from './modules/interactuadores/yoke'
 import pedales from './modules/interactuadores/pedales'
 import throttle from './modules/interactuadores/throttle'
+import mixture from './modules/interactuadores/mixture'
 
 const store = createStore({
   state: {
@@ -30,6 +31,7 @@ const store = createStore({
     yoke,
     pedales,
     throttle,
+    mixture,
   },
 })
 

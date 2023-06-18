@@ -92,4 +92,13 @@ window.addEventListener('keyup', (event) => {
   }
 })
 
+//Teclas para mixture
+window.addEventListener('keypress', (event) => {
+  if (event.key === 'n' || event.key === 'm') {
+    store.dispatch('teclaPresionada', event);
+    console.log('estadoMixture', store.getters.getEstadoMixture);
+  }
+});
+
+
 createApp(App).use(store).mount('#app')
