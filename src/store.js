@@ -2,6 +2,7 @@
 import { createStore } from 'vuex'
 import horizonteArtificial from './modules/indicadores/horizonteArtificial'
 import tacometro from './modules/indicadores/tacometro'
+import altimeter from './modules/indicadores/altimeter'
 import headingIndicator from './modules/indicadores/headingIndicator'
 import yoke from './modules/interactuadores/yoke'
 import pedales from './modules/interactuadores/pedales'
@@ -27,6 +28,7 @@ const store = createStore({
     horizonteArtificial,
     tacometro,
     headingIndicator,
+    altimeter,
     yoke,
     pedales,
     throttle,
