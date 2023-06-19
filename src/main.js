@@ -43,7 +43,7 @@ window.addEventListener('keyup', () => {
 })
 
 window.addEventListener('keydown', (event) => {
-  if (event.key === 'q') {
+  if (event.key === 'q' && store.getters.movPedalDerecha === 0) {
     clearTimeout(timeoutPedalIzq)
     store.dispatch('incrementarMovPedalIzq')
     console.log('mov_Pedal_izq:', store.getters.movPedalIzq)
@@ -53,7 +53,7 @@ window.addEventListener('keydown', (event) => {
       'Valor de Heading Indicator:',
       store.getters.getHeadingIndicator
     )
-  } else if (event.key === 'e') {
+  } else if (event.key === 'e' && store.getters.movPedalIzq === 0) {
     clearTimeout(timeoutPedalDerecha)
     store.dispatch('incrementarMovPedalDerecha')
 
@@ -91,5 +91,14 @@ window.addEventListener('keyup', (event) => {
     }, 1000)
   }
 })
+
+//Teclas para mixture
+window.addEventListener('keypress', (event) => {
+  if (event.key === 'n' || event.key === 'm') {
+    store.dispatch('teclaPresionada', event);
+    console.log('estadoMixture', store.getters.getEstadoMixture);
+  }
+});
+
 
 createApp(App).use(store).mount('#app')
