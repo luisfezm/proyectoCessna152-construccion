@@ -71,7 +71,7 @@
           if (calculo === 0) {
             this.axis = 0
           } else {
-            this.axis = (calculo * -400).toFixed(2)
+            this.axis = (calculo * -400 * -1).toFixed(2)
           }
 
           this.currentRotation = newRotation
