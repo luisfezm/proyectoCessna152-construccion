@@ -21,18 +21,11 @@ window.addEventListener('keypress', (event) => {
 })
 
 window.addEventListener('keypress', (event) => {
-  if (event.key === 'y') {
-    clearTimeout(timeoutVerticalspeed)
-    store.dispatch('cambiarAngulo')
-    store.dispatch("updateVerticalspeed")
-    console.log('speed', store.getters.getSpeed)
-    console.log('angulo', store.getters.getAngulo)
-    console.log('verticalspeed', store.getters.getVerticalspeed)
-  } else if (event.key === 'u') {
+  if (event.key === 'u') {
     clearTimeout(timeoutVerticalspeed)
     store.dispatch('cambiarVelocidad')
     store.dispatch("updateVerticalspeed")
-    console.log('speed', store.getters.getSpeed)
+    console.log('speed', store.getters.getSpeedPPM)
     console.log('angulo', store.getters.getAngulo)
     console.log('verticalspeed', store.getters.getVerticalspeed)
   }}

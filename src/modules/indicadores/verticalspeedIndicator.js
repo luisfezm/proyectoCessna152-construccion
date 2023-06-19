@@ -1,4 +1,4 @@
-//import horizonteArtificial from './horizonteArtificial'
+import horizonteArtificial from './horizonteArtificial'
 //verticalspeedIndicator.js
 const verticalspeedIndicator = {
     state: {
@@ -18,24 +18,18 @@ const verticalspeedIndicator = {
         cambioUnidadVelocidad(state){  //Cambia la velocidad de estar en millas por hora a pies por minuto
             state.velocidadPPM=state.velocidadMPH*88
         },
-        cambiarAngulo(state){ //para ir variando el angulo, para hacer pruebas
-            state.angulo++
-        },
         cambiarVelocidad(state){ //para ir variando la velocidad, para hacer pruebas
-            state.velocidad++
+            state.velocidadMPH++
         },
 
 
     },
     actions: {
       // Acciones para realizar operaciones relacionadas con los indicadores
-      updateVerticalspeed({ commit }){
+      updateVerticalspeed({ commit, rootState }){
+        angulo=rootState.horizonteArtificial.anguloPitch
         commit('cambioUnidadVelocidad')
         commit('updateVerticalspeed')
-      },
-
-      cambiarAngulo({ commit }){
-        commit('cambiarAngulo')
       },
 
       cambiarVelocidad({ commit }){
