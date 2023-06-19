@@ -19,16 +19,17 @@
 </template>
 
 <script>
+  import store from '@/store'
   export default {
     data() {
       return {
-        axis: 0,
+        axis: 0, // valor del thlottle
         startX: 0,
         startY: 0,
         isDragging: false,
         scaleMultiplier: 0.0002, // Factor de escala
         rotationMultiplier: 0.1, // Factor de rotación
-        currentScale: 0.9, // Tamaño actual de la imagen
+        currentScale: 1, // Tamaño actual de la imagen
         maxScale: 1, // Límite máximo de escala
         minScale: 0.75, // Límite mínimo de escala
         currentRotation: 0, // Rotación actual en grados
@@ -67,11 +68,13 @@
           this.currentScale = newScale
 
           // Calcular el valor del eje
-          let calculo = 1 - newScale
+          let calculo = newScale - 1
           if (calculo === 0) {
             this.axis = 0
           } else {
             this.axis = (calculo * -400).toFixed(2)
+            store.dispatch('setThrottleDepth', this.axis) //seteamos el valor del thlottle con el valor del axis
+            console.log('throttle_depth', store.getters.getThrottleDepth) // para mostrarlo en consola
           }
 
           this.currentRotation = newRotation
@@ -96,7 +99,6 @@
         if (match && match[1]) {
           return parseFloat(match[1])
         }
-
         return 0
       },
     },
