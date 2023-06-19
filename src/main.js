@@ -5,6 +5,7 @@ import store from './store'
 let timeoutThrottle
 let timeoutPedalIzq
 let timeoutPedalDerecha
+let timeoutVerticalspeed
 let temp
 
 window.addEventListener('keypress', (event) => {
@@ -18,6 +19,25 @@ window.addEventListener('keypress', (event) => {
     console.log('throttle_depth', store.getters.getThrottleDepth)
   }
 })
+
+window.addEventListener('keypress', (event) => {
+  if (event.key === 'y') {
+    clearTimeout(timeoutVerticalspeed)
+    store.dispatch('cambiarAngulo')
+    store.dispatch("updateVerticalspeed")
+    console.log('speed', store.getters.getSpeed)
+    console.log('angulo', store.getters.getAngulo)
+    console.log('verticalspeed', store.getters.getVerticalspeed)
+  } else if (event.key === 'u') {
+    clearTimeout(timeoutVerticalspeed)
+    store.dispatch('cambiarVelocidad')
+    store.dispatch("updateVerticalspeed")
+    console.log('speed', store.getters.getSpeed)
+    console.log('angulo', store.getters.getAngulo)
+    console.log('verticalspeed', store.getters.getVerticalspeed)
+  }}
+  )
+
 window.addEventListener('keydown', (event) => {
   if (
     event.key === 'a' ||
