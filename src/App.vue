@@ -11,7 +11,7 @@
     </div>
     <div class="tableroInferior">
       <div class="itemTableroInferior">
-        <div class="controlesTableroInferior">Controles</div>
+        <div class="controlesTableroInferior"> <MiYoke /> </div>
         <PedalesPiloto />
       </div>
       <CenterColumn />
@@ -31,6 +31,7 @@
   import CenterColumn from './components/tablero/centerColumn/CenterColumnPanel.vue'
   import PedalesPiloto from './components/pedales/PedalesPiloto.vue'
   import PedalesCopiloto from './components/pedales/PedalesCopiloto.vue'
+  import MiYoke from './components/tablero/inferiorPanel/MiYoke.vue'
 </script>
 
 <style src="./style.css">
