@@ -7,7 +7,7 @@
       @mouseup="soltarPedalDerecho"
       @mouseleave="soltarPedalDerecho"
     />
-    <p>Movimiento del pedal derecho: {{ movPedalDerecha }}</p>
+    <!-- <p>Movimiento del pedal derecho: {{ movPedalDerecha }}</p> -->
   </div>
 </template>
 
