@@ -10,11 +10,35 @@
   import PedalPilotoDerecho from '../../pedales/MiPedalPilotoDerecho.vue'
   export default {
     mounted() {
+      //utilizar la letra "p" para acelerar
+      document.addEventListener('keydown', (event) => {
+        var keyValue = event.key;
+        if(keyValue=='p'){
+          //funcion que traslada la aguja 
+          this.moveNeedle()
+        }
+        
+      }, false);
+      document.addEventListener('keyup', (event) => {
+        var keyValue = event.key;
+        if(keyValue=='p'){
+          //funcion que retorna la aguja a su posicion inicial
+          this.moveNeedleUp()
+        }
+        
+     
+      }, false);
      
     },
     methods: {
-     
-      
+     moveNeedle(){
+      //0.4 turn limita la vuelta de la aguja hasta el limite del Airspeed indicator
+      document.getElementById("needleAir").style.cssText = "transform: rotate(0.4turn);transition:6s";
+     },
+     moveNeedleUp(){
+      //-180 deg es la pocicion inicial (en reposo) de la aguja
+      document.getElementById("needleAir").style.cssText = "transform: rotate(-180deg);transition:10s";
+     } 
     },
     
   }
