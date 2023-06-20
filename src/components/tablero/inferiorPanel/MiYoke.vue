@@ -7,7 +7,7 @@
         }" draggable="false" />
     </div>
 </template>
-  
+
 <script>
 import store from '@/store'
 
@@ -24,44 +24,44 @@ export default {
             maxRotation: 90,
             minRotation: -90,
             resetInterval: null,
+            activeKeys: new Set(),
         };
     },
     mounted() {
-        window.addEventListener('keydown', this.handleKeyDown);
+        window.addEventListener('keypress', this.handleKeyPress);
         window.addEventListener('keyup', this.handleKeyUp);
     },
     beforeDestroy() {
-        window.removeEventListener('keydown', this.handleKeyDown);
+        window.removeEventListener('keypress', this.handleKeyPress);
         window.removeEventListener('keyup', this.handleKeyUp);
     },
     methods: {
-        handleKeyDown(event) {
+        handleKeyPress(event) {
             const key = event.key.toUpperCase();
-            if (key === 'A' || key === 'W' || key === 'S' || key === 'D') {
-                this.presionarTeclaYoke(key);
-            }
+            this.activeKeys.add(key);
+            this.presionarTeclaYoke();
         },
         handleKeyUp(event) {
             const key = event.key.toUpperCase();
-            if (key === 'A' || key === 'W' || key === 'S' || key === 'D') {
+            this.activeKeys.delete(key);
+            if (this.activeKeys.size === 0) {
                 this.soltarTeclaYoke();
             }
         },
-        presionarTeclaYoke(key) {
-            store.dispatch('presionarTecla_yoke', key);
-            switch (key) {
-                case 'S':
-                    this.moveImageUp();
-                    break;
-                case 'W':
-                    this.moveImageDown();
-                    break;
-                case 'A':
-                    this.rotateImageLeft();
-                    break;
-                case 'D':
-                    this.rotateImageRight();
-                    break;
+        presionarTeclaYoke() {
+            store.dispatch('presionarTecla_yoke', this.activeKeys);
+            
+            if (this.activeKeys.has('S')) {
+                this.moveImageUp();
+            }
+            if (this.activeKeys.has('W')) {
+                this.moveImageDown();
+            }
+            if (this.activeKeys.has('A')) {
+                this.rotateImageLeft();
+            }
+            if (this.activeKeys.has('D')) {
+                this.rotateImageRight();
             }
         },
         soltarTeclaYoke() {
@@ -127,7 +127,7 @@ export default {
     },
 };
 </script>
-  
+
 <style>
 .MiYoke {
     display: flex;
@@ -140,5 +140,4 @@ export default {
     margin-left: 1%;
     position: relative;
 }
-
 </style>

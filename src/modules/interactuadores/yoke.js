@@ -1,4 +1,3 @@
-// yoke.js
 const yoke = {
   state: {
     estadoPitch_yoke: 0,
@@ -43,25 +42,27 @@ const yoke = {
     },
   },
   actions: {
-    presionarTecla_yoke({ commit, state }, tecla) {
-      switch (tecla) {
-        case 'W':
-          commit('incrementEstadoPitch_yoke');
-          console.log('W');
-          break;
-        case 'S':
-          commit('decrementEstadoPitch_yoke');
-          console.log('S');
-          break;
-        case 'A':
-          commit('decrementEstadoRoll_yoke');
-          console.log('A');
-          break;
-        case 'D':
-          commit('incrementEstadoRoll_yoke');
-          console.log('D');
-          break;
-      }
+    presionarTecla_yoke({ commit, state }, teclas) {
+      teclas.forEach((tecla) => {
+        switch (tecla) {
+          case 'W':
+            commit('incrementEstadoPitch_yoke');
+            console.log('W');
+            break;
+          case 'S':
+            commit('decrementEstadoPitch_yoke');
+            console.log('S');
+            break;
+          case 'A':
+            commit('decrementEstadoRoll_yoke');
+            console.log('A');
+            break;
+          case 'D':
+            commit('incrementEstadoRoll_yoke');
+            console.log('D');
+            break;
+        }
+      });
 
       console.log('Nuevo estado del yoke:');
       console.log('Pitch_yoke:', state.estadoPitch_yoke);
