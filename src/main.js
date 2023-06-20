@@ -10,11 +10,11 @@ let temp
 window.addEventListener('keypress', (event) => {
   if (event.key === 'c') {
     clearTimeout(timeoutThrottle)
-    //store.dispatch('presionarThrottle')
+    //store.dispatch('presionarThrottle')       //se comento esto ya que no se sabe si con las teclas tambien cambiara el valor
     console.log('throttle_depth', store.getters.getThrottleDepth)
   } else if (event.key === 'v') {
     clearTimeout(timeoutThrottle)
-    //store.dispatch('tirarThrottle')
+    //store.dispatch('tirarThrottle')          //se comento esto ya que no se sabe si con las teclas tambien cambiara el valor
     console.log('throttle_depth', store.getters.getThrottleDepth)
   }
 })

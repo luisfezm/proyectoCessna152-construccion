@@ -1,43 +1,79 @@
 <template>
   <div class="circular">
     <div class="box">
-      <!-- 
-        <button id="increase" @mousedown="Accelerator" @mouseup="releaseAccelerator"></button>
-        <button id="decrease" @mousedown="brake" onmouseup=""></button>
-         -->
       <div class="tachometer">
-        <div id="measurer">
+        <div
+          id="measurer"
+          :style="`transform: rotate(${rpmToDegrees}deg); transition: ${transitionDuration}s`"
+        >
           <div id="point" />
         </div>
+        <button
+          id="increase"
+          @mousedown="startIncreasingRPM"
+          @mouseup="stopIncreasingRPM"
+        />
+        <button
+          id="decrease"
+          @mousedown="decreaseRPM"
+          @mouseup="releaseAccelerator"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import store from '@/store'
   export default {
+    data() {
+      return {
+        rpm: 0,
+        rpmToDegrees: -130, // Cambiar el valor inicial a -130 grados para que en 0 RPM el puntero esté en la posición inicial
+        transitionDuration: 0,
+        increaseInterval: null,
+      }
+    },
     methods: {
-      Accelerator() {
-        document.getElementById('measurer').style =
-          'transform-origin: bottom;transform: rotate(70deg);transition:4s'
+      startIncreasingRPM() {
+        console.log('Valor de throttle:', store.state.throttle) // Mostrar el valor de "throttle" por consola
+        console.log('Valor de rpm:', this.rpm) // Mostrar el valor de "rpm" por consola
+        this.increaseInterval = setInterval(() => {
+          if (this.rpm < 100) {
+            this.rpm += 1
+            this.updateRPM()
+          }
+        }, 100)
       },
-
+      stopIncreasingRPM() {
+        clearInterval(this.increaseInterval)
+      },
+      decreaseRPM() {
+        console.log('Valor de throttle:', store.state.throttle) // Mostrar el valor de "throttle" por consola
+        console.log('Valor de rpm:', this.rpm) // Mostrar el valor de "rpm" por consola
+        if (this.rpm > 0) {
+          this.rpm -= 1
+          this.updateRPM()
+        }
+      },
       releaseAccelerator() {
-        document.getElementById('measurer').style.cssText =
-          'transform-origin: bottom;transform: rotate(-130deg);transition:3.5s;'
+        // this.rpm = 0;
+        this.increaseInterval = null
+        this.updateRPM()
       },
-
-      brake() {
-        document.getElementById('measurer').style.cssText =
-          'transform-origin: bottom;transform: rotate(-135deg);transition:0.5s;'
+      updateRPM() {
+        //this.rpm = parseInt(store.state.throttle); // Obtener el valor de "throttle" del store y convertirlo a entero para la variable "rpm"
+        //console.log('--Valor de throttle:', store.state.throttle); // Mostrar el valor de "throttle" por consola
+        //console.log('--Valor de rpm:', this.rpm); // Mostrar el valor de "rpm" por consola
+        this.rpmToDegrees = -130 + this.rpm * 2.6 // Convertir RPM a grados (-130 a 0)
+        this.transitionDuration = 3.5 - this.rpm * 0.03 // Ajustar la duración de la transición según las RPM
       },
     },
   }
 </script>
 
 <style>
-  /*
-.box #increase{ 
+  .box #increase {
     width: 8px;
     height: 4px;
     position: absolute;
@@ -49,17 +85,14 @@
     z-index: 4;
     cursor: pointer;
     border-radius: 5px;
-
-}
-.box #increase:hover{
+  }
+  .box #increase:hover {
     box-shadow: 0px 0px 10px 5px gray;
-
-}
-.box #decrease:hover{
+  }
+  .box #decrease:hover {
     box-shadow: 0px 0px 10px 5px gray;
-
-}
-.box #decrease{
+  }
+  .box #decrease {
     width: 8px;
     height: 4px;
     position: absolute;
@@ -70,10 +103,8 @@
     cursor: pointer;
     z-index: 4;
     border-radius: 5px;
+  }
 
-}
-
-*/
   .tachometer {
     width: 90px;
     height: 90px;
