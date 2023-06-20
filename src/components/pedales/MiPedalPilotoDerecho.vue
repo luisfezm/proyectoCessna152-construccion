@@ -8,22 +8,28 @@
 </template>
 
 <script>
+  
   export default {
     data() {
       return {
         direccion: 0,
       }
     },
+    
     methods: {
       pedalDerecho(presionado) {
         if (presionado) {
           this.direccion = 1
+          document.getElementById("needleAir").style.cssText = "transform: rotate(0.4turn);transition:6s";
         } else {
           this.direccion = 0
+          document.getElementById("needleAir").style.cssText = "transform: rotate(-180deg);transition:10s";
         }
       },
     },
+    
   }
+  
 </script>
 
 <style scoped>

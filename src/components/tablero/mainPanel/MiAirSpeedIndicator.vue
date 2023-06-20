@@ -1,35 +1,22 @@
 <template>
   <div class="indicadorMainPanel">
     <div class="airspeed-indicator">
-      <div ref="needle" class="needle" />
+      <div ref="needle" class="needle" id="needleAir" />
     </div>
   </div>
 </template>
 
 <script>
+  import PedalPilotoDerecho from '../../pedales/MiPedalPilotoDerecho.vue'
   export default {
     mounted() {
-      this.speedBase()
-      setInterval(() => {
-        const randomSpeed = Math.floor(Math.random() * 161)
-        this.moveNeedle(randomSpeed)
-      }, 1000)
+     
     },
     methods: {
-      //velocity seria el parametro recibido
-      moveNeedle(velocity) {
-        const needle = this.$refs.needle
-        const baseAngle = 50
-        const maxVelocity = 160
-        const angle = baseAngle - (velocity / maxVelocity) * 180
-        needle.style.transform = `rotate(${angle}deg)`
-      },
-      //Se pone el needle en la base del velocimetro
-      speedBase() {
-        this.moveNeedle(100)
-      },
+     
+      
     },
-    //-30 de velocity llega hasta 160mph
+    
   }
 </script>
 
@@ -59,7 +46,7 @@
     background-position: center;
   }
 
-  .needle {
+  #needleAir {
     position: absolute;
     top: 50%;
     left: 48%;
@@ -68,18 +55,8 @@
     height: 35%;
     background-color: red;
     transition: transform 0.3s;
+    transform: rotate(-180deg);
   }
 
-  .needle::before {
-    content: '';
-    position: absolute;
-    bottom: -30%;
-    left: -1%;
-    width: 10%;
-    height: 0px;
-    border-style: solid;
-    border-width: 0 6% 10% 6%;
-    border-color: transparent transparent red transparent;
-    transform: rotate(180deg);
-  }
+
 </style>
