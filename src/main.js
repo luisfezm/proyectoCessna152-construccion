@@ -18,7 +18,7 @@ window.addEventListener('keypress', (event) => {
     console.log('throttle_depth', store.getters.getThrottleDepth)
   }
 })
-window.addEventListener('keydown', (event) => {
+/* window.addEventListener('keydown', (event) => {
   if (
     event.key === 'a' ||
     event.key === 'w' ||
@@ -40,7 +40,7 @@ window.addEventListener('keyup', () => {
   ) {
     store.dispatch('soltarTecla_yoke')
   }
-})
+}) */
 
 window.addEventListener('keydown', (event) => {
   if (event.key === 'q') {

@@ -11,12 +11,12 @@
     </div>
     <div class="tableroInferior">
       <div class="itemTableroInferior">
-        <div class="controlesTableroInferior"> <MiYoke /> </div>
+        <div class="controlesTableroInferior"> <MiYoke/> </div>
         <PedalesPiloto />
       </div>
       <CenterColumn />
       <div class="itemTableroInferior">
-        <div class="controlesTableroInferior">Controles</div>
+        <div class="controlesTableroInferior"><MiYoke/></div>
         <PedalesCopiloto />
       </div>
     </div>

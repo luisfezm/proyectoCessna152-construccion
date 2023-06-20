@@ -1,5 +1,5 @@
 <template>
-    <div id="miDiv" class="MiYoke" :class="{ grabbing: isDragging }" @keydown="handleKeyDown" @keyup="handleKeyUp">
+    <div id="miDiv" class="MiYoke" :class="{ grabbing: isDragging }" ref="div">
         <img ref="image" src="src\assets\img\Yoke.png" :style="{
             transform: `translateY(${currentTranslationY}px) rotate(${currentRotation}deg)`,
             width: '80px',
@@ -9,86 +9,120 @@
 </template>
   
 <script>
+import store from '@/store'
+
 export default {
     data() {
         return {
             isDragging: false,
-            translationMultiplier: 10,
-            rotationMultiplier: 10,
+            translationMultiplier: 2, // Multiplicador de traducción más bajo
+            rotationMultiplier: 2, // Multiplicador de rotación más bajo
             currentTranslationY: 0,
             currentRotation: 0,
             maxTranslationY: 25,
             minTranslationY: -25,
             maxRotation: 90,
             minRotation: -90,
+            resetInterval: null,
         };
     },
     mounted() {
-        document.addEventListener("keydown", this.handleKeyDown);
-        document.addEventListener("keyup", this.handleKeyUp);
+        window.addEventListener('keydown', this.handleKeyDown);
+        window.addEventListener('keyup', this.handleKeyUp);
     },
     beforeDestroy() {
-        document.removeEventListener("keydown", this.handleKeyDown);
-        document.removeEventListener("keyup", this.handleKeyUp);
+        window.removeEventListener('keydown', this.handleKeyDown);
+        window.removeEventListener('keyup', this.handleKeyUp);
     },
     methods: {
         handleKeyDown(event) {
-            const key = event.key.toLowerCase();
-            const isShiftKey = event.shiftKey;
-
+            const key = event.key.toUpperCase();
+            if (key === 'A' || key === 'W' || key === 'S' || key === 'D') {
+                this.presionarTeclaYoke(key);
+            }
+        },
+        handleKeyUp(event) {
+            const key = event.key.toUpperCase();
+            if (key === 'A' || key === 'W' || key === 'S' || key === 'D') {
+                this.soltarTeclaYoke();
+            }
+        },
+        presionarTeclaYoke(key) {
+            store.dispatch('presionarTecla_yoke', key);
             switch (key) {
-                case "s":
-                    this.moveImageUp(isShiftKey);
+                case 'S':
+                    this.moveImageUp();
                     break;
-                case "w":
-                    this.moveImageDown(isShiftKey);
+                case 'W':
+                    this.moveImageDown();
                     break;
-                case "a":
-                    this.rotateImageLeft(isShiftKey);
+                case 'A':
+                    this.rotateImageLeft();
                     break;
-                case "d":
-                    this.rotateImageRight(isShiftKey);
+                case 'D':
+                    this.rotateImageRight();
                     break;
             }
         },
-        handleKeyUp() {
+        soltarTeclaYoke() {
+            store.dispatch('soltarTecla_yoke');
             this.resetMovement();
         },
-        moveImageUp(isShiftKey) {
-            const newTranslationY = this.currentTranslationY - this.translationMultiplier * (isShiftKey ? 2 : 1);
+        moveImageUp() {
+            const newTranslationY = this.currentTranslationY - this.translationMultiplier;
             if (newTranslationY >= this.minTranslationY) {
                 this.currentTranslationY = newTranslationY;
                 this.updateImageTransform();
             }
         },
-        moveImageDown(isShiftKey) {
-            const newTranslationY = this.currentTranslationY + this.translationMultiplier * (isShiftKey ? 2 : 1);
+        moveImageDown() {
+            const newTranslationY = this.currentTranslationY + this.translationMultiplier;
             if (newTranslationY <= this.maxTranslationY) {
                 this.currentTranslationY = newTranslationY;
                 this.updateImageTransform();
             }
         },
-        rotateImageLeft(isShiftKey) {
-            const newRotation = this.currentRotation - this.rotationMultiplier * (isShiftKey ? 2 : 1);
+        rotateImageLeft() {
+            const newRotation = this.currentRotation - this.rotationMultiplier;
             if (newRotation >= this.minRotation) {
                 this.currentRotation = newRotation;
                 this.updateImageTransform();
             }
         },
-        rotateImageRight(isShiftKey) {
-            const newRotation = this.currentRotation + this.rotationMultiplier * (isShiftKey ? 2 : 1);
+        rotateImageRight() {
+            const newRotation = this.currentRotation + this.rotationMultiplier;
             if (newRotation <= this.maxRotation) {
                 this.currentRotation = newRotation;
                 this.updateImageTransform();
             }
         },
         updateImageTransform() {
-            this.$refs.image.style.transform = `translateY(${this.currentTranslationY}px) rotate(${this.currentRotation}deg)`;
+            if (this.$refs.image) {
+                this.$refs.image.style.transform = `translateY(${this.currentTranslationY}px) rotate(${this.currentRotation}deg)`;
+            }
         },
         resetMovement() {
-            this.currentTranslationY = 0;
-            this.currentRotation = 0;
-            this.updateImageTransform();
+            clearInterval(this.resetInterval);
+            this.resetInterval = setInterval(() => {
+                let translationDelta = 0;
+                let rotationDelta = 0;
+
+                if (this.currentTranslationY !== 0) {
+                    translationDelta = this.currentTranslationY > 0 ? -1 : 1;
+                }
+
+                if (this.currentRotation !== 0) {
+                    rotationDelta = this.currentRotation > 0 ? -1 : 1;
+                }
+
+                this.currentTranslationY += translationDelta;
+                this.currentRotation += rotationDelta;
+                this.updateImageTransform();
+
+                if (this.currentTranslationY === 0 && this.currentRotation === 0) {
+                    clearInterval(this.resetInterval);
+                }
+            }, 10);
         },
     },
 };
@@ -106,5 +140,5 @@ export default {
     margin-left: 1%;
     position: relative;
 }
+
 </style>
-  
