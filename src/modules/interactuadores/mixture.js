@@ -1,40 +1,34 @@
-//Mixture.js
 const mixture = {
-    state: {
-      // Estado inicial de los interactuadores
-      estadoMixture: 0
+  state: {
+    consumoBencinaHora: 6,
+    estadoMixture: 0,
+  },
+  mutations: {
+    // Mutación para actualizar el consumo de bencina por hora
+    actualizarConsumoBencinaHora(state, payload) {
+      state.consumoBencinaHora = payload;
     },
-    mutations: {
-      // Mutaciones para modificar el estado de los interactuadores
-      incrementarMixture(state) {
-        if (state.estadoMixture < 10) {
-          state.estadoMixture += 1;
-        }
-      },
-      disminuirMixture(state) {
-        if (state.estadoMixture > 0) {
-          state.estadoMixture -= 1;
-        }
-      }
+  },
+  actions: {
+    // Acciones para realizar operaciones relacionadas con los interactuadores
+    teclaPresionada(context, event) {
+      console.log('estadoMixture:', context.state.estadoMixture);
     },
-    actions: {
-      // Acciones para realizar operaciones relacionadas con los interactuadores
-      teclaPresionada(context, event) {
-        if (event.key === 'n') {
-          context.commit('incrementarMixture');
-        } else if (event.key === 'm') {
-          context.commit('disminuirMixture');
-        }
-        console.log('estadoMixture:', context.state.estadoMixture);
-      }
+    // Acción para actualizar el consumo de bencina por hora
+    actualizarBencinaPorHora(context, axis) {
+      context.commit('actualizarConsumoBencinaHora', axis);
     },
-    getters: {
-      // Getters para obtener datos del estado de los interactuadores
-      getEstadoMixture(state) {
-        return state.estadoMixture;
-      }
-    }
-  };
-  
-  export default mixture;
-  
+  },
+  getters: {
+    // Getters para obtener datos del estado de los interactuadores
+    getEstadoMixture(state) {
+      return state.estadoMixture;
+    },
+    // Getter para obtener el consumo de bencina por hora
+    getConsumoBencinaHora(state) {
+      return state.consumoBencinaHora;
+    },
+  },
+};
+
+export default mixture;
