@@ -5,7 +5,7 @@ const horizonteArtificial = {
   state: {
     // Estado inicial de los indicadores
     anguloRoll: 0,
-    anguloPitch: 45,
+    anguloPitch: 0,
     velocidadRoll: 0,
     velocidadPitch: 0,
     // (FALTA AJUSTAR)
