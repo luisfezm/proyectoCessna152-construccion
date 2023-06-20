@@ -120,7 +120,19 @@ html, body {
 
 .indicadorRightADF {
   grid-column: span 2;
-  background-color:grey;
+  background-color: grey;
+  height: 90px;
+  width: 270px;
+  display: flex;
+  border: 3px solid #000;
+  border-radius: 5px;
+  background-color: #393b39e6;
+  padding: 2px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .tableroInferior {
