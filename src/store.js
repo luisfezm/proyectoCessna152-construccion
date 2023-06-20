@@ -7,6 +7,7 @@ import yoke from './modules/interactuadores/yoke'
 import pedales from './modules/interactuadores/pedales'
 import throttle from './modules/interactuadores/throttle'
 import mixture from './modules/interactuadores/mixture'
+import trimwheel from './modules/interactuadores/trimwheel'
 
 const store = createStore({
   state: {
@@ -32,6 +33,7 @@ const store = createStore({
     pedales,
     throttle,
     mixture,
+    trimwheel,
   },
 })
 
