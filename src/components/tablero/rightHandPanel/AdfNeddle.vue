@@ -1,5 +1,5 @@
 <template>
-  <div class="back">
+  <div class="container">
     <img
       id="medidas"
       class="rotar"
@@ -10,7 +10,7 @@
     <img
       id="agujaImg"
       class="aguja"
-      :style="{ transform: 'rotate(' + angulo + 'deg)' }"
+      :style="{ transform: 'rotate(' + angle + 'deg)' }"
       src="src/assets/arrow.svg"
       style="height: 45px"
       alt="aguja"
@@ -21,7 +21,7 @@
 <script>
   export default {
     props: {
-      angulo: {
+      angle: {
         type: Number,
         required: true,
       },
@@ -30,7 +30,7 @@
 </script>
 
 <style>
-  .back {
+  .container {
     width: 90px;
     height: 90px;
     border-radius: 50%;

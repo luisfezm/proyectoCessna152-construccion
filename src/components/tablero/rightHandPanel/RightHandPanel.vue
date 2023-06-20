@@ -1,27 +1,29 @@
 <template>
   <div class="rightHandPanel">
     <Tachometer />
-    <ADFNeddle :angulo="adf_needle" />
+    <ADFNeddle :angle="adf_needle" />
 
     <div class="indicadorRightADF">
-      <span class="numeros">{{ primero }}, {{ segundo }}, {{ tercero }}</span>
+      <div class="frame">
+        <div class="numbers">{{ first }},{{ second }},{{ third }}</div>
+      </div>
       <img
-        class="primera"
-        src="src/assets/tknob.svg"
+        class="first"
+        src="src/assets/adfKnob.svg"
         alt=""
-        @click="modificarPrimero()"
+        @click="modifyFirst()"
       />
       <img
-        class="segunda"
-        src="src/assets/tknob.svg"
+        class="second"
+        src="src/assets/adfKnob.svg"
         alt=""
-        @click="modificarSegundo()"
+        @click="modifySecond()"
       />
       <img
-        class="tercera"
-        src="src/assets/tknob.svg"
+        class="third"
+        src="src/assets/adfKnob.svg"
         alt=""
-        @click="modificarTercero()"
+        @click="modifyThird()"
       />
     </div>
   </div>
@@ -31,6 +33,8 @@
   import Tachometer from '@/components/tablero/rightHandPanel/MiTachometer.vue'
   import ADFNeddle from '@/components/tablero/rightHandPanel/AdfNeddle.vue'
   import store from '@/store'
+  import { searchPoint } from '@/modules/indicadores/adfRadio.js'
+
   export default {
     components: {
       Tachometer,
@@ -39,104 +43,142 @@
     data() {
       return {
         adf_needle: 0,
-        primero: 0,
-        segundo: 0,
-        tercero: 0,
+        first: 0,
+        second: 0,
+        third: 0,
         headingIndicatorValue: 0,
         adf_point: 0,
-        posicionActual: {
+        currentPosition: {
           x: 0,
           y: 0,
         },
-        puntoDestino: {
+        destinationPoint: {
           x: 0,
           y: 0,
         },
       }
     },
     created() {
-      // Inicializar el estado del headingIndicator
+      // Inicializar el estado de headingIndicator
       this.headingIndicatorValue = store.getters.getHeadingIndicator
       this.adf_point = 0
 
-      // Mostrar el valor del headingIndicator utilizando el getter
+      // Mostrar el valor de headingIndicator utilizando el getter
       console.log(
-        'Valor actual del headingIndicator:',
+        'Valor actual de headingIndicator:',
         this.headingIndicatorValue
       )
 
-      this.actualizarAdfPoint()
+      this.updateAdfPoint()
 
-      setInterval(this.actualizarAdf, 10)
+      setInterval(this.updateAdf, 10)
     },
     methods: {
-      calcularAngulo(x1, y1, x2, y2) {
+      calculateAngle(x1, y1, x2, y2) {
         const deltaX = x2 - x1
         const deltaY = y2 - y1
 
-        const radianes = Math.atan2(deltaY, deltaX)
-        let angulo = radianes * (180 / Math.PI)
+        const radians = Math.atan2(deltaY, deltaX)
+        let angle = radians * (180 / Math.PI)
 
-        // Ajustar el ángulo al sentido de las manecillas del reloj (restar 90 grados)
-        angulo -= 90
+        // Ajustar el ángulo en la dirección de las agujas del reloj (restar 90 grados)
+        angle -= 90
 
         // Asegurarse de que el ángulo esté dentro del rango de 0 a 360 grados
-        if (angulo < 0) {
-          angulo += 360
-        } else if (angulo >= 360) {
-          angulo %= 360
+        if (angle < 0) {
+          angle += 360
+        } else if (angle >= 360) {
+          angle %= 360
         }
 
-        return 360 - angulo
+        return 360 - angle
       },
-      modificarPrimero() {
-        this.primero += 1
-        this.primero %= 10
-        this.actualizarAdfPoint()
+      modifyFirst() {
+        this.first += 1
+        this.first %= 10
+
+        this.updateAdfPoint()
       },
-      modificarSegundo() {
-        this.segundo += 1
-        this.segundo %= 10
-        this.actualizarAdfPoint()
+      modifySecond() {
+        this.second += 1
+        this.second %= 10
+        this.updateAdfPoint()
       },
-      modificarTercero() {
-        this.tercero += 1
-        this.tercero %= 10
-        this.actualizarAdfPoint()
+      modifyThird() {
+        this.third += 1
+        this.third %= 10
+        this.updateAdfPoint()
       },
-      actualizarAdf() {
+      updateAdf() {
         this.headingIndicatorValue = store.getters.getHeadingIndicator
         if (this.headingIndicatorValue < 0) {
           this.headingIndicatorValue += 360
         }
-        this.adf_needle = this.headingIndicatorValue
+        let aux = this.calculateAngle(
+          this.currentPosition.x,
+          this.currentPosition.y,
+          this.destinationPoint.x,
+          this.destinationPoint.y
+        )
+        this.adf_needle = aux - this.headingIndicatorValue
       },
-      actualizarAdfPoint() {
-        this.adf_point = this.primero * 100 + this.segundo * 10 + this.tercero
+      updateAdfPoint() {
+        this.adf_point = this.first * 100 + this.second * 10 + this.third
+        let formattedAdfPoint = this.adf_point.toString().padStart(3, '0')
+        let foundPoint = searchPoint(formattedAdfPoint)
 
-        //console.log(this.adf_point);
+        if (foundPoint) {
+          this.destinationPoint.x = foundPoint.x
+          this.destinationPoint.y = foundPoint.y
+          console.log('Valor actual de x: ' + this.currentPosition.x)
+          console.log('Valor actual de y: ' + this.currentPosition.y)
+          console.log('Valor de destino de x: ' + this.destinationPoint.x)
+          console.log('Valor de destino de y: ' + this.destinationPoint.y)
+        } else {
+          console.log('No se encontró ningún punto con el valor especificado')
+        }
       },
     },
   }
 </script>
 
 <style>
-  .primera {
+  .first {
     height: 30px;
-    transform: translateX(-30px);
+    transform: translateX(-36px) translateY(15px);
   }
 
-  .segunda {
+  .second {
     height: 30px;
-    transform: translateX(-20px);
+    transform: translateX(-26px) translateY(15px);
   }
 
-  .tercera {
+  .third {
     height: 30px;
-    transform: translateX(-10px);
+    transform: translateX(-16px) translateY(15px);
   }
 
-  .numeros {
-    transform: translateY(-30px) translateX(45px);
+  .numbers {
+    position: relative;
+    z-index: 2;
+    border: 3px solid #000;
+    border-radius: 5px;
+    color: #223412;
+    background-color: #94d457;
+    padding: 2px;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .frame {
+    position: relative;
+    z-index: 1;
+    transform: translateY(-20px) translateX(45px);
+    border: 3px solid #000;
+    border-radius: 5px;
+    background-color: #393b39e6;
+    padding: 2px;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
 </style>
