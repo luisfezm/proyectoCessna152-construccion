@@ -74,7 +74,7 @@
           } else {
             this.axis = (calculo * -400).toFixed(2)
             store.dispatch('setThrottleDepth', this.axis) //seteamos el valor del thlottle con el valor del axis
-            console.log('throttle_depth', store.getters.getThrottleDepth) // para mostrarlo en consola
+            //console.log('throttle_depth', store.getters.getThrottleDepth) // para mostrarlo en consola
           }
 
           this.currentRotation = newRotation

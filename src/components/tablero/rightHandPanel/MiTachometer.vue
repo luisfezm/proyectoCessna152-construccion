@@ -25,6 +25,8 @@
 
 <script>
   import store from '@/store'
+  //import { throttle } from '@/store/modules/throttle.js'
+
   export default {
     data() {
       return {
@@ -32,8 +34,13 @@
         rpmToDegrees: -130, // Cambiar el valor inicial a -130 grados para que en 0 RPM el puntero esté en la posición inicial
         transitionDuration: 0,
         increaseInterval: null,
+        variableTraspaso: 0,
       }
     },
+    created() {
+      setInterval(this.updateRPM, 10)
+    },
+
     methods: {
       startIncreasingRPM() {
         console.log('Valor de throttle:', store.state.throttle) // Mostrar el valor de "throttle" por consola
@@ -62,11 +69,14 @@
         this.updateRPM()
       },
       updateRPM() {
-        //this.rpm = parseInt(store.state.throttle); // Obtener el valor de "throttle" del store y convertirlo a entero para la variable "rpm"
-        //console.log('--Valor de throttle:', store.state.throttle); // Mostrar el valor de "throttle" por consola
+        this.rpm = store.getters.getThrottleDepth // Obtener el valor de "throttle_depth" del módulo "throttle" y convertirlo a entero para la variable "rpm"
+        //console.log('--Valor de getThrottleDepth:', store.getters.getThrottleDepth);
         //console.log('--Valor de rpm:', this.rpm); // Mostrar el valor de "rpm" por consola
         this.rpmToDegrees = -130 + this.rpm * 2.6 // Convertir RPM a grados (-130 a 0)
         this.transitionDuration = 3.5 - this.rpm * 0.03 // Ajustar la duración de la transición según las RPM
+      },
+      updateRPMbar() {
+        this.updateRPM()
       },
     },
   }
