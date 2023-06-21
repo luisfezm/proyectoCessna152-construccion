@@ -1,46 +1,49 @@
 <template>
-  <div
-    id="miDiv"
-    class="WingFlaps"
-    :class="{ grabbing: isDragging }"
-    @mousedown="startDrag"
-    @mouseup="stopDrag"
-    @mousemove="handleDrag"
-  >
-    <img
-      ref="image"
-      src="src\assets\rectangle.png"
-      :style="{
-        transform: `translateY(${currentTranslationY}px)`,
-        width: '100%',
-        height: '10%',
-      }"
-      draggable="false"
-    />
-    <div class="title">
-      {{ currentTranslationY }}
+  <div class="divGeneral">
+    <h6 style="width: 10%; font-size: 65%; word-wrap: break-word">Wingflaps</h6>
+    <div
+      id="miDiv"
+      class="WingFlaps"
+      :class="{ grabbing: isDragging }"
+      @mousedown="startDrag"
+      @mouseup="stopDrag"
+      @mousemove="handleDrag"
+    >
+      <img
+        ref="image"
+        src="src\assets\rectangle.png"
+        :style="{
+          transform: `translateY(${currentTranslationY}px)`,
+          width: '100%',
+          height: '10%',
+        }"
+        draggable="false"
+      />
+      <div class="title">
+        {{ currentTranslationY }}
+      </div>
     </div>
-  </div>
-  <div
-    id="miDiv"
-    class="WingFlapsAngle"
-    :class="{ grabbingAngle: isDraggingAngle }"
-    @mousedown="startDragAngle"
-    @mouseup="stopDragAngle"
-    @mousemove="handleDragAngle"
-  >
-    <img
-      ref="imageAngle"
-      src="src\assets\rectangle.png"
-      :style="{
-        transform: `translateY(${currentTranslationYAngle}px)`,
-        width: '100%',
-        height: '10%',
-      }"
-      draggable="false"
-    />
-    <div class="title">
-      {{ currentTranslationYAngle }}
+    <div
+      id="miDiv"
+      class="WingFlapsAngle"
+      :class="{ grabbingAngle: isDraggingAngle }"
+      @mousedown="startDragAngle"
+      @mouseup="stopDragAngle"
+      @mousemove="handleDragAngle"
+    >
+      <img
+        ref="imageAngle"
+        src="src\assets\rectangle.png"
+        :style="{
+          transform: `translateY(${currentTranslationYAngle}px)`,
+          width: '100%',
+          height: '10%',
+        }"
+        draggable="false"
+      />
+      <div class="title">
+        {{ currentTranslationYAngle }}
+      </div>
     </div>
   </div>
 </template>
@@ -196,7 +199,6 @@
   .WingFlaps {
     display: flex;
     justify-content: center;
-
     background-color: rgb(177, 177, 177);
     width: 50%;
     height: 80%;
@@ -211,7 +213,7 @@
 
     background-color: rgb(177, 177, 177);
     width: 50%;
-    height: 80%;
+    height: 60%;
     border-radius: 5%;
     margin: auto;
     position: relative;
@@ -234,5 +236,12 @@
     text-align: center;
     font-weight: bold;
     color: white;
+  }
+  .divGeneral {
+    display: flex;
+    background-color: rgb(177, 177, 177);
+    width: 50%;
+    height: 100%;
+    margin: auto;
   }
 </style>
