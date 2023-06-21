@@ -19,7 +19,7 @@
 
 <script>
   
-  import store from '../../../store'
+  //import store from '../../../store'
 
   export default {
     data() {
@@ -32,32 +32,43 @@
 
       circleStyle() {
         return {
-          left: `calc(50% - 1px - ${this.gradosDesviacion}px)`, //Movimiento del circle en relacion con los gradosDesviacion recibidos
-          right: `calc(50% - 1px - ${this.gradosDesviacion}px)`,
+          left: `calc(50% - 1px - ${this.gradosDesviacion/4}px)`, //Movimiento del circle en relacion con los gradosDesviacion recibidos
+          right: `calc(50% - 1px - ${this.gradosDesviacion/4}px)`,
         }
       },
     },
     mounted() {   
       setInterval(() => {  //Cada segundo revisa el estado del getEstadoRoll_yoke
         
-        console.log('ESTADO ' + store.getters.getEstadoRoll_yoke)
+        console.log('ESTADO ' + this.$store.getters.getEstadoRoll_yoke)
        
-        this.moverAvion(store.getters.getEstadoRoll_yoke) // LLamo a la funcion para mover el indicador con el valor del estado
-      }, 1000)
+        this.moverAvion(this.$store.getters.getEstadoRoll_yoke) // LLamo a la funcion para mover el indicador con el valor del estado
+      }, 500)
     },
     methods: {
       moverAvion(estado) {
         if(estado == -1){  //El avion esta girando hacia la izquierda
-          this.gradosDesviacion -= 2  
-          this.gradosDesviacion = this.gradosDesviacion % 360
-
-          console.log("DESVIACION   "+this.gradosDesviacion)
+          
+          this.$store.dispatch('actualizar', {roll: -100 , pitch: 0})
+          this.gradosDesviacion = this.$store.getters.anguloRoll
+          console.log("DESVIACION   "+this.$store.getters.anguloRoll)
         }
 
         if(estado == 1){ //El avion esta girando hacia la derecha
-          this.gradosDesviacion += 2
-          console.log("DESVIACION   "+this.gradosDesviacion)
+           
+          this.$store.dispatch('actualizar', {roll: 100 , pitch: 0})
+          this.gradosDesviacion = this.$store.getters.anguloRoll
+
+          console.log("DESVIACION   "+this.$store.getters.anguloRoll)
         }
+        if(this.gradosDesviacion >= 25){
+          this.gradosDesviacion = 25;
+        }
+
+        if(this.gradosDesviacion <= -25){
+          this.gradosDesviacion = -25;
+        }
+        
       },
     },
   }
