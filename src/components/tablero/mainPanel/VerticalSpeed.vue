@@ -9,16 +9,20 @@
 </template>
 
 <script>
+  import store from '@/store'
   export default {
     mounted() {
-      let speed = document.getElementById('needle') // se obtiene el id de la aguja del medidor vertical speed
-      let degrees = this.get_Degrees() // obtengo los grados que se le pasa al metodo
-      speed.style.transform = `rotate(${degrees}deg)` // se aplica el cambio de la rotacion de la aguja dependiendo los grados que se obtienen
+      setInterval(() => {
+        let speed = document.getElementById('needle') // se obtiene el id de la aguja del medidor vertical speed
+        let degrees = this.get_Degrees() // obtengo los grados que se le pasa al metodo
+        speed.style.transform = `rotate(${degrees}deg)` // se aplica el cambio de la rotacion de la aguja dependiendo los grados que se obtienen
+      }, 1000)
     },
     methods: {
       get_Degrees() {
         //metodo para pasar valores en grados
-        return 90 // retorna la variable que se le pasa al metodo
+        return store.getters.getVerticalspeedIndicator
+        // retorna la variable que se le pasa al metodo
       },
     },
   }
@@ -53,8 +57,8 @@
     height: 20px;
     background-color: white;
     transform: rotate(90deg);
-    margin-left: 2.7%;
-    margin-top: 2.7%;
+    margin-left: 2.1%;
+    margin-top: 2.1%;
     transition: 3s;
     position: absolute;
     transform-origin: top;
