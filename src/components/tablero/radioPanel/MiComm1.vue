@@ -1,15 +1,24 @@
 <template>
-  <div>
-    <h1>Radio de Avión</h1>
-    <div>
-      <label for="frecuencia">Frecuencia:</label>
-      <input type="text" id="frecuencia" v-model="frecuencia" />
+  <div class="panel-radio">
+    
+    <div class="controles">
+      <div class="grupo-com">
+        <div :style="{ color: com1TextColor }">COM1: {{ com1 }} </div> 
+        <input type="text" v-model="com1" class="input-frecuencia">
+      </div>
+      <div class="grupo-com">
+        <div :style="{ color: com1TextColor }">COM2: {{ com2 }} </div> 
+        <input type="text" v-model="com2" class="input-frecuencia">
+      </div>
+      <div class="grupo-nav">
+        <div :style="{ color: com1TextColor }">NAV1: {{ nav1 }} </div> 
+        <input type="text" v-model="nav1" class="input-frecuencia">
+      </div>
+      <div class="grupo-nav">
+        <div :style="{ color: com1TextColor }">NAV2: {{ nav2 }} </div>
+        <input type="text" v-model="nav2" class="input-frecuencia">
+      </div>
     </div>
-    <div>
-      <button @click="subirFrecuencia">Subir Frecuencia</button>
-      <button @click="bajarFrecuencia">Bajar Frecuencia</button>
-    </div>
-    <p>Frecuencia actual: {{ frecuencia }}</p>
   </div>
 </template>
 
@@ -17,38 +26,48 @@
   export default {
     data() {
       return {
-        frecuencia: "118.1" // Frecuencia inicial
+        com1: '118.1',
+        com2: '123.4',
+        nav1: '108.8',
+        nav2: '115.0',
+        com1TextColor: 'orange',
       };
-    },
-    methods: {
-      subirFrecuencia() {
-        const frecuenciaNumerica = parseFloat(this.frecuencia);
-        if (frecuenciaNumerica < 136.0) {
-          this.frecuencia = (frecuenciaNumerica + 0.025).toFixed(3);
-        }
-      },
-      bajarFrecuencia() {
-        const frecuenciaNumerica = parseFloat(this.frecuencia);
-        if (frecuenciaNumerica > 108.0) {
-          this.frecuencia = (frecuenciaNumerica - 0.025).toFixed(3);
-        }
-      }
     }
   };
 </script>
 
-<style scoped>
-h1 {
-  font-size: 20px;
-  margin-bottom: 10px;
+<style>
+.panel-radio {
+  width: 400px;
+  padding: 10px;
+  background-color: #949393;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: Arial, sans-serif;
 }
 
-label {
-  margin-right: 10px;
+.controles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
 }
 
-button {
-  margin-right: 10px;
+.grupo-com,
+.grupo-nav {
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  width: 50px;
+  font-weight: bold;
+  color: white;
+}
+
+.input-frecuencia {
+  padding: 5px;
+  width: 80px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 </style>
-
