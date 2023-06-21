@@ -15,31 +15,35 @@ export default {
     data() {
         return {
             isDragging: false,
-            translationMultiplier: 2, // Multiplicador de traducción más bajo
-            rotationMultiplier: 2, // Multiplicador de rotación más bajo
+            translationMultiplier: 1, // Multiplicador de traducción más bajo
+            rotationMultiplier: 1, // Multiplicador de rotación más bajo
             currentTranslationY: 0,
             currentRotation: 0,
-            maxTranslationY: 25,
-            minTranslationY: -25,
+            targetTranslationY: 0,
+            targetRotation: 0,
+            maxTranslationY: 45,
+            minTranslationY: -45,
             maxRotation: 90,
             minRotation: -90,
-            resetInterval: null,
             activeKeys: new Set(),
         };
     },
     mounted() {
-        window.addEventListener('keypress', this.handleKeyPress);
+        window.addEventListener('keydown', this.handleKeyDown);
         window.addEventListener('keyup', this.handleKeyUp);
+        this.updateImageTransform();
     },
     beforeDestroy() {
-        window.removeEventListener('keypress', this.handleKeyPress);
+        window.removeEventListener('keydown', this.handleKeyDown);
         window.removeEventListener('keyup', this.handleKeyUp);
     },
     methods: {
-        handleKeyPress(event) {
+        handleKeyDown(event) {
             const key = event.key.toUpperCase();
-            this.activeKeys.add(key);
-            this.presionarTeclaYoke();
+            if (!this.activeKeys.has(key)) {
+                this.activeKeys.add(key);
+                this.presionarTeclaYoke();
+            }
         },
         handleKeyUp(event) {
             const key = event.key.toUpperCase();
@@ -50,79 +54,73 @@ export default {
         },
         presionarTeclaYoke() {
             store.dispatch('presionarTecla_yoke', this.activeKeys);
-            
-            if (this.activeKeys.has('S')) {
-                this.moveImageUp();
-            }
-            if (this.activeKeys.has('W')) {
-                this.moveImageDown();
-            }
-            if (this.activeKeys.has('A')) {
-                this.rotateImageLeft();
-            }
-            if (this.activeKeys.has('D')) {
-                this.rotateImageRight();
-            }
+            this.updateMovement();
         },
         soltarTeclaYoke() {
             store.dispatch('soltarTecla_yoke');
-            this.resetMovement();
+            this.targetTranslationY = 0;
+            this.targetRotation = 0;
+            this.updateMovement();
         },
-        moveImageUp() {
-            const newTranslationY = this.currentTranslationY - this.translationMultiplier;
-            if (newTranslationY >= this.minTranslationY) {
-                this.currentTranslationY = newTranslationY;
-                this.updateImageTransform();
+        updateMovement() {
+            if (!this.animationFrameId) {
+                this.animationFrameId = requestAnimationFrame(this.animate);
             }
         },
-        moveImageDown() {
-            const newTranslationY = this.currentTranslationY + this.translationMultiplier;
-            if (newTranslationY <= this.maxTranslationY) {
-                this.currentTranslationY = newTranslationY;
-                this.updateImageTransform();
+        animate() {
+            let translationDelta = 0;
+            let rotationDelta = 0;
+
+            if (this.activeKeys.has('S')) {
+                translationDelta -= this.translationMultiplier;
             }
-        },
-        rotateImageLeft() {
-            const newRotation = this.currentRotation - this.rotationMultiplier;
-            if (newRotation >= this.minRotation) {
-                this.currentRotation = newRotation;
-                this.updateImageTransform();
+            if (this.activeKeys.has('W')) {
+                translationDelta += this.translationMultiplier;
             }
-        },
-        rotateImageRight() {
-            const newRotation = this.currentRotation + this.rotationMultiplier;
-            if (newRotation <= this.maxRotation) {
-                this.currentRotation = newRotation;
-                this.updateImageTransform();
+            if (this.activeKeys.has('A')) {
+                rotationDelta -= this.rotationMultiplier;
             }
+            if (this.activeKeys.has('D')) {
+                rotationDelta += this.rotationMultiplier;
+            }
+
+            const easing = 0.1; // Factor de suavizado
+
+            // Actualizar las posiciones objetivo
+            this.targetTranslationY += translationDelta;
+            this.targetRotation += rotationDelta;
+
+            // Limitar las posiciones objetivo dentro de los límites
+            this.targetTranslationY = Math.max(
+                Math.min(this.targetTranslationY, this.maxTranslationY),
+                this.minTranslationY
+            );
+            this.targetRotation = Math.max(
+                Math.min(this.targetRotation, this.maxRotation),
+                this.minRotation
+            );
+
+            // Aplicar el suavizado a las posiciones actuales
+            this.currentTranslationY += (this.targetTranslationY - this.currentTranslationY) * easing;
+            this.currentRotation += (this.targetRotation - this.currentRotation) * easing;
+
+            this.updateImageTransform();
+
+            // Verificar si se alcanzaron las posiciones objetivo
+            const translationDiff = Math.abs(this.targetTranslationY - this.currentTranslationY);
+            const rotationDiff = Math.abs(this.targetRotation - this.currentRotation);
+            if (translationDiff < 0.1 && rotationDiff < 0.1) {
+                this.animationFrameId = null;
+                return;
+            }
+
+            // Continuar animando en el siguiente frame
+            this.animationFrameId = requestAnimationFrame(this.animate);
         },
         updateImageTransform() {
             if (this.$refs.image) {
                 this.$refs.image.style.transform = `translateY(${this.currentTranslationY}px) rotate(${this.currentRotation}deg)`;
             }
-        },
-        resetMovement() {
-            clearInterval(this.resetInterval);
-            this.resetInterval = setInterval(() => {
-                let translationDelta = 0;
-                let rotationDelta = 0;
-
-                if (this.currentTranslationY !== 0) {
-                    translationDelta = this.currentTranslationY > 0 ? -1 : 1;
-                }
-
-                if (this.currentRotation !== 0) {
-                    rotationDelta = this.currentRotation > 0 ? -1 : 1;
-                }
-
-                this.currentTranslationY += translationDelta;
-                this.currentRotation += rotationDelta;
-                this.updateImageTransform();
-
-                if (this.currentTranslationY === 0 && this.currentRotation === 0) {
-                    clearInterval(this.resetInterval);
-                }
-            }, 10);
         },
     },
 };
