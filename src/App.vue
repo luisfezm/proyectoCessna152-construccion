@@ -11,7 +11,9 @@
     </div>
     <div class="tableroInferior">
       <div class="itemTableroInferior">
-        <div class="controlesTableroInferior">Controles</div>
+        <div class="controlesTableroInferior">Controles
+          <FuelQuantity/>
+        </div>
         <PedalesPiloto />
       </div>
       <CenterColumn />
@@ -24,13 +26,14 @@
 </template>
 
 <script setup>
-  import MiTerreno from './components/terreno/MiTerreno.vue'
-  import MainPanel from './components/tablero/mainPanel/MainPanel.vue'
-  import RadioPanel from './components/tablero/radioPanel/RadioPanel.vue'
-  import RightHandPanel from './components/tablero/rightHandPanel/RightHandPanel.vue'
-  import CenterColumn from './components/tablero/centerColumn/CenterColumnPanel.vue'
-  import PedalesPiloto from './components/pedales/PedalesPiloto.vue'
   import PedalesCopiloto from './components/pedales/PedalesCopiloto.vue'
+import PedalesPiloto from './components/pedales/PedalesPiloto.vue'
+import CenterColumn from './components/tablero/centerColumn/CenterColumnPanel.vue'
+import FuelQuantity from './components/tablero/mainPanel/FuelQuantity.vue'
+import MainPanel from './components/tablero/mainPanel/MainPanel.vue'
+import RadioPanel from './components/tablero/radioPanel/RadioPanel.vue'
+import RightHandPanel from './components/tablero/rightHandPanel/RightHandPanel.vue'
+import MiTerreno from './components/terreno/MiTerreno.vue'
 </script>
 
 <style src="./style.css">
