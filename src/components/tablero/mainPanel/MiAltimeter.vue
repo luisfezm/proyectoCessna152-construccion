@@ -35,17 +35,18 @@
 </template>
 
 <script>
-  import altimeter from '@/modules/indicadores/altimeter'
+  import store from '@/store'
 
+  // const altimeter = store.modules.altimeter;
   export default {
     data() {
       return {}
     },
     mounted() {
       setInterval(() => {
-        altimeter.mutations.cambiarVelocidad(altimeter.state)
-        altimeter.mutations.cambiaUnidadVelocidad(altimeter.state)
-        altimeter.mutations.updateAltimeter(altimeter.state)
+        store.dispatch('updateVelocidadAltimeter')
+        store.dispatch('cambiaUnidadVelocidadPpmToPps')
+        store.dispatch('updateAltimeter')
 
         let primaryNeedle = document.querySelector('.pn')
         let senconaryNeedle = document.querySelector('.sn')
@@ -53,17 +54,17 @@
 
         //variable que modifica la aguja primaria (centenas de pies 1 --> 100)
         // let degPn = this.getDeegresPrimary(6)
-        let degPn = altimeter.state.primaryDegrees
+        let degPn = store.getters.getPrimaryDegrees
         primaryNeedle.style.transform = `rotate(${degPn}deg)`
 
         //variable que modifica la aguja secundaria (miles de pies  1 --> 1 000)
         // let degSn = this.getDeegresSecondary(6)
-        let degSn = altimeter.state.secondaryDegrees
+        let degSn = store.getters.getSecondaryDegrees
 
         senconaryNeedle.style.transform = `rotate(${degSn}deg)`
         //variable que modifica la aguja terciaria (decenas de miles 1--> 10 000)
         // let degTn = this.getDeegresTerciary(6)
-        let degTn = altimeter.state.terciaryDegrees
+        let degTn = store.getters.getTerciaryDegrees
 
         tertiaryNeedle.style.transform = `rotate(${degTn}deg)`
       }, 1000)
