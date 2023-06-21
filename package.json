@@ -38,6 +38,7 @@
     ]
   },
   "dependencies": {
+    "leaflet": "^1.9.4",
     "vue-flight-indicators": "^0.1.1"
   }
 }
