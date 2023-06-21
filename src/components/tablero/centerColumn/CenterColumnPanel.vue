@@ -1,10 +1,10 @@
 <template>
   <div class="centerColumnPanel">
     <CarburetorHeat />
-    <MixtureKnob />
     <TrottleKnob />
-    <TrimWhell />
+    <MixtureKnob />
     <WingFlaps />
+    <TrimWhell />
   </div>
 </template>
 
