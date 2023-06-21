@@ -40,7 +40,7 @@
       },
       accelerator(rpm) {
         const measuredElement = document.getElementById('measurer')
-        console.log(rpm)
+       // console.log(rpm)
         const range = 140 // Rango de grados permitidos
         const maxRpm = 3500 // Valor máximo de RPM
 
