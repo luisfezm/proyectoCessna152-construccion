@@ -9,7 +9,7 @@
   >
     <span class="number">{{ axis }}</span>
     <img
-      src="src/assets/knob.svg"
+      src="@/assets/knob.svg"
       :style="{
         transform: `scale(${currentScale}) rotate(${currentRotation}deg)`,
       }"

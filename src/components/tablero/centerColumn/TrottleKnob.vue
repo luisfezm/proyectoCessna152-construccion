@@ -9,7 +9,7 @@
   >
     <span class="number">{{ axis }}</span>
     <img
-      src="src/assets/tknob.svg"
+      src="@/assets/tknob.svg"
       :style="{
         transform: `scale(${currentScale}) rotate(${currentRotation}deg)`,
       }"
