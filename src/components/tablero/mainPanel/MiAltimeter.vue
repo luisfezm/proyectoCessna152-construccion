@@ -43,9 +43,10 @@
     },
     mounted() {
       setInterval(() => {
-        console.log(altimeter)
         altimeter.mutations.cambiarVelocidad(altimeter.state)
+        altimeter.mutations.cambiaUnidadVelocidad(altimeter.state)
         altimeter.mutations.updateAltimeter(altimeter.state)
+
         let primaryNeedle = document.querySelector('.pn')
         let senconaryNeedle = document.querySelector('.sn')
         let tertiaryNeedle = document.querySelector('.tn')
@@ -65,7 +66,7 @@
         let degTn = altimeter.state.terciaryDegrees
 
         tertiaryNeedle.style.transform = `rotate(${degTn}deg)`
-      }, 5000)
+      }, 1000)
     },
   }
 </script>
