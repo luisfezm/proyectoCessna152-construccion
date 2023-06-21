@@ -18,6 +18,9 @@
 </template>
 
 <script>
+  
+  import store from '../../../store'
+
   export default {
     data() {
       return {
@@ -25,6 +28,8 @@
       }
     },
     computed: {
+
+
       circleStyle() {
         return {
           left: `calc(50% - 1px - ${this.gradosDesviacion}px)`, //Movimiento del circle en relacion con los gradosDesviacion recibidos
@@ -32,14 +37,27 @@
         }
       },
     },
-    mounted() {
-      setInterval(() => {
-        this.moverAvion(Math.floor(Math.random() * 20) - 10) // Genera un valor aleatorio entre -10 y 10
-      }, 2000)
+    mounted() {   
+      setInterval(() => {  //Cada segundo revisa el estado del getEstadoRoll_yoke
+        
+        console.log('ESTADO ' + store.getters.getEstadoRoll_yoke)
+       
+        this.moverAvion(store.getters.getEstadoRoll_yoke) // LLamo a la funcion para mover el indicador con el valor del estado
+      }, 1000)
     },
     methods: {
-      moverAvion(grados) {
-        this.gradosDesviacion = grados
+      moverAvion(estado) {
+        if(estado == -1){  //El avion esta girando hacia la izquierda
+          this.gradosDesviacion -= 2  
+          this.gradosDesviacion = this.gradosDesviacion % 360
+
+          console.log("DESVIACION   "+this.gradosDesviacion)
+        }
+
+        if(estado == 1){ //El avion esta girando hacia la derecha
+          this.gradosDesviacion += 2
+          console.log("DESVIACION   "+this.gradosDesviacion)
+        }
       },
     },
   }

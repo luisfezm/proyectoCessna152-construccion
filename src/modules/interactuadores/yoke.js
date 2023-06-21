@@ -1,4 +1,6 @@
 // yoke.js
+
+
 const yoke = {
   state: {
     // Estado inicial de los interactuadores
@@ -20,6 +22,7 @@ const yoke = {
       switch (tecla) {
         case 'W':
           commit('setEstadoPitch_yoke', 1)
+          TurnCoordinator.
           break
         case 'S':
           commit('setEstadoPitch_yoke', -1)
@@ -39,9 +42,10 @@ const yoke = {
     },
     soltarTecla_yoke({ commit, state }) {
       commit('setEstadoPitch_yoke', 0)
-      commit('setEstadoRoll_yoke', 0)
-      console.log('Pitch_yoke:', state.estadoPitch_yoke)
-      console.log('Roll_yoke:', state.estadoRoll_yoke)
+        commit('setEstadoRoll_yoke', 0)
+        console.log('Pitch_yoke:', state.estadoPitch_yoke)
+        console.log('Roll_yoke:', state.estadoRoll_yoke)
+      
     },
   },
   getters: {
@@ -50,5 +54,6 @@ const yoke = {
     getEstadoRoll_yoke: (state) => state.estadoRoll_yoke,
   },
 }
+
 
 export default yoke
