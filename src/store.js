@@ -1,13 +1,14 @@
 // store.js
 import { createStore } from 'vuex'
+import fuelquantity from './modules/indicadores/fuelquantity'
+import headingIndicator from './modules/indicadores/headingIndicator'
 import horizonteArtificial from './modules/indicadores/horizonteArtificial'
 import tacometro from './modules/indicadores/tacometro'
-import headingIndicator from './modules/indicadores/headingIndicator'
-import yoke from './modules/interactuadores/yoke'
 import pedales from './modules/interactuadores/pedales'
 import throttle from './modules/interactuadores/throttle'
 import mixture from './modules/interactuadores/mixture'
 import trimwheel from './modules/interactuadores/trimwheel'
+import yoke from './modules/interactuadores/yoke'
 
 const store = createStore({
   state: {
@@ -34,6 +35,7 @@ const store = createStore({
     throttle,
     mixture,
     trimwheel,
+    fuelquantity,
   },
 })
 

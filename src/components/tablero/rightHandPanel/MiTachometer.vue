@@ -4,82 +4,89 @@
       <div class="tachometer">
         <div
           id="measurer"
-          :style="`transform: rotate(${rpmToDegrees}deg); transition: ${transitionDuration}s`"
-        >
+          :style="`transform: rotate(${rpmToDegrees}deg); transition: ${transitionDuration}s`">
           <div id="point" />
         </div>
-        <button
-          id="increase"
-          @mousedown="startIncreasingRPM"
-          @mouseup="stopIncreasingRPM"
-        />
-        <button
-          id="decrease"
-          @mousedown="decreaseRPM"
-          @mouseup="releaseAccelerator"
-        />
+
+
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import store from '@/store'
-  //import { throttle } from '@/store/modules/throttle.js'
+import store from '@/store'
 
-  export default {
-    data() {
-      return {
-        rpm: 0,
-        rpmToDegrees: -130, // Cambiar el valor inicial a -130 grados para que en 0 RPM el puntero esté en la posición inicial
-        transitionDuration: 0,
-        increaseInterval: null,
-        variableTraspaso: 0,
-      }
-    },
-    created() {
-      setInterval(this.updateRPM, 10)
-    },
-
-    methods: {
-      startIncreasingRPM() {
-        console.log('Valor de throttle:', store.state.throttle) // Mostrar el valor de "throttle" por consola
-        console.log('Valor de rpm:', this.rpm) // Mostrar el valor de "rpm" por consola
-        this.increaseInterval = setInterval(() => {
-          if (this.rpm < 100) {
-            this.rpm += 1
-            this.updateRPM()
-          }
-        }, 100)
-      },
-      stopIncreasingRPM() {
-        clearInterval(this.increaseInterval)
-      },
-      decreaseRPM() {
-        console.log('Valor de throttle:', store.state.throttle) // Mostrar el valor de "throttle" por consola
-        console.log('Valor de rpm:', this.rpm) // Mostrar el valor de "rpm" por consola
-        if (this.rpm > 0) {
-          this.rpm -= 1
+export default {
+  data() {
+    return {
+      rpm: 0,
+      rpmToDegrees: -130,
+      transitionDuration: 0,
+      increaseInterval: null,
+      variableTraspaso: 0,
+    }
+  },
+  created() {
+    setInterval(this.updateRPM, 10)
+  },
+  mounted() {
+    setInterval(() => {
+      this.startIncreasingRPM()
+     // this.accelerator(this.currentRpm())
+    }, 1000)
+  },
+  methods: {
+    startIncreasingRPM() {
+      console.log('Valor de throttle:', store.state.throttle)
+      console.log('Valor de rpm:', this.rpm)
+      this.increaseInterval = setInterval(() => {
+        if (this.rpm < 100) {
+          this.rpm += 1
           this.updateRPM()
         }
-      },
-      releaseAccelerator() {
-        // this.rpm = 0;
-        this.increaseInterval = null
-        this.updateRPM()
-      },
-      updateRPM() {
-        this.rpm = store.getters.getThrottleDepth // Obtener el valor de "throttle_depth" del módulo "throttle" y convertirlo a entero para la variable "rpm"
-        //console.log('--Valor de getThrottleDepth:', store.getters.getThrottleDepth);
-        //console.log('--Valor de rpm:', this.rpm); // Mostrar el valor de "rpm" por consola
-        this.rpmToDegrees = -130 + this.rpm * 2.6 // Convertir RPM a grados (-130 a 0)
-        this.transitionDuration = 3.5 - this.rpm * 0.03 // Ajustar la duración de la transición según las RPM
-      },
-      updateRPMbar() {
-        this.updateRPM()
-      },
+      }, 100)
     },
-  }
+    stopIncreasingRPM() {
+      clearInterval(this.increaseInterval)
+    },
+    decreaseRPM() {
+      console.log('Valor de throttle:', store.state.throttle)
+      console.log('Valor de rpm:', this.rpm)
+      if (this.rpm > 0) {
+        this.rpm -= 1
+        this.updateRPM()
+      }
+    },
+    releaseAccelerator() {
+      this.increaseInterval = null
+      this.updateRPM()
+    },
+    updateRPM() {
+      this.rpm = store.getters.getThrottleDepth
+      this.rpmToDegrees = -130 + this.rpm * 2.6
+      this.transitionDuration = 3.5 - this.rpm * 0.03
+    },
+    currentRpm() {
+      return this.$store.getters.getRpm
+    },
+    accelerator(rpm) {
+      const measuredElement = document.getElementById('measurer')
+      const range = 140
+      const maxRpm = 3500
+      const RpmRange = Math.max(Math.min(rpm, maxRpm), 0)
+      const percentage = RpmRange / maxRpm
+      const degrees = percentage * range * 2 - range
+      if (degrees >= 140) {
+        measuredElement.style.cssText = `transform: rotate(${140}deg); transition: 4s;`
+      } else {
+        measuredElement.style.cssText = `transform: rotate(${
+          degrees - 15
+        }deg); transition: 4s;`
+      }
+    },
+  },
+}
 </script>
 
 <style>
@@ -136,9 +143,9 @@
     top: 25%;
     left: 49%;
     z-index: 3;
+    transform: rotate(-140deg);
+    transition: transform 4s;
     transform-origin: bottom;
-    transform: rotate(-130deg); /* Grados para rotar el medidor de velocidad */
-    transition: 2s;
   }
 
   #point {
@@ -150,7 +157,6 @@
     bottom: -5px;
     left: -5px;
     background-color: white;
-    transition: 2s;
   }
 
   .circular {
