@@ -1,12 +1,11 @@
 <template>
   <div class="circular">
     <div class="box">
-      <!-- 
-        <button id="increase" @mousedown="Accelerator" @mouseup="releaseAccelerator"></button>
-        <button id="decrease" @mousedown="brake" onmouseup=""></button>
-         -->
       <div class="tachometer">
-        <div id="measurer">
+        <div
+          id="measurer"
+          :style="`transform: rotate(${rpmToDegrees}deg); transition: ${transitionDuration}s`"
+        >
           <div id="point" />
         </div>
       </div>
@@ -15,29 +14,82 @@
 </template>
 
 <script>
+  import store from '@/store'
+
   export default {
+    data() {
+      return {
+        rpm: 0,
+        rpmToDegrees: -130,
+        transitionDuration: 0,
+        increaseInterval: null,
+        variableTraspaso: 0,
+      }
+    },
+    created() {
+      setInterval(this.updateRPM, 10)
+    },
+    mounted() {
+      setInterval(() => {
+        this.startIncreasingRPM()
+        // this.accelerator(this.currentRpm())
+      }, 1000)
+    },
     methods: {
-      Accelerator() {
-        document.getElementById('measurer').style =
-          'transform-origin: bottom;transform: rotate(70deg);transition:4s'
+      startIncreasingRPM() {
+        console.log('Valor de throttle:', store.state.throttle)
+        console.log('Valor de rpm:', this.rpm)
+        this.increaseInterval = setInterval(() => {
+          if (this.rpm < 100) {
+            this.rpm += 1
+            this.updateRPM()
+          }
+        }, 100)
       },
-
+      stopIncreasingRPM() {
+        clearInterval(this.increaseInterval)
+      },
+      decreaseRPM() {
+        console.log('Valor de throttle:', store.state.throttle)
+        console.log('Valor de rpm:', this.rpm)
+        if (this.rpm > 0) {
+          this.rpm -= 1
+          this.updateRPM()
+        }
+      },
       releaseAccelerator() {
-        document.getElementById('measurer').style.cssText =
-          'transform-origin: bottom;transform: rotate(-130deg);transition:3.5s;'
+        this.increaseInterval = null
+        this.updateRPM()
       },
-
-      brake() {
-        document.getElementById('measurer').style.cssText =
-          'transform-origin: bottom;transform: rotate(-135deg);transition:0.5s;'
+      updateRPM() {
+        this.rpm = store.getters.getThrottleDepth
+        this.rpmToDegrees = -130 + this.rpm * 2.6
+        this.transitionDuration = 3.5 - this.rpm * 0.03
+      },
+      currentRpm() {
+        return this.$store.getters.getRpm
+      },
+      accelerator(rpm) {
+        const measuredElement = document.getElementById('measurer')
+        const range = 140
+        const maxRpm = 3500
+        const RpmRange = Math.max(Math.min(rpm, maxRpm), 0)
+        const percentage = RpmRange / maxRpm
+        const degrees = percentage * range * 2 - range
+        if (degrees >= 140) {
+          measuredElement.style.cssText = `transform: rotate(${140}deg); transition: 4s;`
+        } else {
+          measuredElement.style.cssText = `transform: rotate(${
+            degrees - 15
+          }deg); transition: 4s;`
+        }
       },
     },
   }
 </script>
 
 <style>
-  /*
-.box #increase{ 
+  .box #increase {
     width: 8px;
     height: 4px;
     position: absolute;
@@ -49,17 +101,14 @@
     z-index: 4;
     cursor: pointer;
     border-radius: 5px;
-
-}
-.box #increase:hover{
+  }
+  .box #increase:hover {
     box-shadow: 0px 0px 10px 5px gray;
-
-}
-.box #decrease:hover{
+  }
+  .box #decrease:hover {
     box-shadow: 0px 0px 10px 5px gray;
-
-}
-.box #decrease{
+  }
+  .box #decrease {
     width: 8px;
     height: 4px;
     position: absolute;
@@ -70,10 +119,8 @@
     cursor: pointer;
     z-index: 4;
     border-radius: 5px;
+  }
 
-}
-
-*/
   .tachometer {
     width: 90px;
     height: 90px;
@@ -95,9 +142,9 @@
     top: 25%;
     left: 49%;
     z-index: 3;
+    transform: rotate(-140deg);
+    transition: transform 4s;
     transform-origin: bottom;
-    transform: rotate(-130deg); /* Grados para rotar el medidor de velocidad */
-    transition: 2s;
   }
 
   #point {
@@ -109,7 +156,6 @@
     bottom: -5px;
     left: -5px;
     background-color: white;
-    transition: 2s;
   }
 
   .circular {

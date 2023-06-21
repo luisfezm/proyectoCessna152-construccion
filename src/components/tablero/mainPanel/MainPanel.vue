@@ -2,13 +2,13 @@
   <div class="mainPanel">
     <div class="mainTopPanel">
       <MiAirSpeedIndicator />
-
       <MiArtificialHorizon />
       <MiAltimeter />
       <TurnCoordinator />
     </div>
 
     <div class="mainBotPanel">
+      <MiHeadingIndicator />
       <VerticalSpeed />
     </div>
   </div>
@@ -20,6 +20,7 @@
   import MiAltimeter from './MiAltimeter.vue'
   import TurnCoordinator from './TurnCoordinator.vue'
   import VerticalSpeed from './VerticalSpeed.vue'
+  import MiHeadingIndicator from './MiHeadingIndicator.vue'
 
   export default {
     components: {
@@ -28,6 +29,7 @@
       MiAltimeter,
       TurnCoordinator,
       VerticalSpeed,
+      MiHeadingIndicator,
     },
   }
 </script>
