@@ -6,10 +6,14 @@
       <MiArtificialHorizon />
       <MiAltimeter />
       <TurnCoordinator />
+      <CourseDeviationIndicator1 />
+      
+
     </div>
 
     <div class="mainBotPanel">
       <VerticalSpeed />
+      <CourseDeviationIndicator2/>
     </div>
   </div>
 </template>
@@ -20,14 +24,18 @@
   import MiAltimeter from './MiAltimeter.vue'
   import TurnCoordinator from './TurnCoordinator.vue'
   import VerticalSpeed from './VerticalSpeed.vue'
+  import CourseDeviationIndicator1 from './CourseDeviationIndicator1.vue'
+  import CourseDeviationIndicator2 from './CourseDeviationIndicator2.vue'
 
   export default {
     components: {
-      MiAirSpeedIndicator,
-      MiArtificialHorizon,
-      MiAltimeter,
-      TurnCoordinator,
-      VerticalSpeed,
-    },
+    MiAirSpeedIndicator,
+    MiArtificialHorizon,
+    MiAltimeter,
+    TurnCoordinator,
+    VerticalSpeed,
+    CourseDeviationIndicator1,
+    CourseDeviationIndicator2
+},
   }
 </script>
