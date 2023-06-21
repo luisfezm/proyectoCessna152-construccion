@@ -232,7 +232,7 @@
     left: 30px;
     top: 32px;
     position: absolute;
-    height: 20%;
+    height: 30px;
     transition: transform 2s;
     transform-style: preserve-3d;
     transform: translateZ(-300px);
@@ -261,7 +261,7 @@
 
     transition: transform 2s, opacity 2s;
     backface-visibility: hidden;
-    text-shadow: 0 -2px 0 rgba(0, 0, 0, 1);
+    
   }
 
   #hours1 {
