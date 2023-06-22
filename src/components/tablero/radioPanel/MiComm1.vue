@@ -1,5 +1,5 @@
 <template>
-  <button @click="$emit('toggle')">Encender/Apagar</button>
+  <div class="indicadorRadioPanel" />
 </template>
 
 <script>
