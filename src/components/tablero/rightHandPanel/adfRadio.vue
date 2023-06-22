@@ -2,24 +2,14 @@
   <div class="frame">
     <div class="numbers">{{ first }},{{ second }},{{ third }}</div>
   </div>
-  <img
-    class="first"
-    src="src/assets/adfKnob.svg"
-    alt=""
-    @click="modifyFirst()"
-  />
+  <img class="first" src="@/assets/adfKnob.svg" alt="" @click="modifyFirst()" />
   <img
     class="second"
-    src="src/assets/adfKnob.svg"
+    src="@/assets/adfKnob.svg"
     alt=""
     @click="modifySecond()"
   />
-  <img
-    class="third"
-    src="src/assets/adfKnob.svg"
-    alt=""
-    @click="modifyThird()"
-  />
+  <img class="third" src="@/assets/adfKnob.svg" alt="" @click="modifyThird()" />
 </template>
 <script>
   import store from '@/store'

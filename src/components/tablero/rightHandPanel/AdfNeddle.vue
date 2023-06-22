@@ -3,7 +3,7 @@
     <img
       id="medidas"
       class="rotar"
-      src="src/assets/adf.svg"
+      src="@/assets/adf.svg"
       style="height: 90px"
       alt="test"
     />
@@ -11,7 +11,7 @@
       id="agujaImg"
       class="aguja"
       :style="{ transform: 'rotate(' + angle + 'deg)' }"
-      src="src/assets/arrow.svg"
+      src="@/assets/arrow.svg"
       style="height: 45px"
       alt="aguja"
     />
