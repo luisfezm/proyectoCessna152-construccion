@@ -40,6 +40,7 @@ window.addEventListener('keydown', (event) => {
   ) {
     const key = event.key.toUpperCase()
     store.dispatch('presionarTecla_yoke', key)
+    
   }
 })
 
