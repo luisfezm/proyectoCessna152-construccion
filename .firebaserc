@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "cessna-152"
+  },
+  "targets": {
+    "cessna-152": {
+      "hosting": {
+        "sprint2": [
+          "cessna-152-sprint2"
+        ]
+      }
+    }
   }
 }
