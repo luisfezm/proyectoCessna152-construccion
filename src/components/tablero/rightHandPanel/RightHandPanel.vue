@@ -1,7 +1,7 @@
 <template>
   <div class="rightHandPanel">
     <Tachometer />
-    <ADFNeddle />
+    <ADFNeddle :angle="adfNeedleValue" />
     <FlightHourRecorder />
 
     <div class="indicadorRightADF">
