@@ -2,18 +2,16 @@
   <div class="mainPanel">
     <div class="mainTopPanel">
       <MiAirSpeedIndicator />
-
       <MiArtificialHorizon />
       <MiAltimeter />
       <TurnCoordinator />
       <CourseDeviationIndicator1 />
-      
-
     </div>
 
     <div class="mainBotPanel">
+      <MiHeadingIndicator />
       <VerticalSpeed />
-      <CourseDeviationIndicator2/>
+      <CourseDeviationIndicator2 />
     </div>
   </div>
 </template>
@@ -26,16 +24,18 @@
   import VerticalSpeed from './VerticalSpeed.vue'
   import CourseDeviationIndicator1 from './CourseDeviationIndicator1.vue'
   import CourseDeviationIndicator2 from './CourseDeviationIndicator2.vue'
+  import MiHeadingIndicator from './MiHeadingIndicator.vue'
 
   export default {
     components: {
-    MiAirSpeedIndicator,
-    MiArtificialHorizon,
-    MiAltimeter,
-    TurnCoordinator,
-    VerticalSpeed,
-    CourseDeviationIndicator1,
-    CourseDeviationIndicator2
-},
+      MiAirSpeedIndicator,
+      MiArtificialHorizon,
+      MiAltimeter,
+      TurnCoordinator,
+      VerticalSpeed,
+      CourseDeviationIndicator1,
+      CourseDeviationIndicator2,
+      MiHeadingIndicator,
+    },
   }
 </script>
