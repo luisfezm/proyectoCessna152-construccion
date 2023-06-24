@@ -1,25 +1,49 @@
 <template>
-  <button
-    class="pedal"
-    role="button"
-    @mousedown="pedalDerecho(true)"
-    @mouseup="pedalDerecho(false)"
-  />
+  <div>
+    <button
+      class="pedal"
+      role="button"
+      @mousedown="presionarPedalDerecho"
+      @mouseup="soltarPedalDerecho"
+      @mouseleave="soltarPedalDerecho"
+    />
+    <!-- <p>Movimiento del pedal derecho: {{ movPedalDerecha }}</p> -->
+  </div>
 </template>
 
 <script>
   export default {
     data() {
       return {
-        direccion: 0,
+        intervalId: null,
+        resetTimeoutId: null,
       }
     },
+    computed: {
+      movPedalDerecha() {
+        return this.$store.getters.movPedalDerecha
+      },
+    },
     methods: {
-      pedalDerecho(presionado) {
-        if (presionado) {
-          this.direccion = 1
-        } else {
-          this.direccion = 0
+      presionarPedalDerecho() {
+        clearTimeout(this.resetTimeoutId)
+        this.resetTimeoutId = null
+
+        if (!this.intervalId) {
+          this.intervalId = setInterval(() => {
+            this.$store.dispatch('incrementarMovPedalDerecha')
+          }, 100) // Ejecuta la función cada 100 ms mientras el botón esté presionado
+        }
+      },
+      soltarPedalDerecho() {
+        clearInterval(this.intervalId)
+        this.intervalId = null
+
+        if (!this.resetTimeoutId) {
+          this.resetTimeoutId = setTimeout(() => {
+            this.$store.dispatch('resetMovPedalDerecha')
+            this.resetTimeoutId = null
+          }, 1000) // Ejecuta la función después de 1 segundo (1000 ms) de haber soltado el botón
         }
       },
     },

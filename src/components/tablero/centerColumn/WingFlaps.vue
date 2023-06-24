@@ -9,7 +9,7 @@
   >
     <img
       ref="image"
-      src="src\assets\rectangle.png"
+      src="@\assets\rectangle.png"
       :style="{
         transform: `translateY(${currentTranslationY}px)`,
         width: '100%',
