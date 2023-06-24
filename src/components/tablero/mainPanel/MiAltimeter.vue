@@ -1,7 +1,7 @@
 <template>
-  <div class="indicadorMainPanel" id = "altimeter">
-    <div class="center-point" ></div>
-   <!--     
+  <div id="altimeter" class="indicadorMainPanel">
+    <div class="center-point" />
+    <!--     
     <div clas="central-hider" id="altimeter-hide"></div>
  
     <div class="alimeter-scale hundreds-feets-1" style="--a:1"></div>
@@ -21,74 +21,67 @@
     <div class="hundred hund-7" style="--i:7"><b>7</b></div>
     <div class="hundred hund-8" style="--i:8"><b>8</b></div>
     <div class="hundred hund-9" style="--i:9"><b>9</b></div>
-    --> 
+    -->
     <div class="needle-wraper pn">
-      <div class="primary-needle"></div>
+      <div class="primary-needle" />
     </div>
     <div class="needle-wraper sn">
-      <div class="secondary-needle"></div>
+      <div class="secondary-needle" />
     </div>
     <div class="needle-wraper tn">
-      <div class="tertiary-needle"></div>
+      <div class="tertiary-needle" />
     </div>
-    
   </div>
 </template>
 
 <script>
-import { onMounted } from 'vue';
+  import store from '@/store'
 
+  // const altimeter = store.modules.altimeter;
   export default {
-    data(){
-
-      return{
-        
-      }
+    data() {
+      return {}
     },
-    mounted(){
-      
-      let primaryNeedle = document.querySelector(".pn")
-      let senconaryNeedle = document.querySelector(".sn")
-      let tertiaryNeedle = document.querySelector(".tn")
+    mounted() {
+      setInterval(() => {
+        store.dispatch('updateVelocidadAltimeter')
+        store.dispatch('cambiaUnidadVelocidadPpmToPps')
+        store.dispatch('updateAltimeter')
 
-      //variable que modifica la aguja primaria (centenas de pies 1 --> 100) 
-      let degPn = this.getDeegresPrimary(90)
-      primaryNeedle.style.transform = `rotate(${degPn}deg)`
-      //variable que modifica la aguja secundaria (miles de pies  1 --> 1 000)
-      let degSn = 180
-      senconaryNeedle.style.transform = `rotate(${degSn}deg)`
-      //variable que modifica la aguja terciaria (decenas de miles 1--> 10 000)
-      let degTn = 270
-      tertiaryNeedle.style.transform = `rotate(${degTn}deg)`
+        let primaryNeedle = document.querySelector('.pn')
+        let senconaryNeedle = document.querySelector('.sn')
+        let tertiaryNeedle = document.querySelector('.tn')
+
+        //variable que modifica la aguja primaria (centenas de pies 1 --> 100)
+        // let degPn = this.getDeegresPrimary(6)
+        let degPn = store.getters.getPrimaryDegrees
+        primaryNeedle.style.transform = `rotate(${degPn}deg)`
+
+        //variable que modifica la aguja secundaria (miles de pies  1 --> 1 000)
+        // let degSn = this.getDeegresSecondary(6)
+        let degSn = store.getters.getSecondaryDegrees
+
+        senconaryNeedle.style.transform = `rotate(${degSn}deg)`
+        //variable que modifica la aguja terciaria (decenas de miles 1--> 10 000)
+        // let degTn = this.getDeegresTerciary(6)
+        let degTn = store.getters.getTerciaryDegrees
+
+        tertiaryNeedle.style.transform = `rotate(${degTn}deg)`
+      }, 1000)
     },
-    methods:{
-      getDeegresPrimary(aux){
-        return aux;
-      },
-      getDeegresSecondary(aux){
-        return aux;
-      },
-      getDeegresTerciary(aux){
-        return aux;
-      }
-    }
-
   }
-
-  
 </script>
 
 <style>
-  #altimeter{
-    border: 2px solid grey ;
+  #altimeter {
+    border: 2px solid grey;
     position: relative;
     background-image: url(https://i.ibb.co/f2TgqSJ/alt1.png);
     background-size: cover;
     top: 0px;
     left: 0px;
-
   }
-  .center-point{
+  .center-point {
     width: 5px;
     height: 5px;
     background-color: white;
@@ -98,7 +91,7 @@ import { onMounted } from 'vue';
     left: 33px;
     z-index: 20;
   }
-/*  
+  /*  
   .alimeter-scale{
     width: 2px;
     height: 70px;
@@ -151,7 +144,7 @@ import { onMounted } from 'vue';
     transform: rotate(calc(-36deg* var(--i)));
   }
 */
-  .needle-wraper{
+  .needle-wraper {
     width: 30px;
     height: 30px;
     background-color: transparent;
@@ -160,9 +153,8 @@ import { onMounted } from 'vue';
     left: 20px;
     /* transform: rotate(10deg); */
     z-index: 10;
-    
   }
-  .primary-needle{
+  .primary-needle {
     width: 2px;
     height: 24px;
     position: absolute;
@@ -171,7 +163,7 @@ import { onMounted } from 'vue';
     background-color: whitesmoke;
     z-index: 1;
   }
-  .secondary-needle{
+  .secondary-needle {
     width: 3px;
     height: 14px;
     position: absolute;
@@ -180,7 +172,7 @@ import { onMounted } from 'vue';
     background-color: whitesmoke;
     z-index: 1;
   }
-  .tertiary-needle{
+  .tertiary-needle {
     width: 0.5px;
     height: 25px;
     position: absolute;
@@ -189,11 +181,7 @@ import { onMounted } from 'vue';
     background-color: whitesmoke;
     z-index: 1;
   }
-
-
-
 </style>
-
 
 <!--
   .indicadorMainPanel {
@@ -203,4 +191,3 @@ import { onMounted } from 'vue';
   border-radius: 50%;
 }
 -->
-
