@@ -54,8 +54,7 @@ window.addEventListener('keyup', () => {
   ) {
     store.dispatch('soltarTecla_yoke')
   }
-}) */
-
+}) 
 window.addEventListener('keydown', (event) => {
   if (event.key === 'q' && store.getters.movPedalDerecha === 0) {
     clearTimeout(timeoutPedalIzq)

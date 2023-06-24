@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-=======
-// yoke.js
-
-
->>>>>>> sprint3
 const yoke = {
   state: {
     estadoPitch_yoke: 0,
@@ -48,29 +42,6 @@ const yoke = {
     },
   },
   actions: {
-<<<<<<< HEAD
-    presionarTecla_yoke({ commit, state }, teclas) {
-      teclas.forEach((tecla) => {
-        switch (tecla) {
-          case 'W':
-            commit('incrementEstadoPitch_yoke');
-            console.log('W');
-            break;
-          case 'S':
-            commit('decrementEstadoPitch_yoke');
-            console.log('S');
-            break;
-          case 'A':
-            commit('decrementEstadoRoll_yoke');
-            console.log('A');
-            break;
-          case 'D':
-            commit('incrementEstadoRoll_yoke');
-            console.log('D');
-            break;
-        }
-      });
-=======
     // Acciones para realizar operaciones relacionadas con los interactuadores
     presionarTecla_yoke({ commit, state }, tecla) {
       switch (tecla) {
@@ -88,7 +59,6 @@ const yoke = {
           commit('setEstadoRoll_yoke', 1)
           break
       }
->>>>>>> sprint3
 
       console.log('Nuevo estado del yoke:');
       console.log('Pitch_yoke:', state.estadoPitch_yoke);
@@ -96,24 +66,10 @@ const yoke = {
       console.log('---');
     },
     soltarTecla_yoke({ commit, state }) {
-<<<<<<< HEAD
-      const interval = setInterval(() => {
-        commit('resetEstadoPitch_yoke');
-        commit('resetEstadoRoll_yoke');
-        console.log('Pitch_yoke:', state.estadoPitch_yoke);
-        console.log('Roll_yoke:', state.estadoRoll_yoke);
-        console.log('---');
-        if (state.estadoPitch_yoke === 0 && state.estadoRoll_yoke === 0) {
-          clearInterval(interval);
-        }
-      }, 10);
-=======
       commit('setEstadoPitch_yoke', 0)
         commit('setEstadoRoll_yoke', 0)
         console.log('Pitch_yoke:', state.estadoPitch_yoke)
         console.log('Roll_yoke:', state.estadoRoll_yoke)
-      
->>>>>>> sprint3
     },
   },
   getters: {
@@ -121,10 +77,5 @@ const yoke = {
     getEstadoRoll_yoke: (state) => state.estadoRoll_yoke,
   },
 };
-
-<<<<<<< HEAD
 export default yoke;
-=======
 
-export default yoke
->>>>>>> sprint3
