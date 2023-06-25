@@ -14,6 +14,9 @@
                     let gasoline_1 = document.getElementById('right')  /*gasolina 1 es el estanque 1 de gasolina */
                     let gasoline_2 = document.getElementById('left') /*gasolina 2 es el estanque 2 de gasolina 2 */
                     /*modificacion de la rotacion de las agujas */
+                    if(this.$store.getters.getStateGasoline_1 <=137){
+                        gasoline_2.style.zIndex  = "20"
+                    }
                     gasoline_1.style.transform = `rotate(${this.$store.getters.getStateGasoline_1}deg)`
                     gasoline_2.style.transform = `rotate(${this.$store.getters.getStateGasoline_2}deg)`   
                 }, 1000)
@@ -37,7 +40,7 @@
     background-repeat: no-repeat;
     left: 42px;
     position: relative;
-    bottom : 50%;
+    bottom : 40%;
     
 }
 
@@ -68,7 +71,7 @@
     transition: 3s;
     position: absolute;
     transform-origin: top;
-    
+    z-index: 0;
 
 }
 
