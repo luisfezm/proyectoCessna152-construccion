@@ -32,6 +32,7 @@ const plane = {
     actions: {
       // Acciones para realizar operaciones relacionadas con los interactuadores
       setAirDensity({ commit },value) {
+
         commit('setAirDensity')  
       },
       setValues({ commit }) {
