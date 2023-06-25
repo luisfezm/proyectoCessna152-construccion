@@ -31,6 +31,8 @@ const horizonteArtificial = {
       // reinicia los angulos de 360 a 0
       state.anguloRoll = state.anguloRoll % 360
       state.anguloPitch = state.anguloPitch % 360
+
+      console.log('ACTUALIZAR' + state.anguloRoll)
     },
 
     actualizar(state, Yoke) {
@@ -122,8 +124,10 @@ const horizonteArtificial = {
     // Acciones para realizar operaciones relacionadas con los indicadores
     // (FALTA AJUSTAR)
     actualizar({ commit }, Yoke) {
+      console.log(Yoke)
       if (Yoke.roll >= 0) {
         // saco raices para disminuir la brecha entre los valores maximos y minimos (dependera de como se implemente el Yoke)
+        
         Yoke.roll = Math.sqrt(Math.sqrt(Yoke.roll))
       } else {
         Yoke.roll = -Math.sqrt(Math.sqrt(-Yoke.roll))
@@ -134,7 +138,7 @@ const horizonteArtificial = {
       } else {
         Yoke.pitch = -Math.sqrt(Math.sqrt(-Yoke.pitch))
       }
-      commit('actualizar', Yoke)
+      commit('actualizar', Yoke)<
       commit('actualizaAngulos')
     },
   },

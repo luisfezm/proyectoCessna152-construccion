@@ -2,76 +2,91 @@
   <div class="circular">
     <div class="box">
       <div class="tachometer">
-        <div id="measurer">
-          <div id="point"></div>
+        <div
+          id="measurer"
+          :style="`transform: rotate(${rpmToDegrees}deg); transition: ${transitionDuration}s`">
+          <div id="point" />
         </div>
+
+
       </div>
     </div>
   </div>
 </template>
+
 <script>
-  export default {
-    /*
-   Idea sobre la integración de Tacometro:
+import store from '@/store'
 
-   El tacómetro actualmente está conectado con su lógica (tacometro.js)
-   lo que se hace realmente en éste componente es obtener rpm desde tacometro.js que a su vez tacometro.js obtiene rpm desde throttle
-
-   throttle -> tacometro.js -> MiTachometro.vue
-
-   Ésta conexión de throttle a tacometro.js no está hecha
-   Pero la conexión de tacometro.js a MiTachometro.vue sí está hecha y cuando se implemente en un futuro correctamente la conexión cuando se use el throttle debería cambiar tacometro.js y automaticamente actualizar el valor de la aguja del tacometro.
-
-*/
-    mounted() {
-      setInterval(() => {
-        this.accelerator(this.currentRpm()) //Le pasamos los rpm 
-      }, 1000) //Cada 1seg se actualiza el valor que se refleja en el indicador
-
-      //this.releaseAccelerator(this.currentRpm); -> Funcion para simular que se soltó el acelerador que puede ser utilizada en un futuro
-      
-      //Funcion para simular frenado
-      //this.brake(this.currentRpm);
-    },
-    methods: {
-      currentRpm(){ //Obtener rpm desde tacometro.js
-       // console.log("RPM desde tacometro.js = "+this.$store.getters.getRpm)
-        return this.$store.getters.getRpm
-      },
-      accelerator(rpm) {
-        const measuredElement = document.getElementById('measurer')
-       // console.log(rpm)
-        const range = 140 // Rango de grados permitidos
-        const maxRpm = 3500 // Valor máximo de RPM
-
-        const RpmRange = Math.max(Math.min(rpm, maxRpm), 0) // Asegurar que el valor RPM esté dentro del rango permitido
-        const percentage = RpmRange / maxRpm // Calcular el porcentaje relativo al valor máximo de RPM
-        const degrees = percentage * range * 2 - range // Calcular los grados relativos al rango permitido
-        //console.log(degrees)
-        if (degrees >= 140) {
-          measuredElement.style.cssText = `transform: rotate(${140}deg); transition: 4s;`
-        } else {
-          measuredElement.style.cssText = `transform: rotate(${
-            degrees - 15
-          }deg); transition: 4s;`
+export default {
+  data() {
+    return {
+      rpm: 0,
+      rpmToDegrees: -130,
+      transitionDuration: 0,
+      increaseInterval: null,
+      variableTraspaso: 0,
+    }
+  },
+  created() {
+    setInterval(this.updateRPM, 10)
+  },
+  mounted() {
+    setInterval(() => {
+      this.startIncreasingRPM()
+     // this.accelerator(this.currentRpm())
+    }, 1000)
+  },
+  methods: {
+    startIncreasingRPM() {
+      console.log('Valor de throttle:', store.state.throttle)
+      console.log('Valor de rpm:', this.rpm)
+      this.increaseInterval = setInterval(() => {
+        if (this.rpm < 100) {
+          this.rpm += 1
+          this.updateRPM()
         }
-      },
-      /*
-    releaseAccelerator(rpm) {
-      rpm = this.currentRpm
-      console.log(this.currentRpm)
-      const gradosCalculados = (rpm / 500) * 205; // Calcula los grados basados en el valor RPM
-      document.getElementById('measurer').style.cssText = `transform-origin: bottom; transform: rotate(${gradosCalculados}deg); transition: 3.5s`;
+      }, 100)
     },
-    brake(rpm) {
-      rpm = this.currentRpm
-      console.log(this.currentRpm)
-      const gradosCalculados = (rpm / 500) * 205; // Calcula los grados basados en el valor RPM
-      document.getElementById('measurer').style.cssText = `transform-origin: bottom; transform: rotate(${gradosCalculados}deg); transition: 0.5s`;
+    stopIncreasingRPM() {
+      clearInterval(this.increaseInterval)
     },
-    */
+    decreaseRPM() {
+      console.log('Valor de throttle:', store.state.throttle)
+      console.log('Valor de rpm:', this.rpm)
+      if (this.rpm > 0) {
+        this.rpm -= 1
+        this.updateRPM()
+      }
     },
-  }
+    releaseAccelerator() {
+      this.increaseInterval = null
+      this.updateRPM()
+    },
+    updateRPM() {
+      this.rpm = store.getters.getThrottleDepth
+      this.rpmToDegrees = -130 + this.rpm * 2.6
+      this.transitionDuration = 3.5 - this.rpm * 0.03
+    },
+    currentRpm() {
+      return this.$store.getters.getRpm
+    },
+    accelerator(rpm) {
+      const measuredElement = document.getElementById('measurer')
+      const range = 140
+      const maxRpm = 3500
+      const RpmRange = Math.max(Math.min(rpm, maxRpm), 0)
+      const percentage = RpmRange / maxRpm
+      const degrees = percentage * range * 2 - range
+      if (degrees >= 140) {
+        measuredElement.style.cssText = `transform: rotate(${140}deg); transition: 4s;`
+      } else {
+        measuredElement.style.cssText = `transform: rotate(${
+          degrees - 15
+        }deg); transition: 4s;`
+      }
+    },
+  },
+}
 </script>
 
 <style>

@@ -18,6 +18,8 @@
 </template>
 
 <script>
+  //import store from '../../../store'
+
   export default {
     data() {
       return {
@@ -27,19 +29,45 @@
     computed: {
       circleStyle() {
         return {
-          left: `calc(50% - 1px - ${this.gradosDesviacion}px)`, //Movimiento del circle en relacion con los gradosDesviacion recibidos
-          right: `calc(50% - 1px - ${this.gradosDesviacion}px)`,
+          left: `calc(50% - 1px - ${this.gradosDesviacion / 4}px)`, //Movimiento del circle en relacion con los gradosDesviacion recibidos
+          right: `calc(50% - 1px - ${this.gradosDesviacion / 4}px)`,
         }
       },
     },
     mounted() {
       setInterval(() => {
-        this.moverAvion(Math.floor(Math.random() * 20) - 10) // Genera un valor aleatorio entre -10 y 10
-      }, 2000)
+        //Cada segundo revisa el estado del getEstadoRoll_yoke
+
+        console.log('ESTADO ' + this.$store.getters.getEstadoRoll_yoke)
+
+        this.moverAvion(this.$store.getters.getEstadoRoll_yoke) // LLamo a la funcion para mover el indicador con el valor del estado
+      }, 500)
     },
     methods: {
-      moverAvion(grados) {
-        this.gradosDesviacion = grados
+      moverAvion(estado) {
+        if (estado == -1) {
+          //El avion esta girando hacia la izquierda
+
+          this.$store.dispatch('actualizar', { roll: -100, pitch: 0 })
+          this.gradosDesviacion = this.$store.getters.anguloRoll
+          console.log('DESVIACION   ' + this.$store.getters.anguloRoll)
+        }
+
+        if (estado == 1) {
+          //El avion esta girando hacia la derecha
+
+          this.$store.dispatch('actualizar', { roll: 100, pitch: 0 })
+          this.gradosDesviacion = this.$store.getters.anguloRoll
+
+          console.log('DESVIACION   ' + this.$store.getters.anguloRoll)
+        }
+        if (this.gradosDesviacion >= 25) {
+          this.gradosDesviacion = 25
+        }
+
+        if (this.gradosDesviacion <= -25) {
+          this.gradosDesviacion = -25
+        }
       },
     },
   }

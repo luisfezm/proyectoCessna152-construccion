@@ -5,7 +5,8 @@
 </template>
 
 <script>
-import { Attitude } from 'vue-flight-indicators'
+  import { Attitude } from 'vue-flight-indicators'
+  import { mapGetters } from 'vuex'
 
 export default {
   name: 'IndicadorMainPanel',
@@ -32,6 +33,12 @@ export default {
         this.rollValue = roll;
         this.isAnimating = false;
       }, 1000); // Ajusta la duración de la animación según tus necesidades
+    },
+    computed: {
+      ...mapGetters(['getCurrentTranslationY']),
+      pitch() {
+        return this.getCurrentTranslationY * 0.4 //formula para que el movimiento del pitch sea mas suave
+      },
     },
 
     //Obtener el pitch y roll Desde HorizonteArtificial.js

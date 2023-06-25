@@ -9,7 +9,7 @@
   >
     <span class="number">{{ axis }}</span>
     <img
-      src="src/assets/knob.svg"
+      src="@/assets/knob.svg"
       :style="{
         transform: `scale(${currentScale}) rotate(${currentRotation}deg)`,
       }"
@@ -19,6 +19,8 @@
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
+
   export default {
     data() {
       return {
@@ -35,6 +37,7 @@
       }
     },
     methods: {
+      ...mapActions(['actualizarBencinaPorHora']),
       startDrag(event) {
         this.startX = event.clientX
         this.startY = event.clientY
@@ -66,12 +69,13 @@
           }
           this.currentScale = newScale
 
-          // Calcular el valor del eje
           let calculo = 1 - newScale
           if (calculo === 0) {
             this.axis = 0
           } else {
-            this.axis = (calculo * -400).toFixed(2)
+            this.axis = ((calculo * 400) / 10).toFixed(2)
+            this.ajustarCombustiblePorHora(this.axis) // llamamos a la función para ajustar el combustible por hora
+            this.actualizarBencinaPorHora(this.combustible_por_hora) // llamamos a la función para actualizar el combustible por hora
           }
 
           this.currentRotation = newRotation
@@ -99,9 +103,26 @@
 
         return 0
       },
+
+      ajustarCombustiblePorHora(axis) {
+        const combustibleInicial = 6
+        const combustibleFinal = 7
+
+        if (axis < 1 || axis > 10) {
+          console.log('El valor de axis debe estar entre 1 y 10.')
+          return
+        }
+
+        const variacion = (combustibleFinal - combustibleInicial) / 9
+        const combustible_por_hora = combustibleInicial + (axis - 1) * variacion
+
+        console.log('axis:', axis)
+        console.log('combustible_por_hora:', combustible_por_hora)
+      },
     },
   }
 </script>
+
 <style>
   .knob {
     /* centrado generico */

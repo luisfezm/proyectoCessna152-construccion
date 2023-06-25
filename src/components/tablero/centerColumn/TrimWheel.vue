@@ -9,7 +9,7 @@
   >
     <img
       ref="image"
-      src="src\assets\rectangle.png"
+      src="@\assets\rectangle.png"
       :style="{
         transform: `translateY(${currentTranslationY}px)`,
         width: '100%',
@@ -24,38 +24,40 @@
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
+
   export default {
     data() {
       return {
         startX: 0,
         startY: 0,
         isDragging: false,
-        translationMultiplier: 1, // Factor de desplazamiento vertical
-        lastTranslationY: 0, // Última posición de desplazamiento vertical
-        currentTranslationY: 0, // Desplazamiento vertical actual
+        translationMultiplier: 1,
+        lastTranslationY: 0,
+        currentTranslationY: 0,
       }
     },
     methods: {
       startDrag(event) {
-        event.preventDefault() // Evita el arrastre predeterminado de la imagen
+        event.preventDefault()
         this.startX = event.clientX
         this.startY = event.clientY
         this.isDragging = true
       },
       stopDrag() {
         this.isDragging = false
-        this.lastTranslationY = this.currentTranslationY // Guardar la última posición al soltar la imagen
+        this.lastTranslationY = this.currentTranslationY
       },
       handleDrag(event) {
         if (this.isDragging) {
           const currentY = event.clientY
           const diffY = currentY - this.startY
 
-          const translationFactor = 1 // Factor de desplazamiento
+          const translationFactor = 1
           let newTranslationY = diffY * translationFactor
 
-          const maxTranslationY = 40 // Límite máximo de desplazamiento hacia arriba
-          const minTranslationY = -40 // Límite máximo de desplazamiento hacia abajo
+          const maxTranslationY = 40
+          const minTranslationY = -40
 
           newTranslationY = Math.max(
             minTranslationY,
@@ -66,11 +68,14 @@
           this.currentTranslationY = Math.max(
             minTranslationY,
             Math.min(maxTranslationY, nextTranslationY)
-          ) // Ajustar dentro del rango
+          )
+
+          this.updateCurrentTranslationY(this.currentTranslationY)
 
           this.$refs.image.style.transform = `translateY(${this.currentTranslationY}px)`
         }
       },
+      ...mapActions(['updateCurrentTranslationY']),
     },
   }
 </script>
