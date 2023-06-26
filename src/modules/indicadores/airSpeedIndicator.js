@@ -8,11 +8,11 @@ const airSpeedIndicator = {
       // Mutaciones para modificar el estado de los indicadores
       setKnots(state, knots) {
         state.knots = knots
-        console.log("knots: "+ knots);
+        //console.log("knots: "+ knots);
       },
       setDegrees(state, degrees) {
         state.degrees = degrees
-        console.log("degrees: "+degrees);
+        //console.log("degrees: "+degrees);
       },
     },
     actions: {

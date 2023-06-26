@@ -11,14 +11,18 @@
   export default {
    
     mounted() {
-      //utilizar la letra "p" para acelerar 10 knots
-      //utilizar la letra "o" para desacelerar 10 knots
+      
       //knots mide los nudos que recorre el avion
-      
-     
-      
+      //funcion que mueve la aguja, que se ingresa como parametro la cantidad de nudos(knots)
+      this.moveNeedle(0)
+
+
+
+      ////--------------Para Probar el Codigo ---------------------
+/*
       document.addEventListener('keypress', (event) => {
-        //this.getCurrentRotationFixed()
+      //utilizar la letra "p" para acelerar 10 knots
+      //utilizar la letra "o" para desacelerar 10 knots  
        
         var keyValue = event.key;
         if(keyValue=='o'){
@@ -35,38 +39,29 @@
           this.$store.dispatch('setKnots',(this.$store.getters.getknots+10))
           this.moveNeedle(this.$store.getters.getknots)
         }
-        
-     
       }, false);
+*/
       
      
     },
 /*
 
       30 deg   -->>  40 knots
-      z              30
       160 deg  -->>  100 knots
-
-      50 -> x
-      40 -> 30 
-      50*160
-      /100
-      -----
       290 deg  -->> 180 knots
+      320 deg  -->> 200 knots
+
 
       80 kntos    *180
       /290
-
-
-      80 -> x
-      180 -> 290
-        80 *290
-        /180
-    
+ 
 */
     methods: {
      moveNeedle(knots){
       let aux
+      //actalizar varialvle Knots en el store
+      this.$store.dispatch('setKnots',(knots))
+
       if(knots<=0){
         aux=0
       }
@@ -90,16 +85,13 @@
           aux = (knots*160)/100
         }
         
+      }else if(knots<=200){
+        aux = (knots*290)/180
       }else{
-        if(knots<=320){
-          aux = (knots*290)/180
-        }else{
-          aux=320
-        }
-
+        aux=320
       }
+      //actalizar variable degreed en el store
       this.$store.dispatch('setDegrees',aux)
-      
       document.getElementById("needleAir").style.cssText = `transform: rotate(${this.$store.getters.getdegrees}deg);transition:6s`;
       
      },     
