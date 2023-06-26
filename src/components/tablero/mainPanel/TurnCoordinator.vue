@@ -23,14 +23,15 @@
   export default {
     data() {
       return {
-        gradosDesviacion: 0, //grados de desviacion que se obtienen como parametro
+        gradosDesviacion: 0, //grados de desviacion para el giro del avion
+        gradosDesviacionBola: 0 //grados de desviacion para el giro de la bola (indicador de desplazamiento lateral)
       }
     },
     computed: {
       circleStyle() {
         return {
-          left: `calc(50% - 1px - ${this.gradosDesviacion / 4}px)`, //Movimiento del circle en relacion con los gradosDesviacion recibidos
-          right: `calc(50% - 1px - ${this.gradosDesviacion / 4}px)`,
+          left: `calc(50% - 1px - ${this.gradosDesviacionBola }px)`, //Movimiento del circle en relacion con los gradosDesviacion recibidos
+          right: `calc(50% - 1px - ${this.gradosDesviacionBola}px)`,
         }
       },
     },
@@ -68,6 +69,13 @@
         if (this.gradosDesviacion <= -25) {
           this.gradosDesviacion = -25
         }
+
+        if(this.$store.getters.angulo_pitch != this.$store.getters.angulo_yaw){
+          this.gradosDesviacionBola = this.gradosDesviacion/4;
+        }
+
+        console.log("GRADOS BOLA " + this.gradosDesviacionBola)
+
       },
     },
   }
