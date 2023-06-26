@@ -7,35 +7,38 @@
 </template>
 
 <script>
-  import PedalPilotoDerecho from '../../pedales/MiPedalPilotoDerecho.vue'
+  
   export default {
-    data(){
-      return{
-        knots: 0
-      }
-    },
+   
     mounted() {
-      //utilizar la letra "p" para acelerar
+      //utilizar la letra "p" para acelerar 10 knots
+      //utilizar la letra "o" para desacelerar 10 knots
       //knots mide los nudos que recorre el avion
-      this.knots=120
-      document.addEventListener('keydown', (event) => {
+      
+     
+      
+      document.addEventListener('keypress', (event) => {
+        //this.getCurrentRotationFixed()
+       
         var keyValue = event.key;
-        if(keyValue=='p'){
+        if(keyValue=='o'){
+           this.$store.dispatch('setKnots',(this.$store.getters.getknots-10))
           //funcion que traslada la aguja 
-          this.moveNeedle(this.knots)
+          this.moveNeedle(this.$store.getters.getknots)
         }
         
       }, false);
-      document.addEventListener('keyup', (event) => {
+      document.addEventListener('keypress', (event) => {
         var keyValue = event.key;
         if(keyValue=='p'){
           //funcion que retorna la aguja a su posicion inicial
-          this.moveNeedleUp()
+          this.$store.dispatch('setKnots',(this.$store.getters.getknots+10))
+          this.moveNeedle(this.$store.getters.getknots)
         }
         
      
       }, false);
-      //console.log(document.getElementById("needleAir"));
+      
      
     },
 /*
@@ -61,12 +64,13 @@
         /180
     
 */
-
-
     methods: {
      moveNeedle(knots){
       let aux
-      if(knots<=100){
+      if(knots<=0){
+        aux=0
+      }
+      else if(knots<=100){
         if(knots <40){
           aux = (knots*30)/40
         }
@@ -92,18 +96,13 @@
         }else{
           aux=320
         }
-      }
-      //0.4 turn limita la vuelta de la aguja hasta el limite del Airspeed indicator
-      document.getElementById("needleAir").style.cssText = `transform: rotate(${aux}deg);transition:6s`;
-      //document.getElementById("needleAir").style.transform = `rotate(${140}deg)`
-      //document.getElementById("needleAir").style.cssText = "transition:6s";
 
-     },
-     moveNeedleUp(){
-      //-180 deg es la pocicion inicial (en reposo) de la aguja
-      document.getElementById("needleAir").style.cssText = "transform: rotate(0deg);transition:10s";
-     },
-     
+      }
+      this.$store.dispatch('setDegrees',aux)
+      
+      document.getElementById("needleAir").style.cssText = `transform: rotate(${this.$store.getters.getdegrees}deg);transition:6s`;
+      
+     },     
     },
     
   }
