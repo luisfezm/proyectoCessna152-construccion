@@ -63,6 +63,20 @@
         this.nav2 = parseFloat(value);
       },
     },
+    watch: {
+      com1(newVal) {
+        this.com1 = Math.max(108.0, Math.min(parseFloat(newVal), 137.0));
+      },
+      com2(newVal) {
+        this.com2 = Math.max(108.0, Math.min(parseFloat(newVal), 137.0));
+      },
+      nav1(newVal) {
+        this.nav1 = Math.max(108.0, Math.min(parseFloat(newVal), 117.95));
+      },
+      nav2(newVal) {
+        this.nav2 = Math.max(108.0, Math.min(parseFloat(newVal), 117.95));
+      },
+    },
   };
 </script>
 
@@ -86,7 +100,7 @@
 .grupo-nav {
   display: flex;
   align-items: center;
-  color: white;
+  color: rgb(234, 109, 32);
 }
 
 .label {
@@ -102,12 +116,12 @@
 .input-frecuencia {
   padding: 5px;
   width: 80px;
-  border: 1px solid #f48549;
+  border: 1px solid #ea8737;
   border-radius: 4px;
 }
 
 .slider {
   margin-left: 10px;
-  width: 180px
+  width: 180px;
 }
 </style>
