@@ -39,8 +39,9 @@
     ]
   },
   "dependencies": {
+    "leaflet": "^1.9.4",
     "vue-flight-indicators": "^0.1.1",
     "vue-knob-control": "^1.7.0",
-    "leaflet": "^1.9.4"
+    "vue-slider-component": "^4.1.0-beta.7"
   }
 }
