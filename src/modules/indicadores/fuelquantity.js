@@ -31,11 +31,11 @@ const fuelquantity = {
 
     actions: {
         // accion para realizar el decremento de gasolina
-        decrease_gasoline({commit, value_1}){
+        decrease_gasoline({commit}, value_1){
            commit('decrease', value_1)
         },
         // accion para realizar el incremento de gasolina 
-        increase_gasoline({commit, value_2}){
+        increase_gasoline({commit}, value_2){
             commit('increase', value_2)
         }
     },
