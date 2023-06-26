@@ -1,11 +1,12 @@
-// tacometro.js
 const tacometro = {
   state: {
     // Estado inicial de los indicadores
     numero: 0,
     throttle: 0,
-    rpm: 0,
+    rpm: 0
   },
+
+  
   mutations: {
     // Mutaciones para modificar el estado de los indicadores
     updateNumero(state, numero) {

@@ -16,6 +16,9 @@ const throttle = {
         state.throttle_depth--
       }
     },
+    setThrottleDepth(state, value) {
+      state.throttle_depth = value
+    },
   },
   actions: {
     // Acciones para realizar operaciones relacionadas con los interactuadores
@@ -25,9 +28,12 @@ const throttle = {
     tirarThrottle({ commit }) {
       commit('tirarThrottle')
     },
+    setThrottleDepth({ commit }, value) {
+      commit('setThrottleDepth', value)
+    },
   },
   getters: {
-    // Getters para obtener datos del estado de los
+    // Getters para obtener datos del estado de los interactuadores
     getThrottleDepth: (state) => state.throttle_depth,
   },
 }
