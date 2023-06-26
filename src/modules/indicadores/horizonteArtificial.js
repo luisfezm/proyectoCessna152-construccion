@@ -25,14 +25,16 @@ const horizonteArtificial = {
     actualizaAngulos(state) {
       // (FALTA AJUSTAR)
       // varia los angulos segun la velocidad
-      state.anguloRoll += state.velocidadRoll / 20
-      state.anguloPitch += state.velocidadPitch / 20
+
+      //Originalmente era state.anguloRoll += state.velocidadRoll / 20, se cambio a 2 para que avanzara mas grados y sea notoria la rotación
+      state.anguloRoll += state.velocidadRoll / 2
+      state.anguloPitch += state.velocidadPitch / 2
 
       // reinicia los angulos de 360 a 0
       state.anguloRoll = state.anguloRoll % 360
       state.anguloPitch = state.anguloPitch % 360
 
-      console.log('ACTUALIZAR' + state.anguloRoll)
+      console.log('ACTUALIZAR: ' + state.anguloRoll)
     },
 
     actualizar(state, Yoke) {
