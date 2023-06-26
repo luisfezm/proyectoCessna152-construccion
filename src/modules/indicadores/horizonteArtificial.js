@@ -35,6 +35,10 @@ const horizonteArtificial = {
       console.log('ACTUALIZAR' + state.anguloRoll)
     },
 
+    setPitch(state, newPitch) {
+      state.velocidadPitch = newPitch;
+    },
+
     actualizar(state, Yoke) {
       // saco los componentes del Yoke
       let roll = Yoke.roll
@@ -141,6 +145,11 @@ const horizonteArtificial = {
       commit('actualizar', Yoke)<
       commit('actualizaAngulos')
     },
+
+    updatePitch({ commit }, newPitch) {
+      commit('setPitch', newPitch);
+    },
+    
   },
   getters: {
     // Getters para obtener datos
@@ -158,6 +167,10 @@ const horizonteArtificial = {
 
     velocidadPitch(state) {
       return parseInt(state.velocidadPitch)
+    },
+
+    pitch: (state) => {
+      return state.velocidadPitch;
     },
   },
 }
