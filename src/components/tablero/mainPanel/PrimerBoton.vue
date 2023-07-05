@@ -25,18 +25,18 @@
 
 <style>
   .base {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     background-color: black;
-    border-radius: 10px;
+    border-radius: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   .palanca {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     background-color: silver;
     border-radius: 50%;
     position: relative;
