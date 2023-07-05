@@ -1,31 +1,7 @@
 <template>
   <div id="container-map" class="container">
     <div id="map" />
-    <div class="checkbox-group">
-      <div class="checkbox-container">
-        <input
-          id="circularCheckbox"
-          name="cssCheckbox"
-          type="checkbox"
-          class="css-checkbox"
-          @change="toggleCircularMode"
-        />
-        <!--<input type="checkbox" id="circularCheckbox" @change="toggleCircularMode" />-->
-        <label class="checkbox-label" for="circularCheckbox"
-          >Modo Circular</label
-        >
-      </div>
-      <div class="checkbox-container">
-        <input
-          id="zoomControlCheckbox"
-          name="cssCheckbox"
-          class="css-checkbox"
-          type="checkbox"
-          @change="toggleZoomControl"
-        />
-        <label class="checkbox-label" for="zoomControlCheckbox">Zoom</label>
-      </div>
-    </div>
+    
   </div>
 </template>
 
@@ -38,7 +14,7 @@ import { defineComponent, onMounted, ref } from 'vue'
     name: 'MiMapa',
     setup() {
       let map = null
-      const circularMode = ref(false)
+      const circularMode = ref(true)
       const zoomControl = L.control.zoom()
       let marker = null
 
