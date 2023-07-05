@@ -168,6 +168,7 @@ html, body {
 }
 
 .controlesTableroInferior {
+  display: flex;
   width: 100%;
   background-color: #FDD4A3;
   padding: 10px;
