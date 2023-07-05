@@ -39,7 +39,7 @@
       setInterval(() => {
         //Cada segundo revisa el estado del getEstadoRoll_yoke
 
-        console.log('ESTADO ' + this.$store.getters.getEstadoRoll_yoke)
+        //console.log('ESTADO ' + this.$store.getters.getEstadoRoll_yoke)
 
         this.moverAvion(this.$store.getters.getEstadoRoll_yoke) // LLamo a la funcion para mover el indicador con el valor del estado
       }, 500)
@@ -51,7 +51,7 @@
 
           this.$store.dispatch('actualizar', { roll: -100, pitch: 0 })
           this.gradosDesviacion = this.$store.getters.anguloRoll
-          console.log('DESVIACION   ' + this.$store.getters.anguloRoll)
+          //console.log('DESVIACION   ' + this.$store.getters.anguloRoll)
         }
 
         if (estado == 1) {
@@ -60,7 +60,7 @@
           this.$store.dispatch('actualizar', { roll: 100, pitch: 0 })
           this.gradosDesviacion = this.$store.getters.anguloRoll
 
-          console.log('DESVIACION   ' + this.$store.getters.anguloRoll)
+          //console.log('DESVIACION   ' + this.$store.getters.anguloRoll)
         }
         if (this.gradosDesviacion >= 25) {
           this.gradosDesviacion = 25
