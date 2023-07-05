@@ -6,6 +6,7 @@
 
 html, body {
   height: 100%;
+  
 }
 
 .app {
@@ -20,23 +21,30 @@ html, body {
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 30vh;
+  height: 30%;
+  
   flex: 0.9;
+  background-image: url("https://wallpaperaccess.com/full/1397286.jpg");
 }
 
 .terrenoIzquierda {
   width: 50%;
+  
+
+  
+  
 }
 
 .terrenoDerecha {
   align-self: right;
   width: 50%;
+  
 }
 
 .miniMapa {
   position: relative;
   left: 20px;
-  top: 20px;
+  
 }
 
 .miniMapa img {
@@ -48,10 +56,11 @@ html, body {
 
 .tableroSuperior {
   display: flex;
-  background-color:bisque;
+  background-color: bisque;
   justify-content: space-between;
-  border-radius: 10px;
-  height: 30vh;
+  height: 30%;
+  background-image: url("https://i.ibb.co/7Gb5gvv/LG2-Sticker.png");
+  border-top: 5px solid black;
 }
 
 .mainPanel {
@@ -62,6 +71,8 @@ html, body {
   margin: 10px;
   padding: 20px;
   align-items: center;
+  
+  
   
 }
 
@@ -83,18 +94,36 @@ html, body {
 }
 
 .radioPanel {
-  
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
   grid-gap: 10px;
   width: 25%;
   padding: 20px;
+  height: auto; /* Ajusta la altura a "auto" para adaptarse al contenido */
+  position: relative;
+  overflow: visible; /* Cambia "hidden" a "visible" para mostrar el contenido que se desborda */ 
 }
+
+.radioPanel::before {
+  content: "";
+  position: absolute;
+  top: -30px; /* Ajusta la cantidad de desplazamiento hacia arriba para mostrar el pedazo de imagen superior */
+  left: 0;
+  width: 100%;
+  height: 113%;
+  background-image: url("https://i.ibb.co/dfG29GT/test.png");
+  background-position: center top; /* Ajusta la posición de la imagen en el fondo */
+  background-size: cover; /* Ajusta el tamaño de la imagen para cubrir el fondo */
+  z-index: 1;
+}
+
+
 
 .indicadorRadioPanel {
   background-color:grey;
   padding: 20px;
+  z-index: 10;
 }
 
 .indicadorRadioTransponder {
@@ -105,17 +134,30 @@ html, body {
 
 .rightHandPanel {
 
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: auto;
-  grid-gap: 10px;
+  display: flex;
+  flex-direction: column;
   width: 30%;
+  gap: 10px;
+  margin: 10px;
   padding: 20px;
+  align-items: center;
+}
+
+.right-top{
+  display: flex;
+  gap: 10px;
+
+}
+
+.right-bottom{
+  display: flex;
+  gap: 10px;
 }
 
 .indicadorRightHandPanel {
   background-color:grey;
   padding: 20px;
+  
 }
 
 .indicadorRightADF {
@@ -133,6 +175,9 @@ html, body {
   align-items: center;
   justify-content: center;
   position: relative;
+  left: 25%;
+  top:33%;
+
 }
 
 .tableroInferior {
@@ -142,6 +187,7 @@ html, body {
   padding: 10px;
   height: 20vh;
   flex: 0.1;
+  background-color: #000;
 }
 
 .itemTableroInferior {
@@ -150,6 +196,7 @@ html, body {
   display: flex;
   flex-direction: column;
   height: 100%;
+  background-image: url("https://t3.ftcdn.net/jpg/02/25/28/12/360_F_225281244_PLbOFVvspHyxsRYViwSpYXoQCqEb8N8N.jpg");
 }
 
 .centerColumnPanel {
@@ -159,8 +206,21 @@ html, body {
   grid-gap: 20px;
   background-color: bisque;
   grid-template-rows: 100px 100px;
+  background-image: url("https://t3.ftcdn.net/jpg/02/25/28/12/360_F_225281244_PLbOFVvspHyxsRYViwSpYXoQCqEb8N8N.jpg");
 }
 
+.palanca{
+  background-image: url("https://t4.ftcdn.net/jpg/01/66/16/19/360_F_166161972_YiceBvzi2tXl1AYmB7APthiXtB0F5GVU.jpg");
+}
+.Tknob{
+  background-image: url("https://t4.ftcdn.net/jpg/01/66/16/19/360_F_166161972_YiceBvzi2tXl1AYmB7APthiXtB0F5GVU.jpg");
+}
+.knob{
+  background-image: url("https://t4.ftcdn.net/jpg/01/66/16/19/360_F_166161972_YiceBvzi2tXl1AYmB7APthiXtB0F5GVU.jpg");
+}
+.pedales{
+  background-image: url("https://t4.ftcdn.net/jpg/01/66/16/19/360_F_166161972_YiceBvzi2tXl1AYmB7APthiXtB0F5GVU.jpg");
+}
 .indicadorCenterColumnPanel {
   background-color:slategray;
   margin: 10px;
@@ -172,6 +232,8 @@ html, body {
   background-color: #FDD4A3;
   padding: 10px;
   height: 60%;
+  background-image: url("https://t4.ftcdn.net/jpg/01/66/16/19/360_F_166161972_YiceBvzi2tXl1AYmB7APthiXtB0F5GVU.jpg");
+  border: 5px solid black;
 }
 
 .pedales {

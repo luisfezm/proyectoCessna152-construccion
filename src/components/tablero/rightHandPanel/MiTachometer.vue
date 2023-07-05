@@ -1,5 +1,5 @@
 <template>
-  <div class="circular">
+  <div id="tachometer_id" class="circular">
     <div class="box">
       <div class="tachometer">
         <div
@@ -38,8 +38,8 @@ export default {
   },
   methods: {
     startIncreasingRPM() {
-      console.log('Valor de throttle:', store.state.throttle)
-      console.log('Valor de rpm:', this.rpm)
+      //console.log('Valor de throttle:', store.state.throttle)
+      //console.log('Valor de rpm:', this.rpm)
       this.increaseInterval = setInterval(() => {
         if (this.rpm < 100) {
           this.rpm += 1
@@ -51,8 +51,8 @@ export default {
       clearInterval(this.increaseInterval)
     },
     decreaseRPM() {
-      console.log('Valor de throttle:', store.state.throttle)
-      console.log('Valor de rpm:', this.rpm)
+      //console.log('Valor de throttle:', store.state.throttle)
+      //console.log('Valor de rpm:', this.rpm)
       if (this.rpm > 0) {
         this.rpm -= 1
         this.updateRPM()
@@ -123,8 +123,8 @@ export default {
   }
 
   .tachometer {
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     background-image: url(https://i.ibb.co/Mkgvbf1/tacometro5.png);
     background-size: 100%, 100%;
@@ -169,5 +169,11 @@ export default {
     background-color: rgb(16, 15, 15);
     height: 90px;
     width: 90px;
+  }
+
+  #tachometer_id{
+    position: relative;
+    right: 40%;
+    bottom: 15%;
   }
 </style>

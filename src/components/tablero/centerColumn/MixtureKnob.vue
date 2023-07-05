@@ -4,7 +4,6 @@
     class="knob"
     draggable="false"
     @mousedown="startDrag"
-    @mouseup="stopDrag"
     @mousemove="handleDrag"
   >
     <span class="number">{{ axis }}</span>
@@ -42,11 +41,13 @@
         this.startX = event.clientX
         this.startY = event.clientY
         this.isDragging = true
+        window.addEventListener('mouseup', this.stopDrag)
       },
       stopDrag() {
         this.isDragging = false
         this.currentScale = this.getCurrentScale()
         this.currentRotation = this.getCurrentRotation()
+        window.removeEventListener('mouseup', this.stopDrag)
       },
       handleDrag(event) {
         if (this.isDragging) {
@@ -103,10 +104,10 @@
 
         return 0
       },
-
       ajustarCombustiblePorHora(axis) {
-        const combustibleInicial = 6
-        const combustibleFinal = 7
+        // función para ajustar el combustible por hora
+        const combustibleInicial = 6 // combustible por hora inicial en galones por hora, el cessna 154 solo tiene 24,5 galones utilizables.
+        const combustibleFinal = 7 // combustible por hora final en galones por hora.
 
         if (axis < 1 || axis > 10) {
           console.log('El valor de axis debe estar entre 1 y 10.')
