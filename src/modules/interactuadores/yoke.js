@@ -22,7 +22,7 @@ const yoke = {
       switch (tecla) {
         case 'W':
           commit('setEstadoPitch_yoke', 1)
-          TurnCoordinator.
+          //TurnCoordinator.
           break
         case 'S':
           commit('setEstadoPitch_yoke', -1)

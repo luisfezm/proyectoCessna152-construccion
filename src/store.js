@@ -11,6 +11,7 @@ import pedales from './modules/interactuadores/pedales'
 import throttle from './modules/interactuadores/throttle'
 import mixture from './modules/interactuadores/mixture'
 import trimwheel from './modules/interactuadores/trimwheel'
+import topView from './modules/indicadores/topView'
 
 const store = createStore({
   state: {
@@ -42,6 +43,7 @@ const store = createStore({
     trimwheel,
     fuelquantity,
     verticalspeedIndicator,
+    topView,
   },
 })
 
