@@ -38,8 +38,8 @@ export default {
   },
   methods: {
     startIncreasingRPM() {
-      console.log('Valor de throttle:', store.state.throttle)
-      console.log('Valor de rpm:', this.rpm)
+      //console.log('Valor de throttle:', store.state.throttle)
+      //console.log('Valor de rpm:', this.rpm)
       this.increaseInterval = setInterval(() => {
         if (this.rpm < 100) {
           this.rpm += 1
@@ -51,8 +51,8 @@ export default {
       clearInterval(this.increaseInterval)
     },
     decreaseRPM() {
-      console.log('Valor de throttle:', store.state.throttle)
-      console.log('Valor de rpm:', this.rpm)
+      //console.log('Valor de throttle:', store.state.throttle)
+      //console.log('Valor de rpm:', this.rpm)
       if (this.rpm > 0) {
         this.rpm -= 1
         this.updateRPM()
