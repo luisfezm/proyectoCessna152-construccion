@@ -35,7 +35,7 @@ export default {
       isMovingVertically: false,
       isRotating: false,
       isDragging: false,
-      stepSize: 0.5,
+      stepSize: 0.25,
       maxRotationDisplay: 100,
       minRotationDisplay: -100,
       maxRotation: 90,
@@ -105,6 +105,8 @@ export default {
       if (this.currentTranslationY < this.translateYLimit) {
         this.currentTranslationY += this.stepSize;
         this.moveAnimationFrameId = requestAnimationFrame(this.moveUp);
+      } else {
+        this.currentTranslationY = Math.min(this.currentTranslationY, this.translateYLimit);
       }
     },
     startMoveDown() {
@@ -121,6 +123,8 @@ export default {
       if (this.currentTranslationY > -this.translateYLimit) {
         this.currentTranslationY -= this.stepSize;
         this.moveAnimationFrameId = requestAnimationFrame(this.moveDown);
+      } else {
+        this.currentTranslationY = Math.max(this.currentTranslationY, -this.translateYLimit);
       }
     },
     startRotateLeft() {
@@ -137,6 +141,8 @@ export default {
       if (this.currentRotation > this.minRotation) {
         this.currentRotation -= this.stepSize;
         this.rotateAnimationFrameId = requestAnimationFrame(this.rotateLeft);
+      } else {
+        this.currentRotation = Math.max(this.currentRotation, this.minRotation);
       }
     },
     startRotateRight() {
@@ -153,6 +159,8 @@ export default {
       if (this.currentRotation < this.maxRotation) {
         this.currentRotation += this.stepSize;
         this.rotateAnimationFrameId = requestAnimationFrame(this.rotateRight);
+      } else {
+        this.currentRotation = Math.min(this.currentRotation, this.maxRotation);
       }
     },
     animateMoveBackToOrigin() {
@@ -176,14 +184,17 @@ export default {
   },
   watch: {
     currentTranslationY(value) {
-      let aux = (value * 4)
-      store.dispatch('setEstadoPitch_yoke', aux)
-      console.log("el estado del PITCH en el backend es de:" + store.getters.getEstadoPitch_yoke)
+      let aux = Math.round(value * 4);
+      store.dispatch('setEstadoPitch_yoke', aux);
+      console.log("El estado del PITCH en el backend es de: " + store.getters.getEstadoPitch_yoke);
     },
     currentRotation(value) {
-      let aux = (value * 10)/9
-      store.dispatch('setEstadoRoll_yoke', aux)
-      console.log("el estado del ROLL en el backend es de:" + store.getters.getEstadoRoll_yoke)
+      let aux = Math.round((value * 10) / 9); // Cambiado a redondear el valor
+      if (value < 0) {
+        aux = Math.ceil((value * 10) / 9); // Redondear hacia arriba para valores negativos
+      }
+      store.dispatch('setEstadoRoll_yoke', aux);
+      console.log("El estado del ROLL en el backend es de: " + store.getters.getEstadoRoll_yoke);
     },
   },
   computed: {

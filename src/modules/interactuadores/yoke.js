@@ -13,12 +13,12 @@ const yoke = {
     },
     incrementEstadoPitch_yoke(state) {
       if (state.estadoPitch_yoke < 100) {
-        state.estadoPitch_yoke += 1;
+        state.estadoPitch_yoke += 0.5;
       }
     },
     decrementEstadoPitch_yoke(state) {
       if (state.estadoPitch_yoke > -100) {
-        state.estadoPitch_yoke -= 1;
+        state.estadoPitch_yoke -= 0.5;
       }
     },
     incrementEstadoRoll_yoke(state) {
