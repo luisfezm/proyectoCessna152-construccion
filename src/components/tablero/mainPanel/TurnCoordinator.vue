@@ -48,7 +48,6 @@
       moverAvion(estado) {
         if (estado == -1) {
           //El avion esta girando hacia la izquierda
-
           this.$store.dispatch('actualizar', { roll: -100, pitch: 0 })
           this.gradosDesviacion = this.$store.getters.anguloRoll
           //console.log('DESVIACION   ' + this.$store.getters.anguloRoll)
