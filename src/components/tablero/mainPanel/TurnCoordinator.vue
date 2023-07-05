@@ -38,7 +38,7 @@
       setInterval(() => {
         //Cada segundo revisa el estado del getEstadoRoll_yoke
 
-        console.log('ESTADO ' + this.$store.getters.getEstadoRoll_yoke)
+        //console.log('ESTADO ' + this.$store.getters.getEstadoRoll_yoke)
 
         this.moverAvion(this.$store.getters.getEstadoRoll_yoke) // LLamo a la funcion para mover el indicador con el valor del estado
       }, 500)

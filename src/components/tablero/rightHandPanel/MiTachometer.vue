@@ -4,89 +4,88 @@
       <div class="tachometer">
         <div
           id="measurer"
-          :style="`transform: rotate(${rpmToDegrees}deg); transition: ${transitionDuration}s`">
+          :style="`transform: rotate(${rpmToDegrees}deg); transition: ${transitionDuration}s`"
+        >
           <div id="point" />
         </div>
-
-
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import store from '@/store'
+  import store from '@/store'
 
-export default {
-  data() {
-    return {
-      rpm: 0,
-      rpmToDegrees: -130,
-      transitionDuration: 0,
-      increaseInterval: null,
-      variableTraspaso: 0,
-    }
-  },
-  created() {
-    setInterval(this.updateRPM, 10)
-  },
-  mounted() {
-    setInterval(() => {
-      this.startIncreasingRPM()
-     // this.accelerator(this.currentRpm())
-    }, 1000)
-  },
-  methods: {
-    startIncreasingRPM() {
-      console.log('Valor de throttle:', store.state.throttle)
-      console.log('Valor de rpm:', this.rpm)
-      this.increaseInterval = setInterval(() => {
-        if (this.rpm < 100) {
-          this.rpm += 1
+  export default {
+    data() {
+      return {
+        rpm: 0,
+        rpmToDegrees: -130,
+        transitionDuration: 0,
+        increaseInterval: null,
+        variableTraspaso: 0,
+      }
+    },
+    created() {
+      setInterval(this.updateRPM, 10)
+    },
+    mounted() {
+      setInterval(() => {
+        this.startIncreasingRPM()
+        // this.accelerator(this.currentRpm())
+      }, 1000)
+    },
+    methods: {
+      startIncreasingRPM() {
+        //   console.log('Valor de throttle:', store.state.throttle)
+        //  console.log('Valor de rpm:', this.rpm)
+        this.increaseInterval = setInterval(() => {
+          if (this.rpm < 100) {
+            this.rpm += 1
+            this.updateRPM()
+          }
+        }, 100)
+      },
+      stopIncreasingRPM() {
+        clearInterval(this.increaseInterval)
+      },
+      decreaseRPM() {
+        console.log('Valor de throttle:', store.state.throttle)
+        console.log('Valor de rpm:', this.rpm)
+        if (this.rpm > 0) {
+          this.rpm -= 1
           this.updateRPM()
         }
-      }, 100)
-    },
-    stopIncreasingRPM() {
-      clearInterval(this.increaseInterval)
-    },
-    decreaseRPM() {
-      console.log('Valor de throttle:', store.state.throttle)
-      console.log('Valor de rpm:', this.rpm)
-      if (this.rpm > 0) {
-        this.rpm -= 1
+      },
+      releaseAccelerator() {
+        this.increaseInterval = null
         this.updateRPM()
-      }
+      },
+      updateRPM() {
+        this.rpm = store.getters.getThrottleDepth
+        this.rpmToDegrees = -130 + this.rpm * 2.6
+        this.transitionDuration = 3.5 - this.rpm * 0.03
+      },
+      currentRpm() {
+        return this.$store.getters.getRpm
+      },
+      accelerator(rpm) {
+        const measuredElement = document.getElementById('measurer')
+        const range = 140
+        const maxRpm = 3500
+        const RpmRange = Math.max(Math.min(rpm, maxRpm), 0)
+        const percentage = RpmRange / maxRpm
+        const degrees = percentage * range * 2 - range
+        if (degrees >= 140) {
+          measuredElement.style.cssText = `transform: rotate(${140}deg); transition: 4s;`
+        } else {
+          measuredElement.style.cssText = `transform: rotate(${
+            degrees - 15
+          }deg); transition: 4s;`
+        }
+      },
     },
-    releaseAccelerator() {
-      this.increaseInterval = null
-      this.updateRPM()
-    },
-    updateRPM() {
-      this.rpm = store.getters.getThrottleDepth
-      this.rpmToDegrees = -130 + this.rpm * 2.6
-      this.transitionDuration = 3.5 - this.rpm * 0.03
-    },
-    currentRpm() {
-      return this.$store.getters.getRpm
-    },
-    accelerator(rpm) {
-      const measuredElement = document.getElementById('measurer')
-      const range = 140
-      const maxRpm = 3500
-      const RpmRange = Math.max(Math.min(rpm, maxRpm), 0)
-      const percentage = RpmRange / maxRpm
-      const degrees = percentage * range * 2 - range
-      if (degrees >= 140) {
-        measuredElement.style.cssText = `transform: rotate(${140}deg); transition: 4s;`
-      } else {
-        measuredElement.style.cssText = `transform: rotate(${
-          degrees - 15
-        }deg); transition: 4s;`
-      }
-    },
-  },
-}
+  }
 </script>
 
 <style>
