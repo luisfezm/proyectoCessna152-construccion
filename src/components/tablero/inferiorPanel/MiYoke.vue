@@ -1,152 +1,208 @@
 <template>
-  <div id="miDiv" ref="div" class="MiYoke" :class="{ grabbing: isDragging }">
-    <img
-      ref="image"
-      src="@\assets\img\Yoke.png"
-      :style="{
-        transform: `translateY(${currentTranslationY}px) rotate(${currentRotation}deg)`,
-        width: '80px',
-        height: '70px',
-      }"
-      draggable="false"
-    />
+  <div
+    id="miDiv"
+    class="MiYoke"
+    :class="{ grabbing: isDragging }"
+    ref="div"
+  >
+    <div class="panel-inferior">
+      <div class="image-container">
+        <img
+          ref="image"
+          src="src/assets/img/Yoke.png"
+          :style="{
+            transform: `translate(${currentTranslationX}px, ${currentTranslationY + 20}px) rotate(${currentRotation}deg)`,
+            width: '80px',
+            height: '70px'
+          }"
+          :class="{ translateYAnimation: isMovingVertically, rotateAnimation: isRotating }"
+          draggable="false"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-  import store from '@/store'
+import store from '@/store'
 
-  export default {
-    data() {
-      return {
-        isDragging: false,
-        translationMultiplier: 1, // Multiplicador de traducción más bajo
-        rotationMultiplier: 1, // Multiplicador de rotación más bajo
-        currentTranslationY: 0,
-        currentRotation: 0,
-        targetTranslationY: 0,
-        targetRotation: 0,
-        maxTranslationY: 45,
-        minTranslationY: -45,
-        maxRotation: 90,
-        minRotation: -90,
-        activeKeys: new Set(),
+export default {
+  data() {
+    return {
+      currentTranslationX: 0,
+      currentTranslationY: 0,
+      currentRotation: 0,
+      isMovingVertically: false,
+      isRotating: false,
+      isDragging: false,
+      stepSize: 0.5,
+      maxRotationDisplay: 100,
+      minRotationDisplay: -100,
+      maxRotation: 90,
+      minRotation: -90,
+      translateYLimit: 25,
+      translateXLimit: 0,
+      moveAnimationFrameId: null,
+      rotateAnimationFrameId: null,
+    };
+  },
+  mounted() {
+    window.addEventListener('keydown', this.handleKeyDown);
+    window.addEventListener('keyup', this.handleKeyUp);
+  },
+  beforeUnmount() {
+    window.removeEventListener('keydown', this.handleKeyDown);
+    window.removeEventListener('keyup', this.handleKeyUp);
+  },
+  methods: {
+    handleKeyDown(event) {
+      switch (event.key) {
+        case 'ArrowUp':
+          this.startMoveUp();
+          break;
+        case 'ArrowDown':
+          this.startMoveDown();
+          break;
+        case 'ArrowLeft':
+          this.startRotateLeft();
+          break;
+        case 'ArrowRight':
+          this.startRotateRight();
+          break;
+        default:
+          break;
       }
     },
-    mounted() {
-      window.addEventListener('keydown', this.handleKeyDown)
-      window.addEventListener('keyup', this.handleKeyUp)
-      this.updateImageTransform()
+    handleKeyUp(event) {
+      switch (event.key) {
+        case 'ArrowUp':
+          this.stopMoveUp();
+          break;
+        case 'ArrowDown':
+          this.stopMoveDown();
+          break;
+        case 'ArrowLeft':
+          this.stopRotateLeft();
+          break;
+        case 'ArrowRight':
+          this.stopRotateRight();
+          break;
+        default:
+          break;
+      }
     },
-    beforeUnmount() {
-      window.removeEventListener('keydown', this.handleKeyDown)
-      window.removeEventListener('keyup', this.handleKeyUp)
+    startMoveUp() {
+      this.isMovingVertically = true;
+      this.moveUp();
     },
-    methods: {
-      handleKeyDown(event) {
-        const key = event.key.toUpperCase()
-        if (!this.activeKeys.has(key)) {
-          this.activeKeys.add(key)
-          this.presionarTeclaYoke()
-        }
-      },
-      handleKeyUp(event) {
-        const key = event.key.toUpperCase()
-        this.activeKeys.delete(key)
-        if (this.activeKeys.size === 0) {
-          this.soltarTeclaYoke()
-        }
-      },
-      presionarTeclaYoke() {
-        store.dispatch('presionarTecla_yoke', this.activeKeys)
-        this.updateMovement()
-      },
-      soltarTeclaYoke() {
-        store.dispatch('soltarTecla_yoke')
-        this.targetTranslationY = 0
-        this.targetRotation = 0
-        this.updateMovement()
-      },
-      updateMovement() {
-        if (!this.animationFrameId) {
-          this.animationFrameId = requestAnimationFrame(this.animate)
-        }
-      },
-      animate() {
-        let translationDelta = 0
-        let rotationDelta = 0
-
-        if (this.activeKeys.has('S')) {
-          translationDelta -= this.translationMultiplier
-        }
-        if (this.activeKeys.has('W')) {
-          translationDelta += this.translationMultiplier
-        }
-        if (this.activeKeys.has('A')) {
-          rotationDelta -= this.rotationMultiplier
-        }
-        if (this.activeKeys.has('D')) {
-          rotationDelta += this.rotationMultiplier
-        }
-
-        const easing = 0.1 // Factor de suavizado
-
-        // Actualizar las posiciones objetivo
-        this.targetTranslationY += translationDelta
-        this.targetRotation += rotationDelta
-
-        // Limitar las posiciones objetivo dentro de los límites
-        this.targetTranslationY = Math.max(
-          Math.min(this.targetTranslationY, this.maxTranslationY),
-          this.minTranslationY
-        )
-        this.targetRotation = Math.max(
-          Math.min(this.targetRotation, this.maxRotation),
-          this.minRotation
-        )
-
-        // Aplicar el suavizado a las posiciones actuales
-        this.currentTranslationY +=
-          (this.targetTranslationY - this.currentTranslationY) * easing
-        this.currentRotation +=
-          (this.targetRotation - this.currentRotation) * easing
-
-        this.updateImageTransform()
-
-        // Verificar si se alcanzaron las posiciones objetivo
-        const translationDiff = Math.abs(
-          this.targetTranslationY - this.currentTranslationY
-        )
-        const rotationDiff = Math.abs(
-          this.targetRotation - this.currentRotation
-        )
-        if (translationDiff < 0.1 && rotationDiff < 0.1) {
-          this.animationFrameId = null
-          return
-        }
-
-        // Continuar animando en el siguiente frame
-        this.animationFrameId = requestAnimationFrame(this.animate)
-      },
-      updateImageTransform() {
-        if (this.$refs.image) {
-          this.$refs.image.style.transform = `translateY(${this.currentTranslationY}px) rotate(${this.currentRotation}deg)`
-        }
-      },
+    stopMoveUp() {
+      this.isMovingVertically = false;
+      cancelAnimationFrame(this.moveAnimationFrameId);
+      this.moveAnimationFrameId = null;
+      this.animateMoveBackToOrigin();
     },
-  }
+    moveUp() {
+      if (this.currentTranslationY < this.translateYLimit) {
+        this.currentTranslationY += this.stepSize;
+        this.moveAnimationFrameId = requestAnimationFrame(this.moveUp);
+      }
+    },
+    startMoveDown() {
+      this.isMovingVertically = true;
+      this.moveDown();
+    },
+    stopMoveDown() {
+      this.isMovingVertically = false;
+      cancelAnimationFrame(this.moveAnimationFrameId);
+      this.moveAnimationFrameId = null;
+      this.animateMoveBackToOrigin();
+    },
+    moveDown() {
+      if (this.currentTranslationY > -this.translateYLimit) {
+        this.currentTranslationY -= this.stepSize;
+        this.moveAnimationFrameId = requestAnimationFrame(this.moveDown);
+      }
+    },
+    startRotateLeft() {
+      this.isRotating = true;
+      this.rotateLeft();
+    },
+    stopRotateLeft() {
+      this.isRotating = false;
+      cancelAnimationFrame(this.rotateAnimationFrameId);
+      this.rotateAnimationFrameId = null;
+      this.animateRotateBackToOrigin();
+    },
+    rotateLeft() {
+      if (this.currentRotation > this.minRotation) {
+        this.currentRotation -= this.stepSize;
+        this.rotateAnimationFrameId = requestAnimationFrame(this.rotateLeft);
+      }
+    },
+    startRotateRight() {
+      this.isRotating = true;
+      this.rotateRight();
+    },
+    stopRotateRight() {
+      this.isRotating = false;
+      cancelAnimationFrame(this.rotateAnimationFrameId);
+      this.rotateAnimationFrameId = null;
+      this.animateRotateBackToOrigin();
+    },
+    rotateRight() {
+      if (this.currentRotation < this.maxRotation) {
+        this.currentRotation += this.stepSize;
+        this.rotateAnimationFrameId = requestAnimationFrame(this.rotateRight);
+      }
+    },
+    animateMoveBackToOrigin() {
+      if (this.currentTranslationY < 0) {
+        this.currentTranslationY += this.stepSize;
+        requestAnimationFrame(this.animateMoveBackToOrigin);
+      } else if (this.currentTranslationY > 0) {
+        this.currentTranslationY -= this.stepSize;
+        requestAnimationFrame(this.animateMoveBackToOrigin);
+      }
+    },
+    animateRotateBackToOrigin() {
+      if (this.currentRotation < 0) {
+        this.currentRotation += this.stepSize;
+        requestAnimationFrame(this.animateRotateBackToOrigin);
+      } else if (this.currentRotation > 0) {
+        this.currentRotation -= this.stepSize;
+        requestAnimationFrame(this.animateRotateBackToOrigin);
+      }
+    },
+  },
+  watch: {
+    currentTranslationY(value) {
+      let aux = (value * 4)
+      store.dispatch('setEstadoPitch_yoke', aux)
+      console.log("el estado del PITCH en el backend es de:" + store.getters.getEstadoPitch_yoke)
+    },
+    currentRotation(value) {
+      let aux = (value * 10)/9
+      store.dispatch('setEstadoRoll_yoke', aux)
+      console.log("el estado del ROLL en el backend es de:" + store.getters.getEstadoRoll_yoke)
+    },
+  },
+  computed: {
+    displayedRotation() {
+      return Math.round((this.currentRotation / this.maxRotation) * this.maxRotationDisplay);
+    },
+  },
+};
 </script>
 
 <style>
-  .MiYoke {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(177, 177, 177);
-    width: 100%;
-    height: 150px;
-    border-radius: 5%;
-    margin-left: 1%;
-    position: relative;
-  }
+.panel-inferior {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.image-container {
+  position: relative;
+}
 </style>

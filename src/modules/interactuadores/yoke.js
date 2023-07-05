@@ -1,3 +1,4 @@
+// yoke.js
 const yoke = {
   state: {
     estadoPitch_yoke: 0,
@@ -31,45 +32,18 @@ const yoke = {
       }
     },
     resetEstadoPitch_yoke(state) {
-      if (state.estadoPitch_yoke !== 0) {
-        state.estadoPitch_yoke += state.estadoPitch_yoke > 0 ? -1 : 1;
-      }
+      state.estadoPitch_yoke = 0;
     },
     resetEstadoRoll_yoke(state) {
-      if (state.estadoRoll_yoke !== 0) {
-        state.estadoRoll_yoke += state.estadoRoll_yoke > 0 ? -1 : 1;
-      }
+      state.estadoRoll_yoke = 0;
     },
   },
   actions: {
-    // Acciones para realizar operaciones relacionadas con los interactuadores
-    presionarTecla_yoke({ commit, state }, tecla) {
-      switch (tecla) {
-        case 'W':
-          commit('setEstadoPitch_yoke', 1)
-          TurnCoordinator.
-          break
-        case 'S':
-          commit('setEstadoPitch_yoke', -1)
-          break
-        case 'A':
-          commit('setEstadoRoll_yoke', -1)
-          break
-        case 'D':
-          commit('setEstadoRoll_yoke', 1)
-          break
-      }
-
-      console.log('Nuevo estado del yoke:');
-      console.log('Pitch_yoke:', state.estadoPitch_yoke);
-      console.log('Roll_yoke:', state.estadoRoll_yoke);
-      console.log('---');
+    setEstadoPitch_yoke({ commit }, pitch_yoke) {
+      commit('setEstadoPitch_yoke', pitch_yoke);
     },
-    soltarTecla_yoke({ commit, state }) {
-      commit('setEstadoPitch_yoke', 0)
-        commit('setEstadoRoll_yoke', 0)
-        console.log('Pitch_yoke:', state.estadoPitch_yoke)
-        console.log('Roll_yoke:', state.estadoRoll_yoke)
+    setEstadoRoll_yoke({ commit }, roll_yoke) {
+      commit('setEstadoRoll_yoke', roll_yoke);
     },
   },
   getters: {
@@ -77,5 +51,5 @@ const yoke = {
     getEstadoRoll_yoke: (state) => state.estadoRoll_yoke,
   },
 };
-export default yoke;
 
+export default yoke;
