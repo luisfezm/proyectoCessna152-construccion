@@ -1,7 +1,7 @@
 // airSpeedIndicator.js
 const airSpeedIndicator = {
     state: {
-      knots:0,
+      knots:100,
       degrees:0
     },
     mutations: {

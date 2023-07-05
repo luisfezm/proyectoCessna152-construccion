@@ -14,12 +14,13 @@
       
       //knots mide los nudos que recorre el avion
       //funcion que mueve la aguja, que se ingresa como parametro la cantidad de nudos(knots)
-      this.moveNeedle(0)
+      setInterval(this.getKnots,100)
+      
 
 
 
       ////--------------Para Probar el Codigo ---------------------
-/*
+
       document.addEventListener('keypress', (event) => {
       //utilizar la letra "p" para acelerar 10 knots
       //utilizar la letra "o" para desacelerar 10 knots  
@@ -27,8 +28,8 @@
         var keyValue = event.key;
         if(keyValue=='o'){
            this.$store.dispatch('setKnots',(this.$store.getters.getknots-10))
-          //funcion que traslada la aguja 
-          this.moveNeedle(this.$store.getters.getknots)
+           console.log(this.$store.getters.getknots)
+          
         }
         
       }, false);
@@ -37,10 +38,11 @@
         if(keyValue=='p'){
           //funcion que retorna la aguja a su posicion inicial
           this.$store.dispatch('setKnots',(this.$store.getters.getknots+10))
-          this.moveNeedle(this.$store.getters.getknots)
+          console.log(this.$store.getters.getknots)
+          
         }
       }, false);
-*/
+
       
      
     },
@@ -57,10 +59,14 @@
  
 */
     methods: {
+      getKnots(){
+        let knot = this.$store.getters.getknots
+        this.moveNeedle(knot)
+      },
      moveNeedle(knots){
       let aux
       //actalizar varialvle Knots en el store
-      this.$store.dispatch('setKnots',(knots))
+      //this.$store.dispatch('setKnots',(knots))
 
       if(knots<=0){
         aux=0
@@ -90,8 +96,10 @@
       }else{
         aux=320
       }
-      //actalizar variable degreed en el store
+      //actualizar variable degree en el store
       this.$store.dispatch('setDegrees',aux)
+      //console.log("los nudos son: "+this.$store.getters.getknots)
+      //console.log("los grados son: "+this.$store.getters.getdegrees)
       document.getElementById("needleAir").style.cssText = `transform: rotate(${this.$store.getters.getdegrees}deg);transition:6s`;
       
      },     
