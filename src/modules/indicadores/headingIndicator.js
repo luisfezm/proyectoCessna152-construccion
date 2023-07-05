@@ -19,7 +19,7 @@ const headingIndicator = {
   },
   getters: {
     // Getters para obtener datos del estado de los indicadores
-    getHeadingIndicator: (state) => state.getHeadingIndicator,
+    getHeadingIndicator: (state) => state.HeadingIndicator,
   },
 }
 
