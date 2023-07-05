@@ -1,6 +1,7 @@
 <template>
   <div class="rightHandPanel">
     <Tachometer />
+    <Amperimetro />    
     <ADFNeddle :angle="adfNeedleValue" />
     <FlightHourRecorder />
 
@@ -15,6 +16,7 @@
 
 <script>
   import Tachometer from '@/components/tablero/rightHandPanel/MiTachometer.vue'
+  import Amperimetro from '@/components/tablero/rightHandPanel/MiAmperimetro.vue'
   import ADFNeddle from '@/components/tablero/rightHandPanel/AdfNeddle.vue'
   import FlightHourRecorder from '@/components/tablero/rightHandPanel/FlightHourRecorder.vue'
   import adfRadio from '@/components/tablero/rightHandPanel/adfRadio.vue'
@@ -22,6 +24,7 @@
   export default {
     components: {
       Tachometer,
+      Amperimetro,
       ADFNeddle,
       adfRadio,
       FlightHourRecorder,
