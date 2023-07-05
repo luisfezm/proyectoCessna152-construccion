@@ -11,7 +11,7 @@ import pedales from './modules/interactuadores/pedales'
 import throttle from './modules/interactuadores/throttle'
 import mixture from './modules/interactuadores/mixture'
 import trimwheel from './modules/interactuadores/trimwheel'
-
+import avion from './modules/avion'
 const store = createStore({
   state: {
     luz: false,
@@ -42,6 +42,7 @@ const store = createStore({
     trimwheel,
     fuelquantity,
     verticalspeedIndicator,
+    avion,
   },
 })
 

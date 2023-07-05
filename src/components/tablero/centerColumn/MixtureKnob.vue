@@ -20,6 +20,7 @@
 
 <script>
   import { mapActions } from 'vuex'
+  import store from '../../../store'
 
   export default {
     data() {
@@ -110,6 +111,8 @@
 
         if (axis < 1 || axis > 10) {
           console.log('El valor de axis debe estar entre 1 y 10.')
+          // setear mixture
+          store.dispatch('setEstadoMixture', this.axis)
           return
         }
 
@@ -117,6 +120,9 @@
         const combustible_por_hora = combustibleInicial + (axis - 1) * variacion
 
         console.log('axis:', axis)
+        // setear mixture
+        store.dispatch('setEstadoMixture', this.axis)
+        store.dispatch('actualizarBencinaPorHora', combustible_por_hora)
         console.log('combustible_por_hora:', combustible_por_hora)
       },
     },
