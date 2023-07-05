@@ -14,8 +14,8 @@
     },
     computed: {
       headingValue: {
-        get: function () {
-          return this.$store.state.headingValue
+        get() {
+          return this.$store.getters.getHeadingIndicator
         },
       },
     },
