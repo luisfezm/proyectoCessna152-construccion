@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import MiMapa from '@/components/miniMapa/MiniMapa.vue'
+  import MiMapa from '@/components/miniMapa/MiniMapa.vue';
 
   export default {
     components: {

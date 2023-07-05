@@ -1,5 +1,5 @@
 <template>
-  <div class="circular">
+  <div  id = "vertical" class="circular">
     <div id="img1" class="imagen">
       <div id="needle" class="arrow">
         <div class="point" />
@@ -34,7 +34,7 @@
     background-size: 100%;
     width: 100%;
     height: 100%;
-
+    position:relative;
     background-repeat: no-repeat;
     background-position: center;
     z-index: 2;
@@ -57,8 +57,8 @@
     height: 20px;
     background-color: white;
     transform: rotate(90deg);
-    margin-left: 2.1%;
-    margin-top: 2.1%;
+    left: 45%;
+    top: 47.5%;
     transition: 3s;
     position: absolute;
     transform-origin: top;
@@ -75,4 +75,14 @@
     height: 70px;
     width: 70px;
   }
+  
+  #vertical{
+    position: relative;
+    left: 30%;
+    height: 78px;
+    width: 78px;
+    top: 4%;
+   
+  }
+ 
 </style>

@@ -1,12 +1,12 @@
 <template>
-  <div class="indicadorMainPanel">
-    <Attitude id="attitude" :size="70" :pitch="pitchValue"  :roll="rollValue" :class="{ 'rotate-animation': isAnimating }" />
+  <div id ="horizon" class="indicadorMainPanel">
+    <Attitude id="attitude" :size="80" :pitch="pitchValue"  :roll="rollValue" :class="{ 'rotate-animation': isAnimating }"  />
   </div>
 </template>
 
 <script>
-  import { Attitude } from 'vue-flight-indicators'
-  import { mapGetters } from 'vuex'
+  import { Attitude } from 'vue-flight-indicators';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'IndicadorMainPanel',
@@ -67,3 +67,14 @@ export default {
   }
 };
 </script>
+
+<style >
+  #horizon{
+    position: relative;
+    right: 5%;
+    width: 80px;
+    height: 80px;
+   
+    
+  }
+</style>

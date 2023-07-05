@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div id="container-map" class="container">
     <div id="map" />
     <div class="checkbox-group">
       <div class="checkbox-container">
@@ -30,9 +30,9 @@
 </template>
 
 <script>
-  import { defineComponent, onMounted, ref } from 'vue'
-  import 'leaflet/dist/leaflet.css'
   import L from 'leaflet'
+import 'leaflet/dist/leaflet.css'
+import { defineComponent, onMounted, ref } from 'vue'
 
   export default defineComponent({
     name: 'MiMapa',
@@ -119,12 +119,19 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
+    
+    
   }
 
   #map {
     width: 100%;
     height: 300px;
     border-radius: 0;
+    border-top: 2.5px solid black;
+    border-bottom: 2.5px solid black;
+    border-right: 2.5px solid black;
+    border-left: 2.5px solid black;
   }
 
   .checkbox-group {
@@ -138,6 +145,7 @@
     display: flex;
     align-items: center;
     margin-right: 10px;
+    
   }
 
   .checkbox-label {
@@ -206,4 +214,12 @@
     height: 20px;
     width: 20px;
   }
+
+  #container-map{
+    
+    position: relative;
+    
+  }
+
+ 
 </style>
