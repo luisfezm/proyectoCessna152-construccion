@@ -14,6 +14,7 @@
         <div class="controlesTableroInferior">
           Controles
           <PrimerBoton />
+          <IgnitionSwitch/>
           <FuelQuantity />
         </div>
         <PedalesPiloto />
@@ -33,6 +34,7 @@
   import CenterColumn from './components/tablero/centerColumn/CenterColumnPanel.vue'
   import FuelQuantity from './components/tablero/mainPanel/FuelQuantity.vue'
   import PrimerBoton from './components/tablero/mainPanel/PrimerBoton.vue'
+  import IgnitionSwitch from './components/tablero/mainPanel/IgnitionSwitch.vue'
   import MainPanel from './components/tablero/mainPanel/MainPanel.vue'
   import RadioPanel from './components/tablero/radioPanel/RadioPanel.vue'
   import RightHandPanel from './components/tablero/rightHandPanel/RightHandPanel.vue'
