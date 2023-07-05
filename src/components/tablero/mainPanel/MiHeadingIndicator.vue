@@ -1,7 +1,7 @@
 <template>
-  <div class="indicadorMainPanel">
+  <div id = "heading" class="indicadorMainPanel">
     <Heading
-      :size="70"
+      :size="80"
       :heading="headingValue"
       class="{ 'rotate-animation': isAnimating }"
     />
@@ -54,3 +54,14 @@
     },
   }
 </script>
+
+<style>
+ #heading{
+  position: relative;
+  right: 12%;
+  width: 80px;
+  height: 80px;
+ }
+</style>
+
+

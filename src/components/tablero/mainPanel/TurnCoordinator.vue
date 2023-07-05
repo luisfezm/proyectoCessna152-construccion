@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div id="coordinator" class="">
     <div class="circular">
       <div class="turn-coordinator">
         <div
@@ -23,14 +23,15 @@
   export default {
     data() {
       return {
-        gradosDesviacion: 0, //grados de desviacion que se obtienen como parametro
+        gradosDesviacion: 0, //grados de desviacion para el giro del avion
+        gradosDesviacionBola: 0 //grados de desviacion para el giro de la bola (indicador de desplazamiento lateral)
       }
     },
     computed: {
       circleStyle() {
         return {
-          left: `calc(50% - 1px - ${this.gradosDesviacion / 4}px)`, //Movimiento del circle en relacion con los gradosDesviacion recibidos
-          right: `calc(50% - 1px - ${this.gradosDesviacion / 4}px)`,
+          left: `calc(50% - 1px - ${this.gradosDesviacionBola }px)`, //Movimiento del circle en relacion con los gradosDesviacion recibidos
+          right: `calc(50% - 1px - ${this.gradosDesviacionBola}px)`,
         }
       },
     },
@@ -38,7 +39,7 @@
       setInterval(() => {
         //Cada segundo revisa el estado del getEstadoRoll_yoke
 
-        console.log('ESTADO ' + this.$store.getters.getEstadoRoll_yoke)
+        //console.log('ESTADO ' + this.$store.getters.getEstadoRoll_yoke)
 
         this.moverAvion(this.$store.getters.getEstadoRoll_yoke) // LLamo a la funcion para mover el indicador con el valor del estado
       }, 500)
@@ -50,7 +51,7 @@
 
           this.$store.dispatch('actualizar', { roll: -100, pitch: 0 })
           this.gradosDesviacion = this.$store.getters.anguloRoll
-          console.log('DESVIACION   ' + this.$store.getters.anguloRoll)
+          //console.log('DESVIACION   ' + this.$store.getters.anguloRoll)
         }
 
         if (estado == 1) {
@@ -59,7 +60,7 @@
           this.$store.dispatch('actualizar', { roll: 100, pitch: 0 })
           this.gradosDesviacion = this.$store.getters.anguloRoll
 
-          console.log('DESVIACION   ' + this.$store.getters.anguloRoll)
+          //console.log('DESVIACION   ' + this.$store.getters.anguloRoll)
         }
         if (this.gradosDesviacion >= 25) {
           this.gradosDesviacion = 25
@@ -68,6 +69,13 @@
         if (this.gradosDesviacion <= -25) {
           this.gradosDesviacion = -25
         }
+
+        if(this.$store.getters.angulo_pitch != this.$store.getters.angulo_yaw){
+          this.gradosDesviacionBola = this.gradosDesviacion/4;
+        }
+
+        console.log("GRADOS BOLA " + this.gradosDesviacionBola)
+
       },
     },
   }
@@ -81,8 +89,8 @@
     color: white;
     border-radius: 50%;
     background-color: rgb(16, 15, 15);
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     margin-left: 1%;
     margin-top: 1%;
   }
@@ -150,5 +158,12 @@
     100% {
       transform: translateX(-50%) rotate(-10deg);
     }
+  }
+
+  #coordinator{
+    position: relative;
+    right: 83%;
+    top: 112%;
+    
   }
 </style>
