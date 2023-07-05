@@ -13,8 +13,10 @@
 </template>
 
 <script>
-  import MiMapa from '@/components/miniMapa/MiniMapa.vue'
+
+  import MiMapa from '@/components/miniMapa/MiniMapa.vue';
   import frontView from './frontView.vue';
+
   export default {
     components: {
       MiMapa,

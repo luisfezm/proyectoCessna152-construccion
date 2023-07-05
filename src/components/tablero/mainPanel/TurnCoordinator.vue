@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div id="coordinator" class="">
     <div class="circular">
       <div class="turn-coordinator">
         <div
@@ -89,8 +89,8 @@
     color: white;
     border-radius: 50%;
     background-color: rgb(16, 15, 15);
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     margin-left: 1%;
     margin-top: 1%;
   }
@@ -158,5 +158,12 @@
     100% {
       transform: translateX(-50%) rotate(-10deg);
     }
+  }
+
+  #coordinator{
+    position: relative;
+    right: 83%;
+    top: 112%;
+    
   }
 </style>
