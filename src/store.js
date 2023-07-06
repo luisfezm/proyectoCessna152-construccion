@@ -1,6 +1,7 @@
 // store.js
 import { createStore } from 'vuex'
 import fuelquantity from './modules/indicadores/fuelquantity'
+//import primer from './modules/indicadores/primer'
 import headingIndicator from './modules/indicadores/headingIndicator'
 import horizonteArtificial from './modules/indicadores/horizonteArtificial'
 import tacometro from './modules/indicadores/tacometro'
@@ -42,6 +43,7 @@ const store = createStore({
     mixture,
     trimwheel,
     fuelquantity,
+    //primer,
     verticalspeedIndicator,
     topView,
   },

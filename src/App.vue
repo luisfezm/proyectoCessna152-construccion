@@ -11,8 +11,11 @@
     </div>
     <div class="tableroInferior">
       <div class="itemTableroInferior">
-        <div class="controlesTableroInferior">Controles
-          <FuelQuantity/>
+        <div class="controlesTableroInferior">
+          Controles
+          <PrimerBoton />
+          <IgnitionSwitch/>
+          <FuelQuantity />
         </div>
         <PedalesPiloto />
       </div>
@@ -27,13 +30,15 @@
 
 <script setup>
   import PedalesCopiloto from './components/pedales/PedalesCopiloto.vue'
-import PedalesPiloto from './components/pedales/PedalesPiloto.vue'
-import CenterColumn from './components/tablero/centerColumn/CenterColumnPanel.vue'
-import FuelQuantity from './components/tablero/mainPanel/FuelQuantity.vue'
-import MainPanel from './components/tablero/mainPanel/MainPanel.vue'
-import RadioPanel from './components/tablero/radioPanel/RadioPanel.vue'
-import RightHandPanel from './components/tablero/rightHandPanel/RightHandPanel.vue'
-import MiTerreno from './components/terreno/MiTerreno.vue'
+  import PedalesPiloto from './components/pedales/PedalesPiloto.vue'
+  import CenterColumn from './components/tablero/centerColumn/CenterColumnPanel.vue'
+  import FuelQuantity from './components/tablero/mainPanel/FuelQuantity.vue'
+  import PrimerBoton from './components/tablero/mainPanel/PrimerBoton.vue'
+  import IgnitionSwitch from './components/tablero/mainPanel/IgnitionSwitch.vue'
+  import MainPanel from './components/tablero/mainPanel/MainPanel.vue'
+  import RadioPanel from './components/tablero/radioPanel/RadioPanel.vue'
+  import RightHandPanel from './components/tablero/rightHandPanel/RightHandPanel.vue'
+  import MiTerreno from './components/terreno/MiTerreno.vue'
 </script>
 
 <style src="./style.css">
