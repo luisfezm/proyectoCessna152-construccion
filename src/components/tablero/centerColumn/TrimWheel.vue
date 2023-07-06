@@ -4,7 +4,6 @@
     class="TrimWheel"
     :class="{ grabbing: isDragging }"
     @mousedown="startDrag"
-    @mouseup="stopDrag"
     @mousemove="handleDrag"
   >
     <img
@@ -24,7 +23,7 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
+  import { mapActions, mapGetters } from 'vuex'
 
   export default {
     data() {
@@ -43,10 +42,12 @@
         this.startX = event.clientX
         this.startY = event.clientY
         this.isDragging = true
+        window.addEventListener('mouseup', this.stopDrag)
       },
       stopDrag() {
         this.isDragging = false
         this.lastTranslationY = this.currentTranslationY
+        window.removeEventListener('mouseup', this.stopDrag)
       },
       handleDrag(event) {
         if (this.isDragging) {
@@ -76,11 +77,20 @@
         }
       },
       ...mapActions(['updateCurrentTranslationY']),
+      ...mapActions(['updatePitch']),
+    },
+    computed: {
+      ...mapGetters(['pitch']),
+    },
+    watch: {
+      currentTranslationY(newValue) {
+        this.updatePitch(newValue)
+      },
     },
   }
 </script>
 
-<style>
+<style scoped>
   .TrimWheel {
     display: flex;
     justify-content: center;
@@ -94,7 +104,7 @@
     margin: auto;
     position: relative;
 
-    cursor: grab;
+    cursor: auto;
   }
 
   .TrimWheel.grabbing {

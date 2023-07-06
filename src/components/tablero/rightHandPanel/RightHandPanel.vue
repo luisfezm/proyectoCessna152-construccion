@@ -1,16 +1,22 @@
 <template>
   <div class="rightHandPanel">
+
     <Tachometer />
     <Amperimetro />    
     <ADFNeddle :angle="adfNeedleValue" />
     <FlightHourRecorder />
-
-    <div class="indicadorRightADF">
-      <adfRadio
-        ref="adfRadioComponent"
-        @adfNeedleChange="handleAdfNeedleChange"
-      />
     </div>
+    <div class="right-bottom">
+      <FlightHourRecorder />
+       <div class="indicadorRightADF">
+         <adfRadio
+           ref="adfRadioComponent"
+           @adfNeedleChange="handleAdfNeedleChange"
+          />
+       </div>
+    </div>
+    
+    
   </div>
 </template>
 
@@ -28,6 +34,7 @@
       ADFNeddle,
       adfRadio,
       FlightHourRecorder,
+     
     },
     data() {
       return {
@@ -42,7 +49,4 @@
   }
 </script>
 
-<style>
-  .rightHandPanel {
-  }
-</style>
+
