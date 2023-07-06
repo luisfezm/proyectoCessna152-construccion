@@ -1,7 +1,6 @@
 <template>
-  <div class="indicadorMainPanel">
-    <Heading :size="70" :heading="headingValue" />
-
+  <div id="heading">
+    <Heading :size="80" :heading="headingValue" />
   </div>
 </template>
 
@@ -24,12 +23,9 @@
 </script>
 
 <style>
- #heading{
-  position: relative;
-  right: 12%;
-  width: 80px;
-  height: 80px;
- }
+  #heading {
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
 </style>
-
-

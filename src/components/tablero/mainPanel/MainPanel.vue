@@ -6,7 +6,6 @@
       <MiAltimeter />
       <TurnCoordinator />
       <CourseDeviationIndicator1 />
-
     </div>
 
     <div class="mainBotPanel">
@@ -27,7 +26,6 @@
   import CourseDeviationIndicator1 from './CourseDeviationIndicator1.vue'
   import CourseDeviationIndicator2 from './CourseDeviationIndicator2.vue'
 
-
   export default {
     components: {
       MiAirSpeedIndicator,
@@ -37,10 +35,7 @@
       VerticalSpeed,
       MiHeadingIndicator,
       CourseDeviationIndicator1,
-      CourseDeviationIndicator2
-
+      CourseDeviationIndicator2,
     },
   }
 </script>
-
-

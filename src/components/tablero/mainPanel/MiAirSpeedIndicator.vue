@@ -1,5 +1,5 @@
 <template>
-  <div id = "airspeed" class="indicadorMainPanel">
+  <div id="airspeed" class="indicadorMainPanel">
     <div class="airspeed-indicator">
       <div ref="needle" class="needle" />
     </div>
@@ -34,7 +34,6 @@
 </script>
 
 <style scoped>
-  
   .circular {
     display: flex;
     justify-content: center;
@@ -44,7 +43,7 @@
     background-color: rgb(16, 15, 15);
     height: 100hv;
     width: 6vw;
-    margin-left: 1%;
+    /* margin-left: 1%; */
     margin-top: 1%;
   }
 
@@ -84,11 +83,10 @@
     transform: rotate(180deg);
   }
 
-  #airspeed{
-    right: 5%;
-    position:relative;
+  #airspeed {
+    /* right: 5%; */
+    position: relative;
     width: 80px;
     height: 80px;
-    
   }
 </style>

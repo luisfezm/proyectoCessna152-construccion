@@ -79,7 +79,7 @@
     background-image: url(https://i.ibb.co/f2TgqSJ/alt1.png);
     background-size: cover;
     top: 0px;
-    left: 15%;
+    /* left: 15%; */
     width: 82px;
     height: 82px;
   }
