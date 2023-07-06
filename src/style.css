@@ -30,9 +30,6 @@ html, body {
 .terrenoIzquierda {
   width: 50%;
   
-
-  
-  
 }
 
 .terrenoDerecha {
@@ -140,11 +137,13 @@ html, body {
   gap: 10px;
   margin: 10px;
   padding: 20px;
-  align-items: center;
+  /* align-items: center; */
 }
 
 .right-top{
   display: flex;
+  flex-direction: row;
+  justify-content: left;
   gap: 10px;
 
 }
@@ -176,7 +175,7 @@ html, body {
   justify-content: center;
   position: relative;
   left: 25%;
-  top:33%;
+  top: 10%;
 
 }
 
