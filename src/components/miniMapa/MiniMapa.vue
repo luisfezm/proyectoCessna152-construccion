@@ -1,44 +1,20 @@
 <template>
-  <div class="container">
+  <div id="container-map" class="container">
     <div id="map" />
-    <div class="checkbox-group">
-      <div class="checkbox-container">
-        <input
-          id="circularCheckbox"
-          name="cssCheckbox"
-          type="checkbox"
-          class="css-checkbox"
-          @change="toggleCircularMode"
-        />
-        <!--<input type="checkbox" id="circularCheckbox" @change="toggleCircularMode" />-->
-        <label class="checkbox-label" for="circularCheckbox"
-          >Modo Circular</label
-        >
-      </div>
-      <div class="checkbox-container">
-        <input
-          id="zoomControlCheckbox"
-          name="cssCheckbox"
-          class="css-checkbox"
-          type="checkbox"
-          @change="toggleZoomControl"
-        />
-        <label class="checkbox-label" for="zoomControlCheckbox">Zoom</label>
-      </div>
-    </div>
+    
   </div>
 </template>
 
 <script>
-  import { defineComponent, onMounted, ref } from 'vue'
-  import 'leaflet/dist/leaflet.css'
   import L from 'leaflet'
+import 'leaflet/dist/leaflet.css'
+import { defineComponent, onMounted, ref } from 'vue'
 
   export default defineComponent({
     name: 'MiMapa',
     setup() {
       let map = null
-      const circularMode = ref(false)
+      const circularMode = ref(true)
       const zoomControl = L.control.zoom()
       let marker = null
 
@@ -119,12 +95,19 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
+    
+    
   }
 
   #map {
     width: 100%;
     height: 300px;
     border-radius: 0;
+    border-top: 2.5px solid black;
+    border-bottom: 2.5px solid black;
+    border-right: 2.5px solid black;
+    border-left: 2.5px solid black;
   }
 
   .checkbox-group {
@@ -138,6 +121,7 @@
     display: flex;
     align-items: center;
     margin-right: 10px;
+    
   }
 
   .checkbox-label {
@@ -206,4 +190,12 @@
     height: 20px;
     width: 20px;
   }
+
+  #container-map{
+    
+    position: relative;
+    
+  }
+
+ 
 </style>

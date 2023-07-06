@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div id="coordinator" class="">
     <div class="circular">
       <div class="turn-coordinator">
         <div
@@ -39,7 +39,7 @@
       setInterval(() => {
         //Cada segundo revisa el estado del getEstadoRoll_yoke
 
-        console.log('ESTADO ' + this.$store.getters.getEstadoRoll_yoke)
+        //console.log('ESTADO ' + this.$store.getters.getEstadoRoll_yoke)
 
         this.moverAvion(this.$store.getters.getEstadoRoll_yoke) // LLamo a la funcion para mover el indicador con el valor del estado
       }, 500)
@@ -48,10 +48,9 @@
       moverAvion(estado) {
         if (estado == -1) {
           //El avion esta girando hacia la izquierda
-
           this.$store.dispatch('actualizar', { roll: -100, pitch: 0 })
           this.gradosDesviacion = this.$store.getters.anguloRoll
-          console.log('DESVIACION   ' + this.$store.getters.anguloRoll)
+          //console.log('DESVIACION   ' + this.$store.getters.anguloRoll)
         }
 
         if (estado == 1) {
@@ -60,7 +59,7 @@
           this.$store.dispatch('actualizar', { roll: 100, pitch: 0 })
           this.gradosDesviacion = this.$store.getters.anguloRoll
 
-          console.log('DESVIACION   ' + this.$store.getters.anguloRoll)
+          //console.log('DESVIACION   ' + this.$store.getters.anguloRoll)
         }
         if (this.gradosDesviacion >= 25) {
           this.gradosDesviacion = 25
@@ -89,8 +88,8 @@
     color: white;
     border-radius: 50%;
     background-color: rgb(16, 15, 15);
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     margin-left: 1%;
     margin-top: 1%;
   }
@@ -158,5 +157,12 @@
     100% {
       transform: translateX(-50%) rotate(-10deg);
     }
+  }
+
+  #coordinator{
+    position: relative;
+    right: 83%;
+    top: 112%;
+    
   }
 </style>

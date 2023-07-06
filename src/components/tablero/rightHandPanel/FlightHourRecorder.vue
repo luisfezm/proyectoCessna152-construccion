@@ -205,6 +205,9 @@
 <style scoped>
   .FlightHourRecorder {
     position: relative;
+    right:14%;
+    bottom: 30%;
+
   }
   body {
     color: #fff;
@@ -216,23 +219,24 @@
     margin: 0 auto;
     perspective-origin: center center;
     position: absolute;
+    
   }
 
   .hinder2 {
     position: absolute;
-    width: 120px;
-    height: 120px;
+    width: 90px;
+    height: 90px;
     background-repeat: no-repeat;
     background-size: 100%, 100%;
     z-index: 10;
     background-image: url(https://i.ibb.co/swjNfML/hourindicator.png);
   }
   #stage {
-    width: 50px;
-    left: 30px;
-    top: 32px;
+    width: 32px;
+    left: 23px;
+    top: 24px;
     position: absolute;
-    height: 20%;
+    height: 10px;
     transition: transform 2s;
     transform-style: preserve-3d;
     transform: translateZ(-300px);
@@ -240,7 +244,7 @@
   }
 
   .wheel {
-    height: 17%;
+    height: 1%;
     width: 5%;
     transform-style: preserve-3d;
     transition: transform 1s;
@@ -267,37 +271,42 @@
   #hours1 {
     position: absolute;
     top: 10%;
-    left: 2%;
+    left: 0%;
+  
+    
   }
 
   #hours2 {
     position: absolute;
     top: 10%;
-    left: 13%;
+    left: 15.5%;
   }
 
   #minutes1 {
     position: absolute;
     top: 10%;
-    left: 29%;
+    left: 35%;
   }
 
   #minutes2 {
     position: absolute;
     top: 10%;
-    left: 42%;
+    left: 50%;
   }
 
   #seconds1 {
     position: absolute;
     top: 10%;
-    left: 58%;
+    left: 67%;
   }
 
   #seconds2 {
     position: absolute;
     top: 10%;
-    left: 71%;
+    left: 81%;
+    
+    
+   
   }
 
   .one {
