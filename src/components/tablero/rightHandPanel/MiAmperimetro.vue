@@ -1,10 +1,10 @@
 <template>
-  <div id="tachometer_id" class="circular">
+  <div class="circular">
     <div class="box">
-      <div class="tachometer">
+      <div class="Amperimetro">
         <div
           id="measurer"
-          :style="`transform: rotate(${rpmToDegrees}deg); transition: ${transitionDuration}s`"
+          :style="`transform: rotate(${ampToDegrees}deg); transition: ${transitionDuration}s`"
         >
           <div id="point" />
         </div>
@@ -19,62 +19,61 @@
   export default {
     data() {
       return {
-        rpm: 0,
-        rpmToDegrees: -130,
+        amp: 0,
+        ampToDegrees: -130,
         transitionDuration: 0,
         increaseInterval: null,
-        variableTraspaso: 0,
+        variableTraspaso: 30,
       }
     },
     created() {
-      setInterval(this.updateRPM, 10)
+      setInterval(this.updateAMP, 10)
     },
     mounted() {
       setInterval(() => {
-        this.startIncreasingRPM()
-        // this.accelerator(this.currentRpm())
+        this.startIncreasingAMP()
       }, 1000)
     },
     methods: {
-      startIncreasingRPM() {
-        //console.log('Valor de throttle:', store.state.throttle)
-        //console.log('Valor de rpm:', this.rpm)
+      startIncreasingAMP() {
+        console.log('Valor de throttle:', store.state.throttle)
+        console.log('Valor de amp:', this.amp)
         this.increaseInterval = setInterval(() => {
-          if (this.rpm < 100) {
-            this.rpm += 1
-            this.updateRPM()
+          if (this.amp < 100) {
+            this.amp += 1
+            this.updateAMP()
           }
         }, 100)
       },
-      stopIncreasingRPM() {
+      stopIncreasingAMP() {
         clearInterval(this.increaseInterval)
       },
-      decreaseRPM() {
-        //console.log('Valor de throttle:', store.state.throttle)
-        //console.log('Valor de rpm:', this.rpm)
-        if (this.rpm > 0) {
-          this.rpm -= 1
-          this.updateRPM()
+      decreaseAMP() {
+        console.log('Valor de throttle:', store.state.throttle)
+        console.log('Valor de amp:', this.amp)
+        if (this.amp > 0) {
+          this.amp -= 1
+          this.updateAMP()
         }
       },
       releaseAccelerator() {
         this.increaseInterval = null
-        this.updateRPM()
+        this.updateAMP()
       },
-      updateRPM() {
-        this.rpm = store.getters.getThrottleDepth
-        this.rpmToDegrees = -130 + this.rpm * 2.6
-        this.transitionDuration = 3.5 - this.rpm * 0.03
+      updateAMP() {
+        this.amp = 0
+        this.ampToDegrees = this.amp * 2.6
+        this.transitionDuration = 3.5 - this.amp * 0.03
       },
-      currentRpm() {
-        return this.$store.getters.getRpm
+      currentAmp() {
+        return this.$store.getters.getAmp
       },
-      accelerator(rpm) {
+      accelerator(amp) {
         const measuredElement = document.getElementById('measurer')
         const range = 140
-        const maxRpm = 3500
-        const RpmRange = Math.max(Math.min(rpm, maxRpm), 0)
-        const percentage = RpmRange / maxRpm
+        const maxAmp = 3500
+        const AmpRange = Math.max(Math.min(amp, maxAmp), 0)
+        const percentage = AmpRange / maxAmp
         const degrees = percentage * range * 2 - range
         if (degrees >= 140) {
           measuredElement.style.cssText = `transform: rotate(${140}deg); transition: 4s;`
@@ -121,11 +120,11 @@
     border-radius: 5px;
   }
 
-  .tachometer {
+  .Amperimetro {
     width: 90px;
     height: 90px;
     border-radius: 50%;
-    background-image: url(https://i.ibb.co/Mkgvbf1/tacometro5.png);
+    background-image: url(https://i.ibb.co/dcWhF4X/Mi-proyecto.png);
     background-size: 100%, 100%;
     background-repeat: no-repeat;
     position: relative;
@@ -135,12 +134,12 @@
   #measurer {
     width: 1px;
     height: 20px;
-    border: 1px solid white;
+    border: 1px solid rgb(255, 0, 0);
     border-radius: 2px;
-    background-color: white;
+    background-color: rgb(255, 0, 0);
     position: absolute;
     top: 25%;
-    left: 49%;
+    /* left: 49%; */
     z-index: 3;
     transform: rotate(-140deg);
     transition: transform 4s;
@@ -151,11 +150,11 @@
     width: 8px;
     height: 8px;
     position: absolute;
-    border: 1px solid white;
+    border: 1px solid rgb(255, 0, 0);
     border-radius: 50%;
     bottom: -5px;
     left: -5px;
-    background-color: white;
+    background-color: rgb(255, 0, 0);
   }
 
   .circular {
@@ -168,10 +167,6 @@
     background-color: rgb(16, 15, 15);
     height: 90px;
     width: 90px;
+    margin-left: 0%;
   }
-
-  /* #tachometer_id{
-    position: relative;
-    right: 40%;
-  } */
 </style>

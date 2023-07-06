@@ -4,7 +4,6 @@
     class="Tknob"
     draggable="false"
     @mousedown="startDrag"
-    @mouseup="stopDrag"
     @mousemove="handleDrag"
   >
     <span class="number">{{ axis }}</span>
@@ -19,7 +18,8 @@
 </template>
 
 <script>
-  import store from '@/store'
+  import { mapActions } from 'vuex'
+
   export default {
     data() {
       return {
@@ -36,15 +36,18 @@
       }
     },
     methods: {
+      ...mapActions(['setThrottleDepth']),
       startDrag(event) {
         this.startX = event.clientX
         this.startY = event.clientY
         this.isDragging = true
+        window.addEventListener('mouseup', this.stopDrag)
       },
       stopDrag() {
         this.isDragging = false
         this.currentScale = this.getCurrentScale()
         this.currentRotation = this.getCurrentRotation()
+        window.removeEventListener('mouseup', this.stopDrag)
       },
       handleDrag(event) {
         if (this.isDragging) {
@@ -73,8 +76,8 @@
             this.axis = 0
           } else {
             this.axis = (calculo * -400).toFixed(2)
-            store.dispatch('setThrottleDepth', this.axis) //seteamos el valor del thlottle con el valor del axis
-            //console.log('throttle_depth', store.getters.getThrottleDepth) // para mostrarlo en consola
+            this.setThrottleDepth(this.axis) //seteamos el valor del thlottle con el valor del axis
+            //console.log('throttle_depth', this.$store.getters.getThrottleDepth) // para mostrarlo en consola
           }
 
           this.currentRotation = newRotation

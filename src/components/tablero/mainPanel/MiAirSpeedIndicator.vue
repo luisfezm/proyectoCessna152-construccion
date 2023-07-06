@@ -1,5 +1,5 @@
 <template>
-  <div class="indicadorMainPanel">
+  <div id="airspeed" class="indicadorMainPanel">
     <div class="airspeed-indicator">
       <div ref="needle" class="needle" />
     </div>
@@ -43,7 +43,7 @@
     background-color: rgb(16, 15, 15);
     height: 100hv;
     width: 6vw;
-    margin-left: 1%;
+    /* margin-left: 1%; */
     margin-top: 1%;
   }
 
@@ -81,5 +81,12 @@
     border-width: 0 6% 10% 6%;
     border-color: transparent transparent red transparent;
     transform: rotate(180deg);
+  }
+
+  #airspeed {
+    /* right: 5%; */
+    position: relative;
+    width: 80px;
+    height: 80px;
   }
 </style>
