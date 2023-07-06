@@ -9,20 +9,19 @@
     </div>
     <div class="tableroInferior">
       <div class="itemTableroInferior">
-
-        <div class="controlesTableroInferior"> <MiYoke/> </div>
-
         <div class="controlesTableroInferior">
-          Controles
           <PrimerBoton />
-          <IgnitionSwitch/>
+          <IgnitionSwitch />
+          <MiYoke />
           <FuelQuantity />
         </div>
         <PedalesPiloto />
       </div>
       <CenterColumn />
       <div class="itemTableroInferior">
-        <div class="controlesTableroInferior"><MiYoke/></div>
+        <div class="controlesTableroInferior">
+          <MiYoke />
+        </div>
         <PedalesCopiloto />
       </div>
     </div>
@@ -53,6 +52,9 @@
       RadioPanel,
       RightHandPanel,
       MiTerreno,
+      MiYoke,
+      PrimerBoton,
+      IgnitionSwitch,
     },
     data() {
       return {
