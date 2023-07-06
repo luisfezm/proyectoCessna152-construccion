@@ -44,6 +44,7 @@ const yoke = {
     },
     setEstadoRoll_yoke({ commit }, roll_yoke) {
       commit('setEstadoRoll_yoke', roll_yoke);
+
     },
   },
   getters: {
