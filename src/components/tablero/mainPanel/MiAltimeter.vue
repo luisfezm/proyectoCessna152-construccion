@@ -79,7 +79,9 @@
     background-image: url(https://i.ibb.co/f2TgqSJ/alt1.png);
     background-size: cover;
     top: 0px;
-    left: 0px;
+    /* left: 15%; */
+    width: 82px;
+    height: 82px;
   }
   .center-point {
     width: 5px;
@@ -87,8 +89,8 @@
     background-color: white;
     border-radius: 50%;
     position: absolute;
-    top: 33px;
-    left: 33px;
+    top: 37px;
+    left: 37px;
     z-index: 20;
   }
   /*  
@@ -149,8 +151,8 @@
     height: 30px;
     background-color: transparent;
     position: absolute;
-    top: 20px;
-    left: 20px;
+    top: 24px;
+    left: 25px;
     /* transform: rotate(10deg); */
     z-index: 10;
   }

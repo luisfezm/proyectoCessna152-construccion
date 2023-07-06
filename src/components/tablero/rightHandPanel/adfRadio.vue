@@ -1,7 +1,9 @@
 <template>
+  
   <div class="frame">
     <div class="numbers">{{ first }},{{ second }},{{ third }}</div>
   </div>
+  
   <img class="first" src="@/assets/adfKnob.svg" alt="" @click="modifyFirst()" />
   <img
     class="second"
@@ -12,8 +14,8 @@
   <img class="third" src="@/assets/adfKnob.svg" alt="" @click="modifyThird()" />
 </template>
 <script>
-  import store from '@/store'
   import { searchPoint } from '@/modules/indicadores/adfRadio.js'
+import store from '@/store'
 
   export default {
     emits: ['adfNeedleChange'], // Declaración del evento adfNeedleChange
