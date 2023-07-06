@@ -1,11 +1,10 @@
 <template>
   <div id="miDiv" ref="div" class="MiYoke" :class="{ grabbing: isDragging }">
-
     <div class="panel-inferior">
       <div class="image-container">
         <img
           ref="image"
-          src="src/assets/img/Yoke.png"
+          src="@/assets/img/Yoke.png"
           :style="{
             transform: `translate(${currentTranslationX}px, ${
               currentTranslationY + 20
