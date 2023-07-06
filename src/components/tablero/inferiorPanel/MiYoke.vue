@@ -53,6 +53,8 @@ export default {
   beforeUnmount() {
     window.removeEventListener('keydown', this.handleKeyDown);
     window.removeEventListener('keyup', this.handleKeyUp);
+    this.cancelMoveAnimation();
+    this.cancelRotateAnimation();
   },
   methods: {
     handleKeyDown(event) {
@@ -97,16 +99,13 @@ export default {
     },
     stopMoveUp() {
       this.isMovingVertically = false;
-      cancelAnimationFrame(this.moveAnimationFrameId);
-      this.moveAnimationFrameId = null;
+      this.cancelMoveAnimation();
       this.animateMoveBackToOrigin();
     },
     moveUp() {
-      if (this.currentTranslationY < this.translateYLimit) {
+      if (this.currentTranslationY < this.translateYLimit && this.isMovingVertically) {
         this.currentTranslationY += this.stepSize;
         this.moveAnimationFrameId = requestAnimationFrame(this.moveUp);
-      } else {
-        this.currentTranslationY = Math.min(this.currentTranslationY, this.translateYLimit);
       }
     },
     startMoveDown() {
@@ -115,16 +114,13 @@ export default {
     },
     stopMoveDown() {
       this.isMovingVertically = false;
-      cancelAnimationFrame(this.moveAnimationFrameId);
-      this.moveAnimationFrameId = null;
+      this.cancelMoveAnimation();
       this.animateMoveBackToOrigin();
     },
     moveDown() {
-      if (this.currentTranslationY > -this.translateYLimit) {
+      if (this.currentTranslationY > -this.translateYLimit && this.isMovingVertically) {
         this.currentTranslationY -= this.stepSize;
         this.moveAnimationFrameId = requestAnimationFrame(this.moveDown);
-      } else {
-        this.currentTranslationY = Math.max(this.currentTranslationY, -this.translateYLimit);
       }
     },
     startRotateLeft() {
@@ -133,16 +129,13 @@ export default {
     },
     stopRotateLeft() {
       this.isRotating = false;
-      cancelAnimationFrame(this.rotateAnimationFrameId);
-      this.rotateAnimationFrameId = null;
+      this.cancelRotateAnimation();
       this.animateRotateBackToOrigin();
     },
     rotateLeft() {
-      if (this.currentRotation > this.minRotation) {
+      if (this.currentRotation > this.minRotation && this.isRotating) {
         this.currentRotation -= this.stepSize;
         this.rotateAnimationFrameId = requestAnimationFrame(this.rotateLeft);
-      } else {
-        this.currentRotation = Math.max(this.currentRotation, this.minRotation);
       }
     },
     startRotateRight() {
@@ -151,33 +144,44 @@ export default {
     },
     stopRotateRight() {
       this.isRotating = false;
-      cancelAnimationFrame(this.rotateAnimationFrameId);
-      this.rotateAnimationFrameId = null;
+      this.cancelRotateAnimation();
       this.animateRotateBackToOrigin();
     },
     rotateRight() {
-      if (this.currentRotation < this.maxRotation) {
+      if (this.currentRotation < this.maxRotation && this.isRotating) {
         this.currentRotation += this.stepSize;
         this.rotateAnimationFrameId = requestAnimationFrame(this.rotateRight);
-      } else {
-        this.currentRotation = Math.min(this.currentRotation, this.maxRotation);
+      }
+    },
+    cancelMoveAnimation() {
+      if (this.moveAnimationFrameId) {
+        cancelAnimationFrame(this.moveAnimationFrameId);
+        this.moveAnimationFrameId = null;
+      }
+    },
+    cancelRotateAnimation() {
+      if (this.rotateAnimationFrameId) {
+        cancelAnimationFrame(this.rotateAnimationFrameId);
+        this.rotateAnimationFrameId = null;
       }
     },
     animateMoveBackToOrigin() {
-      if (this.currentTranslationY < 0) {
-        this.currentTranslationY += this.stepSize;
-        requestAnimationFrame(this.animateMoveBackToOrigin);
-      } else if (this.currentTranslationY > 0) {
-        this.currentTranslationY -= this.stepSize;
+      if (this.currentTranslationY !== 0) {
+        if (this.currentTranslationY < 0) {
+          this.currentTranslationY += this.stepSize;
+        } else {
+          this.currentTranslationY -= this.stepSize;
+        }
         requestAnimationFrame(this.animateMoveBackToOrigin);
       }
     },
     animateRotateBackToOrigin() {
-      if (this.currentRotation < 0) {
-        this.currentRotation += this.stepSize;
-        requestAnimationFrame(this.animateRotateBackToOrigin);
-      } else if (this.currentRotation > 0) {
-        this.currentRotation -= this.stepSize;
+      if (this.currentRotation !== 0) {
+        if (this.currentRotation < 0) {
+          this.currentRotation += this.stepSize;
+        } else {
+          this.currentRotation -= this.stepSize;
+        }
         requestAnimationFrame(this.animateRotateBackToOrigin);
       }
     },
@@ -189,9 +193,9 @@ export default {
       console.log("El estado del PITCH en el backend es de: " + store.getters.getEstadoPitch_yoke);
     },
     currentRotation(value) {
-      let aux = Math.round((value * 10) / 9); // Cambiado a redondear el valor
+      let aux = Math.round((value * 10) / 9);
       if (value < 0) {
-        aux = Math.ceil((value * 10) / 9); // Redondear hacia arriba para valores negativos
+        aux = Math.ceil((value * 10) / 9);
       }
       store.dispatch('setEstadoRoll_yoke', aux);
       console.log("El estado del ROLL en el backend es de: " + store.getters.getEstadoRoll_yoke);
