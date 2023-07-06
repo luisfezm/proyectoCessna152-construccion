@@ -9,6 +9,9 @@
     </div>
     <div class="tableroInferior">
       <div class="itemTableroInferior">
+
+        <div class="controlesTableroInferior"> <MiYoke/> </div>
+
         <div class="controlesTableroInferior">
           <PrimerBoton />
           <IgnitionSwitch />

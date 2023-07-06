@@ -1,5 +1,6 @@
 <template>
   <div id="miDiv" ref="div" class="MiYoke" :class="{ grabbing: isDragging }">
+
     <div class="panel-inferior">
       <div class="image-container">
         <img
