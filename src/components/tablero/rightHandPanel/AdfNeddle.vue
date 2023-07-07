@@ -31,20 +31,17 @@
 
 <style scoped>
   .container {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
     background-color: black;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    right: 28%;
-    bottom: 20%;
   }
 
   .aguja {
     position: absolute;
-    
   }
 </style>

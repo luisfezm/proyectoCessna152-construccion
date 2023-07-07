@@ -203,23 +203,27 @@
   }
 </script>
 <style scoped>
-  .FlightHourRecorder {
+  .right-top .FlightHourRecorder {
     position: relative;
-    right:14%;
-    bottom: 30%;
+    /* right: 10%; */
+    top: 10%;
+  }
 
+  .right-bottom .FlightHourRecorder {
+    position: relative;
+    /* right: 10%; */
+    top: 25%;
   }
   body {
     color: #fff;
     font-family: 'HelveticaNeue', Helvetica, sans-serif;
   }
   #container {
-    width: 110%;
-    height: 110%;
+    width: 90px;
+    height: 90px;
     margin: 0 auto;
     perspective-origin: center center;
     position: absolute;
-    
   }
 
   .hinder2 {
@@ -272,8 +276,6 @@
     position: absolute;
     top: 10%;
     left: 0%;
-  
-    
   }
 
   #hours2 {
@@ -304,9 +306,6 @@
     position: absolute;
     top: 10%;
     left: 81%;
-    
-    
-   
   }
 
   .one {

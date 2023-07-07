@@ -1,5 +1,5 @@
 <template>
-  <div id="coordinator" class="">
+  <div id="coordinator" class="indicadorMainPanel">
     <div class="circular">
       <div class="turn-coordinator">
         <div
@@ -24,13 +24,13 @@
     data() {
       return {
         gradosDesviacion: 0, //grados de desviacion para el giro del avion
-        gradosDesviacionBola: 0 //grados de desviacion para el giro de la bola (indicador de desplazamiento lateral)
+        gradosDesviacionBola: 0, //grados de desviacion para el giro de la bola (indicador de desplazamiento lateral)
       }
     },
     computed: {
       circleStyle() {
         return {
-          left: `calc(50% - 1px - ${this.gradosDesviacionBola }px)`, //Movimiento del circle en relacion con los gradosDesviacion recibidos
+          left: `calc(50% - 1px - ${this.gradosDesviacionBola}px)`, //Movimiento del circle en relacion con los gradosDesviacion recibidos
           right: `calc(50% - 1px - ${this.gradosDesviacionBola}px)`,
         }
       },
@@ -48,7 +48,6 @@
       moverAvion(estado) {
         if (estado == -1) {
           //El avion esta girando hacia la izquierda
-
           this.$store.dispatch('actualizar', { roll: -100, pitch: 0 })
           this.gradosDesviacion = this.$store.getters.anguloRoll
           //console.log('DESVIACION   ' + this.$store.getters.anguloRoll)
@@ -70,16 +69,18 @@
           this.gradosDesviacion = -25
         }
 
-        if(this.$store.getters.angulo_pitch != this.$store.getters.angulo_yaw){
-          this.gradosDesviacionBola = this.gradosDesviacion/4;
+        if (
+          this.$store.getters.angulo_pitch != this.$store.getters.angulo_yaw
+        ) {
+          this.gradosDesviacionBola = this.gradosDesviacion / 4
         }
 
-        console.log("GRADOS BOLA " + this.gradosDesviacionBola)
-
+        console.log('GRADOS BOLA ' + this.gradosDesviacionBola)
       },
     },
   }
 </script>
+
 <style scoped>
   .circular {
     position: relative;
@@ -158,12 +159,5 @@
     100% {
       transform: translateX(-50%) rotate(-10deg);
     }
-  }
-
-  #coordinator{
-    position: relative;
-    right: 83%;
-    top: 112%;
-    
   }
 </style>
