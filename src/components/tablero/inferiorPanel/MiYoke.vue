@@ -2,6 +2,10 @@
   <div id="miDiv" ref="div" class="MiYoke" :class="{ grabbing: isDragging }">
     <div class="panel-inferior">
       <div class="image-container">
+        <!-- Agregar ejes de movimiento -->
+        <div class="axis-x"></div>
+        <div class="axis-y"></div>
+        <!-- Fin de los ejes de movimiento -->
         <img
           ref="image"
           src="@/assets/img/Yoke.png"
@@ -9,8 +13,10 @@
             transform: `translate(${currentTranslationX}px, ${
               currentTranslationY + 20
             }px) rotate(${currentRotation}deg)`,
-            width: '80px',
-            height: '70px',
+            width: '120px',
+            height: '90px',
+            left: `${translateXLimit}px`,
+            top: `${-translateYLimit}px`,
           }"
           :class="{
             translateYAnimation: isMovingVertically,
@@ -88,38 +94,38 @@
     methods: {
       handleKeyDown(event) {
         switch (event.key) {
-          case 'ArrowUp':
-            this.startMoveUp()
-            break
-          case 'ArrowDown':
-            this.startMoveDown()
-            break
-          case 'ArrowLeft':
-            this.startRotateLeft()
-            break
-          case 'ArrowRight':
-            this.startRotateRight()
-            break
-          default:
-            break
+        case 'ArrowUp':
+          this.startMoveUp()
+          break
+        case 'ArrowDown':
+          this.startMoveDown()
+          break
+        case 'ArrowLeft':
+          this.startRotateLeft()
+          break
+        case 'ArrowRight':
+          this.startRotateRight()
+          break
+        default:
+          break
         }
       },
       handleKeyUp(event) {
         switch (event.key) {
-          case 'ArrowUp':
-            this.stopMoveUp()
-            break
-          case 'ArrowDown':
-            this.stopMoveDown()
-            break
-          case 'ArrowLeft':
-            this.stopRotateLeft()
-            break
-          case 'ArrowRight':
-            this.stopRotateRight()
-            break
-          default:
-            break
+        case 'ArrowUp':
+          this.stopMoveUp()
+          break
+        case 'ArrowDown':
+          this.stopMoveDown()
+          break
+        case 'ArrowLeft':
+          this.stopRotateLeft()
+          break
+        case 'ArrowRight':
+          this.stopRotateRight()
+          break
+        default:
+          break
         }
       },
       startMoveUp() {
@@ -234,5 +240,30 @@
 
   .image-container {
     position: relative;
+    width: 120px; /* Ancho del Yoke */
+    height: 90px; /* Alto del Yoke con los ejes de movimiento */
   }
+
+  /* Estilos de los ejes de movimiento */
+  .axis-x {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: red;
+  transform: translateY(-50%);
+}
+
+.axis-y {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 100%;
+  background-color: red;
+  transform: translateX(-50%);
+}
+
+
 </style>
