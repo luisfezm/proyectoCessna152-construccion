@@ -1,5 +1,6 @@
+
 <template>
-  <div id="coordinator" class="indicadorMainPanel">
+  <div class="">
     <div class="circular">
       <div class="turn-coordinator">
         <div
@@ -23,15 +24,14 @@
   export default {
     data() {
       return {
-        gradosDesviacion: 0, //grados de desviacion para el giro del avion
-        gradosDesviacionBola: 0, //grados de desviacion para el giro de la bola (indicador de desplazamiento lateral)
+        gradosDesviacion: 0, //grados de desviacion que se obtienen como parametro
       }
     },
     computed: {
       circleStyle() {
         return {
-          left: `calc(50% - 1px - ${this.gradosDesviacionBola}px)`, //Movimiento del circle en relacion con los gradosDesviacion recibidos
-          right: `calc(50% - 1px - ${this.gradosDesviacionBola}px)`,
+          left: `calc(50% - 1px - ${this.gradosDesviacion / 4}px)`, //Movimiento del circle en relacion con los gradosDesviacion recibidos
+          right: `calc(50% - 1px - ${this.gradosDesviacion / 4}px)`,
         }
       },
     },
@@ -42,24 +42,25 @@
         //console.log('ESTADO ' + this.$store.getters.getEstadoRoll_yoke)
 
         this.moverAvion(this.$store.getters.getEstadoRoll_yoke) // LLamo a la funcion para mover el indicador con el valor del estado
-      }, 500)
+      }, 50)
     },
     methods: {
       moverAvion(estado) {
-        if (estado == -1) {
+        if (estado <= 0) {
           //El avion esta girando hacia la izquierda
-          this.$store.dispatch('actualizar', { roll: -100, pitch: 0 })
-          this.gradosDesviacion = this.$store.getters.anguloRoll
-          //console.log('DESVIACION   ' + this.$store.getters.anguloRoll)
+
+          this.$store.dispatch('actualizar', { roll: estado, pitch: 0 })
+          this.gradosDesviacion = this.$store.getters.getEstadoRoll_yoke*0.25
+          //console.log('DESVIACION   ' + this.$store.getters.getEstadoRoll_yoke)
         }
 
-        if (estado == 1) {
+        if (estado >= 0) {
           //El avion esta girando hacia la derecha
 
-          this.$store.dispatch('actualizar', { roll: 100, pitch: 0 })
-          this.gradosDesviacion = this.$store.getters.anguloRoll
+          this.$store.dispatch('actualizar', { roll: estado, pitch: 0 })
+          this.gradosDesviacion = this.$store.getters.getEstadoRoll_yoke*0.25
 
-          //console.log('DESVIACION   ' + this.$store.getters.anguloRoll)
+          //console.log('DESVIACION   ' + this.$store.getters.getEstadoRoll_yoke)
         }
         if (this.gradosDesviacion >= 25) {
           this.gradosDesviacion = 25
@@ -68,19 +69,10 @@
         if (this.gradosDesviacion <= -25) {
           this.gradosDesviacion = -25
         }
-
-        if (
-          this.$store.getters.angulo_pitch != this.$store.getters.angulo_yaw
-        ) {
-          this.gradosDesviacionBola = this.gradosDesviacion / 4
-        }
-
-        console.log('GRADOS BOLA ' + this.gradosDesviacionBola)
       },
     },
   }
 </script>
-
 <style scoped>
   .circular {
     position: relative;
@@ -90,8 +82,8 @@
     color: white;
     border-radius: 50%;
     background-color: rgb(16, 15, 15);
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     margin-left: 1%;
     margin-top: 1%;
   }
