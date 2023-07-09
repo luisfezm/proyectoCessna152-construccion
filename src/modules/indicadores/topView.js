@@ -35,15 +35,15 @@ const topView = {
           state.blue_aileron  = 0
        }
 
-       if (rudder_left >0) {
-        state.red_rudder = -1
-       
-       }else if (rudder_right >0) {
-        state.red_rudder = 1
-       }else{
-        state.red_rudder = 0
+       if (rudder_left > 0) {
+         state.red_rudder = (rudder_left * 30) / 100
+         //state.red_rudder = -1
+       } else if (rudder_right > 0) {
+         //state.red_rudder = 1
+         state.red_rudder = -((rudder_right * 30) / 100)
+       } else {
+         state.red_rudder = 0
        }
-
 
     },
 

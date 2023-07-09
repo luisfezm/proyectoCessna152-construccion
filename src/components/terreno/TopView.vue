@@ -85,18 +85,10 @@
       },
 
       moveRed() {
-        const redRudder = this.$refs.red_rudder
-
-        if (this.$store.getters.getRed_Rudder == -1) {
-          redRudder.style.transform = `rotateZ(${30}deg)`
-          redRudder.style.transition = `0.5s`
-        } else if (this.$store.getters.getRed_Rudder == 1) {
-          redRudder.style.transform = `rotateZ(${-30}deg)`
-          redRudder.style.transition = `0.5s`
-        } else {
-          redRudder.style.transform = `rotateZ(${0}deg)`
-          redRudder.style.transition = `0.1s`
-        }
+        let redRudder = this.$refs.red_rudder
+        let aux = this.$store.getters.getRed_Rudder
+        redRudder.style.transform = `rotateZ(${aux}deg)`
+        redRudder.style.transition = `${0.3}S`
       },
 
       getValues() {
