@@ -8,6 +8,10 @@ const mixture = {
     actualizarConsumoBencinaHora(state, payload) {
       state.consumoBencinaHora = payload;
     },
+    setEstadoMixture(state,mixture)
+    {
+      state.estadoMixture=mixture;
+    }
   },
   actions: {
     // Acciones para realizar operaciones relacionadas con los interactuadores
@@ -17,6 +21,9 @@ const mixture = {
     // Acción para actualizar el consumo de bencina por hora
     actualizarBencinaPorHora(context, axis) {
       context.commit('actualizarConsumoBencinaHora', axis);
+    },
+    setEstadoMixture(context, mixture) {
+      context.commit('setEstadoMixture', mixture);
     },
   },
   getters: {

@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div id="coordinator" class="indicadorMainPanel">
     <div class="circular">
       <div class="turn-coordinator">
         <div
@@ -23,14 +23,15 @@
   export default {
     data() {
       return {
-        gradosDesviacion: 0, //grados de desviacion que se obtienen como parametro
+        gradosDesviacion: 0, //grados de desviacion para el giro del avion
+        gradosDesviacionBola: 0, //grados de desviacion para el giro de la bola (indicador de desplazamiento lateral)
       }
     },
     computed: {
       circleStyle() {
         return {
-          left: `calc(50% - 1px - ${this.gradosDesviacion / 4}px)`, //Movimiento del circle en relacion con los gradosDesviacion recibidos
-          right: `calc(50% - 1px - ${this.gradosDesviacion / 4}px)`,
+          left: `calc(50% - 1px - ${this.gradosDesviacionBola}px)`, //Movimiento del circle en relacion con los gradosDesviacion recibidos
+          right: `calc(50% - 1px - ${this.gradosDesviacionBola}px)`,
         }
       },
     },
@@ -47,10 +48,9 @@
       moverAvion(estado) {
         if (estado == -1) {
           //El avion esta girando hacia la izquierda
-
           this.$store.dispatch('actualizar', { roll: -100, pitch: 0 })
           this.gradosDesviacion = this.$store.getters.anguloRoll
-          console.log('DESVIACION   ' + this.$store.getters.anguloRoll)
+          //console.log('DESVIACION   ' + this.$store.getters.anguloRoll)
         }
 
         if (estado == 1) {
@@ -59,7 +59,7 @@
           this.$store.dispatch('actualizar', { roll: 100, pitch: 0 })
           this.gradosDesviacion = this.$store.getters.anguloRoll
 
-          console.log('DESVIACION   ' + this.$store.getters.anguloRoll)
+          //console.log('DESVIACION   ' + this.$store.getters.anguloRoll)
         }
         if (this.gradosDesviacion >= 25) {
           this.gradosDesviacion = 25
@@ -68,10 +68,19 @@
         if (this.gradosDesviacion <= -25) {
           this.gradosDesviacion = -25
         }
+
+        if (
+          this.$store.getters.angulo_pitch != this.$store.getters.angulo_yaw
+        ) {
+          this.gradosDesviacionBola = this.gradosDesviacion / 4
+        }
+
+        console.log('GRADOS BOLA ' + this.gradosDesviacionBola)
       },
     },
   }
 </script>
+
 <style scoped>
   .circular {
     position: relative;
@@ -81,8 +90,8 @@
     color: white;
     border-radius: 50%;
     background-color: rgb(16, 15, 15);
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     margin-left: 1%;
     margin-top: 1%;
   }

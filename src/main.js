@@ -30,32 +30,6 @@ window.addEventListener('keypress', (event) => {
     console.log('verticalspeed', store.getters.getVerticalspeed)
   }}
   )
-
-window.addEventListener('keydown', (event) => {
-  if (
-    event.key === 'a' ||
-    event.key === 'w' ||
-    event.key === 's' ||
-    event.key === 'd'
-  ) {
-    const key = event.key.toUpperCase()
-    store.dispatch('presionarTecla_yoke', key)
-    
-  }
-})
-
-// Evento para soltar una tecla
-window.addEventListener('keyup', () => {
-  if (
-    event.key === 'a' ||
-    event.key === 'w' ||
-    event.key === 's' ||
-    event.key === 'd'
-  ) {
-    store.dispatch('soltarTecla_yoke')
-  }
-})
-
 window.addEventListener('keydown', (event) => {
   if (event.key === 'q' && store.getters.movPedalDerecha === 0) {
     clearTimeout(timeoutPedalIzq)
