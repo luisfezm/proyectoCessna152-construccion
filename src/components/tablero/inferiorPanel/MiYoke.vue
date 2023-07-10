@@ -3,8 +3,8 @@
     <div class="panel-inferior">
       <div class="image-container">
         <!-- Agregar ejes de movimiento -->
-        <div class="axis-x"></div>
-        <div class="axis-y"></div>
+       
+        <div class="axis-y"/>
         <!-- Fin de los ejes de movimiento -->
         <img
           ref="image"
@@ -13,9 +13,9 @@
             transform: `translate(${currentTranslationX}px, ${
               currentTranslationY + 20
             }px) rotate(${currentRotation}deg)`,
-            width: '120px',
+            width: '120px', 
             height: '90px',
-            left: `${translateXLimit}px`,
+            left: `${translateXLimit + 400}px`, 
             top: `${-translateYLimit}px`,
           }"
           :class="{
@@ -23,7 +23,7 @@
             rotateAnimation: isRotating,
           }"
           draggable="false"
-        />
+        >
       </div>
     </div>
   </div>
@@ -46,8 +46,8 @@
         minRotationDisplay: -100,
         maxRotation: 90,
         minRotation: -90,
-        translateYLimit: 25,
-        translateXLimit: 0,
+        translateYLimit: 50,
+        translateXLimit: 100,
         moveAnimationFrameId: null,
         rotateAnimationFrameId: null,
       }
@@ -231,39 +231,37 @@
 </script>
 
 <style>
-  .panel-inferior {
+.panel-inferior {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
+    width: 100%;
+    height: 30vh;
   }
 
-  .image-container {
-    position: relative;
-    width: 120px; /* Ancho del Yoke */
-    height: 90px; /* Alto del Yoke con los ejes de movimiento */
-  }
-
-  /* Estilos de los ejes de movimiento */
-  .axis-x {
+ .image-container {
+  justify-content: center;
+  align-items: center;
   position: absolute;
   top: 50%;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: red;
-  transform: translateY(-50%);
+  left: 50%;
+  transform: translate(200%, -100%); 
 }
+
 
 .axis-y {
   position: absolute;
-  top: 0;
+  top: 40%;
   left: 50%;
-  width: 1px;
-  height: 100%;
-  background-color: red;
+  width: 6px;
+  height: 85%;
+  background-color: rgba(99, 95, 95, 0.952);
   transform: translateX(-50%);
+  z-index: 0;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
 }
-
 
 </style>
