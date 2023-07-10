@@ -10,22 +10,28 @@
 
 <script>
   export default {
+    // Exportar
     data() {
+      // Datos
       return {
-        estadoPresionado: false,
-        estadoPrimer: false,
-        contador: 0,
+        estadoPresionado: false, // Estado para iniciar la animación
+        estadoPrimer: false, // Estado para cambiar el color del primer botón
+        contador: 0, // Contador para cambiar el estadoPrimer
       }
     },
     methods: {
+      // Métodos
       presionarBoton() {
-        this.estadoPresionado = true
+        // Cuando se presiona el botón
+        this.estadoPresionado = true // Cambiar el estado para iniciar la animación
       },
       soltarBoton() {
-        this.estadoPresionado = false
-        this.contador++
+        // Cuando se suelta el botón
+        this.estadoPresionado = false // Cambiar el estado para reiniciar la animación
+        this.contador++ // Aumentar el contador
         if (this.contador === 5) {
-          this.estadoPrimer = !this.estadoPrimer
+          // Si el contador llega a 5
+          this.estadoPrimer = !this.estadoPrimer // Cambiar el estado
           this.contador = 0 // Reiniciar el contador después de cambiar el estado
         }
       },
