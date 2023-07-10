@@ -88,7 +88,7 @@
       update() {
         this.angulo_avion = store.getters.getHeadingIndicator
         this.mixture = store.getters.getEstadoMixture
-        console.log('mixture:', this.mixture)
+        //console.log('mixture:', this.mixture)
         this.throttle = store.getters.getThrottleDepth
         this.plane_surface = store.getters.plane_surface
         this.air_resistance = store.getters.air_resistance
@@ -103,8 +103,8 @@
             (this.air_density * this.plane_surface * this.air_resistance)
         )
 
-        console.log('velocidad:' + this.V)
-        console.log('poentecia:' + this.potencia)
+        //console.log('velocidad:' + this.V)
+        //console.log('poentecia:' + this.potencia)
         this.calcularVelocidadDespuesDeRotacion(this.V, this.angulo_avion)
 
         //valor store
@@ -115,12 +115,13 @@
 
         this.calcularVelocidadAltura(this.V, this.angulo_Pitch)
 
-        console.log('velX:', store.getters.velocidad_x)
-        console.log('velY:', store.getters.velocidad_y)
+        //console.log('velX:', store.getters.velocidad_x)
+        //console.log('velY:', store.getters.velocidad_y)
 
         //subida
-        console.log('*-*-*velosidad subida: ', store.getters.velocidad_z)
-        console.log('*-*-*altura actual', store.getters.altura)
+        //console.log('------------------------------------------------')
+        //console.log('*-*-*velosidad subida: ', store.getters.velocidad_z)
+        //console.log('*-*-*altura actual', store.getters.altura)
 
         // actualizar posicion
         this.coordenadas_actuales.latitud += store.getters.velocidad_y * 0.1
@@ -132,12 +133,12 @@
         )
 
         store.dispatch('setCoordenadas', this.coordenadas_actuales)
-        console.log(
-          'posicion_actual: ',
-          store.getters.longitud,
-          ',',
-          store.getters.latitud
-        )
+        //console.log(
+        //  'posicion_actual: ',
+        //  store.getters.longitud,
+        //  ',',
+        //  store.getters.latitud
+        //)
       },
 
       calcularVelocidadDespuesDeRotacion(velocidad, angulo) {

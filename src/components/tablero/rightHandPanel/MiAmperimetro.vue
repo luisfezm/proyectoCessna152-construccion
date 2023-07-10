@@ -36,8 +36,8 @@
     },
     methods: {
       startIncreasingAMP() {
-        console.log('Valor de throttle:', store.state.throttle)
-        console.log('Valor de amp:', this.amp)
+        //console.log('Valor de throttle:', store.state.throttle)
+        //console.log('Valor de amp:', this.amp)
         this.increaseInterval = setInterval(() => {
           if (this.amp < 100) {
             this.amp += 1

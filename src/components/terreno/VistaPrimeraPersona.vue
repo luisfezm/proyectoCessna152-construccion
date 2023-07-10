@@ -14,28 +14,33 @@
         //los timer se ejecutan al mismo tiempo
 
         //variables del store a modificar
+        //trotle      (potencia)
+        //carburator  (potencia)
+        //angulo subida  (artificial horizon)
 
         //angulo del avion arriba y abajo
-
         //
 
+        //estado inicial: iniciando despegue
         setTimeout(() => {
-          console.log(
-            '*-*-*ds-a*f-sa*fds-a*fads-*fdas-*fas-fs-fs*daf-dsa-f*das-f*asd-fas-*df*asd*fs-adf*'
-          )
+          console.log('')
         }, 2000)
 
+        //estado consiguiendo altura
         setTimeout(() => {
           console.log(
             '*-*-120938210938120938093820913812093091230958329875-fs*daf-dsa-f*das-f*asd-fas-*df*asd*fs-adf*'
           )
         }, 3000)
 
+        //estado manteniendo se en el aire
         setTimeout(() => {
           console.log(
             '*-*-*dsSKDJFAKJSDFHSADKÑHFSLDKAJFHSLKAFHs-fs-fs*daf-dsa-f*das-f*asd-fas-*df*asd*fs-adf*'
           )
         }, 4000)
+
+        //estado bajando hasta colicionar
       },
     },
   }
