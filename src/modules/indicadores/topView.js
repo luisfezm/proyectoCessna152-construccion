@@ -16,20 +16,20 @@ const topView = {
        let rudder_right = this.getters.movPedalDerecha    // giro aleron rojo derecha
        
 
-       if (roll_yoke == -1) {
-          state.yellow_aileron  = -1
-       } else if (roll_yoke == 1) {
+       if (roll_yoke < 0) {
+          state.yellow_aileron  = ((roll_yoke * 30) / 100)
+       } else if (roll_yoke > 0) {
 
-            state.yellow_aileron  = 1
+            state.yellow_aileron  = ((roll_yoke * 30 ) / 100 )
        }
        else{
           state.yellow_aileron  = 0
        }
 
-       if (pitch_yoke == -1) {
-          state.blue_aileron  = -1
-       } else if (pitch_yoke == 1) {
-            state.blue_aileron  = 1
+       if (pitch_yoke <0) {
+          state.blue_aileron  = ((pitch_yoke * 30 ) / 100)
+       } else if (pitch_yoke > 0) {
+            state.blue_aileron  = ((pitch_yoke * 30 ) / 100) 
        }
        else{
           state.blue_aileron  = 0
