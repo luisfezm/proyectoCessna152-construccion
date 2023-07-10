@@ -1,35 +1,74 @@
 <template>
-  <div id="airspeed" class="indicadorMainPanel">
+  <div class="indicadorMainPanel">
     <div class="airspeed-indicator">
-      <div ref="needle" class="needle" />
+      <div ref="needle" class="needle" id="needleAir" />
     </div>
   </div>
 </template>
 
 <script>
+  
   export default {
+   
     mounted() {
-      this.speedBase()
-      setInterval(() => {
-        const randomSpeed = Math.floor(Math.random() * 161)
-        this.moveNeedle(randomSpeed)
-      }, 1000)
+      
+      //knots mide los nudos que recorre el avion
+      //funcion que mueve la aguja, que se ingresa como parametro la cantidad de nudos(knots)
+      setInterval(this.setValues,100)   
+     
     },
+/*
+
+      30 deg   -->>  40 knots
+      160 deg  -->>  100 knots
+      290 deg  -->> 180 knots
+      320 deg  -->> 200 knots
+
+
+      80 kntos    *180
+      /290
+
+      100 deg   70k
+      x          50k
+ 
+*/
     methods: {
-      //velocity seria el parametro recibido
-      moveNeedle(velocity) {
-        const needle = this.$refs.needle
-        const baseAngle = 50
-        const maxVelocity = 160
-        const angle = baseAngle - (velocity / maxVelocity) * 180
-        needle.style.transform = `rotate(${angle}deg)`
+      setValues(){
+        let knot = this.$store.getters.getknots
+        this.moveNeedle(knot)
       },
-      //Se pone el needle en la base del velocimetro
-      speedBase() {
-        this.moveNeedle(100)
-      },
+     moveNeedle(knots){
+      let aux
+      //actalizar varialvle Knots en el store
+      //this.$store.dispatch('setKnots',(knots))
+
+      if(knots<=0){
+        aux=0
+      }
+      else if(knots<100){
+        if(knots <=40){
+          aux = (knots*30)/40
+        }
+        
+        else if(knots<70){
+          aux = ((knots*100)/70)-15
+        }
+        else if(knots>=70){
+          aux = ((knots*160)/100)-10
+        }  
+      }else if(knots<=200){
+        aux = (knots*290)/180
+      }else{
+        aux=320
+      }
+      //actualizar variable degree en el store
+      this.$store.dispatch('setDegrees',aux)
+      //console.log("los nudos son: "+this.$store.getters.getknots)
+      //console.log("los grados son: "+this.$store.getters.getdegrees)
+      document.getElementById("needleAir").style.cssText = `transform: rotate(${this.$store.getters.getdegrees}deg);transition:0.5s`;
+     },     
     },
-    //-30 de velocity llega hasta 160mph
+    
   }
 </script>
 
@@ -43,7 +82,7 @@
     background-color: rgb(16, 15, 15);
     height: 100hv;
     width: 6vw;
-    /* margin-left: 1%; */
+    margin-left: 1%;
     margin-top: 1%;
   }
 
@@ -59,34 +98,18 @@
     background-position: center;
   }
 
-  .needle {
+  #needleAir {
     position: absolute;
-    top: 50%;
+    top: 15%;
     left: 48%;
-    transform-origin: 50% 0%;
+    
     width: 4%;
     height: 35%;
     background-color: red;
     transition: transform 0.3s;
+    transform-origin: bottom ;
+ 
   }
 
-  .needle::before {
-    content: '';
-    position: absolute;
-    bottom: -30%;
-    left: -1%;
-    width: 10%;
-    height: 0px;
-    border-style: solid;
-    border-width: 0 6% 10% 6%;
-    border-color: transparent transparent red transparent;
-    transform: rotate(180deg);
-  }
 
-  #airspeed {
-    /* right: 5%; */
-    position: relative;
-    width: 80px;
-    height: 80px;
-  }
 </style>

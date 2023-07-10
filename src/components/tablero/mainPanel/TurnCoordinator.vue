@@ -75,7 +75,7 @@
           this.gradosDesviacionBola = this.gradosDesviacion / 4
         }
 
-        console.log('GRADOS BOLA ' + this.gradosDesviacionBola)
+        //console.log('GRADOS BOLA ' + this.gradosDesviacionBola)
       },
     },
   }
