@@ -83,6 +83,21 @@
     },
     methods: {
       update() {
+        // importa el valor de la altura desde el store
+        const altura = store.getters.altura
+        // si la altura es 0, entonces el avion esta en el suelo (se debería mostrar imagen de despegue)
+        if (altura === 0) {
+          console.log('altura:', altura)
+        } else if (altura > 0) {
+          console.log('altura:', altura)
+        }
+
+        // importa el valor de la velocidad desde el store
+        const Avionvivo = store.getters.Avionvivo
+        if (Avionvivo === 0) {
+          //aqui hace el mati su cosa rara
+        }
+
         this.angulo_avion = store.getters.getHeadingIndicator
         this.mixture = store.getters.getEstadoMixture
         console.log('mixture:', this.mixture)
@@ -143,22 +158,6 @@
 
         store.dispatch('setVelocidadZ', velocidadaltura)
       },
-
-      // ---------------------------  Planificasion -----------------------------
-
-      //calcular velocidad para la altura usando formulas simples [mati]
-
-      //usar la funcion anterior modificando de forma estruccturada el store para simular cosas ()
-
-      //mover el punto del mapa xd  [tavo]
-      //asignar posiscion inicial del avion
-      //aplicar funcion ya creada
-
-      //trabajar el div para mostrar la vista [opcional]
-
-      //crear .vue para visualizar la primera persona Template, script y style. [tavo]
-
-      //mostrar cambios en vista de primera persona (segun altura actual)
     },
   }
 </script>
