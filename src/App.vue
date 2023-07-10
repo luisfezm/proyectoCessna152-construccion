@@ -156,7 +156,7 @@
 
       //trabajar el div para mostrar la vista [opcional]
 
-      //crear .vue para visualizar la primera persona
+      //crear .vue para visualizar la primera persona Template, script y style. [tavo]
 
       //mostrar cambios en vista de primera persona (segun altura actual)
     },
