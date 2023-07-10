@@ -1,9 +1,9 @@
 <template>
   <div class="base">
     <div
-      :class="['palanca', { active: estadoPalanca }]"
-      @mousedown="cambiarEstadoPalanca"
-      @mouseup="cambiarEstadoPalanca"
+      :class="['palanca', { active: estadoPresionado }]"
+      @mousedown="presionarBoton"
+      @mouseup="soltarBoton"
     />
   </div>
 </template>
@@ -12,12 +12,22 @@
   export default {
     data() {
       return {
-        estadoPalanca: false,
+        estadoPresionado: false,
+        estadoPrimer: false,
+        contador: 0,
       }
     },
     methods: {
-      cambiarEstadoPalanca() {
-        this.estadoPalanca = !this.estadoPalanca
+      presionarBoton() {
+        this.estadoPresionado = true
+      },
+      soltarBoton() {
+        this.estadoPresionado = false
+        this.contador++
+        if (this.contador === 5) {
+          this.estadoPrimer = !this.estadoPrimer
+          this.contador = 0 // Reiniciar el contador después de cambiar el estado
+        }
       },
     },
   }
@@ -47,7 +57,7 @@
     transition: all 0.2s ease-in-out;
   }
 
-  .active {
+  .palanca.active {
     transform: scale(0.8);
   }
 </style>

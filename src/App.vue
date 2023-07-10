@@ -10,7 +10,6 @@
     <div class="tableroInferior">
       <div class="itemTableroInferior">
         <div class="controlesTableroInferior">
-          <PrimerBoton />
           <IgnitionSwitch />
           <MiYoke />
           <FuelQuantity />
@@ -34,7 +33,6 @@
   import PedalesPiloto from './components/pedales/PedalesPiloto.vue'
   import CenterColumn from './components/tablero/centerColumn/CenterColumnPanel.vue'
   import FuelQuantity from './components/tablero/mainPanel/FuelQuantity.vue'
-  import PrimerBoton from './components/tablero/mainPanel/PrimerBoton.vue'
   import IgnitionSwitch from './components/tablero/mainPanel/IgnitionSwitch.vue'
   import MainPanel from './components/tablero/mainPanel/MainPanel.vue'
   import RadioPanel from './components/tablero/radioPanel/RadioPanel.vue'
@@ -53,7 +51,6 @@
       RightHandPanel,
       MiTerreno,
       MiYoke,
-      PrimerBoton,
       IgnitionSwitch,
     },
     data() {
