@@ -68,6 +68,9 @@
         V: 0,
         angulo_avion: 0,
 
+        angulo_Pitch: 0,
+
+        //usado para probar
         headAvion: 9,
 
         //quisas en el futuro meterlo al avion
@@ -91,6 +94,7 @@
         this.air_resistance = store.getters.air_resistance
         this.air_density = store.getters.air_density
         this.motor_strength = store.getters.motor_strenght
+        this.angulo_Pitch = store.getters.anguloPitch
 
         this.potencia =
           (((this.throttle / 100) * this.mixture) / 10) * this.motor_strength
@@ -103,10 +107,13 @@
         console.log('poentecia:' + this.potencia)
         this.calcularVelocidadDespuesDeRotacion(this.V, this.angulo_avion)
 
-        //angulo pich
-        //store.getters.anguloroll
+        //valor store
+        //store.getters.aanguloPitch
 
-        this.calcularVelocidadAltura(this.V, this.headAvion)
+        //valor de prueba
+        //this.headAvion
+
+        this.calcularVelocidadAltura(this.V, this.angulo_Pitch)
 
         console.log('velX:', store.getters.velocidad_x)
         console.log('velY:', store.getters.velocidad_y)
@@ -159,7 +166,7 @@
       //trabajar el div para mostrar la vista [opcional]
       //modificar los divs para que no queden espacios
 
-      //crear .vue para visualizar la primera persona Template, script y style. [tavo]
+      //crear .vue para visualizar la primera persona
 
       //mostrar cambios en vista de primera persona (segun altura actual)
     },
