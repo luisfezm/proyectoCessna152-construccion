@@ -28,13 +28,12 @@ html, body {
 }
 
 .terrenoIzquierda {
-  width: 50%;
+  
   
 }
 
 .terrenoDerecha {
-  align-self: right;
-  width: 50%;
+  height: 300px;
   
 }
 

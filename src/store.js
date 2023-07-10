@@ -15,7 +15,6 @@ import trimwheel from './modules/interactuadores/trimwheel'
 import avion from './modules/avion'
 import topView from './modules/indicadores/topView'
 
-
 const store = createStore({
   state: {
     luz: false,
