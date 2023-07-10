@@ -67,6 +67,10 @@
         potencia: 0,
         V: 0,
         angulo_avion: 0,
+
+        headAvion: 10,
+
+        //quisas en el futuro meterlo al avion
         coordenadas_actuales: {
           latitud: 0,
           longitud: 0,
@@ -94,13 +98,24 @@
           ((2 * this.potencia) / 0.5) *
             (this.air_density * this.plane_surface * this.air_resistance)
         )
+
         console.log('velocidad:' + this.V)
+        console.log('poentecia:' + this.potencia)
         this.calcularVelocidadDespuesDeRotacion(this.V, this.angulo_avion)
+
+        this.calcularVelocidadAltura(this.V, this.headAvion)
+
         console.log('velX:', store.getters.velocidad_x)
         console.log('velY:', store.getters.velocidad_y)
+
+        //subida
+        console.log('*-*-*velosidad subida: ', store.getters.velocidad_z)
+        console.log('*-*-*altura actual', store.getters.altura)
+
         // actualizar posicion
         this.coordenadas_actuales.latitud += store.getters.velocidad_y * 0.1
         this.coordenadas_actuales.longitud += store.getters.velocidad_x * 0.1
+
         store.dispatch('setCoordenadas', this.coordenadas_actuales)
         console.log(
           'posicion_actual: ',
@@ -109,6 +124,7 @@
           store.getters.latitud
         )
       },
+
       calcularVelocidadDespuesDeRotacion(velocidad, angulo) {
         // Convertir el ángulo de grados a radianes
         var anguloRadianes = (angulo * Math.PI) / 180
@@ -118,6 +134,31 @@
         store.dispatch('setVelocidadY', velocidadY)
         store.dispatch('setVelocidadX', velocidadX)
       },
+
+      calcularVelocidadAltura(velocidad, anguloVertical) {
+        var anguloRadianes = (anguloVertical * Math.PI) / 180
+        var velocidadaltura = velocidad * Math.cos(anguloRadianes)
+
+        console.log('velocidadaltura', velocidadaltura)
+
+        store.dispatch('setVelocidadZ', velocidadaltura)
+      },
+
+      // ---------------------------  Planificasion -----------------------------
+
+      //calcular velocidad para la altura usando formulas simples [mati]
+
+      //usar la funcion anterior modificando de forma estruccturada el store para simular cosas ()
+
+      //mover el punto del mapa xd  [tavo]
+      //asignar posiscion inicial del avion
+      //aplicar funcion ya creada
+
+      //trabajar el div para mostrar la vista [opcional]
+
+      //crear .vue para visualizar la primera persona
+
+      //mostrar cambios en vista de primera persona (segun altura actual)
     },
   }
 </script>

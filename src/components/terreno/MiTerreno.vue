@@ -5,9 +5,7 @@
       <!-- Esta es la parte izquierda de la vista del vuelo, deben colocar aquí el componente que creen -->
     </div>
 
-    <div class="vistaPrimeraPersona">
-      <h1 />
-    </div>
+    <div class="vistaPrimeraPersona" />
 
     <div class="terrenoDerecha">
       <!-- Esta es la parte derecha de la vista del vuelo, deben colocar aquí el componente que creen -->
