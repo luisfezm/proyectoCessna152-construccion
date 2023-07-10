@@ -68,7 +68,7 @@
         V: 0,
         angulo_avion: 0,
 
-        headAvion: 10,
+        headAvion: 9,
 
         //quisas en el futuro meterlo al avion
         coordenadas_actuales: {
@@ -118,6 +118,9 @@
         console.log('poentecia:' + this.potencia)
         this.calcularVelocidadDespuesDeRotacion(this.V, this.angulo_avion)
 
+        //angulo pich
+        //store.getters.anguloroll
+
         this.calcularVelocidadAltura(this.V, this.headAvion)
 
         console.log('velX:', store.getters.velocidad_x)
@@ -130,6 +133,11 @@
         // actualizar posicion
         this.coordenadas_actuales.latitud += store.getters.velocidad_y * 0.1
         this.coordenadas_actuales.longitud += store.getters.velocidad_x * 0.1
+
+        store.dispatch(
+          'setAltura',
+          store.getters.altura + store.getters.velocidad_z * 0.1
+        )
 
         store.dispatch('setCoordenadas', this.coordenadas_actuales)
         console.log(
@@ -152,12 +160,23 @@
 
       calcularVelocidadAltura(velocidad, anguloVertical) {
         var anguloRadianes = (anguloVertical * Math.PI) / 180
-        var velocidadaltura = velocidad * Math.cos(anguloRadianes)
-
-        console.log('velocidadaltura', velocidadaltura)
+        var velocidadaltura = velocidad * Math.sin(anguloRadianes)
 
         store.dispatch('setVelocidadZ', velocidadaltura)
       },
+
+      // ---------------------------  Planificasion -----------------------------
+
+      //calcular velocidad para la altura usando formulas simples [mati]
+
+      //usar la funcion anterior modificando de forma estruccturada el store para simular cosas ()
+
+      //trabajar el div para mostrar la vista [opcional]
+      //modificar los divs para que no queden espacios
+
+      //crear .vue para visualizar la primera persona Template, script y style. [tavo]
+
+      //mostrar cambios en vista de primera persona (segun altura actual)
     },
   }
 </script>
