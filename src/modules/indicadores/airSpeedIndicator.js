@@ -1,13 +1,13 @@
 // airSpeedIndicator.js
 const airSpeedIndicator = {
     state: {
-      knots:75,
+      knots:0,
       degrees:0,
     },
     mutations: {
       // Mutaciones para modificar el estado de los indicadores
-      setKnots(state, presionImpacto,presionEstatica,air_density) {
-        state.knots = Math.sqrt((Math.pow(velocidadX, 2)+Math.pow(velocidaY, 2)+velocidaZ)*1.94384)
+      setKnots(state, conversion) {
+        state.knots = conversion
       },
       setDegrees(state, degrees) {
         state.degrees = degrees
@@ -17,8 +17,11 @@ const airSpeedIndicator = {
     },
     actions: {
       // Acciones para realizar operaciones relacionadas con los indicadores
+
+      // conversion de velocidad a knots
       setKnots({ commit }) {
-        commit('setKnots', this.getters.velocidad_x,this.getters.velocidad_y,this.getters.velocidad_z)
+        let conversion=  Math.sqrt((Math.pow(this.getters.velocidad_x, 2)+Math.pow(this.getters.velocidad_y, 2)+Math.pow(this.getters.velocidad_z, 2))*1.94384)
+        commit('setKnots', conversion)
       },
       setDegrees({ commit }, degrees) {
         commit('setDegrees', degrees)

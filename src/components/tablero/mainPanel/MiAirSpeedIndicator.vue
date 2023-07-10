@@ -14,6 +14,7 @@
       
       //knots mide los nudos que recorre el avion
       //funcion que mueve la aguja, que se ingresa como parametro la cantidad de nudos(knots)
+      
       setInterval(this.setValues,100)   
      
     },
@@ -34,6 +35,7 @@
 */
     methods: {
       setValues(){
+        this.$store.dispatch('setKnots')
         let knot = this.$store.getters.getknots
         this.moveNeedle(knot)
       },
