@@ -16,7 +16,7 @@ var pointList = [];
 function searchPoint(value) {
   for (var i = 0; i < pointList.length; i++) {
     var point = pointList[i];
-    if (point.point === value || point.latitude === value || point.longitude === value) {
+    if (point.point === value || point.latitude === value  || point.longitude === value) {
       return point;
     }
   }
@@ -29,7 +29,7 @@ function generateRandomPoints() {
     var point = ("00" + i).slice(-3); // Formatear el punto como "000", "001", etc.
     var latitude = (Math.random() * 180) - 90; // Generar un valor aleatorio entre -90 y 90 para la latitud
     var longitude = (Math.random() * 360) - 180; // Generar un valor aleatorio entre -180 y 180 para la longitud
-    
+
     new adfLibrary.adfPoints(point, latitude, longitude); // Crear un nuevo punto usando adfLibrary
   }
 }

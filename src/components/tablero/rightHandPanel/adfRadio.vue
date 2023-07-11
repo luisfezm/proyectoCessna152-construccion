@@ -100,6 +100,7 @@
       updateAdfPoint() {
         this.adf_point = this.first * 100 + this.second * 10 + this.third
         let formattedAdfPoint = this.adf_point.toString().padStart(3, '0')
+        store.dispatch('setADF', formattedAdfPoint)
         let foundPoint = searchPoint(formattedAdfPoint)
 
         this.currentPosition.lat = store.getters.latitud

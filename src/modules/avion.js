@@ -22,6 +22,7 @@ const avion = {
       latitud: 0,
       longitud: 0,
     },
+    puntoADF: '000',
 
     estado_motor: false, // indica si esta encendido o no el motor
 
@@ -78,6 +79,9 @@ const avion = {
     setCoordenadas(state, coordenadas) {
       state.coordenadas_actuales = coordenadas;
     },
+    setADF(state, ADF) {
+      state.puntoADF = ADF;
+    },
 
     // --------- constantes (solo deberían ser seteadas una vez) ---------
     setPeso(state, peso) {
@@ -126,6 +130,9 @@ const avion = {
     setCoordenadas({ commit }, coordenadas) {
       commit('setCoordenadas', coordenadas);
     },
+    setADF({ commit }, ADF) {
+      commit('setADF', ADF);
+    },
 
     // --------- constantes (solo deberían ser seteadas una vez) ---------
     setPeso({ commit }, peso) {
@@ -168,6 +175,7 @@ const avion = {
     air_density: (state) => state.air_density,
     plane_velocity: (state) => state.plane_velocity,
     air_resistance: (state) => state.air_resistance,
+    puntoADF: (state) => state.puntoADF,
   },
 };
 

@@ -12,35 +12,49 @@
 </template>
 
 <script>
+  import { searchPoint } from '@/modules/indicadores/adfRadio.js'
+  import store from '@/store'
   export default {
     data() {
       return {
         agujaRotacion: 0, //grados
-        coordenadaDestino: '-33.45694, -70.64827', //coordenadas tipo (x,y)
-        coordenadaActual: '-34.17083, -70.74444', //coordenadas tipo (x,y)
-
+        //coordenadaDestino: '-33.45694, -70.64827', //coordenadas tipo (x,y)
+        //coordenadaActual: '-34.17083, -70.74444', //coordenadas tipo (x,y)
+        currentPosition: {
+          lat: 0,
+          lon: 0,
+        },
+        destinationPoint: {
+          lat: 0,
+          lon: 0,
+        },
         //coordenadas Curico: -34.98279, -71.23943
         //coordenadas Rancagua: -34.17083, -70.74444
         //coordenadas Santiago: -33.45694, -70.64827
       }
     },
+    created() {
+      this.currentPosition.lat = store.getters.latitud
+      this.currentPosition.lon = store.getters.longitud
+      let foundPoint = searchPoint(store.getters.puntoADF)
+      if (foundPoint) {
+        this.destinationPoint.lat = foundPoint.latitude
+        this.destinationPoint.lon = foundPoint.longitude
+        console.log('Latitud  Actual  C: ' + this.currentPosition.lat)
+        console.log('Longitud Actual  C: ' + this.currentPosition.lon)
+        console.log('Latitud  Destino C: ' + this.destinationPoint.lat)
+        console.log('Longitud Destino C: ' + this.destinationPoint.lon)
+      }
+      setInterval(this.updateCourse, 10)
+    },
     mounted() {
       // Simulación de actualización en tiempo real
       setInterval(() => {
-        // Parsear las coordenadas deseadas en valores numéricos de x e y
-        const [destinoX, destinoY] = this.coordenadaDestino
-          .split(',')
-          .map(parseFloat)
-
-        // Parsear las coordenadas actuales en valores numéricos de x e y
-        const [actualX, actualY] = this.coordenadaActual
-          .split(',')
-          .map(parseFloat)
-
         // Calcular la desviación en los ejes x e y
-        const desviacionX = destinoX - actualX
-        const desviacionY = destinoY - actualY
-
+        const desviacionX = this.destinationPoint.lat - this.currentPosition.lat
+        const desviacionY = this.destinationPoint.lon - this.currentPosition.lon
+        console.log('Desviación X : ', desviacionX)
+        console.log('Desviación Y : ', desviacionY)
         // Calcular el rumbo en radianes
         const angulo = Math.atan2(desviacionY, desviacionX)
 
@@ -52,6 +66,21 @@
       }, 100)
     },
     methods: {
+      updateCourse() {
+        this.currentPosition.lat = store.getters.latitud
+        this.currentPosition.lon = store.getters.longitud
+        let foundPoint = searchPoint(store.getters.puntoADF)
+        console.log('Store Getter  : ', store.getters.puntoADF)
+        console.log('Store Getter  : ', foundPoint)
+        if (foundPoint) {
+          this.destinationPoint.lat = foundPoint.latitude
+          this.destinationPoint.lon = foundPoint.longitude
+          console.log('ASLatitud  Actual  C: ' + this.currentPosition.lat)
+          console.log('ASLongitud Actual  C: ' + this.currentPosition.lon)
+          console.log('ASLatitud  Destino C: ' + this.destinationPoint.lat)
+          console.log('ASLongitud Destino C: ' + this.destinationPoint.lon)
+        }
+      },
       updateHeading() {
         this.coordenadaActual = this.coordenadaDestino
       },
