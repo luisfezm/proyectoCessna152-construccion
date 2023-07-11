@@ -4,7 +4,7 @@
       <Tachometer />
       <Amperimetro />
       <ADFNeddle :angle="adfNeedleValue" />
-      <FlightHourRecorder />
+      
     </div>
     <div class="right-bottom">
       <FlightHourRecorder />

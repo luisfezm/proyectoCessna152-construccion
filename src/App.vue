@@ -78,7 +78,7 @@
       update() {
         this.angulo_avion = store.getters.getHeadingIndicator
         this.mixture = store.getters.getEstadoMixture
-        console.log('mixture:', this.mixture)
+        //console.log('mixture:', this.mixture)
         this.throttle = store.getters.getThrottleDepth
         this.plane_surface = store.getters.plane_surface
         this.air_resistance = store.getters.air_resistance
@@ -91,20 +91,21 @@
           ((2 * this.potencia) / 0.5) *
             (this.air_density * this.plane_surface * this.air_resistance)
         )
-        console.log('velocidad:' + this.V)
+        //console.log('velocidad:' + this.V)
         this.calcularVelocidadDespuesDeRotacion(this.V, this.angulo_avion)
-        console.log('velX:', store.getters.velocidad_x)
-        console.log('velY:', store.getters.velocidad_y)
+        //console.log('velX:', store.getters.velocidad_x)
+        //console.log('velY:', store.getters.velocidad_y)
         // actualizar posicion
         this.coordenadas_actuales.latitud += store.getters.velocidad_y * 0.1
         this.coordenadas_actuales.longitud += store.getters.velocidad_x * 0.1
         store.dispatch('setCoordenadas', this.coordenadas_actuales)
-        console.log(
+        /*console.log(
           'posicion_actual: ',
           store.getters.longitud,
           ',',
           store.getters.latitud
         )
+        */
       },
       calcularVelocidadDespuesDeRotacion(velocidad, angulo) {
         // Convertir el ángulo de grados a radianes
