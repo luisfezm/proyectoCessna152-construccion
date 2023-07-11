@@ -1,7 +1,7 @@
 <template>
   <div class="img-move-wrapper">
     <button @click="Vuelo1">vuelo de prueba 1</button>
-    <button @click="Vuelo1">vuelo de prueba 2</button>
+
     <img
       id="torre"
       src="src/assets/primerapersona/edificio.jpg"
@@ -22,18 +22,20 @@
     methods: {
       funcionVerificar() {
         var imagen = document.getElementById('imagen')
-        let altura = store.getters.altura
-        if (altura === 0) {
-          console.log('test: inicio')
-        } else if (altura > 0) {
-          imagen.src = 'src/assets/primerapersona/imagen0.jpg'
-          console.log('test: despegue')
-          imagen.src = 'src/assets/primerapersona/imagen1.jpg'
-        }
 
-        const Avionvivo = store.getters.Avionvivo
-        if (Avionvivo === 0) {
-          // elmati ve esto
+        const Avionvivo = store.getters.choque
+        console.log('vivo avion uwuwuwu', Avionvivo)
+        if (Avionvivo === true) {
+          imagen.src = 'src/assets/primerapersona/imagen2.jpg'
+        } else {
+          let altura = store.getters.altura
+          if (altura === 0) {
+            console.log('test: inicio')
+          } else if (altura > 0) {
+            imagen.src = 'src/assets/primerapersona/imagen0.jpg'
+            console.log('test: despegue')
+            imagen.src = 'src/assets/primerapersona/imagen1.jpg'
+          }
         }
       },
       //vuelo en linea recta
@@ -111,8 +113,8 @@
         setTimeout(() => {
           //cambio de valores
           store.dispatch('setEstadoPitch_yoke', 0)
-          store.dispatch('setThrottleDepth', 10)
-          store.dispatch('setEstadoMixture', 10)
+          store.dispatch('setThrottleDepth', 15)
+          store.dispatch('setEstadoMixture', 15)
 
           console.log('------------------')
           console.log('mati subiendo altura')
@@ -132,7 +134,7 @@
           console.log('trotle: ', store.getters.getThrottleDepth)
           console.log('mixture: ', store.getters.getEstadoMixture)
           console.log('angulo pich: ', store.getters.anguloPitch)
-        }, 30000)
+        }, 33000)
       },
     },
   }

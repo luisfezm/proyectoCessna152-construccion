@@ -39,8 +39,8 @@ const avion = {
   mutations: {
     // Mutaciones para modificar el estado del avion
     // usen acciones NO las mutaciones directamente
-    alternaChoque(state) {
-      state.choque = !state.choque;
+    alternaChoque(state,estado) {
+      state.choque = estado;
     },
 
     // --------- velocidades ---------
@@ -95,8 +95,8 @@ const avion = {
   actions: {
     // Acciones para realizar operaciones relacionadas con el avion
 
-    alternaChoque({ commit }) {
-      commit('alternaChoque');
+    alternaChoque({ commit },estado) {
+      commit('alternaChoque',estado);
     },
 
     // --------- velocidades ---------

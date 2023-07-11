@@ -94,13 +94,6 @@
         //a futuro cambiar a archivo .js
         //cordenadas de torre
 
-        if (this.coordenadas_actuales.latitud > 400) {
-          console.log(
-            'oh no hesldkfjaslkdfjdslkajflksdjflkasdfjklsadjf chocado alkfjasdlkfj'
-          )
-          store.dispatch('alternaChoque')
-        }
-
         this.coordenadas_actuales.longitud = store.getters.longitud
         this.coordenadas_actuales.latitud = store.getters.latitud
         this.angulo_avion = store.getters.getHeadingIndicator
@@ -166,8 +159,18 @@
           'mati posicion_actual: ',
           store.getters.longitud,
           ',',
-          store.getters.longitud
+          store.getters.latitud
         )
+
+        if (this.coordenadas_actuales.latitud >= -34.99710133336625) {
+          console.log(
+            'oh no hesldkfjaslkdfjdslkajflksdjfllksdfjglkkasdfjklsadjf chocado alkfjasdlkfj'
+          )
+          store.dispatch('alternaChoque', true)
+        } else {
+          console.log('saliiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii')
+          store.dispatch('alternaChoque', false)
+        }
       },
       // Función auxiliar para convertir grados a radianes
       toRadians(degrees) {
