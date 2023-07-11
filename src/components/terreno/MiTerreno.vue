@@ -8,27 +8,23 @@
       <!-- Esta es la parte derecha de la vista del vuelo, deben colocar aquí el componente que creen -->
       <TopView />
       <frontView />
-      <sideView />
-
     </div>
-  </div>
+    <sideView />
+  </div>      
 </template>
 
 <script>
   import MiMapa from '@/components/miniMapa/MiniMapa.vue'
   import frontView from './frontView.vue'
   import TopView from './TopView.vue'
-
-  import MiMapa from '@/components/miniMapa/MiniMapa.vue';
-  import frontView from './frontView.vue';
   import sideView from './sideView.vue';
 
   export default {
     components: {
       MiMapa,
       frontView,
-      sideView
       TopView,
+      sideView,
     },
   }
 </script>
