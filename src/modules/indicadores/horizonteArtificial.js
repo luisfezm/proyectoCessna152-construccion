@@ -32,7 +32,7 @@ const horizonteArtificial = {
       state.anguloRoll = state.anguloRoll % 360
       state.anguloPitch = state.anguloPitch % 360
 
-      console.log('ACTUALIZAR' + state.anguloRoll)
+      //console.log('angul' + state.anguloPitch)
     },
 
     setPitch(state, newPitch) {

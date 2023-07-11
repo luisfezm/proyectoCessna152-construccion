@@ -67,8 +67,10 @@
         potencia: 0,
         V: 0,
         angulo_avion: 0,
-
+        //temporal
         angulo_Pitch: 0,
+        yoke_pich: 0,
+        yoke_roll: 0,
 
         //usado para probar
         headAvion: 9,
@@ -96,6 +98,9 @@
         this.motor_strength = store.getters.motor_strenght
         this.angulo_Pitch = store.getters.anguloPitch
 
+        this.yoke_pich = store.getters.getEstadoPitch_yoke
+        this.yoke_roll = store.getters.getEstadoRoll_yoke
+
         this.potencia =
           (((this.throttle / 100) * this.mixture) / 10) * this.motor_strength
         this.V = Math.sqrt(
@@ -117,11 +122,23 @@
 
         //console.log('velX:', store.getters.velocidad_x)
         //console.log('velY:', store.getters.velocidad_y)
+        console.log('mati velz:', store.getters.velocidad_z)
+
+        // --------- inicio peligro pruebas quisas colapce despues xd ---------
+        // !!!!!!!! peligroso puede colapsar con otra implementacion !!!!!!!!!!
+        //actualizar horizonte artificial (nesesario para el picht)
+
+        this.$store.dispatch('actualizar', {
+          roll: this.yoke_roll,
+          pitch: this.yoke_pich,
+        })
+        console.log('mati horisonte artificial', this.angulo_Pitch)
+        // ---------------- fin peligro pruebas ------------
 
         //subida
-        //console.log('------------------------------------------------')
+        //console.log('------------------------')
         //console.log('*-*-*velosidad subida: ', store.getters.velocidad_z)
-        //console.log('*-*-*altura actual', store.getters.altura)
+        console.log('mati altura actual', store.getters.altura)
 
         // actualizar posicion
         this.coordenadas_actuales.latitud += store.getters.velocidad_y * 0.1
@@ -133,12 +150,12 @@
         )
 
         store.dispatch('setCoordenadas', this.coordenadas_actuales)
-        //console.log(
-        //  'posicion_actual: ',
-        //  store.getters.longitud,
-        //  ',',
-        //  store.getters.latitud
-        //)
+        console.log(
+          'mati posicion_actual: ',
+          store.getters.longitud,
+          ',',
+          store.getters.latitud
+        )
       },
 
       calcularVelocidadDespuesDeRotacion(velocidad, angulo) {
@@ -155,6 +172,14 @@
         var anguloRadianes = (anguloVertical * Math.PI) / 180
         var velocidadaltura = velocidad * Math.sin(anguloRadianes)
 
+        // if (anguloRadianes < 0 ){
+        //   console.log('mati entreee')
+        //   //anguloRadianes = anguloRadianes * -1
+        //   velocidadaltura = (velocidad * Math.sin(anguloRadianes * -1))
+        // }
+
+        console.log('mati velozidad fun z', velocidadaltura)
+        console.log('mati rad z', anguloRadianes)
         store.dispatch('setVelocidadZ', velocidadaltura)
       },
 
