@@ -19,15 +19,22 @@ import airSpeedIndicator from './modules/indicadores/airSpeedIndicator'
 const store = createStore({
   state: {
     luz: false,
+    estadoPrendidoOApagado: false,  //aca se guarda el estado de prendido o apagado del avion
   },
   mutations: {
     toggleLuz(state) {
       state.luz = !state.luz
     },
+    setEstadoPrendidoOApagado(state, value) {   
+      state.estadoPrendidoOApagado = value  
+    },
   },
   actions: {
     toggleLuz({ commit }) {
       commit('toggleLuz')
+    },
+    setEstadoPrendidoOApagado({ commit }, value) {
+      commit('setEstadoPrendidoOApagado', value)
     },
   },
   getters: {
