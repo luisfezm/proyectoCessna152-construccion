@@ -19,14 +19,14 @@ import topView from './modules/indicadores/topView'
 const store = createStore({
   state: {
     luz: false,
-    estadoPrendidoOApagado: false,
+    estadoPrendidoOApagado: false,  //aca se guarda el estado de prendido o apagado del avion
   },
   mutations: {
     toggleLuz(state) {
       state.luz = !state.luz
     },
-    setEstadoPrendidoOApagado(state, value) {
-      state.estadoPrendidoOApagado = value
+    setEstadoPrendidoOApagado(state, value) {   
+      state.estadoPrendidoOApagado = value  
     },
   },
   actions: {

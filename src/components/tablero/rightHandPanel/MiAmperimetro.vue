@@ -14,43 +14,52 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
-  import store from '@/store'
+  import { mapState } from 'vuex' //importo el mapState para poder acceder a los datos de la store
+  import store from '@/store' //importo el store para poder acceder a los datos de la store
 
   export default {
+    //aca se define la funcion export default
     data() {
+      //aca se define la funcion data
       return {
-        amp: 0,
-        ampToDegrees: -130,
-        transitionDuration: 0,
-        increaseInterval: null,
-        variableTraspaso: 30,
-        variableTraspaso2: false,
+        //aca se define la funcion data
+        amp: 0, //aca se define el valor del amperimetro
+        ampToDegrees: -130, //aca se define el angulo de giro del amperimetro
+        transitionDuration: 0, //aca se define la velocidad de giro del amperimetro
+        variableTraspaso: false, //aca se define la variable que se va a usar para pasar el valor de la store
       }
     },
     computed: {
-      ...mapState(['estadoPrendidoOApagado']),
+      //aca se define la funcion computed
+      ...mapState(['estadoPrendidoOApagado']), //aca se define el nombre de la store que se va a usar
 
       estadoPrendidoOApagado() {
-        return store.state.estadoPrendidoOApagado
+        //aca se define la funcion que se va a usar para pasar el valor de la store
+        return store.state.estadoPrendidoOApagado //aca se obtiene el valor de la store
       },
     },
 
     created() {
+      //aca se define la funcion created
       setInterval(() => {
-        this.amp = this.estadoPrendidoOApagado ? 30 : 0
+        //aca se define el intervalo de tiempo en el que se va a ejecutar la funcion created
+        this.amp = this.estadoPrendidoOApagado ? 30 : 0 //aca se define el valor del amperimetro
       }, 10)
     },
 
     mounted() {
-      setInterval(this.created, 10)
-      setInterval(this.updateAMP, 10)
+      //aca se define la funcion mounted
+      setInterval(this.created, 10) //aca se llama a la funcion created para que se ejecute cada 10 milisegundos
+      setInterval(this.updateAMP, 10) //aca se llama a la funcion updateAMP para que se ejecute cada 10 milisegundos
     },
 
     methods: {
+      //aca se define la funcion methods
       updateAMP() {
-        this.variableTraspaso2 = this.estadoPrendidoOApagado
-        if (this.variableTraspaso2 == true) {
+        //aca se define la funcion updateAMP
+        this.variableTraspaso = this.estadoPrendidoOApagado //aca se iguala la variable de traspaso con el valor de la store
+        if (this.variableTraspaso == true) {
+          //aca se pregunta si la variable de traspaso es true
           this.amp = 20 //aca se define el valor del amperimetro
         } else {
           this.amp = 0 //aca se define el valor del amperimetro
@@ -60,7 +69,8 @@
       },
 
       currentAmp() {
-        return this.$store.getters.getAmp
+        //aca se define la funcion currentAmp
+        return this.$store.getters.getAmp //aca se obtiene el valor de la store
       },
     },
   }
