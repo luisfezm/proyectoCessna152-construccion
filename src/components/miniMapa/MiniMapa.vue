@@ -1,14 +1,14 @@
 <template>
   <div id="container-map" class="container">
     <div id="map" />
-    
   </div>
 </template>
 
 <script>
   import L from 'leaflet'
-import 'leaflet/dist/leaflet.css'
-import { defineComponent, onMounted, ref } from 'vue'
+  import 'leaflet/dist/leaflet.css'
+  import { defineComponent, onMounted, ref } from 'vue'
+  import store from '@/store'
 
   export default defineComponent({
     name: 'MiMapa',
@@ -20,7 +20,7 @@ import { defineComponent, onMounted, ref } from 'vue'
 
       const actualizarMapa = (lat, lng) => {
         const newCoordinates = L.latLng(lat, lng)
-        map.setView(newCoordinates, 6)
+        map.setView(newCoordinates)
         marker.setLatLng(newCoordinates)
       }
 
@@ -30,7 +30,7 @@ import { defineComponent, onMounted, ref } from 'vue'
           map.getContainer().style.borderRadius = '50%'
         }
 
-        map.setView([x, y], 6)
+        map.setView([x, y], 13)
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: 'Cesssna',
         }).addTo(map)
@@ -75,12 +75,15 @@ import { defineComponent, onMounted, ref } from 'vue'
         inicializarMapa(-35.4264, -71.65542)
         actualizarMapa(-14.235004, -51.92528)
         actualizarMapa(-35.0021448, -71.2299552)
+        store.dispatch('setLatitud', -35.0021448)
+        store.dispatch('setLongitud', -71.2299552)
       })
 
       return {
         circularMode,
         toggleCircularMode,
         toggleZoomControl,
+        actualizarMapa,
       }
     },
   })
@@ -95,9 +98,6 @@ import { defineComponent, onMounted, ref } from 'vue'
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
-    
-    
   }
 
   #map {
@@ -121,7 +121,6 @@ import { defineComponent, onMounted, ref } from 'vue'
     display: flex;
     align-items: center;
     margin-right: 10px;
-    
   }
 
   .checkbox-label {
@@ -191,11 +190,7 @@ import { defineComponent, onMounted, ref } from 'vue'
     width: 20px;
   }
 
-  #container-map{
-    
+  #container-map {
     position: relative;
-    
   }
-
- 
 </style>

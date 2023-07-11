@@ -101,28 +101,29 @@
           store.dispatch('alternaChoque')
         }
 
+        this.coordenadas_actuales.longitud = store.getters.longitud
+        this.coordenadas_actuales.latitud = store.getters.latitud
         this.angulo_avion = store.getters.getHeadingIndicator
-        this.mixture = store.getters.getEstadoMixture
-        //console.log('mixture:', this.mixture)
-        this.throttle = store.getters.getThrottleDepth
+        this.mixture = store.getters.getEstadoMixture / 10
+        this.throttle = Math.round(store.getters.getThrottleDepth) / 100
         this.plane_surface = store.getters.plane_surface
         this.air_resistance = store.getters.air_resistance
         this.air_density = store.getters.air_density
         this.motor_strength = store.getters.motor_strenght
+        this.throttle = this.throttle.toFixed(2)
+        this.potencia = this.throttle * this.mixture * this.motor_strength
+        this.potencia = Math.round(this.potencia)
+        console.log('potencia', this.potencia)
         this.angulo_Pitch = store.getters.anguloPitch
-
         this.yoke_pich = store.getters.getEstadoPitch_yoke
         this.yoke_roll = store.getters.getEstadoRoll_yoke
-
-        this.potencia =
-          (((this.throttle / 100) * this.mixture) / 10) * this.motor_strength
         this.V = Math.sqrt(
           ((2 * this.potencia) / 0.5) *
             (this.air_density * this.plane_surface * this.air_resistance)
         )
 
-        //console.log('velocidad:' + this.V)
-        //console.log('poentecia:' + this.potencia)
+        console.log('velocidad:' + this.V)
+        store.dispatch('setVelocidad', this.V)
         this.calcularVelocidadDespuesDeRotacion(this.V, this.angulo_avion)
 
         //valor store
@@ -154,23 +155,29 @@
         console.log('mati altura actual', store.getters.altura)
 
         // actualizar posicion
-        this.coordenadas_actuales.latitud += store.getters.velocidad_y * 0.1
-        this.coordenadas_actuales.longitud += store.getters.velocidad_x * 0.1
+        this.calcularNuevaPosicion(this.V, this.angulo_avion, 0.1)
 
         store.dispatch(
           'setAltura',
           store.getters.altura + store.getters.velocidad_z * 0.1
         )
-
         store.dispatch('setCoordenadas', this.coordenadas_actuales)
         console.log(
           'mati posicion_actual: ',
           store.getters.longitud,
           ',',
-          store.getters.latitud
+          store.getters.longitud
         )
       },
+      // Función auxiliar para convertir grados a radianes
+      toRadians(degrees) {
+        return degrees * (Math.PI / 180)
+      },
 
+      // Función auxiliar para convertir radianes a grados
+      toDegrees(radians) {
+        return radians * (180 / Math.PI)
+      },
       calcularVelocidadDespuesDeRotacion(velocidad, angulo) {
         // Convertir el ángulo de grados a radianes
         var anguloRadianes = (angulo * Math.PI) / 180
@@ -208,6 +215,38 @@
       //crear .vue para visualizar la primera persona
 
       //mostrar cambios en vista de primera persona (segun altura actual)
+      calcularNuevaPosicion(velocidad, rumbo, tiempo) {
+        // Conversión de unidades
+        const radioTierra = 6371000 // Radio promedio de la Tierra en metros
+
+        // Convertir latitud y longitud a radianes
+        var latitudInicialRad = this.toRadians(
+          this.coordenadas_actuales.latitud
+        )
+        var longitudInicialRad = this.toRadians(
+          this.coordenadas_actuales.longitud
+        )
+        var rumboRad = this.toRadians(rumbo)
+
+        // Calcular desplazamiento angular en longitud (en radianes)
+        var deltaLongitud =
+          (velocidad * tiempo) / (radioTierra * Math.cos(latitudInicialRad))
+
+        // Calcular desplazamiento angular en latitud (en radianes)
+        var deltaLatitud = (velocidad * tiempo) / radioTierra
+
+        // Calcular nueva latitud y longitud
+        var nuevaLatitudRad =
+          latitudInicialRad + deltaLatitud * Math.cos(rumboRad)
+        var nuevaLongitudRad =
+          longitudInicialRad + deltaLongitud * Math.sin(rumboRad)
+
+        // Convertir latitud y longitud de radianes a grados
+        var nuevaLatitud = this.toDegrees(nuevaLatitudRad)
+        var nuevaLongitud = this.toDegrees(nuevaLongitudRad)
+        store.dispatch('setLatitud', nuevaLatitud)
+        store.dispatch('setLongitud', nuevaLongitud)
+      },
     },
   }
 </script>

@@ -1,9 +1,8 @@
 <template>
-  
   <div class="frame">
     <div class="numbers">{{ first }},{{ second }},{{ third }}</div>
   </div>
-  
+
   <img class="first" src="@/assets/adfKnob.svg" alt="" @click="modifyFirst()" />
   <img
     class="second"
@@ -15,7 +14,7 @@
 </template>
 <script>
   import { searchPoint } from '@/modules/indicadores/adfRadio.js'
-import store from '@/store'
+  import store from '@/store'
 
   export default {
     emits: ['adfNeedleChange'], // Declaración del evento adfNeedleChange
@@ -28,12 +27,12 @@ import store from '@/store'
         headingIndicatorValue: 0,
         adf_point: 0,
         currentPosition: {
-          x: 0,
-          y: 0,
+          lat: 0,
+          lon: 0,
         },
         destinationPoint: {
-          x: 0,
-          y: 0,
+          lat: 0,
+          lon: 0,
         },
       }
     },
@@ -93,12 +92,8 @@ import store from '@/store'
         if (this.headingIndicatorValue < 0) {
           this.headingIndicatorValue += 360
         }
-        let aux = this.calculateAngle(
-          this.currentPosition.x,
-          this.currentPosition.y,
-          this.destinationPoint.x,
-          this.destinationPoint.y
-        )
+        let aux = this.calcularRumbo()
+        console.log('el angulo calculado por las posiciones: ', aux)
         this.adf_needle = aux - this.headingIndicatorValue
         this.$emit('adfNeedleChange', this.adf_needle)
       },
@@ -107,16 +102,39 @@ import store from '@/store'
         let formattedAdfPoint = this.adf_point.toString().padStart(3, '0')
         let foundPoint = searchPoint(formattedAdfPoint)
 
+        this.currentPosition.lat = store.getters.latitud
+        this.currentPosition.lon = store.getters.longitud
         if (foundPoint) {
-          this.destinationPoint.x = foundPoint.x
-          this.destinationPoint.y = foundPoint.y
-          console.log('Valor actual de x: ' + this.currentPosition.x)
-          console.log('Valor actual de y: ' + this.currentPosition.y)
-          console.log('Valor de destino de x: ' + this.destinationPoint.x)
-          console.log('Valor de destino de y: ' + this.destinationPoint.y)
+          this.destinationPoint.lat = foundPoint.latitude
+          this.destinationPoint.lon = foundPoint.longitude
+          console.log('Latitud  Actual  : ' + this.currentPosition.lat)
+          console.log('Longitud Actual  : ' + this.currentPosition.lon)
+          console.log('Latitud  Destino : ' + this.destinationPoint.lat)
+          console.log('Longitud Destino : ' + this.destinationPoint.lon)
         } else {
           console.log('No se encontró ningún punto con el valor especificado')
         }
+      },
+      calcularRumbo() {
+        var lat1Rad = this.toRadians(this.currentPosition.lat)
+        var lon1Rad = this.toRadians(this.currentPosition.lon)
+        var lat2Rad = this.toRadians(this.destinationPoint.lat)
+        var lon2Rad = this.toRadians(this.destinationPoint.lon)
+        var deltaLon = lon2Rad - lon1Rad
+        var y = Math.sin(deltaLon) * Math.cos(lat2Rad)
+        var x =
+          Math.cos(lat1Rad) * Math.sin(lat2Rad) -
+          Math.sin(lat1Rad) * Math.cos(lat2Rad) * Math.cos(deltaLon)
+        let initialBearingRad = Math.atan2(y, x)
+        initialBearingRad = this.toDegrees(initialBearingRad)
+        var initialBearingDeg = (initialBearingRad + 360) % 360
+        return initialBearingDeg.toFixed(2)
+      },
+      toRadians(degrees) {
+        return degrees * (Math.PI / 180)
+      },
+      toDegrees(radians) {
+        return radians * (180 / Math.PI)
       },
     },
   }

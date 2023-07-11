@@ -9,6 +9,7 @@ const avion = {
     Velocidad_eje_x: 0,
     Velocidad_eje_y: 0,
     Velocidad_eje_z: 0,
+    Velocidad:0,
 
     // angulos de rotacion
     angulo_roll: 0,
@@ -52,6 +53,10 @@ const avion = {
     setVelocidadZ(state, velZ) {
       state.Velocidad_eje_z = velZ;
     },
+    setVelocidad(state, vel) {
+      state.Velocidad = vel;
+    },
+
  
     
     // --------- angulos ---------
@@ -104,6 +109,9 @@ const avion = {
     setVelocidadZ({ commit }, velZ) {
       commit('setVelocidadZ', velZ);
     },
+    setVelocidad({ commit }, vel) {
+      commit('setVelocidad', vel);
+    },
 
     // --------- angulos ---------
     setAnguloRoll({ commit }, roll) {
@@ -152,6 +160,8 @@ const avion = {
     velocidad_y: (state) => state.Velocidad_eje_y,
     // velocidad en el eje z
     velocidad_z: (state) => state.Velocidad_eje_z,
+    //velocidad
+    velocidad: (state) => state.Velocidad,
 
     // ángulo de roll
     angulo_roll: (state) => state.angulo_roll,
