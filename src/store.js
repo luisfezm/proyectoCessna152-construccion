@@ -19,15 +19,22 @@ import topView from './modules/indicadores/topView'
 const store = createStore({
   state: {
     luz: false,
+    estadoPrendidoOApagado: false,
   },
   mutations: {
     toggleLuz(state) {
       state.luz = !state.luz
     },
+    setEstadoPrendidoOApagado(state, value) {
+      state.estadoPrendidoOApagado = value
+    },
   },
   actions: {
     toggleLuz({ commit }) {
       commit('toggleLuz')
+    },
+    setEstadoPrendidoOApagado({ commit }, value) {
+      commit('setEstadoPrendidoOApagado', value)
     },
   },
   getters: {

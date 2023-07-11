@@ -14,6 +14,7 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex'
   import store from '@/store'
 
   export default {
@@ -24,64 +25,42 @@
         transitionDuration: 0,
         increaseInterval: null,
         variableTraspaso: 30,
+        variableTraspaso2: false,
       }
     },
+    computed: {
+      ...mapState(['estadoPrendidoOApagado']),
+
+      estadoPrendidoOApagado() {
+        return store.state.estadoPrendidoOApagado
+      },
+    },
+
     created() {
+      setInterval(() => {
+        this.amp = this.estadoPrendidoOApagado ? 30 : 0
+      }, 10)
+    },
+
+    mounted() {
+      setInterval(this.created, 10)
       setInterval(this.updateAMP, 10)
     },
-    mounted() {
-      setInterval(() => {
-        this.startIncreasingAMP()
-      }, 1000)
-    },
+
     methods: {
-      startIncreasingAMP() {
-        console.log('Valor de throttle:', store.state.throttle)
-        console.log('Valor de amp:', this.amp)
-        this.increaseInterval = setInterval(() => {
-          if (this.amp < 100) {
-            this.amp += 1
-            this.updateAMP()
-          }
-        }, 100)
-      },
-      stopIncreasingAMP() {
-        clearInterval(this.increaseInterval)
-      },
-      decreaseAMP() {
-        console.log('Valor de throttle:', store.state.throttle)
-        console.log('Valor de amp:', this.amp)
-        if (this.amp > 0) {
-          this.amp -= 1
-          this.updateAMP()
-        }
-      },
-      releaseAccelerator() {
-        this.increaseInterval = null
-        this.updateAMP()
-      },
       updateAMP() {
-        this.amp = 0
-        this.ampToDegrees = this.amp * 2.6
-        this.transitionDuration = 3.5 - this.amp * 0.03
+        this.variableTraspaso2 = this.estadoPrendidoOApagado
+        if (this.variableTraspaso2 == true) {
+          this.amp = 20 //aca se define el valor del amperimetro
+        } else {
+          this.amp = 0 //aca se define el valor del amperimetro
+        }
+        this.ampToDegrees = this.amp * 2.6 //aca se define el angulo de giro del amperimetro
+        this.transitionDuration = 3.5 - this.amp * 0.03 //aca se define la velocidad de giro del amperimetro
       },
+
       currentAmp() {
         return this.$store.getters.getAmp
-      },
-      accelerator(amp) {
-        const measuredElement = document.getElementById('measurer')
-        const range = 140
-        const maxAmp = 3500
-        const AmpRange = Math.max(Math.min(amp, maxAmp), 0)
-        const percentage = AmpRange / maxAmp
-        const degrees = percentage * range * 2 - range
-        if (degrees >= 140) {
-          measuredElement.style.cssText = `transform: rotate(${140}deg); transition: 4s;`
-        } else {
-          measuredElement.style.cssText = `transform: rotate(${
-            degrees - 15
-          }deg); transition: 4s;`
-        }
       },
     },
   }
