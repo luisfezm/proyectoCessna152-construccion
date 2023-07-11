@@ -14,6 +14,7 @@ import mixture from './modules/interactuadores/mixture'
 import trimwheel from './modules/interactuadores/trimwheel'
 import avion from './modules/avion'
 import topView from './modules/indicadores/topView'
+import airSpeedIndicator from './modules/indicadores/airSpeedIndicator'
 
 const store = createStore({
   state: {
@@ -48,6 +49,7 @@ const store = createStore({
     verticalspeedIndicator,
     avion,
     topView,
+    airSpeedIndicator,
   },
 })
 

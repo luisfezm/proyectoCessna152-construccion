@@ -75,7 +75,7 @@
       },
     },
     mounted() {
-      console.log('aaaaaaaaaa')
+      //console.log('aaaaaaaaaa')
       window.addEventListener('keydown', this.handleKeyDown)
       window.addEventListener('keyup', this.handleKeyUp)
     },
