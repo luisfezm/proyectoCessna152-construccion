@@ -82,21 +82,23 @@
         this.coordenadas_actuales.longitud = store.getters.longitud
         this.coordenadas_actuales.latitud = store.getters.latitud
         this.angulo_avion = store.getters.getHeadingIndicator
-        this.mixture = store.getters.getEstadoMixture
-        console.log('mixture:', this.mixture)
-        this.throttle = store.getters.getThrottleDepth
+        this.mixture = store.getters.getEstadoMixture / 10
+        this.throttle = Math.round(store.getters.getThrottleDepth) / 100
         this.plane_surface = store.getters.plane_surface
         this.air_resistance = store.getters.air_resistance
         this.air_density = store.getters.air_density
         this.motor_strength = store.getters.motor_strenght
-
-        this.potencia =
-          (((this.throttle / 100) * this.mixture) / 10) * this.motor_strength
+        this.throttle = this.throttle.toFixed(2)
+        this.potencia = this.throttle * this.mixture * this.motor_strength
+        this.potencia = Math.round(this.potencia)
+        console.log('potencia', this.potencia)
         this.V = Math.sqrt(
           ((2 * this.potencia) / 0.5) *
             (this.air_density * this.plane_surface * this.air_resistance)
         )
+
         console.log('velocidad:' + this.V)
+        store.dispatch('setVelocidad', this.V)
         this.calcularVelocidadDespuesDeRotacion(this.V, this.angulo_avion)
         console.log('velX:', store.getters.velocidad_x)
         console.log('velY:', store.getters.velocidad_y)
