@@ -22,6 +22,8 @@ const avion = {
       longitud: 0,
     },
 
+    choque:false,
+
     estado_motor: false, // indica si esta encendido o no el motor
 
     //variables / constantes del avion
@@ -36,6 +38,9 @@ const avion = {
   mutations: {
     // Mutaciones para modificar el estado del avion
     // usen acciones NO las mutaciones directamente
+    alternaChoque(state) {
+      state.choque = !state.choque;
+    },
 
     // --------- velocidades ---------
     setVelocidadX(state, velX) {
@@ -74,6 +79,8 @@ const avion = {
       state.coordenadas_actuales = coordenadas;
     },
 
+ 
+
     // --------- constantes (solo deberían ser seteadas una vez) ---------
     setPeso(state, peso) {
       console.warn('Seteado el peso');
@@ -82,6 +89,10 @@ const avion = {
   },
   actions: {
     // Acciones para realizar operaciones relacionadas con el avion
+
+    alternaChoque({ commit }) {
+      commit('alternaChoque');
+    },
 
     // --------- velocidades ---------
     setVelocidadX({ commit }, velX) {
@@ -125,6 +136,8 @@ const avion = {
     },
   },
   getters: {
+    choque: (state) => state.choque,
+
     // Getters para obtener datos del estado del avion
     // latitud actual del avion
     latitud: (state) => state.coordenadas_actuales.latitud,

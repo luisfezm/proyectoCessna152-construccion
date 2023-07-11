@@ -91,6 +91,16 @@
       update() {
         VistaPrimeraPersona.methods.funcionVerificar()
 
+        //a futuro cambiar a archivo .js
+        //cordenadas de torre
+
+        if (this.coordenadas_actuales.latitud > 400) {
+          console.log(
+            'oh no hesldkfjaslkdfjdslkajflksdjflkasdfjklsadjf chocado alkfjasdlkfj'
+          )
+          store.dispatch('alternaChoque')
+        }
+
         this.angulo_avion = store.getters.getHeadingIndicator
         this.mixture = store.getters.getEstadoMixture
         //console.log('mixture:', this.mixture)

@@ -1,11 +1,18 @@
 <template>
-  <div class="vistaPP">
+  <div class="img-move-wrapper">
+    <button @click="Vuelo1">vuelo de prueba 1</button>
+    <button @click="Vuelo1">vuelo de prueba 2</button>
+    <img
+      id="torre"
+      src="src/assets/primerapersona/edificio.jpg"
+      class="img-move img-move-1 img-fluid"
+    />
+
     <img
       id="imagen"
       src="src/assets/primerapersona/imagen0.jpg"
-      style="width: 900px; height: 300px"
+      class="img-move img-move-2 img-fluid"
     />
-    <button @click="Vuelo1">Haz clic</button>
   </div>
 </template>
 
@@ -62,7 +69,7 @@
         //estado consiguiendo altura
         setTimeout(() => {
           //cambio de valores
-          store.dispatch('setEstadoPitch_yoke', 10)
+          store.dispatch('setEstadoPitch_yoke', 20)
           store.dispatch('setThrottleDepth', 10)
           store.dispatch('setEstadoMixture', 10)
 
@@ -71,26 +78,26 @@
           console.log('trotle: ', store.getters.getThrottleDepth)
           console.log('mixture: ', store.getters.getEstadoMixture)
           console.log('angulo pich: ', store.getters.anguloPitch)
-        }, 3000)
+        }, 4000)
 
         //estado manteniendo se en el aire
         setTimeout(() => {
           //cambio de valores
-          store.dispatch('setEstadoPitch_yoke', -30)
-          store.dispatch('setThrottleDepth', 10)
-          store.dispatch('setEstadoMixture', 10)
+          store.dispatch('setEstadoPitch_yoke', 0)
+          store.dispatch('setThrottleDepth', 30)
+          store.dispatch('setEstadoMixture', 30)
 
           console.log('------------------')
           console.log('mati baja aire')
           console.log('trotle: ', store.getters.getThrottleDepth)
           console.log('mixture: ', store.getters.getEstadoMixture)
           console.log('angulo pich: ', store.getters.anguloPitch)
-        }, 4000)
+        }, 8000)
 
         //estado bajando hasta colicionar
         setTimeout(() => {
           //cambio de valores
-          store.dispatch('setEstadoPitch_yoke', 70)
+          store.dispatch('setEstadoPitch_yoke', -10)
           store.dispatch('setThrottleDepth', 10)
           store.dispatch('setEstadoMixture', 10)
 
@@ -99,7 +106,33 @@
           console.log('trotle: ', store.getters.getThrottleDepth)
           console.log('mixture: ', store.getters.getEstadoMixture)
           console.log('angulo pich: ', store.getters.anguloPitch)
-        }, 13000)
+        }, 8500)
+
+        setTimeout(() => {
+          //cambio de valores
+          store.dispatch('setEstadoPitch_yoke', 0)
+          store.dispatch('setThrottleDepth', 10)
+          store.dispatch('setEstadoMixture', 10)
+
+          console.log('------------------')
+          console.log('mati subiendo altura')
+          console.log('trotle: ', store.getters.getThrottleDepth)
+          console.log('mixture: ', store.getters.getEstadoMixture)
+          console.log('angulo pich: ', store.getters.anguloPitch)
+        }, 15000)
+
+        setTimeout(() => {
+          //cambio de valores
+          store.dispatch('setEstadoPitch_yoke', 0)
+          store.dispatch('setThrottleDepth', 0)
+          store.dispatch('setEstadoMixture', 0)
+
+          console.log('------------------')
+          console.log('mati subiendo altura')
+          console.log('trotle: ', store.getters.getThrottleDepth)
+          console.log('mixture: ', store.getters.getEstadoMixture)
+          console.log('angulo pich: ', store.getters.anguloPitch)
+        }, 30000)
       },
     },
   }
@@ -111,5 +144,47 @@
     height: 900px;
     background-size: cover;
     background-position: center;
+    position: absolute;
+  }
+
+  .img-move {
+    position: absolute;
+  }
+
+  .img-move-1 {
+    left: 400px;
+    top: 100px;
+
+    visibility: hidden;
+
+    z-index: 1; /* This image will be on top */
+  }
+
+  .img-move-2 {
+    left: 0px;
+    top: 20px;
+    z-index: 0;
+  }
+
+  .img-move-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 900px;
+    height: 300px;
+    /*max-width: 1140px; /* Bootstrap 4 container max-width for extra large devices */
+    margin: 0 auto;
+  }
+
+  .edificio_mapa {
+    top: 50px; /* Ajusta la posición vertical de la imagen superpuesta */
+    left: 50px;
+    z-index: 2;
+  }
+
+  .vistaAvion {
+    position: absolute;
+    width: 900px;
+    height: 300px;
+    z-index: 1;
   }
 </style>
