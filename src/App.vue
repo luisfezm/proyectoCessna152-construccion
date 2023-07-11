@@ -40,6 +40,7 @@
   import RadioPanel from './components/tablero/radioPanel/RadioPanel.vue'
   import RightHandPanel from './components/tablero/rightHandPanel/RightHandPanel.vue'
   import MiTerreno from './components/terreno/MiTerreno.vue'
+  import VistaPrimeraPersona from './components/terreno/VistaPrimeraPersona.vue'
   import store from '@/store'
 
   export default {
@@ -83,20 +84,7 @@
     },
     methods: {
       update() {
-        // importa el valor de la altura desde el store
-        const altura = store.getters.altura
-        // si la altura es 0, entonces el avion esta en el suelo (se debería mostrar imagen de despegue)
-        if (altura === 0) {
-          console.log('altura:', altura)
-        } else if (altura > 0) {
-          console.log('altura:', altura)
-        }
-
-        // importa el valor de la velocidad desde el store
-        const Avionvivo = store.getters.Avionvivo
-        if (Avionvivo === 0) {
-          //aqui hace el mati su cosa rara
-        }
+        VistaPrimeraPersona.methods.funcionVerificar()
 
         this.angulo_avion = store.getters.getHeadingIndicator
         this.mixture = store.getters.getEstadoMixture
