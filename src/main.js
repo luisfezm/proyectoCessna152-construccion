@@ -104,5 +104,18 @@ window.addEventListener('keypress', (event) => {
 });
 
 
+//Teclas asignadas para el throttle
+window.addEventListener('keypress', (event) => {
+  if (event.key === 'l') {
+    store.dispatch('tirarThrottle');
+    console.log('Valor Throttle ', store.getters.getThrottleDepth);
+  }else{
+    if(event.key === 'ñ'){
+      store.dispatch('presionarThrottle');
+      console.log('Valor Throttle ', store.getters.getThrottleDepth);
+    }
+  }
+});
+
 
 createApp(App).use(store).mount('#app')
