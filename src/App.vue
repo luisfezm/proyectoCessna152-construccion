@@ -40,6 +40,7 @@
   import RadioPanel from './components/tablero/radioPanel/RadioPanel.vue'
   import RightHandPanel from './components/tablero/rightHandPanel/RightHandPanel.vue'
   import MiTerreno from './components/terreno/MiTerreno.vue'
+  import VistaPrimeraPersona from './components/terreno/VistaPrimeraPersona.vue'
   import store from '@/store'
 
   export default {
@@ -88,6 +89,8 @@
     },
     methods: {
       update() {
+        VistaPrimeraPersona.methods.funcionVerificar()
+
         this.angulo_avion = store.getters.getHeadingIndicator
         this.mixture = store.getters.getEstadoMixture
         //console.log('mixture:', this.mixture)

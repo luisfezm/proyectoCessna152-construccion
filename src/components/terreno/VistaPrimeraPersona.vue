@@ -1,16 +1,34 @@
 <template>
   <div class="vistaPP">
-    kfdjnfdkjndfkjvfkdjnfvkjdfnvkjndfkjvndfkjvndkjf
-
+    <img
+      id="imagen"
+      src="src/assets/primerapersona/imagen0.jpg"
+      style="width: 900px; height: 300px"
+    />
     <button @click="Vuelo1">Haz clic</button>
   </div>
 </template>
 
 <script>
   import store from '@/store'
-
   export default {
     methods: {
+      funcionVerificar() {
+        var imagen = document.getElementById('imagen')
+        let altura = store.getters.altura
+        if (altura === 0) {
+          console.log('test: inicio')
+        } else if (altura > 0) {
+          imagen.src = 'src/assets/primerapersona/imagen0.jpg'
+          console.log('test: despegue')
+          imagen.src = 'src/assets/primerapersona/imagen1.jpg'
+        }
+
+        const Avionvivo = store.getters.Avionvivo
+        if (Avionvivo === 0) {
+          // elmati ve esto
+        }
+      },
       //vuelo en linea recta
       Vuelo1() {
         //los timer se ejecutan al mismo tiempo
@@ -87,10 +105,11 @@
   }
 </script>
 
-<style>
+<style scoped>
   .vistaPP {
-    background-image: url(https://w0.peakpx.com/wallpaper/750/101/HD-wallpaper-car-crash-accident-fire-crash-car.jpg);
-    height: 300px;
-    width: 900px;
+    width: 300px;
+    height: 900px;
+    background-size: cover;
+    background-position: center;
   }
 </style>
