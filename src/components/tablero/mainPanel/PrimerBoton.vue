@@ -1,8 +1,11 @@
 <template>
+  <div>
+    <div class="led" :class="{ 'led-red': !estadoLed, 'led-green': estadoLed }"></div>
+  </div>
   <div class="base">
     <div
       :class="['palanca', { active: estadoPalanca }]"
-      @mousedown="cambiarEstadoPalanca"
+      @mousedown="ejecutar"  
       @mouseup="cambiarEstadoPalanca"
     />
   </div>
@@ -12,13 +15,25 @@
   export default {
     data() {
       return {
+        estadoLed: false,
         estadoPalanca: false,
       }
     },
     methods: {
+      ejecutar(){
+        Promise.all([this.cambiarEstadoPalanca(), this.cambiarEstadoLed()])
+        .then(() => {
+
+        }).catch((error) => {
+          console.error('Error: ',error);
+        })
+      },
       cambiarEstadoPalanca() {
         this.estadoPalanca = !this.estadoPalanca
       },
+      cambiarEstadoLed(){
+        this.estadoLed = !this.estadoLed  
+      }
     },
   }
 </script>
@@ -49,5 +64,16 @@
 
   .active {
     transform: scale(0.8);
+  }
+
+  .led {
+    width: 10px;
+    height: 10px;
+    border-radius: 10%;
+    background-color: red;
+  }
+
+  .led-green {
+    background-color: green;
   }
 </style>

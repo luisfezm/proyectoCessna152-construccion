@@ -88,5 +88,21 @@ window.addEventListener('keypress', (event) => {
   }
 });
 
+//Segundo lote de teclas para mixture (sujeto a cambios)
+window.addEventListener('keypress', (event) => {
+  if (event.key === 'o') {
+    store.dispatch('teclaPresionada', event);
+    store.dispatch('actualizarBencinaPorHora', -5);
+    console.log('Valor Bencina ', store.getters.getConsumoBencinaHora);
+  }else{
+    if(event.key === 'p'){
+      store.dispatch('teclaPresionada', event);
+      store.dispatch('actualizarBencinaPorHora', 5);
+      console.log('Valor Bencina ', store.getters.getConsumoBencinaHora);
+    }
+  }
+});
+
+
 
 createApp(App).use(store).mount('#app')
