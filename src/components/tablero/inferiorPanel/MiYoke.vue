@@ -13,8 +13,8 @@
             transform: `translate(${currentTranslationX}px, ${
               currentTranslationY + 20
             }px) rotate(${currentRotation}deg)`,
-            width: '120px', 
-            height: '90px',
+            width: '160px', 
+            height: '120px',
             left: `${translateXLimit + 400}px`, 
             top: `${-translateYLimit}px`,
           }"
@@ -247,7 +247,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(200%, -100%); 
+  transform: translate(70%, -100%); 
 }
 
 
@@ -255,13 +255,13 @@
   position: absolute;
   top: 40%;
   left: 50%;
-  width: 6px;
+  width: 4px;
   height: 85%;
-  background-color: rgba(99, 95, 95, 0.952);
+  background-color: transparent; 
+  border: 4px solid rgba(99, 95, 95, 0.952); 
+  border-radius: 50%; 
   transform: translateX(-50%);
   z-index: 0;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
 }
-
 </style>
