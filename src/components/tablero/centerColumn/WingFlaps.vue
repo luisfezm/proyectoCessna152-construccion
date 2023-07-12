@@ -48,7 +48,7 @@
       stopDrag() {
         this.isDragging = false
         this.lastTranslationY = this.currentTranslationY
-        window.addEventListener('mouseup', this.stopDrag)
+        window.removeEventListener('mouseup', this.stopDrag)
       },
       handleDrag(event) {
         if (this.isDragging) {
