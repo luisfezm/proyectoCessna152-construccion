@@ -35,6 +35,8 @@ const avion = {
     air_density: 1.225, // 1.225 kg/m³.
     plane_velocity: 0, //m/s
     air_resistance: 0.32, //es el coeficionte aerodinamico del avion
+    stagnation_pressure:0, // presión de IMPACTO (llamada presión de estancamiento recibida del TUBO PITOT de una aeronave, que está en la corriente de aire)
+    static_pressure: 0,    // presión ESTÁTICA (generalmente de un sensor que no está en la corriente de aire)
   },
   mutations: {
     // Mutaciones para modificar el estado del avion
@@ -83,12 +85,18 @@ const avion = {
     setCoordenadas(state, coordenadas) {
       state.coordenadas_actuales = coordenadas;
     },
-
- 
+    
+    //---------Para calcular Velocidad aerodinamica----------------
+    setPresionImpacto(state, stagnation_pressure) {
+      state.stagnation_pressure = stagnation_pressure;
+    },
+    setPresionEstatica(state, static_pressure) {
+      state.static_pressure = static_pressure;
+    },
 
     // --------- constantes (solo deberían ser seteadas una vez) ---------
     setPeso(state, peso) {
-      console.warn('Seteado el peso');
+    //  console.warn('Seteado el peso');
       state.peso_avion = peso;
     },
   },
@@ -137,6 +145,13 @@ const avion = {
     setCoordenadas({ commit }, coordenadas) {
       commit('setCoordenadas', coordenadas);
     },
+    //--------------velocidad aerodinamica---------------------
+    setPresionImpacto({ commit }, presionImpacto) {
+      commit('setPresionImpacto', presionImpacto);
+    },
+    setPresionEstatica({ commit }, presionEstatica) {
+      commit('setPresionEstatica', presionEstatica);
+    },
 
     // --------- constantes (solo deberían ser seteadas una vez) ---------
     setPeso({ commit }, peso) {
@@ -181,7 +196,14 @@ const avion = {
     air_density: (state) => state.air_density,
     plane_velocity: (state) => state.plane_velocity,
     air_resistance: (state) => state.air_resistance,
+    
+    // presion aerodinamica
+    stagnation_pressure: (state)=> state.stagnation_pressure,
+    static_pressure: (state)=> state.static_pressure,
+
+
   },
+
 };
 
 // cualquier error o solicitud de cambio hablarlo a la brevedad con los scrum masters o los integradores

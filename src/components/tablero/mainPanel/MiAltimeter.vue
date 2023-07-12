@@ -35,39 +35,76 @@
 </template>
 
 <script>
-  import store from '@/store'
-
+  
   // const altimeter = store.modules.altimeter;
   export default {
     data() {
       return {}
     },
     mounted() {
+      let deg1 = 0
+      let deg2 = 0
+      let deg3 = 0
       setInterval(() => {
-        store.dispatch('updateVelocidadAltimeter')
-        store.dispatch('cambiaUnidadVelocidadPpmToPps')
-        store.dispatch('updateAltimeter')
+      //  store.dispatch('updateVelocidadAltimeter')
+      //  store.dispatch('cambiaUnidadVelocidadPpmToPps')
+     //   store.dispatch('updateAltimeter')
 
         let primaryNeedle = document.querySelector('.pn')
         let senconaryNeedle = document.querySelector('.sn')
         let tertiaryNeedle = document.querySelector('.tn')
+       
 
         //variable que modifica la aguja primaria (centenas de pies 1 --> 100)
         // let degPn = this.getDeegresPrimary(6)
-        let degPn = store.getters.getPrimaryDegrees
-        primaryNeedle.style.transform = `rotate(${degPn}deg)`
+      
+      //s  let degPn = store.getters.getPrimaryDegrees
+
+        if (this.$store.getters.getEstadoPitch_yoke > 0) {
+              deg2 = deg2 + 1
+             
+              primaryNeedle.style.transform = `rotate(${deg2}deg)`
+
+              if(deg2%6 == 0){
+                deg3 = deg3 + 0.63 
+                senconaryNeedle.style.transform = `rotate(${deg3}deg)`
+              }
+
+              if(deg2%90 == 0){
+                deg1 = deg1 + 0.5
+                tertiaryNeedle.style.transform = `rotate(${deg1}deg)`
+              }
+              
+        } else if (this.$store.getters.getEstadoPitch_yoke < 0) {
+            if(deg2 > 0){
+              deg2 = deg2 - 1
+            
+              primaryNeedle.style.transform = `rotate(${deg2}deg)`
+
+              if(deg2%6 == 0){
+                deg3 = deg3 - 0.63
+                senconaryNeedle.style.transform = `rotate(${deg3}deg)`
+              }
+              if(deg2%90 == 0){
+                deg1 = deg1 - 0.5
+                tertiaryNeedle.style.transform = `rotate(${deg1}deg)`
+              }
+
+            } 
+        }
+       // primaryNeedle.style.transform = `rotate(${degPn}deg)`
 
         //variable que modifica la aguja secundaria (miles de pies  1 --> 1 000)
         // let degSn = this.getDeegresSecondary(6)
-        let degSn = store.getters.getSecondaryDegrees
+       // let degSn = store.getters.getSecondaryDegrees
 
-        senconaryNeedle.style.transform = `rotate(${degSn}deg)`
+       // senconaryNeedle.style.transform = `rotate(${degSn}deg)`
         //variable que modifica la aguja terciaria (decenas de miles 1--> 10 000)
         // let degTn = this.getDeegresTerciary(6)
-        let degTn = store.getters.getTerciaryDegrees
+       // let degTn = store.getters.getTerciaryDegrees
 
-        tertiaryNeedle.style.transform = `rotate(${degTn}deg)`
-      }, 1000)
+      //  tertiaryNeedle.style.transform = `rotate(${degTn}deg)`
+      }, 100)
     },
   }
 </script>
@@ -155,6 +192,7 @@
     left: 25px;
     /* transform: rotate(10deg); */
     z-index: 10;
+    
   }
   .primary-needle {
     width: 2px;
@@ -164,6 +202,7 @@
     top: -10px;
     background-color: whitesmoke;
     z-index: 1;
+    
   }
   .secondary-needle {
     width: 3px;

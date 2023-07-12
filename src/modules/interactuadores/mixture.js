@@ -6,7 +6,7 @@ const mixture = {
   mutations: {
     // Mutación para actualizar el consumo de bencina por hora
     actualizarConsumoBencinaHora(state, payload) {
-      state.consumoBencinaHora = payload;
+      state.consumoBencinaHora += payload;
     },
     setEstadoMixture(state,mixture)
     {

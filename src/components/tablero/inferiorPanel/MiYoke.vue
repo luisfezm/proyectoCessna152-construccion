@@ -2,6 +2,10 @@
   <div id="miDiv" ref="div" class="MiYoke" :class="{ grabbing: isDragging }">
     <div class="panel-inferior">
       <div class="image-container">
+        <!-- Agregar ejes de movimiento -->
+       
+        <div class="axis-y"/>
+        <!-- Fin de los ejes de movimiento -->
         <img
           ref="image"
           src="@/assets/img/Yoke.png"
@@ -9,15 +13,17 @@
             transform: `translate(${currentTranslationX}px, ${
               currentTranslationY + 20
             }px) rotate(${currentRotation}deg)`,
-            width: '80px',
-            height: '70px',
+            width: '160px', 
+            height: '120px',
+            left: `${translateXLimit + 400}px`, 
+            top: `${-translateYLimit}px`,
           }"
           :class="{
             translateYAnimation: isMovingVertically,
             rotateAnimation: isRotating,
           }"
           draggable="false"
-        />
+        >
       </div>
     </div>
   </div>
@@ -40,8 +46,8 @@
         minRotationDisplay: -100,
         maxRotation: 90,
         minRotation: -90,
-        translateYLimit: 25,
-        translateXLimit: 0,
+        translateYLimit: 50,
+        translateXLimit: 100,
         moveAnimationFrameId: null,
         rotateAnimationFrameId: null,
       }
@@ -75,7 +81,7 @@
       },
     },
     mounted() {
-      console.log('aaaaaaaaaa')
+      //console.log('aaaaaaaaaa')
       window.addEventListener('keydown', this.handleKeyDown)
       window.addEventListener('keyup', this.handleKeyUp)
     },
@@ -88,38 +94,38 @@
     methods: {
       handleKeyDown(event) {
         switch (event.key) {
-          case 'ArrowUp':
-            this.startMoveUp()
-            break
-          case 'ArrowDown':
-            this.startMoveDown()
-            break
-          case 'ArrowLeft':
-            this.startRotateLeft()
-            break
-          case 'ArrowRight':
-            this.startRotateRight()
-            break
-          default:
-            break
+        case 'ArrowUp':
+          this.startMoveUp()
+          break
+        case 'ArrowDown':
+          this.startMoveDown()
+          break
+        case 'ArrowLeft':
+          this.startRotateLeft()
+          break
+        case 'ArrowRight':
+          this.startRotateRight()
+          break
+        default:
+          break
         }
       },
       handleKeyUp(event) {
         switch (event.key) {
-          case 'ArrowUp':
-            this.stopMoveUp()
-            break
-          case 'ArrowDown':
-            this.stopMoveDown()
-            break
-          case 'ArrowLeft':
-            this.stopRotateLeft()
-            break
-          case 'ArrowRight':
-            this.stopRotateRight()
-            break
-          default:
-            break
+        case 'ArrowUp':
+          this.stopMoveUp()
+          break
+        case 'ArrowDown':
+          this.stopMoveDown()
+          break
+        case 'ArrowLeft':
+          this.stopRotateLeft()
+          break
+        case 'ArrowRight':
+          this.stopRotateRight()
+          break
+        default:
+          break
         }
       },
       startMoveUp() {
@@ -225,14 +231,37 @@
 </script>
 
 <style>
-  .panel-inferior {
+.panel-inferior {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
+    width: 100%;
+    height: 30vh;
   }
 
-  .image-container {
-    position: relative;
-  }
+ .image-container {
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(70%, -100%); 
+}
+
+
+.axis-y {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  width: 4px;
+  height: 85%;
+  background-color: transparent; 
+  border: 4px solid rgba(99, 95, 95, 0.952); 
+  border-radius: 50%; 
+  transform: translateX(-50%);
+  z-index: 0;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
 </style>

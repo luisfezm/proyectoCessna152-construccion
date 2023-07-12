@@ -11,6 +11,7 @@
     <div class="indicators">
       <p ref="indicator_p">hola</p>
     </div>
+
   </div>
 </template>
 
@@ -90,7 +91,6 @@
     width: 200px;
     height: 150px;
     position: relative;
-
     background-color: white;
     border: 1px solid black;
   }

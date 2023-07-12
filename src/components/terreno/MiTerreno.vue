@@ -20,14 +20,12 @@
 <script>
   import MiMapa from '@/components/miniMapa/MiniMapa.vue'
   import frontView from './frontView.vue'
-
   import VistaPrimeraPersona from './VistaPrimeraPersona.vue'
   import store from '@/store'
   export default {
     components: {
       MiMapa,
       frontView,
-
       VistaPrimeraPersona,
     },
     created() {
@@ -42,6 +40,41 @@
         )
       },
     },
+    data() {
+      return {
+        latitud: null,
+        longitud: null,
+      }
+    },
+    computed: {
+      latitudStore() {
+        return store.getters.latitud
+      },
+      longitudStore() {
+        return store.getters.longitud
+      },
+    },
+    watch: {
+      latitudStore(newValue) {
+        this.latitud = newValue
+        this.update()
+      },
+      longitudStore(newValue) {
+        this.longitud = newValue
+        this.update()
+      },
+    },
+    mounted() {
+      this.latitud = this.latitudStore
+      this.longitud = this.longitudStore
+      this.update()
+    },
+    methods: {
+      update() {
+        const miMapaComponent = this.$refs.miMapaRef
+        miMapaComponent.actualizarMapa(this.latitud, this.longitud)
+      },
+    },
   }
 </script>
 
@@ -50,4 +83,8 @@
     height: 300px;
     width: 900px;
   }
+  .terrenoDerecha {
+    margin-left: 46%;
+    margin-right: 0;
+   }
 </style>
