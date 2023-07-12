@@ -69,6 +69,15 @@
         if (this.gradosDesviacion <= -25) {
           this.gradosDesviacion = -25
         }
+
+        if (
+          this.$store.getters.angulo_pitch != this.$store.getters.angulo_yaw
+        ) {
+          this.gradosDesviacionBola = this.gradosDesviacion / 4
+        }
+
+        //console.log('GRADOS BOLA ' + this.gradosDesviacionBola)
+
       },
     },
   }
