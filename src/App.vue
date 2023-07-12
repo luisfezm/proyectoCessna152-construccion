@@ -58,65 +58,82 @@
     },
     data() {
       return {
-        mixture: 0,
-        throttle: 0,
-        plane_surface: 0,
-        air_density: 0,
-        air_resistance: 0,
-        motor_strength: 0,
-        potencia: 0,
-        V: 0,
-        angulo_avion: 0,
-        coordenadas_actuales: {
-          latitud: 0,
-          longitud: 0,
-        },
+        tiempo: 0.1,
       }
     },
-    created() {
-      store.dispatch('setPeso', 500)
-      setInterval(this.update, 100) // 100 ms = 0.1 segundos
-    },
-    methods: {
-      update() {
-        this.coordenadas_actuales.longitud = store.getters.longitud
-        this.coordenadas_actuales.latitud = store.getters.latitud
-        this.angulo_avion = store.getters.getHeadingIndicator
-        this.mixture = store.getters.getEstadoMixture / 10
-        this.throttle = Math.round(store.getters.getThrottleDepth) / 100
-        this.plane_surface = store.getters.plane_surface
-        this.air_resistance = store.getters.air_resistance
-        this.air_density = store.getters.air_density
-        this.motor_strength = store.getters.motor_strenght
-        this.throttle = this.throttle.toFixed(2)
-        this.potencia = this.throttle * this.mixture * this.motor_strength
-        this.potencia = Math.round(this.potencia)
-        console.log('potencia', this.potencia)
-        this.V = Math.sqrt(
+    computed: {
+      coordenadas_actuales() {
+        return {
+          latitud: store.getters.latitud,
+          longitud: store.getters.longitud,
+        }
+      },
+      angulo_avion() {
+        return store.getters.getHeadingIndicator
+      },
+      mixture() {
+        return store.getters.getEstadoMixture / 10
+      },
+      throttle() {
+        return Math.round(store.getters.getThrottleDepth) / 100
+      },
+      plane_surface() {
+        return store.getters.plane_surface
+      },
+      air_resistance() {
+        return store.getters.air_resistance
+      },
+      air_density() {
+        return store.getters.air_density
+      },
+      motor_strength() {
+        return store.getters.motor_strenght
+      },
+      potencia() {
+        return Math.round(this.throttle * this.mixture * this.motor_strength)
+      },
+      V() {
+        return Math.sqrt(
           ((2 * this.potencia) / 0.5) *
             (this.air_density * this.plane_surface * this.air_resistance)
         )
-
-        console.log('velocidad:' + this.V)
-        store.dispatch('setVelocidad', this.V)
-        this.calcularVelocidadDespuesDeRotacion(this.V, this.angulo_avion)
-        console.log('velX:', store.getters.velocidad_x)
-        console.log('velY:', store.getters.velocidad_y)
-        // actualizar posicion
-        this.calcularNuevaPosicion(this.V, this.angulo_avion, 0.1)
-
-        console.log(
-          'posicion_actual: ',
-          store.getters.latitud,
-          ',',
-          store.getters.longitud
-        )
+      },
+      velocidad_x() {
+        return this.calcularVelocidadDespuesDeRotacion(
+          this.V,
+          this.angulo_avion
+        ).velocidadX
+      },
+      velocidad_y() {
+        return this.calcularVelocidadDespuesDeRotacion(
+          this.V,
+          this.angulo_avion
+        ).velocidadY
+      },
+    },
+    created() {
+      store.dispatch('setPeso', 500)
+    },
+    mounted() {
+      this.startUpdateInterval()
+    },
+    beforeUnmount() {
+      this.stopUpdateInterval()
+    },
+    methods: {
+      startUpdateInterval() {
+        this.updateInterval = setInterval(() => {
+          store.dispatch('setVelocidad', this.V)
+          this.calcularNuevaPosicion(this.V, this.angulo_avion, this.tiempo)
+        }, 100) // 100 ms = 0.1 segundos
+      },
+      stopUpdateInterval() {
+        clearInterval(this.updateInterval)
       },
       // Función auxiliar para convertir grados a radianes
       toRadians(degrees) {
         return degrees * (Math.PI / 180)
       },
-
       // Función auxiliar para convertir radianes a grados
       toDegrees(radians) {
         return radians * (180 / Math.PI)
@@ -127,8 +144,10 @@
         // Calcular las componentes x e y de la velocidad después de la rotación
         var velocidadX = velocidad * Math.sin(anguloRadianes)
         var velocidadY = velocidad * Math.cos(anguloRadianes)
-        store.dispatch('setVelocidadY', velocidadY)
-        store.dispatch('setVelocidadX', velocidadX)
+        return {
+          velocidadX,
+          velocidadY,
+        }
       },
       calcularNuevaPosicion(velocidad, rumbo, tiempo) {
         // Conversión de unidades

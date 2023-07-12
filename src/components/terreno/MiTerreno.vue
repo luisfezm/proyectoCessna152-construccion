@@ -13,23 +13,47 @@
 
 <script>
   import MiMapa from '@/components/miniMapa/MiniMapa.vue'
-  import frontView from './frontView.vue'
+  import FrontView from './frontView.vue'
   import store from '@/store'
+
   export default {
     components: {
       MiMapa,
-      frontView,
+      FrontView,
     },
-    created() {
-      setInterval(this.uptate, 0.1)
+    data() {
+      return {
+        latitud: null,
+        longitud: null,
+      }
+    },
+    computed: {
+      latitudStore() {
+        return store.getters.latitud
+      },
+      longitudStore() {
+        return store.getters.longitud
+      },
+    },
+    watch: {
+      latitudStore(newValue) {
+        this.latitud = newValue
+        this.update()
+      },
+      longitudStore(newValue) {
+        this.longitud = newValue
+        this.update()
+      },
+    },
+    mounted() {
+      this.latitud = this.latitudStore
+      this.longitud = this.longitudStore
+      this.update()
     },
     methods: {
-      uptate() {
+      update() {
         const miMapaComponent = this.$refs.miMapaRef
-        miMapaComponent.actualizarMapa(
-          store.getters.latitud,
-          store.getters.longitud
-        )
+        miMapaComponent.actualizarMapa(this.latitud, this.longitud)
       },
     },
   }
