@@ -14,6 +14,8 @@
         transform: `translateY(${currentTranslationY}px)`,
         width: '100%',
         height: '10%',
+        marginTop: '-30px',
+        position: 'relative',
       }"
       draggable="false"
     />
@@ -44,29 +46,30 @@
       },
       stopDrag() {
         this.isDragging = false
-        this.lastTranslationY = this.currentTranslationY // Guardar la última posición al soltar la imagen
+        this.lastTranslationY = this.currentTranslationY
       },
       handleDrag(event) {
         if (this.isDragging) {
           const currentY = event.clientY
           const diffY = currentY - this.startY
 
-          const translationFactor = 1 // Factor de desplazamiento
-          let newTranslationY = diffY * translationFactor
+          //const translationFactor = 1; // Factor de desplazamiento
+          let newTranslationY =
+            this.lastTranslationY + diffY * this.translationMultiplier
 
-          const maxTranslationY = 40 // Límite máximo de desplazamiento hacia arriba
-          const minTranslationY = -40 // Límite máximo de desplazamiento hacia abajo
+          const maxTranslationY = 30 // Límite máximo de desplazamiento hacia abajo
+          const minTranslationY = 0 // Límite máximo de desplazamiento hacia arriba
 
           newTranslationY = Math.max(
             minTranslationY,
             Math.min(maxTranslationY, newTranslationY)
           )
 
-          const nextTranslationY = this.lastTranslationY + newTranslationY
+          const nextTranslationY = newTranslationY
           this.currentTranslationY = Math.max(
             minTranslationY,
             Math.min(maxTranslationY, nextTranslationY)
-          ) // Ajustar dentro del rango
+          )
 
           this.$refs.image.style.transform = `translateY(${this.currentTranslationY}px)`
         }
@@ -81,8 +84,8 @@
     justify-content: center;
     align-items: center;
     background-color: rgb(177, 177, 177);
-    width: 50%;
-    height: 80%;
+    width: 20%;
+    height: 60%;
     border-radius: 5%;
     margin: auto;
     position: relative;
