@@ -57,9 +57,16 @@
 
         setTimeout(() => {
           //cambio de valores
-          store.dispatch('setEstadoPitch_yoke', 0)
-          store.dispatch('setThrottleDepth', 10)
-          store.dispatch('setEstadoMixture', 10)
+
+          if (store.getters.choque === false) {
+            store.dispatch('setEstadoPitch_yoke', 0)
+            store.dispatch('setThrottleDepth', 10)
+            store.dispatch('setEstadoMixture', 10)
+          } else {
+            store.dispatch('setEstadoPitch_yoke', 0)
+            store.dispatch('setThrottleDepth', 0)
+            store.dispatch('setEstadoMixture', 0)
+          }
 
           console.log('------------------')
           console.log('mati inicia movimiento en tierra')
@@ -71,9 +78,15 @@
         //estado consiguiendo altura
         setTimeout(() => {
           //cambio de valores
-          store.dispatch('setEstadoPitch_yoke', 20)
-          store.dispatch('setThrottleDepth', 10)
-          store.dispatch('setEstadoMixture', 10)
+          if (store.getters.choque === false) {
+            store.dispatch('setEstadoPitch_yoke', 20)
+            store.dispatch('setThrottleDepth', 10)
+            store.dispatch('setEstadoMixture', 10)
+          } else {
+            store.dispatch('setEstadoPitch_yoke', 0)
+            store.dispatch('setThrottleDepth', 0)
+            store.dispatch('setEstadoMixture', 0)
+          }
 
           console.log('------------------')
           console.log('mati conseguir altura')
@@ -85,9 +98,15 @@
         //estado manteniendo se en el aire
         setTimeout(() => {
           //cambio de valores
-          store.dispatch('setEstadoPitch_yoke', 0)
-          store.dispatch('setThrottleDepth', 30)
-          store.dispatch('setEstadoMixture', 30)
+          if (store.getters.choque === false) {
+            store.dispatch('setEstadoPitch_yoke', 0)
+            store.dispatch('setThrottleDepth', 30)
+            store.dispatch('setEstadoMixture', 30)
+          } else {
+            store.dispatch('setEstadoPitch_yoke', 0)
+            store.dispatch('setThrottleDepth', 0)
+            store.dispatch('setEstadoMixture', 0)
+          }
 
           console.log('------------------')
           console.log('mati baja aire')
@@ -99,9 +118,16 @@
         //estado bajando hasta colicionar
         setTimeout(() => {
           //cambio de valores
-          store.dispatch('setEstadoPitch_yoke', -10)
-          store.dispatch('setThrottleDepth', 10)
-          store.dispatch('setEstadoMixture', 10)
+
+          if (store.getters.choque === false) {
+            store.dispatch('setEstadoPitch_yoke', -10)
+            store.dispatch('setThrottleDepth', 10)
+            store.dispatch('setEstadoMixture', 10)
+          } else {
+            store.dispatch('setEstadoPitch_yoke', 0)
+            store.dispatch('setThrottleDepth', 0)
+            store.dispatch('setEstadoMixture', 0)
+          }
 
           console.log('------------------')
           console.log('mati subiendo altura')
@@ -112,9 +138,15 @@
 
         setTimeout(() => {
           //cambio de valores
-          store.dispatch('setEstadoPitch_yoke', 0)
-          store.dispatch('setThrottleDepth', 15)
-          store.dispatch('setEstadoMixture', 15)
+          if (store.getters.choque === false) {
+            store.dispatch('setEstadoPitch_yoke', 0)
+            store.dispatch('setThrottleDepth', 15)
+            store.dispatch('setEstadoMixture', 15)
+          } else {
+            store.dispatch('setEstadoPitch_yoke', 0)
+            store.dispatch('setThrottleDepth', 0)
+            store.dispatch('setEstadoMixture', 0)
+          }
 
           console.log('------------------')
           console.log('mati subiendo altura')
@@ -125,9 +157,15 @@
 
         setTimeout(() => {
           //cambio de valores
-          store.dispatch('setEstadoPitch_yoke', 0)
-          store.dispatch('setThrottleDepth', 0)
-          store.dispatch('setEstadoMixture', 0)
+          if (store.getters.choque === false) {
+            store.dispatch('setEstadoPitch_yoke', 0)
+            store.dispatch('setThrottleDepth', 0)
+            store.dispatch('setEstadoMixture', 0)
+          } else {
+            store.dispatch('setEstadoPitch_yoke', 0)
+            store.dispatch('setThrottleDepth', 0)
+            store.dispatch('setEstadoMixture', 0)
+          }
 
           console.log('------------------')
           console.log('mati subiendo altura')
