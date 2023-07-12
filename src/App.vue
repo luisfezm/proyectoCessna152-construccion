@@ -10,7 +10,6 @@
     <div class="tableroInferior">
       <div class="itemTableroInferior">
         <div class="controlesTableroInferior">
-          <PrimerBoton />
           <IgnitionSwitch />
           <MiYoke />
           <FuelQuantity />
@@ -34,7 +33,6 @@
   import PedalesPiloto from './components/pedales/PedalesPiloto.vue'
   import CenterColumn from './components/tablero/centerColumn/CenterColumnPanel.vue'
   import FuelQuantity from './components/tablero/mainPanel/FuelQuantity.vue'
-  import PrimerBoton from './components/tablero/mainPanel/PrimerBoton.vue'
   import IgnitionSwitch from './components/tablero/mainPanel/IgnitionSwitch.vue'
   import MainPanel from './components/tablero/mainPanel/MainPanel.vue'
   import RadioPanel from './components/tablero/radioPanel/RadioPanel.vue'
@@ -53,7 +51,6 @@
       RightHandPanel,
       MiTerreno,
       MiYoke,
-      PrimerBoton,
       IgnitionSwitch,
     },
     data() {
@@ -137,6 +134,38 @@
       // Función auxiliar para convertir radianes a grados
       toDegrees(radians) {
         return radians * (180 / Math.PI)
+      },
+      update() {
+        this.angulo_avion = store.getters.getHeadingIndicator
+        this.mixture = store.getters.getEstadoMixture
+        //console.log('mixture:', this.mixture)
+        this.throttle = store.getters.getThrottleDepth
+        this.plane_surface = store.getters.plane_surface
+        this.air_resistance = store.getters.air_resistance
+        this.air_density = store.getters.air_density
+        this.motor_strength = store.getters.motor_strenght
+
+        this.potencia =
+          (((this.throttle / 100) * this.mixture) / 10) * this.motor_strength
+        this.V = Math.sqrt(
+          ((2 * this.potencia) / 0.5) *
+            (this.air_density * this.plane_surface * this.air_resistance)
+        )
+        //console.log('velocidad:' + this.V)
+        this.calcularVelocidadDespuesDeRotacion(this.V, this.angulo_avion)
+        //console.log('velX:', store.getters.velocidad_x)
+        //console.log('velY:', store.getters.velocidad_y)
+        // actualizar posicion
+        this.coordenadas_actuales.latitud += store.getters.velocidad_y * 0.1
+        this.coordenadas_actuales.longitud += store.getters.velocidad_x * 0.1
+        store.dispatch('setCoordenadas', this.coordenadas_actuales)
+        /*console.log(
+          'posicion_actual: ',
+          store.getters.longitud,
+          ',',
+          store.getters.latitud
+        )
+        */
       },
       calcularVelocidadDespuesDeRotacion(velocidad, angulo) {
         // Convertir el ángulo de grados a radianes

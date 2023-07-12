@@ -6,6 +6,7 @@
     </div>
     <div class="terrenoDerecha">
       <!-- Esta es la parte derecha de la vista del vuelo, deben colocar aquí el componente que creen -->
+      <TopView />
       <frontView />
     </div>
   </div>
@@ -15,11 +16,13 @@
   import MiMapa from '@/components/miniMapa/MiniMapa.vue'
   import FrontView from './frontView.vue'
   import store from '@/store'
+  import TopView from './TopView.vue'
 
   export default {
     components: {
       MiMapa,
       FrontView,
+      TopView,
     },
     data() {
       return {
@@ -58,3 +61,10 @@
     },
   }
 </script>
+
+<style lang="scss" scoped>
+  .terrenoDerecha {
+    margin-left: 46%;
+    margin-right: 0;
+  }
+</style>
