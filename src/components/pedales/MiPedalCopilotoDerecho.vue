@@ -1,20 +1,27 @@
 <template>
   <div>
-    <button
+    <div
       class="pedal"
       role="button"
+      :style="{
+        'background-image': `url(${pedalImage})`,
+        'background-repeat': 'no-repeat',
+        'background-size': '100% 100%',
+        'background-color': '#2b2b2b',
+      }"
       @mousedown="presionarPedalDerecho"
       @mouseup="soltarPedalDerecho"
       @mouseleave="soltarPedalDerecho"
     />
-    <!-- <p>Movimiento del pedal derecho: {{ movPedalDerecha }}</p> -->
   </div>
 </template>
 
 <script>
+  import pedalImage from '@/assets/img/pedal.png'
   export default {
     data() {
       return {
+        pedalImage,
         intervalId: null,
         resetTimeoutId: null,
       }
@@ -52,14 +59,16 @@
 
 <style scoped>
   .pedal {
+    background-image: url('~@/assets/img/pedal.png');
+    background-size: auto 100%;
     height: 45px;
     padding: 10px 20px;
     border: none;
-    background-color: #f2f2f2;
+    /*background-color: #f2f2f2;*/
     border-radius: 0;
     display: block;
     transition: transform 0.3s;
-    background-color: #0d0d0d;
+    /*background-color: #0d0d0d;*/
   }
 
   .pedal:active {

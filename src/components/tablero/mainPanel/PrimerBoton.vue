@@ -1,23 +1,39 @@
 <template>
   <div class="base">
     <div
-      :class="['palanca', { active: estadoPalanca }]"
-      @mousedown="cambiarEstadoPalanca"
-      @mouseup="cambiarEstadoPalanca"
+      :class="['palanca', { active: estadoPresionado }]"
+      @mousedown="presionarBoton"
+      @mouseup="soltarBoton"
     />
   </div>
 </template>
 
 <script>
   export default {
+    // Exportar
     data() {
+      // Datos
       return {
-        estadoPalanca: false,
+        estadoPresionado: false, // Estado para iniciar la animación
+        estadoPrimer: false, // Estado para cambiar el color del primer botón
+        contador: 0, // Contador para cambiar el estadoPrimer
       }
     },
     methods: {
-      cambiarEstadoPalanca() {
-        this.estadoPalanca = !this.estadoPalanca
+      // Métodos
+      presionarBoton() {
+        // Cuando se presiona el botón
+        this.estadoPresionado = true // Cambiar el estado para iniciar la animación
+      },
+      soltarBoton() {
+        // Cuando se suelta el botón
+        this.estadoPresionado = false // Cambiar el estado para reiniciar la animación
+        this.contador++ // Aumentar el contador
+        if (this.contador === 5) {
+          // Si el contador llega a 5
+          this.estadoPrimer = !this.estadoPrimer // Cambiar el estado
+          this.contador = 0 // Reiniciar el contador después de cambiar el estado
+        }
       },
     },
   }
@@ -47,7 +63,7 @@
     transition: all 0.2s ease-in-out;
   }
 
-  .active {
+  .palanca.active {
     transform: scale(0.8);
   }
 </style>
