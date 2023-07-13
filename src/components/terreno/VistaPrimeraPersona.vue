@@ -24,16 +24,17 @@
         var imagen = document.getElementById('imagen')
 
         const Avionvivo = store.getters.choque
-        console.log('vivo avion uwuwuwu', Avionvivo)
+        //console.log('vivo avion uwuwuwu', Avionvivo)
         if (Avionvivo === true) {
+          console.log('muerte')
           imagen.src = 'src/assets/primerapersona/imagen2.jpg'
         } else {
           let altura = store.getters.altura
           if (altura === 0) {
-            console.log('test: inicio')
-          } else if (altura > 0) {
             imagen.src = 'src/assets/primerapersona/imagen0.jpg'
-            console.log('test: despegue')
+            //console.log('test: inicio')
+          } else if (altura > 0) {
+            //console.log('test: despegue')
             imagen.src = 'src/assets/primerapersona/imagen1.jpg'
           }
         }
@@ -54,6 +55,7 @@
         console.log('2.- gana altura hasta x punto')
         console.log('3.- mantendra el vuelo')
         console.log('4.- chocara y explotara')
+        console.log('muro invisible al llegar -34.9971013333662')
 
         setTimeout(() => {
           //cambio de valores
@@ -159,8 +161,8 @@
           //cambio de valores
           if (store.getters.choque === false) {
             store.dispatch('setEstadoPitch_yoke', 0)
-            store.dispatch('setThrottleDepth', 0)
-            store.dispatch('setEstadoMixture', 0)
+            store.dispatch('setThrottleDepth', 15)
+            store.dispatch('setEstadoMixture', 15)
           } else {
             store.dispatch('setEstadoPitch_yoke', 0)
             store.dispatch('setThrottleDepth', 0)
