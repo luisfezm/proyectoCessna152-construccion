@@ -5,6 +5,7 @@ const avion = {
     // Estado inicial del avion
     // usen setters y getters NO el state directamente
 
+    choque:false,
     // velocidad en cada uno de los ejes
     Velocidad_eje_x: 0,
     Velocidad_eje_y: 0,
@@ -40,6 +41,9 @@ const avion = {
     // Mutaciones para modificar el estado del avion
     // usen acciones NO las mutaciones directamente
 
+    alternaChoque(state,estado) {
+      state.choque = estado;
+    },
     // --------- velocidades ---------
     setVelocidadX(state, velX) {
       state.Velocidad_eje_x = velX;
@@ -96,6 +100,10 @@ const avion = {
     },
   },
   actions: {
+
+    alternaChoque({ commit },estado) {
+      commit('alternaChoque',estado);
+    },
     // Acciones para realizar operaciones relacionadas con el avion
 
     // --------- velocidades ---------
@@ -150,6 +158,9 @@ const avion = {
     },
   },
   getters: {
+
+    choque: (state) => state.choque,
+
     // Getters para obtener datos del estado del avion
     // latitud actual del avion
     latitud: (state) => state.coordenadas_actuales.latitud,

@@ -4,6 +4,11 @@
       <MiMapa ref="miMapaRef" />
       <!-- Esta es la parte izquierda de la vista del vuelo, deben colocar aquí el componente que creen -->
     </div>
+
+    <div class="vistaPrimeraPersona">
+      <VistaPrimeraPersona />
+    </div>
+
     <div class="terrenoDerecha">
       <!-- Esta es la parte derecha de la vista del vuelo, deben colocar aquí el componente que creen -->
       <TopView />
@@ -16,6 +21,7 @@
   import MiMapa from '@/components/miniMapa/MiniMapa.vue'
   import FrontView from './frontView.vue'
   import store from '@/store'
+  import VistaPrimeraPersona from './VistaPrimeraPersona.vue'
   import TopView from './TopView.vue'
 
   export default {
@@ -23,6 +29,7 @@
       MiMapa,
       FrontView,
       TopView,
+      VistaPrimeraPersona,
     },
     data() {
       return {
@@ -63,8 +70,8 @@
 </script>
 
 <style lang="scss" scoped>
-  .terrenoDerecha {
-    margin-left: 46%;
-    margin-right: 0;
+  .vistaPrimeraPersona {
+    height: 300px;
+    width: 800px;
   }
 </style>

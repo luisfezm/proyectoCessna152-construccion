@@ -38,6 +38,7 @@
   import RadioPanel from './components/tablero/radioPanel/RadioPanel.vue'
   import RightHandPanel from './components/tablero/rightHandPanel/RightHandPanel.vue'
   import MiTerreno from './components/terreno/MiTerreno.vue'
+  import VistaPrimeraPersona from './components/terreno/VistaPrimeraPersona.vue'
   import store from '@/store'
 
   export default {
@@ -65,6 +66,11 @@
           longitud: store.getters.longitud,
         }
       },
+
+      altura() {
+        return store.getters.altura
+      },
+
       angulo_avion() {
         return store.getters.getHeadingIndicator
       },
@@ -107,6 +113,14 @@
           this.angulo_avion
         ).velocidadY
       },
+
+      angulo_pitch() {
+        return store.getters.getEstadoPitch_yoke
+      },
+
+      angulo_roll() {
+        return store.getters.getEstadoRoll_yoke
+      },
     },
     created() {
       store.dispatch('setPeso', 500)
@@ -120,8 +134,27 @@
     methods: {
       startUpdateInterval() {
         this.updateInterval = setInterval(() => {
-          store.dispatch('setVelocidad', this.V)
-          this.calcularNuevaPosicion(this.V, this.angulo_avion, this.tiempo)
+          if (store.getters.choque === false) {
+            store.dispatch('setVelocidad', this.V)
+            this.calcularNuevaPosicion(this.V, this.angulo_avion, this.tiempo)
+            this.calcularVelocidadAltura(this.V, this.angulo_pitch)
+          }
+
+          VistaPrimeraPersona.methods.funcionVerificar()
+          store.dispatch(
+            'setAltura',
+            store.getters.altura + store.getters.velocidad_z * 0.1
+          )
+          console.log('altura:', this.altura)
+
+          //despues se movera a una funcion de un js [solo sprint 4]
+          if (this.coordenadas_actuales.latitud >= -34.9971013333662) {
+            console.log('oh no he chocado ')
+            store.dispatch('alternaChoque', true)
+          } else {
+            console.log(this.coordenadas_actuales.latitud)
+            store.dispatch('alternaChoque', false)
+          }
         }, 100) // 100 ms = 0.1 segundos
       },
       stopUpdateInterval() {
@@ -135,38 +168,14 @@
       toDegrees(radians) {
         return radians * (180 / Math.PI)
       },
-      update() {
-        this.angulo_avion = store.getters.getHeadingIndicator
-        this.mixture = store.getters.getEstadoMixture
-        //console.log('mixture:', this.mixture)
-        this.throttle = store.getters.getThrottleDepth
-        this.plane_surface = store.getters.plane_surface
-        this.air_resistance = store.getters.air_resistance
-        this.air_density = store.getters.air_density
-        this.motor_strength = store.getters.motor_strenght
 
-        this.potencia =
-          (((this.throttle / 100) * this.mixture) / 10) * this.motor_strength
-        this.V = Math.sqrt(
-          ((2 * this.potencia) / 0.5) *
-            (this.air_density * this.plane_surface * this.air_resistance)
-        )
-        //console.log('velocidad:' + this.V)
-        this.calcularVelocidadDespuesDeRotacion(this.V, this.angulo_avion)
-        //console.log('velX:', store.getters.velocidad_x)
-        //console.log('velY:', store.getters.velocidad_y)
-        // actualizar posicion
-        this.coordenadas_actuales.latitud += store.getters.velocidad_y * 0.1
-        this.coordenadas_actuales.longitud += store.getters.velocidad_x * 0.1
-        store.dispatch('setCoordenadas', this.coordenadas_actuales)
-        /*console.log(
-          'posicion_actual: ',
-          store.getters.longitud,
-          ',',
-          store.getters.latitud
-        )
-        */
+      calcularVelocidadAltura(velocidad, anguloVertical) {
+        var anguloRadianes = (anguloVertical * Math.PI) / 180
+        var velocidadaltura = velocidad * Math.sin(anguloRadianes)
+
+        store.dispatch('setVelocidadZ', velocidadaltura)
       },
+
       calcularVelocidadDespuesDeRotacion(velocidad, angulo) {
         // Convertir el ángulo de grados a radianes
         var anguloRadianes = (angulo * Math.PI) / 180
@@ -178,6 +187,7 @@
           velocidadY,
         }
       },
+
       calcularNuevaPosicion(velocidad, rumbo, tiempo) {
         // Conversión de unidades
         const radioTierra = 6371000 // Radio promedio de la Tierra en metros
@@ -207,6 +217,10 @@
         // Convertir latitud y longitud de radianes a grados
         var nuevaLatitud = this.toDegrees(nuevaLatitudRad)
         var nuevaLongitud = this.toDegrees(nuevaLongitudRad)
+
+        console.log(nuevaLatitud)
+        console.log(nuevaLongitud)
+
         store.dispatch('setLatitud', nuevaLatitud)
         store.dispatch('setLongitud', nuevaLongitud)
       },
