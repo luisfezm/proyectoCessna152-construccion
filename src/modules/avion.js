@@ -5,10 +5,12 @@ const avion = {
     // Estado inicial del avion
     // usen setters y getters NO el state directamente
 
+    choque:false,
     // velocidad en cada uno de los ejes
     Velocidad_eje_x: 0,
     Velocidad_eje_y: 0,
     Velocidad_eje_z: 0,
+    Velocidad:0,
 
     // angulos de rotacion
     angulo_roll: 0,
@@ -32,11 +34,16 @@ const avion = {
     air_density: 1.225, // 1.225 kg/m³.
     plane_velocity: 0, //m/s
     air_resistance: 0.32, //es el coeficionte aerodinamico del avion
+    stagnation_pressure:0, // presión de IMPACTO (llamada presión de estancamiento recibida del TUBO PITOT de una aeronave, que está en la corriente de aire)
+    static_pressure: 0,    // presión ESTÁTICA (generalmente de un sensor que no está en la corriente de aire)
   },
   mutations: {
     // Mutaciones para modificar el estado del avion
     // usen acciones NO las mutaciones directamente
 
+    alternaChoque(state,estado) {
+      state.choque = estado;
+    },
     // --------- velocidades ---------
     setVelocidadX(state, velX) {
       state.Velocidad_eje_x = velX;
@@ -47,6 +54,10 @@ const avion = {
     setVelocidadZ(state, velZ) {
       state.Velocidad_eje_z = velZ;
     },
+    setVelocidad(state, vel) {
+      state.Velocidad = vel;
+    },
+
  
     
     // --------- angulos ---------
@@ -74,13 +85,25 @@ const avion = {
       state.coordenadas_actuales = coordenadas;
     },
 
+    //---------Para calcular Velocidad aerodinamica----------------
+    setPresionImpacto(state, stagnation_pressure) {
+      state.stagnation_pressure = stagnation_pressure;
+    },
+    setPresionEstatica(state, static_pressure) {
+      state.static_pressure = static_pressure;
+    },
+
     // --------- constantes (solo deberían ser seteadas una vez) ---------
     setPeso(state, peso) {
-      console.warn('Seteado el peso');
+    //  console.warn('Seteado el peso');
       state.peso_avion = peso;
     },
   },
   actions: {
+
+    alternaChoque({ commit },estado) {
+      commit('alternaChoque',estado);
+    },
     // Acciones para realizar operaciones relacionadas con el avion
 
     // --------- velocidades ---------
@@ -92,6 +115,9 @@ const avion = {
     },
     setVelocidadZ({ commit }, velZ) {
       commit('setVelocidadZ', velZ);
+    },
+    setVelocidad({ commit }, vel) {
+      commit('setVelocidad', vel);
     },
 
     // --------- angulos ---------
@@ -118,6 +144,13 @@ const avion = {
     setCoordenadas({ commit }, coordenadas) {
       commit('setCoordenadas', coordenadas);
     },
+    //--------------velocidad aerodinamica---------------------
+    setPresionImpacto({ commit }, presionImpacto) {
+      commit('setPresionImpacto', presionImpacto);
+    },
+    setPresionEstatica({ commit }, presionEstatica) {
+      commit('setPresionEstatica', presionEstatica);
+    },
 
     // --------- constantes (solo deberían ser seteadas una vez) ---------
     setPeso({ commit }, peso) {
@@ -125,6 +158,9 @@ const avion = {
     },
   },
   getters: {
+
+    choque: (state) => state.choque,
+
     // Getters para obtener datos del estado del avion
     // latitud actual del avion
     latitud: (state) => state.coordenadas_actuales.latitud,
@@ -139,6 +175,8 @@ const avion = {
     velocidad_y: (state) => state.Velocidad_eje_y,
     // velocidad en el eje z
     velocidad_z: (state) => state.Velocidad_eje_z,
+    //velocidad
+    velocidad: (state) => state.Velocidad,
 
     // ángulo de roll
     angulo_roll: (state) => state.angulo_roll,
@@ -158,7 +196,14 @@ const avion = {
     air_density: (state) => state.air_density,
     plane_velocity: (state) => state.plane_velocity,
     air_resistance: (state) => state.air_resistance,
+    
+    // presion aerodinamica
+    stagnation_pressure: (state)=> state.stagnation_pressure,
+    static_pressure: (state)=> state.static_pressure,
+
+
   },
+
 };
 
 // cualquier error o solicitud de cambio hablarlo a la brevedad con los scrum masters o los integradores

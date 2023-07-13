@@ -14,74 +14,63 @@
 </template>
 
 <script>
-  import store from '@/store'
+  import { mapState } from 'vuex' //importo el mapState para poder acceder a los datos de la store
+  import store from '@/store' //importo el store para poder acceder a los datos de la store
 
   export default {
+    //aca se define la funcion export default
     data() {
+      //aca se define la funcion data
       return {
-        amp: 0,
-        ampToDegrees: -130,
-        transitionDuration: 0,
-        increaseInterval: null,
-        variableTraspaso: 30,
+        //aca se define la funcion data
+        amp: 0, //aca se define el valor del amperimetro
+        ampToDegrees: -130, //aca se define el angulo de giro del amperimetro
+        transitionDuration: 0, //aca se define la velocidad de giro del amperimetro
+        variableTraspaso: false, //aca se define la variable que se va a usar para pasar el valor de la store
       }
     },
+    computed: {
+      //aca se define la funcion computed
+      ...mapState(['estadoPrendidoOApagado']), //aca se define el nombre de la store que se va a usar
+
+      estadoPrendidoOApagado() {
+        //aca se define la funcion que se va a usar para pasar el valor de la store
+        return store.state.estadoPrendidoOApagado //aca se obtiene el valor de la store
+      },
+    },
+
     created() {
-      setInterval(this.updateAMP, 10)
-    },
-    mounted() {
+      //aca se define la funcion created
       setInterval(() => {
-        this.startIncreasingAMP()
-      }, 1000)
+        //aca se define el intervalo de tiempo en el que se va a ejecutar la funcion created
+        this.amp = this.estadoPrendidoOApagado ? 30 : 0 //aca se define el valor del amperimetro
+      }, 10)
     },
+
+    mounted() {
+      //aca se define la funcion mounted
+      setInterval(this.created, 10) //aca se llama a la funcion created para que se ejecute cada 10 milisegundos
+      setInterval(this.updateAMP, 10) //aca se llama a la funcion updateAMP para que se ejecute cada 10 milisegundos
+    },
+
     methods: {
-      startIncreasingAMP() {
-        console.log('Valor de throttle:', store.state.throttle)
-        console.log('Valor de amp:', this.amp)
-        this.increaseInterval = setInterval(() => {
-          if (this.amp < 100) {
-            this.amp += 1
-            this.updateAMP()
-          }
-        }, 100)
-      },
-      stopIncreasingAMP() {
-        clearInterval(this.increaseInterval)
-      },
-      decreaseAMP() {
-        console.log('Valor de throttle:', store.state.throttle)
-        console.log('Valor de amp:', this.amp)
-        if (this.amp > 0) {
-          this.amp -= 1
-          this.updateAMP()
-        }
-      },
-      releaseAccelerator() {
-        this.increaseInterval = null
-        this.updateAMP()
-      },
+      //aca se define la funcion methods
       updateAMP() {
-        this.amp = 0
-        this.ampToDegrees = this.amp * 2.6
-        this.transitionDuration = 3.5 - this.amp * 0.03
-      },
-      currentAmp() {
-        return this.$store.getters.getAmp
-      },
-      accelerator(amp) {
-        const measuredElement = document.getElementById('measurer')
-        const range = 140
-        const maxAmp = 3500
-        const AmpRange = Math.max(Math.min(amp, maxAmp), 0)
-        const percentage = AmpRange / maxAmp
-        const degrees = percentage * range * 2 - range
-        if (degrees >= 140) {
-          measuredElement.style.cssText = `transform: rotate(${140}deg); transition: 4s;`
+        //aca se define la funcion updateAMP
+        this.variableTraspaso = this.estadoPrendidoOApagado //aca se iguala la variable de traspaso con el valor de la store
+        if (this.variableTraspaso == true) {
+          //aca se pregunta si la variable de traspaso es true
+          this.amp = 20 //aca se define el valor del amperimetro
         } else {
-          measuredElement.style.cssText = `transform: rotate(${
-            degrees - 15
-          }deg); transition: 4s;`
+          this.amp = 0 //aca se define el valor del amperimetro
         }
+        this.ampToDegrees = this.amp * 2.6 //aca se define el angulo de giro del amperimetro
+        this.transitionDuration = 3.5 - this.amp * 0.03 //aca se define la velocidad de giro del amperimetro
+      },
+
+      currentAmp() {
+        //aca se define la funcion currentAmp
+        return this.$store.getters.getAmp //aca se obtiene el valor de la store
       },
     },
   }

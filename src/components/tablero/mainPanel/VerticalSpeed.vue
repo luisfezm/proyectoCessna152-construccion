@@ -14,7 +14,13 @@
     mounted() {
       setInterval(() => {
         let speed = document.getElementById('needle') // se obtiene el id de la aguja del medidor vertical speed
-        let degrees = this.get_Degrees() // obtengo los grados que se le pasa al metodo
+        let degrees = 90+this.$store.getters.getEstadoPitch_yoke*2
+        if (degrees >= 110) {
+          degrees = 190 
+        }else if (degrees<= -10) {
+          degrees = -10
+        }
+         // obtengo los grados que se le pasa al metodo
         speed.style.transform = `rotate(${degrees}deg)` // se aplica el cambio de la rotacion de la aguja dependiendo los grados que se obtienen
       }, 1000)
     },
@@ -37,7 +43,7 @@
     position: relative;
     background-repeat: no-repeat;
     background-position: center;
-    z-index: 2;
+    
   }
 
   .point {
@@ -49,6 +55,7 @@
     bottom: 18px;
     position: absolute;
     border-radius: 50%;
+    z-index: 1;
   }
 
   #needle {
@@ -59,9 +66,10 @@
     transform: rotate(90deg);
     left: 45%;
     top: 47.5%;
-    transition: 3s;
+    transition: 10s;
     position: absolute;
     transform-origin: top;
+    z-index: 10;
   }
 
   .circular {
