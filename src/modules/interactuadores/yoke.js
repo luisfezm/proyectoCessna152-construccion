@@ -6,10 +6,19 @@ const yoke = {
   },
   mutations: {
     setEstadoPitch_yoke(state, pitch_yoke) {
-      state.estadoPitch_yoke = pitch_yoke;
+      if (this.state.estadoPrendidoOApagado == true) {
+        state.estadoPitch_yoke = pitch_yoke;
+      }else{
+        state.estadoPitch_yoke = 0;
+      }
+     
     },
     setEstadoRoll_yoke(state, roll_yoke) {
+      if (this.state.estadoPrendidoOApagado == true) {
       state.estadoRoll_yoke = roll_yoke;
+      }else{
+        state.estadoRoll_yoke = 0;
+      }
     },
     incrementEstadoPitch_yoke(state) {
       if (state.estadoPitch_yoke < 100) {
