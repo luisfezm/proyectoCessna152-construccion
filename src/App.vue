@@ -11,7 +11,9 @@
       <div class="itemTableroInferior">
         <div class="controlesTableroInferior">
           <IgnitionSwitch />
-          <MiYoke />
+          <div class="centered">
+            <YokeUno />
+          </div>
           <FuelQuantity />
         </div>
         <PedalesPiloto />
@@ -19,7 +21,9 @@
       <CenterColumn />
       <div class="itemTableroInferior">
         <div class="controlesTableroInferior">
-          <MiYoke />
+          <div class="centered">
+            <YokeDos />
+          </div>
         </div>
         <PedalesCopiloto />
       </div>
@@ -27,9 +31,11 @@
   </div>
 </template>
 
+
 <script>
   import PedalesCopiloto from './components/pedales/PedalesCopiloto.vue'
-  import MiYoke from './components/tablero/inferiorPanel/MiYoke.vue'
+  import YokeUno from './components/tablero/inferiorPanel/YokeUno.vue'
+  import YokeDos from './components/tablero/inferiorPanel/YokeDos.vue'
   import PedalesPiloto from './components/pedales/PedalesPiloto.vue'
   import CenterColumn from './components/tablero/centerColumn/CenterColumnPanel.vue'
   import FuelQuantity from './components/tablero/mainPanel/FuelQuantity.vue'
@@ -51,7 +57,8 @@
       RadioPanel,
       RightHandPanel,
       MiTerreno,
-      MiYoke,
+      YokeUno,
+      YokeDos,
       IgnitionSwitch,
     },
     data() {
@@ -230,4 +237,13 @@
 
 <style src="./style.css">
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+
+  .centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
 </style>
