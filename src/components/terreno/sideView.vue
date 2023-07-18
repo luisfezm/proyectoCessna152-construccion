@@ -1,73 +1,79 @@
 <template>
-    <div class="imagenCessna">
-        <img src="https://i.imgur.com/5SjqiUf.png" :style="{ transform: imageTransformCola }">
-        <img src="https://i.imgur.com/mWvEqGj.png" :style="{ transform: imageTransform }">
-        <img src="https://i.imgur.com/E73yWP5.png" :style="{ transform: imageTransformAla }">
-    </div>
+  <div class="imagenCessna">
+    <img src="https://i.imgur.com/5SjqiUf.png" :style="{ transform: imageTransformCola, transformOrigin: 'left center' }">
+    <img src="https://i.imgur.com/mWvEqGj.png" :style="{ transform: imageTransform, transformOrigin: 'left center' }">
+    <img src="https://i.imgur.com/E73yWP5.png" :style="{ transform: imageTransformAla, transformOrigin: 'left center' }">
+    <img src="https://i.imgur.com/L1kG2Gu.png" style="width: 25px; height: 110px; position: absolute; top: 114px; left: -4px;">
+  </div>
 </template>
-  
+
 <script>
 import store from "@/store";
 
 export default {
-    data() {
-        return {
-            showImage: true,
-            angulo: 0,
-            anguloRudder: 0,
-            anguloAmarillo: 0,
-        };
+  data() {
+    return {
+      showImage: true,
+      angulo: 0,
+      anguloRudder: 0,
+      anguloAmarillo: 0,
+    };
+  },
+
+  created() {
+    setInterval(this.update, 100);
+  },
+
+  methods: {
+    update() {
+      this.anguloRudder = store.getters.getRed_Rudder;
+      var estadoPitchYoke = store.getters.getEstadoPitch_yoke;
+      this.angulo = estadoPitchYoke * 0.3;
+      var estadoRollYoke = store.getters.getEstadoRoll_yoke;
+      this.anguloAmarillo = estadoRollYoke * 0.3;
     },
+  },
 
-    created() {
-        setInterval(this.update, 100);
+  computed: {
+    imageTransform() {
+      const translateX = 360; // Posición X original
+      const translateY = -28; // Posición Y original
+      const imageWidth = 280; // Ancho de la imagen azul
+
+      return `scale(0.3) translate(${translateX}px, ${translateY}px) rotateZ(${this.angulo}deg)`;
     },
+    imageTransformCola() {
+      const translateX = 710; // Posición X original
+      const translateY = -49; // Posición Y original
+      const imageWidth = 280; // Ancho de la imagen roja
 
-    methods: {
-        update() {
-            this.anguloRudder = store.getters.getRed_Rudder;
-            var estadoPitchYoke = store.getters.getEstadoPitch_yoke;
-            this.angulo = estadoPitchYoke * 0.3;
-            var estadoRollYoke = store.getters.getEstadoRoll_yoke;
-            this.anguloAmarillo = estadoRollYoke * 0.3;
-        },
+      return `scale(0.49) translate(${translateX - imageWidth}px, ${translateY}px) rotateY(${this.anguloRudder}deg)`;
     },
+    imageTransformAla() {
+      const translateX = -420; // Posición X original
+      const translateY = -50; // Posición Y original
+      const imageWidth = 280; // Ancho de la imagen amarilla
 
-    computed: {
-        imageTransform() {
-            const translateX = 174; // Posición X original
-            const translateY = -16; // Posición Y original
-
-            return `scale(0.49) translate(${translateX}px, ${translateY}px) rotateZ(${this.angulo}deg)`;
-        },
-        imageTransformCola() {
-            const translateX = 390; // Posición X original
-            const translateY = -49; // Posición Y original
-
-            return `scale(0.49) translate(${translateX}px, ${translateY}px) rotateY(${this.anguloRudder}deg)`;
-        },
-        imageTransformAla() {
-
-            return `scale(0.6) translateX(-210px) translateY(-25px) rotateZ(${this.anguloAmarillo}deg)`;
-        },
+      return `scale(0.3) translate(${translateX + imageWidth}px, ${translateY}px) rotateZ(${this.anguloAmarillo}deg)`;
     },
+  },
 };
 </script>
   
-<style>
-.CessnaRojo {
+  <style>
+  .CessnaRojo {
     transform: scale(0.32) translateX(340px) translateY(-49px);
-}
-
-.CessnaAzul {
+  }
+  
+  .CessnaAzul {
     transform: scale(0.34) translateX(35px) translateY(-18px);
-}
-
-.CessnaAmarillo {
+  }
+  
+  .CessnaAmarillo {
     transform: scale(0.6) translateX(-200px) translateY(-20px);
-}
-
-.sideView {
+  }
+  
+  .sideView {
     background-image: url("https://background-image-url.jpg");
     background-size: cover;
     background-position: center;
@@ -76,10 +82,9 @@ export default {
     justify-content: flex-end;
     align-items: flex-start;
     position: relative;
-    /* Agregamos posicionamiento relativo */
-}
-
-.imagenCessna {
+  }
+  
+  .imagenCessna {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -90,14 +95,12 @@ export default {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-}
-
-.angulo-span {
+  }
+  
+  .angulo-span {
     position: absolute;
-    /* Agregamos posicionamiento absoluto */
     background-color: rgba(255, 255, 255, 1);
-    /* Color de fondo del span con transparencia */
     transform: translateX(-130px) translateY(-56px);
-}
-</style>
+  }
+  </style>
   
