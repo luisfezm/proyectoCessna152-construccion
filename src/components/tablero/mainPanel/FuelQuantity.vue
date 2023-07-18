@@ -23,6 +23,10 @@
         if (this.$store.getters.getStateGasoline_1 <= 137) {
           gasoline_2.style.zIndex = '20'
         }
+        if(this.$store.state.estadoPrendidoOApagado == true){
+          this.$store.dispatch('decrease_gasoline')
+          
+        }
         gasoline_1.style.transform = `rotate(${this.$store.getters.getStateGasoline_1}deg)`
         gasoline_2.style.transform = `rotate(${this.$store.getters.getStateGasoline_2}deg)`
       }, 1000)
