@@ -244,14 +244,14 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(168%, -50%); 
+    transform: translate(125%, -50%); 
   }
   
   
   .axis-y {
     position: absolute;
     top: 30%;
-    left: 50%;
+    left: 46%;
     width: 4px;
     height: 78%;
     background-color: transparent; 

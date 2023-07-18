@@ -13,9 +13,7 @@
           <div class="centered">
             <MiYoke />
           </div>
-          <div class="centered">
-            <IgnitionSwitch />
-          </div>
+            <IgnitionSwitch />    
           <div class="centered">
             <FuelQuantity />
           </div>
