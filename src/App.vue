@@ -174,8 +174,7 @@
           //colicion muro
           //store.dispatch('alternaChoque', this.colicionMuro())
           store.dispatch('alternaChoque', this.colicioncordillera())
-
-          //store.dispatch('alternaChoque', this.colicionPrecordillera())
+          store.dispatch('alternaPrecordillera', this.colicionPrecordillera())
         }, 100) // 100 ms = 0.1 segundos
       },
       stopUpdateInterval() {
