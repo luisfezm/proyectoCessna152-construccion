@@ -56,7 +56,7 @@
     },
     data() {
       return {
-        tiempo: 0.1,
+        tiempo: 10,
       }
     },
     computed: {
@@ -132,6 +132,30 @@
       this.stopUpdateInterval()
     },
     methods: {
+      colicionMuro() {
+        if (this.coordenadas_actuales.latitud >= -34.9971013333662) {
+          return true
+        } else {
+          return false
+        }
+      },
+
+      colicionPrecordillera() {
+        if (this.coordenadas_actuales.longitud >= -70.6997947178652) {
+          return true
+        } else {
+          return false
+        }
+      },
+
+      colicioncordillera() {
+        if (this.coordenadas_actuales.longitud >= -70.4382892702144) {
+          return true
+        } else {
+          return false
+        }
+      },
+
       startUpdateInterval() {
         this.updateInterval = setInterval(() => {
           if (store.getters.choque === false) {
@@ -147,14 +171,11 @@
           )
           console.log('altura:', this.altura)
 
-          //despues se movera a una funcion de un js [solo sprint 4]
-          if (this.coordenadas_actuales.latitud >= -34.9971013333662) {
-            console.log('oh no he chocado ')
-            store.dispatch('alternaChoque', true)
-          } else {
-            console.log(this.coordenadas_actuales.latitud)
-            store.dispatch('alternaChoque', false)
-          }
+          //colicion muro
+          //store.dispatch('alternaChoque', this.colicionMuro())
+          store.dispatch('alternaChoque', this.colicioncordillera())
+
+          //store.dispatch('alternaChoque', this.colicionPrecordillera())
         }, 100) // 100 ms = 0.1 segundos
       },
       stopUpdateInterval() {

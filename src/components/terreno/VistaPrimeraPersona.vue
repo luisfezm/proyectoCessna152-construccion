@@ -28,7 +28,7 @@
         if (Avionvivo === true) {
           console.log('muerte')
           imagen.src =
-            'https://cdn.discordapp.com/attachments/791019332346839102/1130661741701898332/imagen2.png'
+            'https://cdn.discordapp.com/attachments/791019332346839102/1130661740774957057/explosion.png'
         } else {
           let altura = store.getters.altura
           if (altura === 0) {
