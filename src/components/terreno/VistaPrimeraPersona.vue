@@ -23,12 +23,17 @@
       funcionVerificar() {
         var imagen = document.getElementById('imagen')
 
-        const Avionvivo = store.getters.choque
+        var Avionvivo = store.getters.choque
+        var precordillera = store.getters.precordillera
         //console.log('vivo avion uwuwuwu', Avionvivo)
         if (Avionvivo === true) {
           console.log('muerte')
           imagen.src =
             'https://cdn.discordapp.com/attachments/791019332346839102/1130661740774957057/explosion.png'
+        } else if (precordillera === true) {
+          console.log('precordillera')
+          imagen.src =
+            'https://cdn.discordapp.com/attachments/791019332346839102/1130661741701898332/imagen2.png'
         } else {
           let altura = store.getters.altura
           if (altura === 0) {

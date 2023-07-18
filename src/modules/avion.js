@@ -181,6 +181,9 @@ const avion = {
   getters: {
 
     choque: (state) => state.choque,
+    precordillera: (state) => state.precordillera,
+    cordillera: (state) => state.cordillera,
+
 
     // Getters para obtener datos del estado del avion
     // latitud actual del avion
@@ -221,6 +224,7 @@ const avion = {
     // presion aerodinamica
     stagnation_pressure: (state)=> state.stagnation_pressure,
     static_pressure: (state)=> state.static_pressure,
+    
 
 
   },
