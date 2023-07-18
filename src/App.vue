@@ -10,11 +10,15 @@
     <div class="tableroInferior">
       <div class="itemTableroInferior">
         <div class="controlesTableroInferior">
-          <IgnitionSwitch />
           <div class="centered">
-            <YokeUno />
+            <MiYoke />
           </div>
-          <FuelQuantity />
+          <div class="centered">
+            <IgnitionSwitch />
+          </div>
+          <div class="centered">
+            <FuelQuantity />
+          </div>
         </div>
         <PedalesPiloto />
       </div>
@@ -22,7 +26,7 @@
       <div class="itemTableroInferior">
         <div class="controlesTableroInferior">
           <div class="centered">
-            <YokeDos />
+            <MiYoke />
           </div>
         </div>
         <PedalesCopiloto />
@@ -34,8 +38,7 @@
 
 <script>
   import PedalesCopiloto from './components/pedales/PedalesCopiloto.vue'
-  import YokeUno from './components/tablero/inferiorPanel/YokeUno.vue'
-  import YokeDos from './components/tablero/inferiorPanel/YokeDos.vue'
+  import MiYoke from './components/tablero/inferiorPanel/MiYoke.vue'
   import PedalesPiloto from './components/pedales/PedalesPiloto.vue'
   import CenterColumn from './components/tablero/centerColumn/CenterColumnPanel.vue'
   import FuelQuantity from './components/tablero/mainPanel/FuelQuantity.vue'
@@ -57,8 +60,7 @@
       RadioPanel,
       RightHandPanel,
       MiTerreno,
-      YokeUno,
-      YokeDos,
+      MiYoke,
       IgnitionSwitch,
     },
     data() {
@@ -243,7 +245,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: 10px;
+
   }
+
+  .itemTableroInferior {
+  display: flex;
+  align-items: center;
+}
+
+.controlesTableroInferior {
+  display: flex;
+}
 
 
 </style>
