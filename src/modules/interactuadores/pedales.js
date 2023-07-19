@@ -1,3 +1,4 @@
+import store from '@/store'
 // pedales.js
 const pedales = {
   state: {
@@ -8,12 +9,12 @@ const pedales = {
   mutations: {
     // Mutaciones para modificar el estado de los interactuadores
     incrementarMovPedalIzq(state) {
-      if (state.mov_pedal_izq < 100) {
+      if (state.mov_pedal_izq < 100 && store.getters.estado_motor) {
         state.mov_pedal_izq++
       }
     },
     incrementarMovPedalDerecha(state) {
-      if (state.mov_pedal_derecha < 100) {
+      if (state.mov_pedal_derecha < 100 && store.getters.estado_motor) {
         state.mov_pedal_derecha++
       }
     },
