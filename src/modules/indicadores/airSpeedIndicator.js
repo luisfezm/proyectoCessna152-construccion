@@ -20,7 +20,11 @@ const airSpeedIndicator = {
 
       // conversion de velocidad a knots
       setKnots({ commit }) {
-        let conversion=  Math.sqrt((Math.pow(this.getters.velocidad_x, 2)+Math.pow(this.getters.velocidad_y, 2)+Math.pow(this.getters.velocidad_z, 2))*1.94384)
+        //let conversion=  Math.sqrt((Math.pow(this.getters.velocidad_x, 2)+Math.pow(this.getters.velocidad_y, 2)+Math.pow(this.getters.velocidad_z, 2))*1.94384)
+        //console.log("velocidad: "+ store.getters.velocidad);
+        let conversion = this.getters.velocidad*1.94384
+
+        
         commit('setKnots', conversion)
       },
       setDegrees({ commit }, degrees) {

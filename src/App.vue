@@ -169,12 +169,14 @@
             'setAltura',
             store.getters.altura + store.getters.velocidad_z * 0.1
           )
-          console.log('altura:', this.altura)
+          //console.log('altura:', this.altura)
+
 
           //colicion muro
           //store.dispatch('alternaChoque', this.colicionMuro())
           store.dispatch('alternaChoque', this.colicioncordillera())
           store.dispatch('alternaPrecordillera', this.colicionPrecordillera())
+
         }, 100) // 100 ms = 0.1 segundos
       },
       stopUpdateInterval() {
@@ -238,8 +240,8 @@
         var nuevaLatitud = this.toDegrees(nuevaLatitudRad)
         var nuevaLongitud = this.toDegrees(nuevaLongitudRad)
 
-        console.log(nuevaLatitud)
-        console.log(nuevaLongitud)
+        //console.log(nuevaLatitud)
+        //console.log(nuevaLongitud)
 
         store.dispatch('setLatitud', nuevaLatitud)
         store.dispatch('setLongitud', nuevaLongitud)
