@@ -39,6 +39,7 @@ const avion = {
     air_resistance: 0.32, //es el coeficionte aerodinamico del avion
     stagnation_pressure:0, // presión de IMPACTO (llamada presión de estancamiento recibida del TUBO PITOT de una aeronave, que está en la corriente de aire)
     static_pressure: 0,    // presión ESTÁTICA (generalmente de un sensor que no está en la corriente de aire)
+    LedPrimer: false,
     angulo_wingflags: 0, //angulo de los wingflags
   },
   mutations: {
@@ -110,6 +111,8 @@ const avion = {
     //  console.warn('Seteado el peso');
       state.peso_avion = peso;
     },
+    setLed(state,led){
+      state.LedPrimer = led;
     setAnguloWingflags(state, angulo_wingflags) {
       state.angulo_wingflags = angulo_wingflags;
     }
@@ -182,6 +185,9 @@ const avion = {
     setPeso({ commit }, peso) {
       commit('setPeso', peso);
     },
+    // --------- Estado del Led del botón del primer-------------
+    setLed({commit}, led){
+      commit('setLed',led);
     setAnguloWingflags({ commit }, angulowingflags) {
       commit('setAnguloWingflags', angulowingflags);
     }

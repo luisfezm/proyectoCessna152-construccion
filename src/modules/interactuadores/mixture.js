@@ -9,7 +9,6 @@ const mixture = {
       if(this.state.estadoPrendidoOApagado == true){   // verificacion si el motor esta encendido o apagado
         state.consumoBencinaHora = payload;
       }
-      
     },
     setEstadoMixture(state,mixture)
     {
