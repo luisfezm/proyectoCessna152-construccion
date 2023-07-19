@@ -1,6 +1,6 @@
 <template>
   <div class="img-move-wrapper">
-    <button @click="Vuelo1">vuelo de prueba 1</button>
+    <!-- <button @click="Vuelo1">vuelo de prueba 1</button> -->
 
     <img
       id="torre"
