@@ -22,10 +22,13 @@
     <div class="title">
       {{ currentTranslationY }}
     </div>
+    <div class="velocidad">Velocidad: {{ velocidad }}</div>
   </div>
 </template>
 
 <script>
+  import store from '../../../store'
+
   export default {
     data() {
       return {
@@ -35,7 +38,14 @@
         translationMultiplier: 1, // Factor de desplazamiento vertical
         lastTranslationY: 0, // Última posición de desplazamiento vertical
         currentTranslationY: 0, // Desplazamiento vertical actual
+        wingFlapsAngle: 0, // Variable para controlar el ángulo de los wingflaps
+        velocidad: 0, // Variable para almacenar la velocidad calculada
       }
+    },
+    watch: {
+      wingFlapsAngle: {
+        handler: 'actualizarVelocidad', // Llama al método actualizarVelocidad cuando cambie el ángulo
+      },
     },
     methods: {
       startDrag(event) {
@@ -73,8 +83,33 @@
             Math.min(maxTranslationY, nextTranslationY)
           )
 
+          this.wingFlapsAngle = this.currentTranslationY // Actualiza el ángulo de los wingflaps
+
           this.$refs.image.style.transform = `translateY(${this.currentTranslationY}px)`
         }
+      },
+      // Función para calcular la velocidad según el ángulo de los wingflaps
+      calcularNuevaVelocidad(angulo) {
+        let velocidadActual = store.getters.velocidad // Velocidad actual del avión (ajustar según necesidades), STORE
+        console.log(velocidadActual)
+        if (angulo === 0) {
+          return velocidadActual * 0.05
+        } else if (angulo === 10) {
+          return velocidadActual * 0.15
+        } else if (angulo === 20) {
+          return velocidadActual * 0.25
+        } else if (angulo === 30) {
+          return velocidadActual * 0.35
+        } else {
+          return null
+        }
+      },
+
+      // Método para actualizar la velocidad cuando cambie el ángulo de los wingflaps
+      actualizarVelocidad() {
+        this.velocidad = this.calcularNuevaVelocidad(this.wingFlapsAngle)
+        console.log('Nueva velocidad:', this.velocidad)
+        //store.set(this.velocidad); // Actualiza la velocidad en el STORE
       },
     },
   }
@@ -106,5 +141,11 @@
     text-align: center;
     font-weight: bold;
     color: white;
+  }
+  .velocidad {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-right: 10px;
   }
 </style>
