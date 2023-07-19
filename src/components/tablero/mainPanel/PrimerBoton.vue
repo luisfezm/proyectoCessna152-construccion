@@ -18,8 +18,10 @@
   export default {
     // Exportar
     data() {
+      
       // Datos
       return {
+        estadoLed: false,
         estadoPresionado: false, // Estado para iniciar la animación
         estadoPrimer: false, // Estado para cambiar el color del primer botón
         contador: 0, // Contador para cambiar el estadoPrimer
@@ -29,7 +31,10 @@
       // Métodos
       presionarBoton() {
         // Cuando se presiona el botón
+        
+        this.estadoLed = !this.estadoLed
         this.estadoPresionado = true // Cambiar el estado para iniciar la animación
+        
       },
       soltarBoton() {
         // Cuando se suelta el botón
