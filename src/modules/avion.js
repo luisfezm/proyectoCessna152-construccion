@@ -111,8 +111,9 @@ const avion = {
     //  console.warn('Seteado el peso');
       state.peso_avion = peso;
     },
-    setLed(state,led){
-      state.LedPrimer = led;
+    setLed(state,led) {
+        state.LedPrimer = led;
+    },
     setAnguloWingflags(state, angulo_wingflags) {
       state.angulo_wingflags = angulo_wingflags;
     }
@@ -186,8 +187,9 @@ const avion = {
       commit('setPeso', peso);
     },
     // --------- Estado del Led del botón del primer-------------
-    setLed({commit}, led){
-      commit('setLed',led);
+    setLed({commit}, led) {
+        commit('setLed', led);
+    },
     setAnguloWingflags({ commit }, angulowingflags) {
       commit('setAnguloWingflags', angulowingflags);
     }
