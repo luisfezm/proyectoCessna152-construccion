@@ -122,6 +122,12 @@
           console.log('Longitud Actual  : ' + this.currentPosition.lon)
           console.log('Latitud  Destino : ' + this.destinationPoint.lat)
           console.log('Longitud Destino : ' + this.destinationPoint.lon)
+          console.log(
+            'Pais',
+            this.foundPoint.country,
+            'Ciudad',
+            this.foundPoint.city
+          )
         } else {
           console.log('No se encontró ningún punto con el valor especificado')
         }

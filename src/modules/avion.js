@@ -6,6 +6,8 @@ const avion = {
     // usen setters y getters NO el state directamente
 
     choque:false,
+    precordillera: false,
+    cordillera: false,
     // velocidad en cada uno de los ejes
     Velocidad_eje_x: 0,
     Velocidad_eje_y: 0,
@@ -16,6 +18,7 @@ const avion = {
     angulo_roll: 0,
     angulo_pitch: 0,
     angulo_yaw: 0,
+    angulo_wingflaps: 0,
 
     // posicion en el espacio
     altura_Actual: 0,
@@ -37,6 +40,7 @@ const avion = {
     stagnation_pressure:0, // presión de IMPACTO (llamada presión de estancamiento recibida del TUBO PITOT de una aeronave, que está en la corriente de aire)
     static_pressure: 0,    // presión ESTÁTICA (generalmente de un sensor que no está en la corriente de aire)
     LedPrimer: false,
+    angulo_wingflags: 0, //angulo de los wingflags
   },
   mutations: {
     // Mutaciones para modificar el estado del avion
@@ -44,6 +48,14 @@ const avion = {
 
     alternaChoque(state,estado) {
       state.choque = estado;
+    },
+
+    alternaCordillera(state,estado) {
+      state.cordillera = estado;
+    },
+
+    alternaPrecordillera(state,estado) {
+      state.precordillera = estado;
     },
     // --------- velocidades ---------
     setVelocidadX(state, velX) {
@@ -101,6 +113,8 @@ const avion = {
     },
     setLed(state,led){
       state.LedPrimer = led;
+    setAnguloWingflags(state, angulo_wingflags) {
+      state.angulo_wingflags = angulo_wingflags;
     }
   },
   actions: {
@@ -108,6 +122,17 @@ const avion = {
     alternaChoque({ commit },estado) {
       commit('alternaChoque',estado);
     },
+
+
+    alternaCordillera({ commit },estado) {
+      commit('alternaCordillera',estado);
+    },
+
+    alternaPrecordillera({ commit },estado) {
+      commit('alternaPrecordillera',estado);
+    },
+
+
     // Acciones para realizar operaciones relacionadas con el avion
 
     // --------- velocidades ---------
@@ -163,11 +188,16 @@ const avion = {
     // --------- Estado del Led del botón del primer-------------
     setLed({commit}, led){
       commit('setLed',led);
+    setAnguloWingflags({ commit }, angulowingflags) {
+      commit('setAnguloWingflags', angulowingflags);
     }
   },
   getters: {
 
     choque: (state) => state.choque,
+    precordillera: (state) => state.precordillera,
+    cordillera: (state) => state.cordillera,
+
 
     // Getters para obtener datos del estado del avion
     // latitud actual del avion
@@ -208,6 +238,8 @@ const avion = {
     // presion aerodinamica
     stagnation_pressure: (state)=> state.stagnation_pressure,
     static_pressure: (state)=> state.static_pressure,
+    angulo_wingflags: (state)=> state.angulo_wingflags,
+    
 
 
   },
