@@ -40,8 +40,8 @@
   import RightHandPanel from './components/tablero/rightHandPanel/RightHandPanel.vue'
   import MiTerreno from './components/terreno/MiTerreno.vue'
   import VistaPrimeraPersona from './components/terreno/VistaPrimeraPersona.vue'
-  import store from '@/store'
   import ModalBox from './components/ModalBox.vue'
+  import store from '@/store'
 
   export default {
     components: {
