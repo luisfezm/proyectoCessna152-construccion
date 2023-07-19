@@ -6,12 +6,19 @@ const mixture = {
   mutations: {
     // Mutación para actualizar el consumo de bencina por hora
     actualizarConsumoBencinaHora(state, payload) {
-      state.consumoBencinaHora = payload;
+      if(this.state.estadoPrendidoOApagado == true){   // verificacion si el motor esta encendido o apagado
+        state.consumoBencinaHora = payload;
+      }
+      
     },
     setEstadoMixture(state,mixture)
     {
-      state.estadoMixture=mixture;
-    }
+      if(this.state.estadoPrendidoOApagado == true){
+        state.estadoMixture=mixture;
+       }
+
+      }
+      
   },
   actions: {
     // Acciones para realizar operaciones relacionadas con los interactuadores
