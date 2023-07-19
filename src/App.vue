@@ -56,7 +56,7 @@
     },
     data() {
       return {
-        tiempo: 10,
+        tiempo: 4,
       }
     },
     computed: {
