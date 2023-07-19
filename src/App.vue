@@ -1,5 +1,6 @@
 <template>
   <div class="app">
+    <ModalBox />
     <MiTerreno />
 
     <div class="tableroSuperior">
@@ -40,6 +41,7 @@
   import MiTerreno from './components/terreno/MiTerreno.vue'
   import VistaPrimeraPersona from './components/terreno/VistaPrimeraPersona.vue'
   import store from '@/store'
+  import ModalBox from './components/ModalBox.vue'
 
   export default {
     components: {
@@ -53,10 +55,12 @@
       MiTerreno,
       MiYoke,
       IgnitionSwitch,
+      ModalBox,
     },
     data() {
       return {
         tiempo: 0.1,
+        showModal: false,
       }
     },
     computed: {
