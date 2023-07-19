@@ -145,15 +145,15 @@
             'setAltura',
             store.getters.altura + store.getters.velocidad_z * 0.1
           )
-          console.log('altura:', this.altura)
+          //console.log('altura:', this.altura)
 
           //despues se movera a una funcion de un js [solo sprint 4]
           if (this.coordenadas_actuales.latitud >= -34.9971013333662) {
-            console.log('oh no he chocado ')
+            //console.log('oh no he chocado ')
             store.dispatch('alternaChoque', true)
           } else {
-            console.log(this.coordenadas_actuales.latitud)
-            store.dispatch('alternaChoque', false)
+            //console.log(this.coordenadas_actuales.latitud)
+            //store.dispatch('alternaChoque', false)
           }
         }, 100) // 100 ms = 0.1 segundos
       },
@@ -218,8 +218,8 @@
         var nuevaLatitud = this.toDegrees(nuevaLatitudRad)
         var nuevaLongitud = this.toDegrees(nuevaLongitudRad)
 
-        console.log(nuevaLatitud)
-        console.log(nuevaLongitud)
+        //console.log(nuevaLatitud)
+        //console.log(nuevaLongitud)
 
         store.dispatch('setLatitud', nuevaLatitud)
         store.dispatch('setLongitud', nuevaLongitud)
