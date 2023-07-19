@@ -1,12 +1,6 @@
 <template>
-  <div
-    id="miDiv"
-    class="Tknob"
-    draggable="false"
-    @mousedown="startDrag"
-    @mousemove="handleDrag"
-  >
-    <span class="number">{{ axis }}</span>
+  <div id="miDiv" class="Tknob" draggable="false">
+    <span class="number">{{ currentRotation }}</span>
     <img
       src="@/assets/tknob.svg"
       :style="{
@@ -35,6 +29,11 @@
         currentRotation: 0, // Rotación actual en grados
       }
     },
+
+    mounted() {
+      window.addEventListener('keypress', this.girarThrottle)
+    },
+
     methods: {
       ...mapActions(['setThrottleDepth']),
       startDrag(event) {
@@ -43,6 +42,17 @@
         this.isDragging = true
         window.addEventListener('mouseup', this.stopDrag)
       },
+
+      girarThrottle(event) {
+        if (event.key == 'l' && this.currentRotation != 0) {
+          this.currentRotation--
+        } else {
+          if (event.key == 'ñ') {
+            this.currentRotation++
+          }
+        }
+      },
+
       stopDrag() {
         this.isDragging = false
         this.currentScale = this.getCurrentScale()

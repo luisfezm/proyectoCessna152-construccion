@@ -1,4 +1,10 @@
 <template>
+  <div>
+    <div
+      class="led"
+      :class="{ 'led-red': !estadoLed, 'led-green': estadoLed }"
+    />
+  </div>
   <div class="base">
     <div
       :class="['palanca', { active: estadoPresionado }]"
@@ -30,11 +36,11 @@
         this.estadoPresionado = false // Cambiar el estado para reiniciar la animación
         this.contador++ // Aumentar el contador
         if (this.contador === 5) {
-          // Si el contador llega a 5
           this.estadoPrimer = !this.estadoPrimer // Cambiar el estado
           this.contador = 0 // Reiniciar el contador después de cambiar el estado
         }
       },
+      // Si el contador llega a 5
     },
   }
 </script>
@@ -65,5 +71,16 @@
 
   .palanca.active {
     transform: scale(0.8);
+  }
+
+  .led {
+    width: 10px;
+    height: 10px;
+    border-radius: 10%;
+    background-color: red;
+  }
+
+  .led-green {
+    background-color: green;
   }
 </style>
