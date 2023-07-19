@@ -6,6 +6,8 @@ const avion = {
     // usen setters y getters NO el state directamente
 
     choque:false,
+    precordillera: false,
+    cordillera: false,
     // velocidad en cada uno de los ejes
     Velocidad_eje_x: 0,
     Velocidad_eje_y: 0,
@@ -43,6 +45,14 @@ const avion = {
 
     alternaChoque(state,estado) {
       state.choque = estado;
+    },
+
+    alternaCordillera(state,estado) {
+      state.cordillera = estado;
+    },
+
+    alternaPrecordillera(state,estado) {
+      state.precordillera = estado;
     },
     // --------- velocidades ---------
     setVelocidadX(state, velX) {
@@ -104,6 +114,17 @@ const avion = {
     alternaChoque({ commit },estado) {
       commit('alternaChoque',estado);
     },
+
+
+    alternaCordillera({ commit },estado) {
+      commit('alternaCordillera',estado);
+    },
+
+    alternaPrecordillera({ commit },estado) {
+      commit('alternaPrecordillera',estado);
+    },
+
+
     // Acciones para realizar operaciones relacionadas con el avion
 
     // --------- velocidades ---------
@@ -160,6 +181,9 @@ const avion = {
   getters: {
 
     choque: (state) => state.choque,
+    precordillera: (state) => state.precordillera,
+    cordillera: (state) => state.cordillera,
+
 
     // Getters para obtener datos del estado del avion
     // latitud actual del avion
@@ -200,6 +224,7 @@ const avion = {
     // presion aerodinamica
     stagnation_pressure: (state)=> state.stagnation_pressure,
     static_pressure: (state)=> state.static_pressure,
+    
 
 
   },
