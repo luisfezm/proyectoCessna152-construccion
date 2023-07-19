@@ -22,7 +22,7 @@
     <div class="title">
       {{ currentTranslationY }}
     </div>
-    <div class="velocidad">Velocidad: {{ velocidad }}</div>
+    <!--<div class="velocidad">Velocidad: {{ velocidad }}</div>-->
   </div>
 </template>
 
@@ -90,7 +90,7 @@
       },
       // Función para calcular la velocidad según el ángulo de los wingflaps
       calcularNuevaVelocidad(angulo) {
-        let velocidadActual = store.getters.velocidad // Velocidad actual del avión (ajustar según necesidades), STORE
+        const velocidadActual = store.getters.velocidad // Velocidad actual del avión (ajustar según necesidades), STORE
         console.log(velocidadActual)
         if (angulo === 0) {
           return velocidadActual * 0.05
@@ -107,9 +107,9 @@
 
       // Método para actualizar la velocidad cuando cambie el ángulo de los wingflaps
       actualizarVelocidad() {
-        this.velocidad = this.calcularNuevaVelocidad(this.wingFlapsAngle)
-        console.log('Nueva velocidad:', this.velocidad)
-        //store.set(this.velocidad); // Actualiza la velocidad en el STORE
+        let velocidad = this.calcularNuevaVelocidad(this.wingFlapsAngle)
+        //console.log('Nueva velocidad:', velocidad)
+        store.dispatch('setVelocidad', velocidad) // Actualiza la velocidad en el STORE
       },
     },
   }
@@ -120,8 +120,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(177, 177, 177);
-    width: 20%;
+    background-color: rgb(69, 69, 69);
+    width: 35%;
     height: 60%;
     border-radius: 5%;
     margin: auto;
@@ -142,10 +142,12 @@
     font-weight: bold;
     color: white;
   }
+  /*
   .velocidad {
     text-align: center;
     font-weight: bold;
     margin-top: 10px;
     margin-right: 10px;
   }
+  */
 </style>
