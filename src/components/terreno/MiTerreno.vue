@@ -13,6 +13,7 @@
       <!-- Esta es la parte derecha de la vista del vuelo, deben colocar aquí el componente que creen -->
       <TopView />
       <frontView />
+      <sideView />
     </div>
   </div>
 </template>
@@ -23,6 +24,7 @@
   import store from '@/store'
   import VistaPrimeraPersona from './VistaPrimeraPersona.vue'
   import TopView from './TopView.vue'
+  import sideView from './sideView.vue'
 
   export default {
     components: {
@@ -30,6 +32,7 @@
       FrontView,
       TopView,
       VistaPrimeraPersona,
+      sideView
     },
     data() {
       return {
