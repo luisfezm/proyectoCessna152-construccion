@@ -18,6 +18,7 @@ const avion = {
     angulo_roll: 0,
     angulo_pitch: 0,
     angulo_yaw: 0,
+    angulo_wingflaps: 0,
 
     // posicion en el espacio
     altura_Actual: 0,
@@ -111,6 +112,7 @@ const avion = {
     },
     setAnguloWingflags(state, angulo_wingflags) {
       state.angulo_wingflags = angulo_wingflags;
+      console.log("JONA"+angulo_wingflags.toString());
     }
   },
   actions: {

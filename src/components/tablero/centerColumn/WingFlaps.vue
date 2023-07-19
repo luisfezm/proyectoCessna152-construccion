@@ -38,7 +38,6 @@
         translationMultiplier: 1, // Factor de desplazamiento vertical
         lastTranslationY: 0, // Última posición de desplazamiento vertical
         currentTranslationY: 0, // Desplazamiento vertical actual
-        wingFlapsAngle: 0, // Variable para controlar el ángulo de los wingflaps
         velocidad: 0, // Variable para almacenar la velocidad calculada
       }
     },
@@ -83,7 +82,7 @@
             Math.min(maxTranslationY, nextTranslationY)
           )
 
-          this.wingFlapsAngle = this.currentTranslationY // Actualiza el ángulo de los wingflaps
+          store.dispatch('setAnguloWingflags', this.currentTranslationY)
 
           this.$refs.image.style.transform = `translateY(${this.currentTranslationY}px)`
         }
@@ -107,7 +106,10 @@
 
       // Método para actualizar la velocidad cuando cambie el ángulo de los wingflaps
       actualizarVelocidad() {
-        let velocidad = this.calcularNuevaVelocidad(this.wingFlapsAngle)
+        let velocidad = this.calcularNuevaVelocidad(
+          store.getters.angulo_wingflags
+        )
+
         //console.log('Nueva velocidad:', velocidad)
         store.dispatch('setVelocidad', velocidad) // Actualiza la velocidad en el STORE
       },
