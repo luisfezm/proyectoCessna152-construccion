@@ -72,6 +72,10 @@
       },
 
       angulo_avion() {
+        console.log(
+          'valor heading indicator',
+          store.getters.getHeadingIndicator
+        )
         return store.getters.getHeadingIndicator
       },
       mixture() {

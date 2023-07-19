@@ -92,6 +92,10 @@ const avion = {
     setPresionEstatica(state, static_pressure) {
       state.static_pressure = static_pressure;
     },
+    setMotor(state,value)
+    {
+      state.estado_motor=value
+    },
 
     // --------- constantes (solo deberían ser seteadas una vez) ---------
     setPeso(state, peso) {
@@ -100,6 +104,9 @@ const avion = {
     },
   },
   actions: {
+    setMotor({ commit }, value) {
+      commit('setMotor', value);
+    },
 
     alternaChoque({ commit },estado) {
       commit('alternaChoque',estado);

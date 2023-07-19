@@ -15,7 +15,7 @@
     computed: {
       headingValue: {
         get() {
-          return this.$store.getters.getHeadingIndicator
+          return -this.$store.getters.getHeadingIndicator
         },
       },
     },
