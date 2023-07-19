@@ -62,7 +62,7 @@
             this.isKeyActive = false // aca se cambia el estado del switch a inactivo sigan viendo...
           }
         }
-
+        store.dispatch('setMotor', this.estadoPrendidoOApagado)
         store.dispatch('setEstadoPrendidoOApagado', this.estadoPrendidoOApagado) // aca se envia el estado del motor al store sigan viendo...
 
         console.log(

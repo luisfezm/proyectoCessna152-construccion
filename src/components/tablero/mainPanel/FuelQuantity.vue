@@ -35,12 +35,12 @@
   .img {
     /*contenedor*/
     background-image: url('https://i.ibb.co/N7wm9J6/Fuel-Quantity.png');
-    width: 105px;
-    height: 55px;
+    width: 140px;
+    height: 80px;
     background-size: 100%, 100%;
     background-position: center;
     background-repeat: no-repeat;
-    left: 42px;
+    left: 200px;
     position: relative;
   }
 
