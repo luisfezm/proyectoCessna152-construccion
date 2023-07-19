@@ -1,6 +1,12 @@
 <template>
-  <div id="miDiv" class="Tknob" draggable="false">
-    <span class="number">{{ currentRotation }}</span>
+  <div 
+    id="miDiv"
+    class="Tknob"
+    draggable="false"
+    @mousedown="startDrag"
+    @mouseup="stopDrag"
+    @mousemove="handleDrag">
+    <span class="number">{{ this.$store.getters.getThrottleDepth }}</span>
     <img
       src="@/assets/tknob.svg"
       :style="{
@@ -13,7 +19,7 @@
 
 <script>
   import { mapActions } from 'vuex'
-
+  import store from '@/store'
   export default {
     data() {
       return {
@@ -43,7 +49,7 @@
         window.addEventListener('mouseup', this.stopDrag)
       },
 
-      girarThrottle(event) {
+      /*girarThrottle(event) {
         if (event.key == 'l' && this.currentRotation != 0) {
           this.currentRotation--
         } else {
@@ -51,7 +57,7 @@
             this.currentRotation++
           }
         }
-      },
+      },*/
 
       stopDrag() {
         this.isDragging = false
@@ -87,7 +93,9 @@
           } else {
             this.axis = (calculo * -400).toFixed(2)
             this.setThrottleDepth(this.axis) //seteamos el valor del thlottle con el valor del axis
-            //console.log('throttle_depth', this.$store.getters.getThrottleDepth) // para mostrarlo en consola
+            store.dispatch('setThrottleDepth', this.axis)
+            console.log('throttle_depth', this.$store.getters.getThrottleDepth) // para mostrarlo en consola
+            
           }
 
           this.currentRotation = newRotation

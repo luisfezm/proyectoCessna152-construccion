@@ -6,7 +6,7 @@
     @mousedown="startDrag"
     @mousemove="handleDrag"
   >
-    <span class="number">{{ valor }}</span>
+    <span class="number">{{ valor.toFixed(1) }}</span>
     <img
       src="@/assets/knob.svg"
       :style="{
@@ -43,6 +43,7 @@
     },
 
     methods: {
+      /*
       girarMixture(event) {
         if (event.key == 'o' && this.currentRotation != 0) {
           this.currentRotation--
@@ -54,7 +55,7 @@
           }
         }
       },
-
+      */
       ...mapActions(['actualizarBencinaPorHora']),
       startDrag(event) {
         this.startX = event.clientX
@@ -143,6 +144,7 @@
         store.dispatch('setEstadoMixture', this.axis)
         store.dispatch('actualizarBencinaPorHora', combustible_por_hora)
         console.log('combustible_por_hora:', combustible_por_hora)
+        this.valor = combustible_por_hora
       },
     },
   }

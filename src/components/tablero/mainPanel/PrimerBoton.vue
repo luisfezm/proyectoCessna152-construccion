@@ -15,10 +15,10 @@
 </template>
 
 <script>
+  import store from '@/store'
   export default {
     // Exportar
     data() {
-      
       // Datos
       return {
         estadoLed: false,
@@ -33,6 +33,7 @@
         // Cuando se presiona el botón
         
         this.estadoLed = !this.estadoLed
+        store.dispatch('setLed',this.estadoLed)
         this.estadoPresionado = true // Cambiar el estado para iniciar la animación
         
       },

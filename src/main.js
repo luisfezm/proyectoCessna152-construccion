@@ -89,6 +89,7 @@ window.addEventListener('keypress', (event) => {
 });
 
 //Segundo lote de teclas para mixture (sujeto a cambios)
+/*
 window.addEventListener('keypress', (event) => {
   if (event.key === 'o') {
     store.dispatch('teclaPresionada', event);
@@ -102,9 +103,10 @@ window.addEventListener('keypress', (event) => {
     }
   }
 });
-
+*/
 
 //Teclas asignadas para el throttle
+/*
 window.addEventListener('keypress', (event) => {
   if (event.key === 'l') {
     store.dispatch('tirarThrottle');
@@ -116,6 +118,6 @@ window.addEventListener('keypress', (event) => {
     }
   }
 });
-
+*/
 
 createApp(App).use(store).mount('#app')

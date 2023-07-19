@@ -36,6 +36,7 @@ const avion = {
     air_resistance: 0.32, //es el coeficionte aerodinamico del avion
     stagnation_pressure:0, // presión de IMPACTO (llamada presión de estancamiento recibida del TUBO PITOT de una aeronave, que está en la corriente de aire)
     static_pressure: 0,    // presión ESTÁTICA (generalmente de un sensor que no está en la corriente de aire)
+    LedPrimer: false,
   },
   mutations: {
     // Mutaciones para modificar el estado del avion
@@ -98,6 +99,9 @@ const avion = {
     //  console.warn('Seteado el peso');
       state.peso_avion = peso;
     },
+    setLed(state,led){
+      state.LedPrimer = led;
+    }
   },
   actions: {
 
@@ -156,6 +160,10 @@ const avion = {
     setPeso({ commit }, peso) {
       commit('setPeso', peso);
     },
+    // --------- Estado del Led del botón del primer-------------
+    setLed({commit}, led){
+      commit('setLed',led);
+    }
   },
   getters: {
 
