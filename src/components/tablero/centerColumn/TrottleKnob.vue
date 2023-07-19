@@ -144,5 +144,6 @@
   .number {
     position: absolute;
     transform: translateY(-50px);
+    color: white;
   }
 </style>
