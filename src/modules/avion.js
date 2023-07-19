@@ -112,7 +112,6 @@ const avion = {
     },
     setAnguloWingflags(state, angulo_wingflags) {
       state.angulo_wingflags = angulo_wingflags;
-      console.log("JONA"+angulo_wingflags.toString());
     }
   },
   actions: {
