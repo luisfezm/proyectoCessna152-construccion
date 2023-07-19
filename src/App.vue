@@ -10,22 +10,29 @@
     <div class="tableroInferior">
       <div class="itemTableroInferior">
         <div class="controlesTableroInferior">
-          <IgnitionSwitch />
-          <MiYoke />
-          <FuelQuantity />
+          <div class="centered">
+            <MiYoke />
+          </div>
+            <IgnitionSwitch />    
+          <div class="centered">
+            <FuelQuantity />
+          </div>
         </div>
         <PedalesPiloto />
       </div>
       <CenterColumn />
       <div class="itemTableroInferior">
         <div class="controlesTableroInferior">
-          <MiYoke />
+          <div class="centered">
+            <MiYoke />
+          </div>
         </div>
         <PedalesCopiloto />
       </div>
     </div>
   </div>
 </template>
+
 
 <script>
   import PedalesCopiloto from './components/pedales/PedalesCopiloto.vue'
@@ -252,4 +259,24 @@
 
 <style src="./style.css">
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+
+  .centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+
+  }
+
+  .itemTableroInferior {
+  display: flex;
+  align-items: center;
+}
+
+.controlesTableroInferior {
+  display: flex;
+}
+
+
 </style>

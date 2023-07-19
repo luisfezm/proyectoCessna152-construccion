@@ -1,37 +1,34 @@
 <template>
-  <div id="miDiv" ref="div" class="MiYoke" :class="{ grabbing: isDragging }">
-    <div class="panel-inferior">
-      <div class="image-container">
-        <!-- Agregar ejes de movimiento -->
-       
-        <div class="axis-y"/>
-        <!-- Fin de los ejes de movimiento -->
-        <img
-          ref="image"
-          src="@/assets/img/Yoke.png"
-          :style="{
-            transform: `translate(${currentTranslationX}px, ${
-              currentTranslationY + 20
-            }px) rotate(${currentRotation}deg)`,
-            width: '160px', 
-            height: '120px',
-            left: `${translateXLimit + 400}px`, 
-            top: `${-translateYLimit}px`,
-          }"
-          :class="{
-            translateYAnimation: isMovingVertically,
-            rotateAnimation: isRotating,
-          }"
-          draggable="false"
-        >
+    <div id="miDiv" ref="div" class="MiYoke" :class="{ grabbing: isDragging }">
+      <div class="panel-inferior">
+        <div class="image-container">
+          <div class="axis-y"/>
+          <img
+            ref="image"
+            src="@/assets/img/yoke.png"
+            :style="{
+              transform: `translate(${currentTranslationX}px, ${
+                currentTranslationY + 20
+              }px) rotate(${currentRotation}deg)`,
+              width: '160px', 
+              height: '120px',
+              left: `${translateXLimit + 500}px`, 
+              top: `${-translateYLimit}px`,
+            }"
+            :class="{
+              translateYAnimation: isMovingVertically,
+              rotateAnimation: isRotating,
+            }"
+            draggable="false"
+          >
+        </div>
       </div>
     </div>
-  </div>
-</template>
-
-<script>
+  </template>
+  
+  <script>
   import store from '@/store'
-
+  
   export default {
     data() {
       return {
@@ -228,40 +225,40 @@
       },
     },
   }
-</script>
-
-<style>
-.panel-inferior {
-    position: relative;
-    display: flex;
+  </script>
+  
+  <style>
+  .panel-inferior {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      height: 10vh;
+    }
+  
+   .image-container {
     justify-content: center;
     align-items: center;
-    height: 100%;
-    width: 100%;
-    height: 30vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(125%, -50%); 
   }
-
- .image-container {
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(70%, -100%); 
-}
-
-
-.axis-y {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  width: 4px;
-  height: 85%;
-  background-color: transparent; 
-  border: 4px solid rgba(99, 95, 95, 0.952); 
-  border-radius: 50%; 
-  transform: translateX(-50%);
-  z-index: 0;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-}
-</style>
+  
+  
+  .axis-y {
+    position: absolute;
+    top: 30%;
+    left: 46%;
+    width: 4px;
+    height: 78%;
+    background-color: transparent; 
+    border: 4px solid rgba(99, 95, 95, 0.952); 
+    border-radius: 50%; 
+    transform: translateX(-50%);
+    z-index: 0;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  }
+  </style>
