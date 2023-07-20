@@ -33,7 +33,7 @@
           state.anguloRoll = -110
         }
         
-        console.log('ACTUALIZAR: ' + state.anguloRoll);
+        //console.log('ACTUALIZAR: ' + state.anguloRoll);
       },
 
       actualizar(state, Yoke) {
@@ -58,7 +58,7 @@
     },
     actions: {
       actualizar({ commit }, Yoke) {
-        console.log(Yoke);
+        //console.log(Yoke);
     
 
         if (Yoke.roll >= 0) {

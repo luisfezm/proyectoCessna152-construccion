@@ -18,6 +18,7 @@
 </template>
 
 <script>
+  import store from '@/store'
   import pedalImage from '@/assets/img/pedal.png'
   export default {
     data() {
@@ -29,7 +30,7 @@
     },
     computed: {
       movPedalIzquierda() {
-        return this.$store.getters.movPedalIzq
+        return store.getters.movPedalIzq
       },
     },
     methods: {
@@ -39,7 +40,11 @@
 
         if (!this.intervalId) {
           this.intervalId = setInterval(() => {
-            this.$store.dispatch('incrementarMovPedalIzq')
+            store.dispatch('incrementarMovPedalIzq')
+            store.dispatch(
+              'calcularHeadingIndicator',
+              -store.getters.movPedalIzq
+            )
           }, 100) // Ejecuta la función cada 100 ms mientras el botón esté presionado
         }
       },
@@ -49,7 +54,7 @@
 
         if (!this.resetTimeoutId) {
           this.resetTimeoutId = setTimeout(() => {
-            this.$store.dispatch('resetMovPedalIzq')
+            store.dispatch('resetMovPedalIzq')
             this.resetTimeoutId = null
           }, 1000) // Ejecuta la función después de 1 segundo (1000 ms) de haber soltado el botón
         }

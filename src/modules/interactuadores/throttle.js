@@ -3,21 +3,27 @@ const throttle = {
   state: {
     // Estado inicial de los interactuadores
     throttle_depth: 0,
+
   },
   mutations: {
     // Mutaciones para modificar el estado de los interactuadores
     presionarThrottle(state) {
       if (state.throttle_depth < 100) {
-        state.throttle_depth++
+           state.throttle_depth++
       }
+       
     },
     tirarThrottle(state) {
       if (state.throttle_depth > 0) {
-        state.throttle_depth--
+           state.throttle_depth--
       }
+    
     },
     setThrottleDepth(state, value) {
-      state.throttle_depth = value
+      if(this.state.estadoPrendidoOApagado == true){
+          state.throttle_depth = value
+      }
+      
     },
   },
   actions: {
