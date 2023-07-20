@@ -8,17 +8,28 @@
     <div ref="left_blue" class="elevators left_blue" />
     <div ref="rigth_blue" class="elevators rigth_blue" />
     <div ref="red_rudder" class="rudder" />
+    
+    <div class="front_propeller" ref="propeller" id="front_propeller">
+      <!-- <div id="line1"></div>
+      <div id="line2"></div> -->
+    </div>
   </div>
 </template>
 
 <script>
   export default {
-    mounted() {
-      setInterval(this.moveAileron, 100)
-      setInterval(this.moveElevators, 100)
-      setInterval(this.moveRudder, 100)
+    mounted() { 
+      setInterval(this.runfuntions,100)
     },
+
     methods: {
+      runfuntions(){
+        this.moveAileron()
+        this.moveElevators()
+        this.moveRudder()
+        this.movePropeller()
+        this.moveFlaps()
+      },
       moveAileron() {
         let ly = this.$refs.left_Yellow
         let ry = this.$refs.rigth_Yellow
@@ -39,6 +50,29 @@
         ly.style.transition = `${0.4}S`
         ry.style.transition = `${0.4}S`
       },
+      async movePropeller() {
+        // let valor_Motor = this.$refs.top_propeller
+          
+        
+        if (this.$store.state.estadoPrendidoOApagado == true) {
+          const valor_Motor = document.getElementById('front_propeller')
+          valor_Motor.classList.add('animar')
+         
+          
+          await this.sleep(2000)
+          valor_Motor.classList.remove('animar')
+          valor_Motor.classList.add('animar2')
+        } else {
+          const valor_Motor = document.getElementById('front_propeller')
+          valor_Motor.classList.remove('animar')
+          valor_Motor.classList.remove('animar2')
+        }
+        
+      },
+
+      sleep(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms))
+      },
       moveElevators() {
         let lb = this.$refs.left_blue
         let rb = this.$refs.rigth_blue
@@ -56,22 +90,21 @@
         lb.style.transition = `${0.8}S`
         rb.style.transition = `${0.8}S`
       },
+      moveFlaps() {
+        let lg = this.$refs.left_green
+        let rg = this.$refs.rigth_green
+        //parte complementaria de topview.js
+        let auxGreen = this.$store.getters.getOrange_Trim
+        lg.style.transform = `rotateX(${90 - auxGreen}deg)`
+        rg.style.transform = `rotateX(${90 - auxGreen}deg)`
+      
+        lg.style.transition = `${0.8}S`
+        rg.style.transition = `${0.8}S`
+      },
       moveRudder() {
         let rr = this.$refs.red_rudder
-        /*
-          if(this.$store.getters.getRed_Rudder==-1){
-            rr.style.transform = `rotateY(${120}deg)` 
-          }else if(this.$store.getters.getRed_Rudder==1){
-            rr.style.transform = `rotateY(${120}deg)` 
-          }
-          
-          else{
-            rr.style.transform = `rotateY(${90}deg)`
-          }
-          */
         let aux = this.$store.getters.getRed_Rudder - 90
         rr.style.transform = `rotateY(${aux}deg)`
-
         rr.style.transition = `${0.4}S`
       },
     },
@@ -161,4 +194,43 @@
     position: absolute;
     bottom: 0px;
   }
+  #front_propeller {
+    background: black;
+    height: 15px;
+    position: absolute;
+    width: 3px;
+    top: 51.3%;
+    left: 49.8%;
+    border-radius: 40%;
+    transform-origin: bottom;
+    
+  }
+  .animar {
+    animation: front_propeller 1.5s linear infinite;
+  }
+  .animar2 {
+    animation: front_propeller 0.2s linear infinite;
+  }
+  @keyframes front_propeller {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+   #front_propeller:after {
+    background: black;
+    height: 15px;
+    position: absolute;
+    content: "";
+    width: 3px;
+    top: 100%;
+    border-radius: 40%;  
+  }  
+
+  
+
+ 
 </style>

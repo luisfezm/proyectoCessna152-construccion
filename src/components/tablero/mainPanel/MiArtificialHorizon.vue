@@ -22,7 +22,7 @@
 
     const attitudeQ = document.querySelector(".roll.indicator-box");
     attitudeQ.style.cssText = `transform: rotate(${this.$store.getters.getEstadoRoll_yoke}deg); transition: 1s;`;
-    console.log("AnguloRoll = "+this.$store.getters.anguloRoll);
+    //console.log("AnguloRoll = "+this.$store.getters.anguloRoll);
   
     const inAttitude = (this.$store.getters.getEstadoPitch_yoke)/10;
     const element = document.querySelector('.pitch.indicator-box');
