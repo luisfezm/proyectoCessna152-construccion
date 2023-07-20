@@ -40,7 +40,8 @@
     background-size: 100%, 100%;
     background-position: center;
     background-repeat: no-repeat;
-    left: 200px;
+    left: -160px;
+    bottom: -80px;
     position: relative;
   }
 
