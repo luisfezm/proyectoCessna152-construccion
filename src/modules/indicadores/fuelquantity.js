@@ -7,12 +7,14 @@ const fuelquantity = {
     
     mutations: {
         // mutaciones para modificar el estado de los estanques de gasolina
-        decrease (state, value_1){      /*el valor minimo que tiene la agujas es de 137 grados*/ 
+        decrease (state){      /*el valor minimo que tiene la agujas es de 137 grados*/ 
             if(state.gasoline_1 >= 137){   /*se decrementa el primero y despues el segundo*/
-                state.gasoline_1 = state.gasoline_1 - value_1
+                state.gasoline_1 = state.gasoline_1 - 0.01
             }else if (state.gasoline_2 >= 137){  
-                state.gasoline_2 = state.gasoline_2 - value_1
+                state.gasoline_2 = state.gasoline_2 - 0.01
             }else{
+                this.state.estadoPrendidoOApagado = false 
+
                 console.log("se acabado la gasolina")
             }              
         } ,  // se tiene que definir el parametro que va recibir en el futuro, por ejemplo en intervalo de metros que avanza el avion
@@ -31,8 +33,8 @@ const fuelquantity = {
 
     actions: {
         // accion para realizar el decremento de gasolina
-        decrease_gasoline({commit}, value_1){
-           commit('decrease', value_1)
+        decrease_gasoline({commit}){
+           commit('decrease')
         },
         // accion para realizar el incremento de gasolina 
         increase_gasoline({commit}, value_2){
