@@ -23,6 +23,7 @@
 </template>
 
 <script>
+  import store from '@/store'
   import { mapActions, mapGetters } from 'vuex'
 
   export default {
@@ -48,6 +49,16 @@
         this.isDragging = false
         this.lastTranslationY = this.currentTranslationY
         window.removeEventListener('mouseup', this.stopDrag)
+        console.log(
+          'se solto el el boton de apretado en el valor ',
+          this.currentTranslationY
+        )
+        let aux = this.currentTranslationY
+        store.dispatch('setEstadoPitch_yoke', aux)
+        console.log(
+          'El estado del PITCH en el backend es de: ' +
+            store.getters.getEstadoPitch_yoke
+        )
       },
       handleDrag(event) {
         if (this.isDragging) {
