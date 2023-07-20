@@ -6,7 +6,7 @@
     @mousedown="startDrag"
     @mousemove="handleDrag"
   >
-    <span class="number">{{ axis }}</span>
+    <span class="number">{{ valor.toFixed(1) }}</span>
     <img
       src="@/assets/knob.svg"
       :style="{
@@ -34,9 +34,28 @@
         maxScale: 1, // Límite máximo de escala
         minScale: 0.75, // Límite mínimo de escala
         currentRotation: 0, // Rotación actual en grados
+        valor: 0,
       }
     },
+
+    mounted() {
+      window.addEventListener('keypress', this.girarMixture)
+    },
+
     methods: {
+      /*
+      girarMixture(event) {
+        if (event.key == 'o' && this.currentRotation != 0) {
+          this.currentRotation--
+          this.valor += -5
+        } else {
+          if (event.key == 'p') {
+            this.currentRotation++
+            this.valor += 5
+          }
+        }
+      },
+      */
       ...mapActions(['actualizarBencinaPorHora']),
       startDrag(event) {
         this.startX = event.clientX
@@ -125,6 +144,7 @@
         store.dispatch('setEstadoMixture', this.axis)
         store.dispatch('actualizarBencinaPorHora', combustible_por_hora)
         console.log('combustible_por_hora:', combustible_por_hora)
+        this.valor = combustible_por_hora
       },
     },
   }

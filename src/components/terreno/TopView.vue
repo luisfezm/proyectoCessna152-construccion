@@ -3,11 +3,13 @@
     <div class="imageairplane">
       <div ref="ailerons_left" class="ailerons_left" />
       <div ref="ailerons_right" class="ailerons_right" />
-      <div class="wingflaps-left" />
-      <div class="wingflaps-right" />
+      <div ref="wingflaps_left" class="wingflaps_left" />
+      <div ref="wingflaps_right" class="wingflaps_right" />
       <div ref="elevator_left" class="elevator_left" />
       <div ref="elevator_right" class="elevator_right" />
       <div ref="red_rudder" class="red_rudder" />
+      <!-- <div ref="orange_trim" class="orange_trim" /> -->
+      <div id="top_propeller" ref="top_propeller" class="top_propeller" />
     </div>
 
     <div class="tabla">
@@ -29,8 +31,11 @@
         this.getAilerons()
         this.getValues()
         this.moveYellow()
+        this.moveGreen()
+        //  this.moveOrange()
         this.moveBlue()
         this.moveRed()
+        this.movePropeller()
       },
 
       getAilerons() {
@@ -39,11 +44,14 @@
         p.append(
           this.$store.getters.getRed_Rudder +
             ' deg | ' +
-            'Aileron Yellow: ' +
+            'Yellow: ' +
             this.$store.getters.getYellow_Aileron +
             ' deg  | ' +
-            'Aileron Blue: ' +
+            'Blue: ' +
             this.$store.getters.getBlue_Aileron +
+            ' deg |  ' +
+            'Green:' +
+            this.$store.getters.getGreen_Flaps +
             ' deg '
         )
       },
@@ -68,6 +76,42 @@
 
         leftYellow.style.transition = `${0.8}S`
         rightYellow.style.transition = `${0.8}S`
+      },
+      moveOrange() {
+        const orangeAileron = this.$refs.orange_trim
+        let orangeAux = this.$store.getters.getOrange_Trim
+
+        if (this.$store.getters.getOrange_Trim < 0) {
+          orangeAileron.style.transform = `rotateX(${210 - orangeAux}deg)`
+        } else if (this.$store.getters.getOrange_Trim > 0) {
+          orangeAileron.style.transform = `rotateX(${210 + orangeAux}deg)`
+        } else {
+          orangeAileron.style.transform = `rotateX(${168}deg)`
+        }
+
+        orangeAileron.style.transition = `${0.8}S`
+      },
+
+      moveGreen() {
+        const leftGreen = this.$refs.wingflaps_left
+        const rightGreen = this.$refs.wingflaps_right
+        let greenAux = this.$store.getters.getGreen_Flaps
+
+        if (this.$store.getters.getGreen_Flaps < 0) {
+          leftGreen.style.transform = `rotateX(${30 - greenAux}deg)`
+
+          rightGreen.style.transform = `rotateX(${30 - greenAux}deg)`
+        } else if (this.$store.getters.getGreen_Flaps > 0) {
+          leftGreen.style.transform = `rotateX(${30 + greenAux}deg)`
+
+          rightGreen.style.transform = `rotateX(${30 + greenAux}deg)`
+        } else {
+          leftGreen.style.transform = `rotateX(${0}deg)`
+          rightGreen.style.transform = `rotateX(${0}deg)`
+        }
+
+        leftGreen.style.transition = `${0.8}S`
+        rightGreen.style.transition = `${0.8}S`
       },
 
       moveBlue() {
@@ -103,6 +147,26 @@
         let aux = this.$store.getters.getRed_Rudder
         redRudder.style.transform = `rotateZ(${aux}deg)`
         redRudder.style.transition = `${0.3}S`
+      },
+
+      async movePropeller() {
+        // let valor_Motor = this.$refs.top_propeller
+
+        if (this.$store.getters.getEstado_Helice == true) {
+          const valor_Motor = document.getElementById('top_propeller')
+          valor_Motor.classList.add('animar')
+          await this.sleep(2000)
+          valor_Motor.classList.remove('animar')
+          valor_Motor.classList.add('animar2')
+        } else {
+          const valor_Motor = document.getElementById('top_propeller')
+          valor_Motor.classList.remove('animar')
+          valor_Motor.classList.remove('animar2')
+        }
+      },
+
+      sleep(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms))
       },
 
       getValues() {
@@ -154,23 +218,25 @@
     rotate: -9deg;
   }
 
-  .wingflaps-left {
+  .wingflaps_left {
     width: 32px;
     height: 8px;
     left: 59px;
     top: 80px;
-    transform: rotate(-1deg);
-    position: relative;
+    transform: rotateX(-1deg);
+    position: absolute;
+    transform-origin: bottom;
     background-color: green;
   }
 
-  .wingflaps-right {
+  .wingflaps_right {
     width: 32px;
     height: 8px;
     left: 106px;
     top: 80px;
-    transform: rotate(-1deg);
+    transform: rotateX(-1deg);
     position: absolute;
+    transform-origin: bottom;
     background-color: green;
   }
 
@@ -198,6 +264,18 @@
     clip-path: polygon(0 38%, 77% 0, 81% 99%, 0% 100%);
     background-color: rgb(21, 70, 216);
   }
+  .orange_trim {
+    width: 24px;
+    height: 5px;
+    transform-origin: top;
+    left: 76px;
+    top: 23px;
+    transform: rotateX(0deg);
+    rotate: -10deg;
+    position: absolute;
+    clip-path: polygon(0 38%, 77% 0, 81% 99%, 0% 100%);
+    background-color: rgb(237, 150, 0);
+  }
 
   .red_rudder {
     width: 1.5px;
@@ -211,19 +289,46 @@
     transform-origin: bottom;
   }
 
+  #top_propeller {
+    width: 2px;
+    border-radius: 35%;
+    height: 36px;
+    background-color: black;
+    position: absolute;
+    left: 98px;
+    top: 123px;
+    right: 20px;
+    rotate: 90deg;
+  }
+
+  .animar {
+    animation: top_propeller 1.5s linear infinite;
+  }
+  .animar2 {
+    animation: top_propeller 0.2s linear infinite;
+  }
+
+  @keyframes top_propeller {
+    from {
+      transform: rotateX(0deg);
+    }
+    to {
+      transform: rotateX(360deg);
+    }
+  }
   .tabla {
     width: 340px;
-    height: 100px;
-
     height: 100%;
+    left: 20px;
     position: absolute;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
       'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    top: 277px;
+    top: 270px;
     font-size: 10px;
   }
   .text_tabla {
     color: black;
+    background-color: transparent;
     border-radius: 4px;
   }
 </style>
