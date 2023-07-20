@@ -1,4 +1,10 @@
 <template>
+  <div>
+    <div
+      class="led"
+      :class="{ 'led-red': !estadoLed, 'led-green': estadoLed }"
+    />
+  </div>
   <div class="base">
     <div
       :class="['palanca', { active: estadoPresionado }]"
@@ -9,11 +15,13 @@
 </template>
 
 <script>
+  import store from '@/store'
   export default {
     // Exportar
     data() {
       // Datos
       return {
+        estadoLed: false,
         estadoPresionado: false, // Estado para iniciar la animación
         estadoPrimer: false, // Estado para cambiar el color del primer botón
         contador: 0, // Contador para cambiar el estadoPrimer
@@ -23,18 +31,22 @@
       // Métodos
       presionarBoton() {
         // Cuando se presiona el botón
+        
+        this.estadoLed = !this.estadoLed
+        store.dispatch('setLed',this.estadoLed)
         this.estadoPresionado = true // Cambiar el estado para iniciar la animación
+        
       },
       soltarBoton() {
         // Cuando se suelta el botón
         this.estadoPresionado = false // Cambiar el estado para reiniciar la animación
         this.contador++ // Aumentar el contador
         if (this.contador === 5) {
-          // Si el contador llega a 5
           this.estadoPrimer = !this.estadoPrimer // Cambiar el estado
           this.contador = 0 // Reiniciar el contador después de cambiar el estado
         }
       },
+      // Si el contador llega a 5
     },
   }
 </script>
@@ -65,5 +77,16 @@
 
   .palanca.active {
     transform: scale(0.8);
+  }
+
+  .led {
+    width: 10px;
+    height: 10px;
+    border-radius: 10%;
+    background-color: red;
+  }
+
+  .led-green {
+    background-color: green;
   }
 </style>

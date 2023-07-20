@@ -1,5 +1,6 @@
 <template>
   <div class="app">
+    <ModalBox />
     <MiTerreno />
 
     <div class="tableroSuperior">
@@ -10,22 +11,29 @@
     <div class="tableroInferior">
       <div class="itemTableroInferior">
         <div class="controlesTableroInferior">
-          <IgnitionSwitch />
-          <MiYoke />
-          <FuelQuantity />
+          <div class="centered">
+            <MiYoke />
+          </div>
+            <IgnitionSwitch />    
+          <div class="centered">
+            <FuelQuantity />
+          </div>
         </div>
         <PedalesPiloto />
       </div>
       <CenterColumn />
       <div class="itemTableroInferior">
         <div class="controlesTableroInferior">
-          <MiYoke />
+          <div class="centered">
+            <MiYoke />
+          </div>
         </div>
         <PedalesCopiloto />
       </div>
     </div>
   </div>
 </template>
+
 
 <script>
   import PedalesCopiloto from './components/pedales/PedalesCopiloto.vue'
@@ -39,6 +47,7 @@
   import RightHandPanel from './components/tablero/rightHandPanel/RightHandPanel.vue'
   import MiTerreno from './components/terreno/MiTerreno.vue'
   import VistaPrimeraPersona from './components/terreno/VistaPrimeraPersona.vue'
+  import ModalBox from './components/ModalBox.vue'
   import store from '@/store'
 
   export default {
@@ -53,10 +62,12 @@
       MiTerreno,
       MiYoke,
       IgnitionSwitch,
+      ModalBox,
     },
     data() {
       return {
-        tiempo: 0.1,
+        tiempo: 2,
+        showModal: false,  
       }
     },
     computed: {
@@ -72,6 +83,10 @@
       },
 
       angulo_avion() {
+        console.log(
+          'valor heading indicator',
+          store.getters.getHeadingIndicator
+        )
         return store.getters.getHeadingIndicator
       },
       mixture() {
@@ -132,6 +147,30 @@
       this.stopUpdateInterval()
     },
     methods: {
+      colicionMuro() {
+        if (this.coordenadas_actuales.latitud >= -34.9971013333662) {
+          return true
+        } else {
+          return false
+        }
+      },
+
+      colicionPrecordillera() {
+        if (this.coordenadas_actuales.longitud >= -70.6997947178652) {
+          return true
+        } else {
+          return false
+        }
+      },
+
+      colicioncordillera() {
+        if (this.coordenadas_actuales.longitud >= -70.4382892702144) {
+          return true
+        } else {
+          return false
+        }
+      },
+
       startUpdateInterval() {
         this.updateInterval = setInterval(() => {
           if (store.getters.choque === false) {
@@ -145,16 +184,14 @@
             'setAltura',
             store.getters.altura + store.getters.velocidad_z * 0.1
           )
-          console.log('altura:', this.altura)
+          //console.log('altura:', this.altura)
 
-          //despues se movera a una funcion de un js [solo sprint 4]
-          if (this.coordenadas_actuales.latitud >= -34.9971013333662) {
-            console.log('oh no he chocado ')
-            store.dispatch('alternaChoque', true)
-          } else {
-            console.log(this.coordenadas_actuales.latitud)
-            store.dispatch('alternaChoque', false)
-          }
+
+          //colicion muro
+          //store.dispatch('alternaChoque', this.colicionMuro())
+          store.dispatch('alternaChoque', this.colicioncordillera())
+          store.dispatch('alternaPrecordillera', this.colicionPrecordillera())
+
         }, 100) // 100 ms = 0.1 segundos
       },
       stopUpdateInterval() {
@@ -218,8 +255,8 @@
         var nuevaLatitud = this.toDegrees(nuevaLatitudRad)
         var nuevaLongitud = this.toDegrees(nuevaLongitudRad)
 
-        console.log(nuevaLatitud)
-        console.log(nuevaLongitud)
+        //console.log(nuevaLatitud)
+        //console.log(nuevaLongitud)
 
         store.dispatch('setLatitud', nuevaLatitud)
         store.dispatch('setLongitud', nuevaLongitud)
@@ -230,4 +267,24 @@
 
 <style src="./style.css">
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+
+  .centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+
+  }
+
+  .itemTableroInferior {
+  display: flex;
+  align-items: center;
+}
+
+.controlesTableroInferior {
+  display: flex;
+}
+
+
 </style>

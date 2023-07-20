@@ -62,7 +62,14 @@
         this.updateRPM()
       },
       updateRPM() {
-        this.rpm = store.getters.getThrottleDepth
+        if(this.$store.state.estadoPrendidoOApagado == true){
+          this.rpm = store.getters.getThrottleDepth
+
+        }else{
+          this.rpm = 0
+        }
+        
+
         this.rpmToDegrees = -130 + this.rpm * 2.6
         this.transitionDuration = 3.5 - this.rpm * 0.03
       },

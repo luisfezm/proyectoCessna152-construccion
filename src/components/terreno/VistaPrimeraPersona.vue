@@ -1,6 +1,6 @@
 <template>
   <div class="img-move-wrapper">
-    <button @click="Vuelo1">vuelo de prueba 1</button>
+    <!-- <button @click="Vuelo1">vuelo de prueba 1</button> -->
 
     <img
       id="torre"
@@ -10,10 +10,9 @@
 
     <img
       id="imagen"
-      src="https://cdn.discordapp.com/attachments/1104247966946037770/1128939076351955026/imagen0.jpg"
+      src="https://cdn.discordapp.com/attachments/791019332346839102/1130661741085339808/imagen0.jpg"
       class="img-move img-move-2 img-fluid"
     />
-    
   </div>
 </template>
 
@@ -24,19 +23,27 @@
       funcionVerificar() {
         var imagen = document.getElementById('imagen')
 
-        const Avionvivo = store.getters.choque
+        var Avionvivo = store.getters.choque
+        var precordillera = store.getters.precordillera
         //console.log('vivo avion uwuwuwu', Avionvivo)
         if (Avionvivo === true) {
           console.log('muerte')
-          imagen.src = 'https://cdn.discordapp.com/attachments/1104247966946037770/1128939075588599838/imagen2.jpg'
+          imagen.src =
+            'https://cdn.discordapp.com/attachments/791019332346839102/1130661740774957057/explosion.png'
+        } else if (precordillera === true) {
+          console.log('precordillera')
+          imagen.src =
+            'https://cdn.discordapp.com/attachments/791019332346839102/1130661741701898332/imagen2.png'
         } else {
           let altura = store.getters.altura
           if (altura === 0) {
-            imagen.src = 'https://cdn.discordapp.com/attachments/1104247966946037770/1128939076351955026/imagen0.jpg'
+            imagen.src =
+              'https://cdn.discordapp.com/attachments/791019332346839102/1130661741085339808/imagen0.jpg'
             //console.log('test: inicio')
           } else if (altura > 0) {
             //console.log('test: despegue')
-            imagen.src = 'https://cdn.discordapp.com/attachments/1104247966946037770/1128939076670734466/imagen1.jpg'
+            imagen.src =
+              'https://cdn.discordapp.com/attachments/791019332346839102/1130661741412503572/imagen1.jpg'
           }
         }
       },
