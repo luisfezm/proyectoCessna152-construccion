@@ -1,4 +1,7 @@
 <template>
+  <div>
+    <div class="led" :class="{ 'led-red': !estadoLed, 'led-green': estadoLed }"></div>
+  </div>
   <div class="base">
     <div
       :class="['palanca', { active: estadoPresionado }]"
@@ -35,6 +38,9 @@
           this.contador = 0 // Reiniciar el contador después de cambiar el estado
         }
       },
+      cambiarEstadoLed(){
+        this.estadoLed = !this.estadoLed  
+      }
     },
   }
 </script>
@@ -65,5 +71,16 @@
 
   .palanca.active {
     transform: scale(0.8);
+  }
+
+  .led {
+    width: 10px;
+    height: 10px;
+    border-radius: 10%;
+    background-color: red;
+  }
+
+  .led-green {
+    background-color: green;
   }
 </style>
